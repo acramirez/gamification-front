@@ -1,0 +1,11 @@
+<div class="card-data__container">
+    <figure class="card-image__container">
+        <img class="card__image" src="" alt="">
+    </figure>
+    <div class="card-details__container">
+        <span class="card__current-limit-title">Tu límite actual</span>
+        <span class="card__current-limit"> <span class="card__current-limit-amount">{{cardData.current_limit.amount | currency}}</span> <span class="card__current-limit-currency"> {{cardData.current_limit.currency_code}} </span> </span>
+        <span class="card__type">{{cardData.type}}</span>
+        <span class="card__display-number">{{cardData.display_number}}</span>
+    </div>
+</div>
