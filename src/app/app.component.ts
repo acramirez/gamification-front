@@ -8,13 +8,13 @@ import { GamificationFacade } from './services/facades/gamification.facade';
 })
 export class AppComponent implements OnInit {
   
-  title = 'Application Gramificacion';
+  title = 'Application Gamification';
 
   constructor( private gamificacionFacade: GamificationFacade ) {}
 
   ngOnInit(): void {
     this.gamificacionFacade.response.subscribe(resp => {
-      console.log(resp.data);
+      console.log(resp);
     });
   }
 
