@@ -1,0 +1,88 @@
+{
+    "gamifications": {
+        "data": {
+            "customer_key": "00000020",
+            "hiring_date": "2022-03-16T23:38:45.408Z",
+            "contract_key": "213131315446",
+            "activation_date": "2022-03-16T23:38:45.408Z",
+            "type": "GM_2",
+            "status": "INITIAL",
+            "last_evaluation_date": "2022-03-16T23:38:45.408Z",
+            "cut_of_date": "2022-03-16T23:38:45.408Z",
+            "card": {
+            "current_limit": {
+                "amount": 50000,
+                "currency_code": "MXN"
+            },
+            "display_number": "*8825",
+            "type": "LikeU Greeen Card",
+            "status": "ACTIVE",
+            "potential_limit": {
+                "amount": 50000,
+                "currency_code": "MXN"
+            },
+            "lower_limit": {
+                "amount": 50000,
+                "currency_code": "MXN"
+            },
+            "next_increase": {
+                "amount": 50000,
+                "currency_code": "MXN"
+            },
+            "period": {
+                "current_period": "0",
+                "status": "ACTIVE",
+                "period_detail": [
+                {
+                    "period_id": "PERIOD_01",
+                    "initial_date": "2022-02-16T23:38:45.408Z",
+                    "due_date": "2012-02-16T23:38:45.408Z",
+                    "acumulated_limit": {
+                    "amount": 50000,
+                    "currency_code": "MXN"
+                    },
+                    "payment_card": [
+                    {
+                        "amount_payment": {
+                        "amount": 50000,
+                        "currency_code": "MXN"
+                        },
+                        "minimum_amount": {
+                        "amount": 50000,
+                        "currency_code": "MXN"
+                        },
+                        "operation_date": "2012-02-16T23:38:45.408Z"
+                    }
+                    ],
+                    "recurring_payment": [
+                    {
+                        "status": "ACTIVE",
+                        "operation_date": "2012-02-16T23:38:45.408Z"
+                    }
+                    ],
+                    "domiciliation": [
+                    {
+                        "status": "ACTIVE",
+                        "operation_date": "2012-02-16T23:38:45.408Z"
+                    }
+                    ],
+                    "assintance": [
+                    {
+                        "status": "ACTIVE",
+                        "operation_date": "2012-02-16T23:38:45.408Z"
+                    }
+                    ],
+                    "payroll": [
+                    {
+                        "status": "ACTIVE",
+                        "operation_date": "2012-02-16T23:38:45.408Z"
+                    }
+                    ],
+                    "status": "ONGOING"
+                }
+                ]
+            }
+            }
+        }
+    }
+}

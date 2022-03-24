@@ -1,4 +1,4 @@
-export interface GamificationDetailResponse {
+export interface Gamifications {
     data: Data;
 }
 
