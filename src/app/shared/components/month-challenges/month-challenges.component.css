@@ -1,0 +1,29 @@
+.month-challenges__container .cards-months__container{
+    display: grid;
+    gap:1em;
+    grid-template-columns: repeat(6,40%);
+    overflow: auto
+}
+
+.month-challenges__container .cards-months__container::-webkit-scrollbar{
+    display: none;
+}
+
+.month-challenges__container .point-carousel__container{
+    display: grid;
+    gap: .5em;
+    grid-auto-flow: column;
+    margin:auto;
+    margin-top: 1em;
+    width: fit-content;
+}
+
+.month-challenges__container .point-carousel__container .point-carousel{
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    height: .5em;
+    width: .5em;
+}
+
+

@@ -82,6 +82,99 @@ export const gamificationData: Gamification={
                 operation_date: new Date( 2022,2,16,23,38,45,408)
               }
             ],
+            status:StatusPeriodDetails.FINISH
+          },
+          {
+            period_id: "PERIOD_02",
+            initial_date: new Date( 2022,2,16,23,38,45,408),
+            due_date: new Date( 2022,2,16,23,38,45,408),
+            acumulated_limit: {
+              amount: 50000,
+              currency_code: "MXN"
+            },
+            payment_card: [
+              {
+                amount_payment: {
+                  amount: 50000,
+                  currency_code: "MXN"
+                },
+                minimum_amount: {
+                  amount: 50000,
+                  currency_code: "MXN"
+                },
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            recurring_payment: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            domiciliation: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            assintance: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            payroll: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            status:StatusPeriodDetails.ONGOING
+          },          {
+            period_id: "PERIOD_01",
+            initial_date: new Date( 2022,2,16,23,38,45,408),
+            due_date: new Date( 2022,2,16,23,38,45,408),
+            acumulated_limit: {
+              amount: 50000,
+              currency_code: "MXN"
+            },
+            payment_card: [
+              {
+                amount_payment: {
+                  amount: 50000,
+                  currency_code: "MXN"
+                },
+                minimum_amount: {
+                  amount: 50000,
+                  currency_code: "MXN"
+                },
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            recurring_payment: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            domiciliation: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            assintance: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
+            payroll: [
+              {
+                status: StatusPeriodInfo.ACTIVE,
+                operation_date: new Date( 2022,2,16,23,38,45,408)
+              }
+            ],
             status:StatusPeriodDetails.ONGOING
           }
         ]

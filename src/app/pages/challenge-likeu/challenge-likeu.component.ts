@@ -8,6 +8,7 @@ import { gamificationData } from 'src/app/shared/data/constant/data.constant';
 })
 export class ChallengeLikeuComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,4 +21,6 @@ export class ChallengeLikeuComponent implements OnInit {
   get periodDetail(){
     return gamificationData.data.card.period
   }
+
+
 }

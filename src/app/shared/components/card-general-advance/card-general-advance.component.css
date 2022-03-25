@@ -43,6 +43,7 @@
     border-radius: 2px;
     margin: auto;
     margin-bottom: .5em;
+    min-width: 30px;
     height: 1em;
     width:70%;
 
@@ -54,6 +55,6 @@
     text-align: center;
 }
 
-.mont-challenge__text__superindice{
+.card-general__container .card-general__advance .mont-challenge__text__superindice{
     margin-bottom: .5em;
 }

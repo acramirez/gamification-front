@@ -1,0 +1,22 @@
+<div class="modal-challenges__general-container">
+    <div class="modal-challenges__container">
+
+        <figure class="modal-challenges__header">
+            <img class="modal-challenges-header__icon" src="" alt="">
+        </figure>
+
+        <div class="modal-challenges__body__container">
+            <ng-container *ngFor="let challenge of [0,1,2]">
+                <div class="modal-challenges__body-challenge__container">
+                    <h3 class="modal-challenges__body-challenge__title">Lorem, ipsum dolor.</h3>
+                    <p class="modal-challenges__body-challenge__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, illo.</p>
+                    <a class="modal-challenges__body-challenge__link" href="">aqui>></a>
+                </div>
+            </ng-container>
+        </div>
+
+        <button (click)="closeModal()" class="modal-challenges__button">Entendido</button>
+        <button (click)="closeModal()" class="modal-challenges__button-close">Cerrar</button>
+    </div>
+
+</div>

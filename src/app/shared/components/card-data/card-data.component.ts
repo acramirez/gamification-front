@@ -8,6 +8,12 @@ import { Card } from '../../interfaces/icard-details';
 })
 export class CardDataComponent implements OnInit {
 
+  /**
+   * Has the info which is used in the component
+   *
+   * @type {Card}
+   * 
+   */
   @Input() cardData!:Card
 
   constructor() { }

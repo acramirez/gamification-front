@@ -1,0 +1,18 @@
+<div class="month-challenges__container">
+    <h2>Reto Mensual</h2>
+    <div #CarouselChallenge class="cards-months__container">
+        <ng-container *ngFor="let month of [0,1,2,3,4,5];let i=index">
+            <app-card-month-challenges (click)="openModal()" [ind]="i" [periodDetailData]="periodData.period_detail[0]"></app-card-month-challenges>
+        </ng-container>
+    </div>
+    <div class="point-carousel__container">
+        <ng-container *ngFor="let point of [0,1,2,3,4,5];let i=index">
+            <span class="point-carousel" (click)="setCurrentPosition(i)"></span>
+        </ng-container>
+    </div>
+</div>
+
+<ng-container *ngIf="switchChallengeModal">
+    <app-modal-challenges (switchModal)="switchChallengeModal=$event" ></app-modal-challenges>
+</ng-container>
+

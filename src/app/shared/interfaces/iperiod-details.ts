@@ -12,7 +12,7 @@ export enum StatusPeriodDetails{
 
 export interface Period {
     current_period: string;
-    status:         string;
+    status:         StatusPeriodInfo;
     period_detail:  PeriodDetail[];
 }
 
@@ -26,7 +26,7 @@ export interface PeriodDetail {
     domiciliation:     Assintance[];
     assintance:        Assintance[];
     payroll:           Assintance[];
-    status:            string;
+    status:            StatusPeriodDetails;
 }
 
 export interface Assintance {
