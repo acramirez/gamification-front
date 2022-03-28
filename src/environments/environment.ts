@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  tkn:{
+    url:'https://otpmuro.pre.mx.corp/TokenManagerWeb/service/tokenmanager',
+    apiService:{
+      generator:'tokenGeneratorWS',
+      validator:'tokenValidatorWS'
+    }
+  }
 };
 
 /*
