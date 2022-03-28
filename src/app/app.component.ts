@@ -1,5 +1,6 @@
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { GamificationFacade } from './services/facades/gamification.facade';
+import { GamificationFacade } from './services/facades/gamifications.facade';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,14 @@ export class AppComponent implements OnInit {
   constructor( private gamificacionFacade: GamificationFacade ) {}
 
   ngOnInit(): void {
-    this.gamificacionFacade.response.subscribe(resp => {
+    this.gamificacionFacade.getCard().subscribe(resp => {
       console.log(resp);
     });
+
+    this.gamificacionFacade.getPeriodDetails().subscribe(resp => {
+      console.log(resp);
+    });
+
   }
 
 }
