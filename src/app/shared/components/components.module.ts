@@ -17,7 +17,8 @@ import { ModalChallengesComponent } from './modal-challenges/modal-challenges.co
     CardDataComponent,
     CardGeneralAdvanceComponent,
     MonthChallengesComponent,
-    ModalChallengesComponent
+    ModalChallengesComponent,
+    ModalChallengeLikeuComponent
   ]
 })
 export class ComponentsModule { }

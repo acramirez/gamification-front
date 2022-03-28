@@ -9,7 +9,19 @@ import { Period } from '../../interfaces/iperiod-details';
 })
 export class CardGeneralAdvanceComponent implements OnInit {
 
+    /**
+   * Has the info which is used in the component
+   *
+   * @type {Card}
+   * 
+   */
   @Input() cardData!:Card
+    /**
+   * Has the info which is used in the component
+   *
+   * @type {Period}
+   * 
+   */
   @Input() periodData!:Period
 
   constructor() { }

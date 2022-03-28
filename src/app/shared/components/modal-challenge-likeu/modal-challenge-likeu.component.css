@@ -1,0 +1,22 @@
+
+.modal-challenges__general-container{
+    align-items: center;
+    background-color: rgba(0,0,0,.3);
+    display: flex;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.modal-challenge__container{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+    margin: auto;
+    width: 90%;
+    position: relative;
+}

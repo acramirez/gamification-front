@@ -8,8 +8,10 @@ import { Observable, of } from 'rxjs';
 })
 export class ModalChallengesComponent implements OnInit {
 
-  @Output() switchModal:EventEmitter<boolean>=new EventEmitter;
   
+
+  @Output() switchModal:EventEmitter<boolean>=new EventEmitter;
+
   constructor() { }
 
   ngOnInit(): void {    

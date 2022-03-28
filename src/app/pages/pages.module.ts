@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
-  declarations: [ChallengeLikeuComponent],
+  declarations: [ChallengeLikeuComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -15,4 +16,5 @@ import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.compo
   ],
   exports:[ChallengeLikeuComponent]
 })
+
 export class PagesModule { }
