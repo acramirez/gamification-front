@@ -28,7 +28,7 @@ export class SsoService {
 
     const params:HttpParams= new HttpParams({
       fromObject:{
-        jsonEntrada:''
+        jsonEntrada:JSON.stringify(jsonEntry)
       }
     });
 
