@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Card } from '../../interfaces/icard-details';
-import { Period } from '../../interfaces/iperiod-details';
+import { Card } from 'src/app/models/card.model';
+import { PeriodDetail } from 'src/app/models/period-detail.model';
 
 @Component({
   selector: 'app-card-general-advance',
@@ -22,7 +22,7 @@ export class CardGeneralAdvanceComponent implements OnInit {
    * @type {Period}
    * 
    */
-  @Input() periodData!:Period
+  @Input() periodData!:PeriodDetail[]
 
   constructor() { }
 

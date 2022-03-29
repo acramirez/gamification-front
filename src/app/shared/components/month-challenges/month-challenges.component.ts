@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { fromEvent, of } from 'rxjs';
-import { Period } from '../../interfaces/iperiod-details';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { PeriodDetail } from 'src/app/models/period-detail.model';
 
 @Component({
   selector: 'app-month-challenges',
@@ -9,8 +8,7 @@ import { Period } from '../../interfaces/iperiod-details';
 })
 export class MonthChallengesComponent implements OnInit {
 
-  @Input() periodData!:Period;
-  // @ViewChildren('pointCarousel') points!:QueryList<'pointCarousel'>
+  @Input() periodData!:PeriodDetail[];
   @ViewChild('CarouselChallenge') carouselChallenge!:ElementRef<HTMLDivElement>
 
   switchChallengeModal:boolean=false ;
@@ -19,7 +17,6 @@ export class MonthChallengesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log();
     
   }
 

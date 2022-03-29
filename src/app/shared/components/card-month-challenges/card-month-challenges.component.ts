@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { PeriodDetail } from 'src/app/models/period-detail.model';
 import { MONTHS } from '../../data/months.const';
-import { PeriodDetail } from '../../interfaces/iperiod-details';
 
 @Component({
   selector: 'app-card-month-challenges',
