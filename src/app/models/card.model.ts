@@ -6,8 +6,8 @@ export class Card {
         public current_limit:CurrentLimit,
         public type:string,    
         public display_number:string,
-        private potential_limit: CurrentLimit,
-        private next_increase: CurrentLimit,
+        public potential_limit: CurrentLimit,
+        public next_increase: CurrentLimit,
     ) {}
 
 }
