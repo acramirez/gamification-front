@@ -1,24 +1,24 @@
-<div class="card-general__container">
+<div class="card-general">
 
-    <div class="card-general__limit-increase__container">
+    <div class="card-general__limit-increase">
 
-        <div class="card__potential-limit">
-            <figure class="card__potential-limit__icons">
-                <img class="card__potential-limit__icons-icon">
+        <div class="card-general__potential-limit">
+            <figure class="card-general__potential-limit-icons">
+                <img class="card-general__potential-limit-icons-icon">
             </figure>
-            <div class="card__potential-limit__texts">
-                <span class="card__potential-limit__texts-title">Tú límite potencial</span>
-                <span class="card__potential-limit__texts-limit"> {{cardData.potential_limit.amount | currency}}  </span>
+            <div class="card-general__potential-limit__texts">
+                <span class="card-general__potential-limit-texts-title">Tú límite potencial</span>
+                <span class="card-general__potential-limit-texts-limit"> {{cardData.potential_limit.amount | currency}}  </span>
             </div>
         </div>
 
-        <div class="card__next-increase">
-            <figure class="card__next-increase__icons">
-                <img class="card__next-increase__icons-icon">
+        <div class="card-general__next-increase">
+            <figure class="card-general__next-increase-icons">
+                <img class="card-general__next-increase-icons-icon">
             </figure>
-            <div class="card__next-increase__texts">
-                <span class="card__next-increase__texts-title">Tú próximo incremento</span>
-                <span class="card__next-increase__texts-limit">{{cardData.next_increase.amount | currency}} </span>
+            <div class="card-general__next-increase__texts">
+                <span class="card-general__next-increase-texts-title">Tú próximo incremento</span>
+                <span class="card-general__next-increase-texts-limit">{{cardData.next_increase.amount | currency}} </span>
             </div>
         </div>
 
@@ -26,17 +26,17 @@
 
     <div class="card-general__advance">
         <h2>Tú avance</h2>
-        <div class="months-challenges__container">
+        <div class="card-general__months-challenges">
             <div *ngFor="let period of [0,1,2,3,4,5]; let i = index">
-                <div class="month-challenge__container">
+                <div class="card-general__month-challenge">
                     
                 </div>
-                <span class="mont-challenge__text"> Mes {{i+1}}</span>
+                <span class="card-general__month-challenge-text"> Mes {{i+1}}</span>
                 <div [ngSwitch]="i">
-                    <span *ngSwitchCase="2">1<span class="mont-challenge__text__superindice">er</span> incremento <span class="mont-challenge__text__percent"> 50% </span> </span>
-                    <span *ngSwitchCase="3">2<span class="mont-challenge__text__superindice">do</span> incremento <span class="mont-challenge__text__percent"> 70% </span> </span>
-                    <span *ngSwitchCase="4">3<span class="mont-challenge__text__superindice">er</span> incremento <span class="mont-challenge__text__percent"> 90% </span> </span>
-                    <span *ngSwitchCase="5">4<span class="mont-challenge__text__superindice">to</span> incremento <span class="mont-challenge__text__percent"> 100% </span> </span>
+                    <span *ngSwitchCase="2">1<span class="card-general__month-challenges-text-superindice">er</span> incremento <span class="card-general__monts-challenges-text-percent"> 50% </span> </span>
+                    <span *ngSwitchCase="3">2<span class="card-general__month-challenges-text-superindice">do</span> incremento <span class="card-general__monts-challenges-text-percent"> 70% </span> </span>
+                    <span *ngSwitchCase="4">3<span class="card-general__month-challenges-text-superindice">er</span> incremento <span class="card-general__monts-challenges-text-percent"> 90% </span> </span>
+                    <span *ngSwitchCase="5">4<span class="card-general__month-challenges-text-superindice">to</span> incremento <span class="card-general__monts-challenges-text-percent"> 100% </span> </span>
                 </div>
             </div>
         </div>

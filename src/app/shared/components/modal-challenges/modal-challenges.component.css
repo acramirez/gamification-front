@@ -1,21 +1,5 @@
 
-.modal-challenges__general-container{
-    align-items: center;
-    background-color: rgba(0,0,0,.3);
-    display: flex;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.modal-challenges__general-container.modal-challenges__hidden{
-    display: none;
-    padding: .5em;
-}
-
-.modal-challenges__container{
+.modal-challenges{
     background-color: #fff;
     display: flex;
     flex-direction: column;

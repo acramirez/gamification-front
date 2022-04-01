@@ -23,7 +23,7 @@ export class CardMonthChallengesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const numberMonth=this.periodDetailData.initial_date.getMonth();;
+    const numberMonth=this.periodDetailData.initial_date.getMonth();
     this.month =MONTHS[numberMonth]
     
   }

@@ -1,36 +1,36 @@
-.card-general__container{
+.card-general{
     background-color: #fff;
     padding: 1em;
     width: 100%;
 }
 
-.card-general__container .card-general__limit-increase__container{
+.card-general__limit-increase{
     display: grid;
     gap:.5em;
     grid-template-columns: repeat(2,1fr);
 
 }
 
-.card-general__container .card-general__limit-increase__container .card__potential-limit,
-.card-general__container .card-general__limit-increase__container .card__next-increase
+.card-general__potential-limit,
+.card-general__next-increase
 {
     display: grid;
     gap: .5em;
     grid-template-columns: repeat(2,1fr);
 }
 
-.card-general__container .card-general__limit-increase__container .card__potential-limit .card__potential-limit__texts,
-.card-general__container .card-general__limit-increase__container .card__next-increase .card__next-increase__texts{
+.card-general__potential-limit-texts,
+.card-general__next-increase-texts{
     display: flex;
     flex-direction: column;
 }
 
-.card-general__container .card-general__limit-increase__container .card__potential-limit .card__potential-limit__texts .card__potential-limit__texts-limit,
-.card-general__container .card-general__limit-increase__container .card__next-increase .card__next-increase__texts .card__next-increase__texts-limit{
+.card-general__potential-limit-texts-limit,
+.card-general__next-increase-texts-limit{
     margin-top: .5em;
 }
 
-.card-general__container .card-general__advance .months-challenges__container{
+.card-general__months-challenges{
     display: grid;
     font-size: .60em;
     gap: 1em;
@@ -38,7 +38,7 @@
     min-width: 54px;
 }
 
-.card-general__container .card-general__advance .months-challenges__container .month-challenge__container{
+.card-general__month-challenge{
     border:1px solid var(--SecondaryTextColor);
     border-radius: 2px;
     margin: auto;
@@ -49,12 +49,12 @@
 
 }
 
-.card-general__container .card-general__advance .months-challenges__container .mont-challenge__text{
+.card-general__month-challenge-text{
     display: block;
     margin-bottom: .5em;
     text-align: center;
 }
 
-.card-general__container .card-general__advance .mont-challenge__text__superindice{
+.card-general__monts-challenges-text-superindice{
     margin-bottom: .5em;
 }

@@ -1,4 +1,4 @@
-.card-data__container{
+.card-data{
     background-color: #fff;
     display: flex;
     justify-content: space-between;
@@ -6,44 +6,44 @@
     width: 100%;
 }
 
-.card-data__container .card-image__container{
+.card-data__image{
     margin: 0;
     min-width: 35%;
     width: fit-content;
 }
 
-.card-data__container .card-image__container .card__image{
+.card-data__image-img{
     min-width: 100%;
 }
 
-.card-data__container .card-details__container{
+.card-data__details{
     display: flex;
     flex-direction: column;
     min-width: 55%;
 }
 
-.card-data__container .card-details__container>span{
+.card-data__details>span{
     margin-bottom: .5em;
 }
 
-.card-data__container .card-details__container span:last-child{
+.card-data__details span:last-child{
     margin: 0;
 }
 
-.card-data__container .card-details__container .card__current-limit-title{
+.card-data__details-current-limit-title{
     font-weight: 600;
 }
 
-.card-data__container .card-details__container .card__current-limit .card__current-limit-amount
+.card-data__details-current-limit
 {
     font-weight: 700;
 }
 
-.card-data__container .card-details__container .card__current-limit .card__current-limit-currency,
-.card-data__container .card-details__container .card__type{
+.card-data__details-current-limit-currency,
+.card-data__details-type{
     color: var(--SecondaryTextColor);
 }
 
-.card-data__container .card-details__container .card__type{
+.card-data__details-type{
     font-size: .75em;
 }

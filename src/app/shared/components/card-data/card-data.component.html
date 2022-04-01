@@ -1,11 +1,14 @@
-<div class="card-data__container">
-    <figure class="card-image__container">
-        <img class="card__image" src="" alt="">
+<div class="card-data">
+    <figure class="card-data__image">
+        <img class="card-data__image-img" src="" alt="">
     </figure>
-    <div class="card-details__container">
-        <span class="card__current-limit-title">Tu límite actual</span>
-        <span class="card__current-limit"> <span class="card__current-limit-amount">{{cardData.current_limit.amount | currency}}</span> <span class="card__current-limit-currency"> {{cardData.current_limit.currency_code}} </span> </span>
-        <span class="card__type">{{cardData.type}}</span>
-        <span class="card__display-number">{{cardData.display_number}}</span>
+    <div class="card-data__details">
+        <span class="card-data__details-current-limit-title">Tu límite actual</span>
+        <ng-container *ngIf="cardData.current_limit">
+            <span class="card-data__details-current-limit"> <span class="card-data__details-current-limit-amount">{{cardData.current_limit?.amount | currency}}</span> <span class="card-data__details-current-limit-currency"> {{cardData.current_limit.currency_code}} </span> </span>
+
+        </ng-container>
+        <span class="card-data__details-type">{{cardData.type}}</span>
+        <span class="card-data__details-display-number">{{cardData.display_number}}</span>
     </div>
 </div>
