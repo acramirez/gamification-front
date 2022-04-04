@@ -5,18 +5,18 @@
             <img class="modal-challenges__icon" src="" alt="">
         </figure>
 
-        <div class="modal-challenges__body">
+        <div class="modal-body">
             <ng-container *ngFor="let challenge of [0,1,2]">
-                <div class="modal-challenges__body-challenge">
-                    <h3 class="modal-challenges__body-challenge-title">Lorem, ipsum dolor.</h3>
-                    <p class="modal-challenges__body-challenge-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, illo.</p>
-                    <a class="modal-challenges__body-challenge-link" href="">aqui>></a>
+                <div class="modal-body">
+                    <h3 class="modal-body__title">Lorem, ipsum dolor.</h3>
+                    <p class="modal-body__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, illo.</p>
+                    <a class="modal-body__link" href="">aqui>></a>
                 </div>
             </ng-container>
         </div>
 
-        <button (click)="closeModal()" class="modal-challenges__button">Entendido</button>
-        <button (click)="closeModal()" class="modal-challenges__button-close">Cerrar</button>
+        <button (click)="closeModal()" class="button">Entendido</button>
+        <button (click)="closeModal()" class="button-close">Cerrar</button>
     </div>
 
 </div>

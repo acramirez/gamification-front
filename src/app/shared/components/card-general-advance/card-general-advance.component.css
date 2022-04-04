@@ -11,26 +11,26 @@
 
 }
 
-.card-general__potential-limit,
-.card-general__next-increase
+.potential-limit,
+.next-increase
 {
     display: grid;
     gap: .5em;
     grid-template-columns: repeat(2,1fr);
 }
 
-.card-general__potential-limit-texts,
-.card-general__next-increase-texts{
+.potential-limit__texts,
+.next-increase__texts{
     display: flex;
     flex-direction: column;
 }
 
-.card-general__potential-limit-texts-limit,
-.card-general__next-increase-texts-limit{
+.potential-limit__limit,
+.next-increase__limit{
     margin-top: .5em;
 }
 
-.card-general__months-challenges{
+.months-challenges{
     display: grid;
     font-size: .60em;
     gap: 1em;
@@ -38,7 +38,7 @@
     min-width: 54px;
 }
 
-.card-general__month-challenge{
+.month-challenge{
     border:1px solid var(--SecondaryTextColor);
     border-radius: 2px;
     margin: auto;
@@ -49,12 +49,12 @@
 
 }
 
-.card-general__month-challenge-text{
+.months-challenge__text{
     display: block;
     margin-bottom: .5em;
     text-align: center;
 }
 
-.card-general__monts-challenges-text-superindice{
+.months-challenges__text-superindice{
     margin-bottom: .5em;
 }

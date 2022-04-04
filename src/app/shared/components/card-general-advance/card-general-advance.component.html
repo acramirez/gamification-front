@@ -2,41 +2,41 @@
 
     <div class="card-general__limit-increase">
 
-        <div class="card-general__potential-limit">
-            <figure class="card-general__potential-limit-icons">
-                <img class="card-general__potential-limit-icons-icon">
+        <div class="potential-limit">
+            <figure class="potential__limit-icons">
+                <img class="potential__limit-icon">
             </figure>
-            <div class="card-general__potential-limit__texts">
-                <span class="card-general__potential-limit-texts-title">Tú límite potencial</span>
-                <span class="card-general__potential-limit-texts-limit"> {{cardData.potential_limit.amount | currency}}  </span>
+            <div class="potential-limit__texts">
+                <span class="potential-limit__title">Tú límite potencial</span>
+                <span class="potential-limit__limit"> {{cardData.potential_limit.amount | currency}}  </span>
             </div>
         </div>
 
-        <div class="card-general__next-increase">
-            <figure class="card-general__next-increase-icons">
-                <img class="card-general__next-increase-icons-icon">
+        <div class="next-increase">
+            <figure class="next-increase__icons">
+                <img class="next-increase__icon">
             </figure>
-            <div class="card-general__next-increase__texts">
-                <span class="card-general__next-increase-texts-title">Tú próximo incremento</span>
-                <span class="card-general__next-increase-texts-limit">{{cardData.next_increase.amount | currency}} </span>
+            <div class="next-increase__texts">
+                <span class="next-increase__title">Tú próximo incremento</span>
+                <span class="next-increase__limit">{{cardData.next_increase.amount | currency}} </span>
             </div>
         </div>
 
     </div>
 
-    <div class="card-general__advance">
+    <div class="advance">
         <h2>Tú avance</h2>
-        <div class="card-general__months-challenges">
+        <div class="months-challenges">
             <div *ngFor="let period of [0,1,2,3,4,5]; let i = index">
-                <div class="card-general__month-challenge">
+                <div class="month-challenge">
                     
                 </div>
-                <span class="card-general__month-challenge-text"> Mes {{i+1}}</span>
+                <span class="months-challenges__text"> Mes {{i+1}}</span>
                 <div [ngSwitch]="i">
-                    <span *ngSwitchCase="2">1<span class="card-general__month-challenges-text-superindice">er</span> incremento <span class="card-general__monts-challenges-text-percent"> 50% </span> </span>
-                    <span *ngSwitchCase="3">2<span class="card-general__month-challenges-text-superindice">do</span> incremento <span class="card-general__monts-challenges-text-percent"> 70% </span> </span>
-                    <span *ngSwitchCase="4">3<span class="card-general__month-challenges-text-superindice">er</span> incremento <span class="card-general__monts-challenges-text-percent"> 90% </span> </span>
-                    <span *ngSwitchCase="5">4<span class="card-general__month-challenges-text-superindice">to</span> incremento <span class="card-general__monts-challenges-text-percent"> 100% </span> </span>
+                    <span *ngSwitchCase="2">1<span class="months-challenges__text-superindice">er</span> incremento <span class="monts-challenges__text-percent"> 50% </span> </span>
+                    <span *ngSwitchCase="3">2<span class="months-challenges__text-superindice">do</span> incremento <span class="monts-challenges__text-percent"> 70% </span> </span>
+                    <span *ngSwitchCase="4">3<span class="months-challenges__text-superindice">er</span> incremento <span class="monts-challenges__text-percent"> 90% </span> </span>
+                    <span *ngSwitchCase="5">4<span class="months-challenges__text-superindice">to</span> incremento <span class="monts-challenges__text-percent"> 100% </span> </span>
                 </div>
             </div>
         </div>

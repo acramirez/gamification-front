@@ -6,44 +6,44 @@
     width: 100%;
 }
 
-.card-data__image{
+.card-image{
     margin: 0;
     min-width: 35%;
     width: fit-content;
 }
 
-.card-data__image-img{
+.card-image__img{
     min-width: 100%;
 }
 
-.card-data__details{
+.card-details{
     display: flex;
     flex-direction: column;
     min-width: 55%;
 }
 
-.card-data__details>span{
+.card-details>span{
     margin-bottom: .5em;
 }
 
-.card-data__details span:last-child{
+.card-details span:last-child{
     margin: 0;
 }
 
-.card-data__details-current-limit-title{
+.card-details__current-limit-title{
     font-weight: 600;
 }
 
-.card-data__details-current-limit
+.card-details__current-limit
 {
     font-weight: 700;
 }
 
-.card-data__details-current-limit-currency,
-.card-data__details-type{
+.card-details__current-limit-currency,
+.card-details__type{
     color: var(--SecondaryTextColor);
 }
 
-.card-data__details-type{
+.card-details__type{
     font-size: .75em;
 }
