@@ -1,0 +1,10 @@
+.modal-challenge{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+    margin: auto;
+    width: 90%;
+    position: relative;
+}

@@ -1,0 +1,15 @@
+<div class="card">
+    <h2 class="card__title">{{month}} {{ind}}</h2>
+    <div class="card__body">
+        <ng-container *ngFor="let challenge of [0,1,2];let i=index" >
+            <div class="challenge">
+                <span class="challenge__number">{{i+1}}</span>
+                <span class="challenge__title"></span>
+                <span class="challenge__icon"></span>
+            </div>
+        </ng-container>
+        <span class="card__footer">En proceso</span>
+        
+
+    </div>
+</div>

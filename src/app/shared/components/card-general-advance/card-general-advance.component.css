@@ -1,0 +1,60 @@
+.card-general{
+    background-color: #fff;
+    padding: 1em;
+    width: 100%;
+}
+
+.card-general__limit-increase{
+    display: grid;
+    gap:.5em;
+    grid-template-columns: repeat(2,1fr);
+
+}
+
+.potential-limit,
+.next-increase
+{
+    display: grid;
+    gap: .5em;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.potential-limit__texts,
+.next-increase__texts{
+    display: flex;
+    flex-direction: column;
+}
+
+.potential-limit__limit,
+.next-increase__limit{
+    margin-top: .5em;
+}
+
+.months-challenges{
+    display: grid;
+    font-size: .60em;
+    gap: 1em;
+    grid-template-columns: repeat(6,1fr);
+    min-width: 54px;
+}
+
+.month-challenge__mark{
+    border:1px solid var(--SecondaryTextColor);
+    border-radius: 2px;
+    margin: auto;
+    margin-bottom: .5em;
+    min-width: 30px;
+    height: 1em;
+    width:70%;
+
+}
+
+.month-challenge__text{
+    display: block;
+    margin-bottom: .5em;
+    text-align: center;
+}
+
+.month-challenges__text-superindice{
+    margin-bottom: .5em;
+}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SsoService } from './shared/services/sso.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
