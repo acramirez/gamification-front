@@ -38,7 +38,7 @@
     min-width: 54px;
 }
 
-.month-challenge{
+.month-challenge__mark{
     border:1px solid var(--SecondaryTextColor);
     border-radius: 2px;
     margin: auto;
@@ -49,12 +49,12 @@
 
 }
 
-.months-challenge__text{
+.month-challenge__text{
     display: block;
     margin-bottom: .5em;
     text-align: center;
 }
 
-.months-challenges__text-superindice{
+.month-challenges__text-superindice{
     margin-bottom: .5em;
 }

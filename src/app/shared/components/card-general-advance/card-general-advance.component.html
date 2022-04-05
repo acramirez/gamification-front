@@ -3,8 +3,8 @@
     <div class="card-general__limit-increase">
 
         <div class="potential-limit">
-            <figure class="potential__limit-icons">
-                <img class="potential__limit-icon">
+            <figure class="potential-limit__icons">
+                <img class="potential-limit__icon">
             </figure>
             <div class="potential-limit__texts">
                 <span class="potential-limit__title">Tú límite potencial</span>
@@ -27,16 +27,16 @@
     <div class="advance">
         <h2>Tú avance</h2>
         <div class="months-challenges">
-            <div *ngFor="let period of [0,1,2,3,4,5]; let i = index">
-                <div class="month-challenge">
+            <div class="month-challenge"  *ngFor="let period of [0,1,2,3,4,5]; let i = index">
+                <div class="month-challenge__mark">
                     
                 </div>
-                <span class="months-challenges__text"> Mes {{i+1}}</span>
+                <span class="month-challenges__text"> Mes {{i+1}}</span>
                 <div [ngSwitch]="i">
-                    <span *ngSwitchCase="2">1<span class="months-challenges__text-superindice">er</span> incremento <span class="monts-challenges__text-percent"> 50% </span> </span>
-                    <span *ngSwitchCase="3">2<span class="months-challenges__text-superindice">do</span> incremento <span class="monts-challenges__text-percent"> 70% </span> </span>
-                    <span *ngSwitchCase="4">3<span class="months-challenges__text-superindice">er</span> incremento <span class="monts-challenges__text-percent"> 90% </span> </span>
-                    <span *ngSwitchCase="5">4<span class="months-challenges__text-superindice">to</span> incremento <span class="monts-challenges__text-percent"> 100% </span> </span>
+                    <span *ngSwitchCase="2">1<span class="month-challenges__text-superindice">er</span> incremento <span class="month-challenges__text-percent"> 50% </span> </span>
+                    <span *ngSwitchCase="3">2<span class="month-challenges__text-superindice">do</span> incremento <span class="month-challenges__text-percent"> 70% </span> </span>
+                    <span *ngSwitchCase="4">3<span class="month-challenges__text-superindice">er</span> incremento <span class="month-challenges__text-percent"> 90% </span> </span>
+                    <span *ngSwitchCase="5">4<span class="month-challenges__text-superindice">to</span> incremento <span class="month-challenges__text-percent"> 100% </span> </span>
                 </div>
             </div>
         </div>
