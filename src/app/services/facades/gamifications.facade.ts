@@ -21,8 +21,9 @@ export class GamificationFacade {
     getCard(): Observable<Card> {
         return this._responseGamifications.pipe(
             map( card => {
-               return new Card(
-                   card.data.card.current_limit.amount, card.data.card.next_increase.amount);
+                const {current_limit, next_increase,display_number,type,potential_limit} = card.data.card
+                return new Card(current_limit,type,display_number,potential_limit,next_increase
+                );
             })
         );
     }

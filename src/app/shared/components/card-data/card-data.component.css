@@ -1,0 +1,49 @@
+.card-data{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    width: 100%;
+}
+
+.card-image{
+    margin: 0;
+    min-width: 35%;
+    width: fit-content;
+}
+
+.card-image__img{
+    min-width: 100%;
+}
+
+.card-details{
+    display: flex;
+    flex-direction: column;
+    min-width: 55%;
+}
+
+.card-details>span{
+    margin-bottom: .5em;
+}
+
+.card-details span:last-child{
+    margin: 0;
+}
+
+.card-details__current-limit-title{
+    font-weight: 600;
+}
+
+.card-details__current-limit
+{
+    font-weight: 700;
+}
+
+.card-details__current-limit-currency,
+.card-details__type{
+    color: var(--SecondaryTextColor);
+}
+
+.card-details__type{
+    font-size: .75em;
+}

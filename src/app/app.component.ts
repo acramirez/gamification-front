@@ -1,4 +1,3 @@
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { GamificationFacade } from './services/facades/gamifications.facade';
 
@@ -11,16 +10,10 @@ export class AppComponent implements OnInit {
   
   title = 'Application Gamification';
 
-  constructor( private gamificacionFacade: GamificationFacade ) {}
+  constructor( ) {}
 
   ngOnInit(): void {
-    this.gamificacionFacade.getCard().subscribe(resp => {
-      console.log(resp);
-    });
 
-    this.gamificacionFacade.getPeriodDetails().subscribe(resp => {
-      console.log(resp);
-    });
 
   }
 

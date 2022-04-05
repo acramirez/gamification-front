@@ -2,10 +2,10 @@
 export class PeriodDetail {
 
     constructor(
-        private period_id: string,
-        private initial_date: Date,
-        private due_date: Date,
-        private status: string,
+        public period_id: string,
+        public initial_date: Date,
+        public due_date: Date,
+        public status: string,
     ) {}
     
 }
