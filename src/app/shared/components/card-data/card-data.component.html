@@ -1,15 +1,9 @@
 <div class="card-data">
-    <!-- <figure class="card-image">
-        <img class="card-image__img" src="" alt="">
-    </figure> -->
     <div class="card-details">
         <span class="card-details__current-limit-title">Límite actual</span>
         <ng-container *ngIf="cardData.current_limit">
             <span class="card-details__current-limit"> <span class="card-details__current-limit-amount">{{cardData.current_limit?.amount | currency}}</span></span>
-
         </ng-container>
-        <!-- <span class="card-details__type">{{cardData.type}}</span>
-        <span class="card-details__display-number">{{cardData.display_number}}</span> -->
     </div>
 
 
@@ -18,7 +12,7 @@
         <div class="percent__background">
             <div class="percent__circle " >
                 <svg viewBox="0, 0, 100, 100">
-                    <circle stroke-width="5" fill="transparent" stroke="var(--theme-color-background-default)" r="47" cx="50" cy="50" style="stroke-dasharray: 295.31; stroke-dashoffset: 0;"></circle>
+                    <circle stroke-width="5" fill="transparent" stroke="var(--theme-color-ui-04)" r="47" cx="50" cy="50" style="stroke-dasharray: 295.31; stroke-dashoffset: 0;"></circle>
                 </svg>
                 <div class="percent__description">
                     <span class="percent__text">{{'.7' | percent}}</span>

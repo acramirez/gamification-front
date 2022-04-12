@@ -19,6 +19,7 @@ body{
 *{
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Santander-Text', Arial, Helvetica, sans-serif;
 }
 
 .modal-container{
