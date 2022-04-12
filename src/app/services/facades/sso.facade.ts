@@ -1,25 +1,30 @@
 
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { SsoService } from "../sso.service";
+
+import { environment } from "src/environments/environment";
+import { TokenValidatorService } from "../apis/token.validator.service";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class SsoFacade{
+export class TokenSsoFacade {
 
-    constructor(private ssoService:SsoService){
-
-    }
+    constructor(
+        private tokenService: TokenValidatorService
+    ) {}
 
     validToken!:boolean;
 
-    validationToken(){
-        return this.ssoService.getValidationToken('dsdsesd').pipe(
-            map(res=>{
-                return (res.stokenValidatorResponse.codigoMensaje==='TVT_000')?this.validToken=true : this.validToken=false
+    private _token: string = `${environment.tkn.dummy}`;
+
+    validationToken(): Observable<boolean> {
+        return this.tokenService.getValidateToken(this._token).pipe(
+            map( resp => {
+                return ( resp.stokenValidatorResponse.codigoMensaje==='TVT_000')?this.validToken=true : this.validToken=false
             })
-        )
+        );
     }
 }
