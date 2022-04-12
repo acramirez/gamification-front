@@ -7,11 +7,15 @@ import { CardMonthChallengesComponent } from './card-month-challenges/card-month
 import { ModalChallengeLikeuComponent } from './modal-challenge-likeu/modal-challenge-likeu.component';
 import { ModalChallengesComponent } from './modal-challenges/modal-challenges.component';
 
+import { IconButtonModule } from '@ngx-mxflame/atoms/icon-button';
+
 
 @NgModule({
   declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, CardMonthChallengesComponent, ModalChallengeLikeuComponent, ModalChallengesComponent],
   imports: [
     CommonModule,
+    IconButtonModule
+
   ],
   exports:[
     CardDataComponent,

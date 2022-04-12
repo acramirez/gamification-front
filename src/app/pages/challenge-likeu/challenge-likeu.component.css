@@ -1,4 +1,5 @@
-.challenge-likeu__container{
+.challenge-likeu{
     display: grid;
     gap: 1em;
+    margin-top: 1rem;
 }
