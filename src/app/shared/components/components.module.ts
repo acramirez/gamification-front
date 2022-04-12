@@ -9,6 +9,7 @@ import { ModalChallengesComponent } from './modal-challenges/modal-challenges.co
 
 import { IconButtonModule } from '@ngx-mxflame/atoms/icon-button';
 import { TimelineModule } from '../molecules/timeline/timeline.module';
+import { ElementListModule } from '../atoms/element-list/element-list.module';
 
 
 @NgModule({
@@ -16,8 +17,8 @@ import { TimelineModule } from '../molecules/timeline/timeline.module';
   imports: [
     CommonModule,
     IconButtonModule,
-    TimelineModule
-
+    TimelineModule,
+    ElementListModule
   ],
   exports:[
     CardDataComponent,
