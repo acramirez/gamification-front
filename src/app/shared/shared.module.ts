@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
+import { TimelineModule } from './molecules/timeline/timeline.module';
 
 
 
@@ -8,10 +9,12 @@ import { ComponentsModule } from './components/components.module';
   declarations: [],
   imports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    TimelineModule
   ],
   exports:[
-    ComponentsModule
+    ComponentsModule,
+    TimelineModule
   ]
 })
 export class SharedModule { }

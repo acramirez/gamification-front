@@ -2,6 +2,7 @@
 
 :root{
     ----theme-color-text-03:#999999FF;
+    --theme-color-primary-01:#EC0000FF;
     --theme-color-background-default:#F2F2F2FF;
     --primaryTextColor:#000;
     --SecondaryTextColor:#888;

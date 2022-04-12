@@ -1,0 +1,30 @@
+<div class="time-line">
+
+    <div class="time-line__points" >
+        
+        <ng-container *ngFor="let element of elements;let i=index">
+
+            <div class="point">
+                <div *ngIf="i<elements.length-1" [ngClass]="{
+                    'point__next':element.status==='NEXT',
+                    'point__complete':element.status!=='NEXT'
+                }" >
+                </div>
+                
+                <sn-icon class="time-line__goal-icon" *ngIf="i===elements.length-1" icon="sn-BAN068"></sn-icon>
+            </div>
+            
+        
+            
+        </ng-container>
+        
+        <div class="time-line__line" [ngStyle]="{'width':percent+'%'}"></div>
+    </div>
+
+    <div class="time-line__texts">
+        <ng-container *ngFor="let element of elements;let i=index">
+            <div class="time-line__name">{{element.text| titlecase}}</div>
+        </ng-container>
+    </div>
+
+</div>
