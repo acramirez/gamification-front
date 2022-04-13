@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { GamificationFacade } from './services/facades/gamifications.facade';
+import { TokenOauthFacade } from './services/facades/token-oauth.facade';
 
 @Component({
   selector: 'app-root',
