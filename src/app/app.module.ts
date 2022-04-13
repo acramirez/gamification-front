@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+
+import { HttpErrorsInterceptor } from './services/interceptors/http.error.interceptor';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,11 @@ import { PagesModule } from './pages/pages.module';
     PagesModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorsInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
