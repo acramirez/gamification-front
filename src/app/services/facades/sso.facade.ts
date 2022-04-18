@@ -6,7 +6,6 @@ import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { TokenValidatorService } from "../apis/token.validator.service";
 
-
 @Injectable({
     providedIn: 'root'
 })

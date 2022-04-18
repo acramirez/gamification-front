@@ -5,7 +5,6 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { OpaqueToken } from "../interfaces/token.interface";
 
-
 @Injectable({
     providedIn: 'root'
 })
