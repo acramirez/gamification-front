@@ -9,11 +9,11 @@ import { ITimeLineElement, statusElement } from './interface/itimeline-element';
 export class TimelineComponent implements OnInit {
 
   @Input() elements:ITimeLineElement[]=[
-    {text:'ene',status:statusElement.COMPLETE},
-    {text:'feb',status:statusElement.COMPLETE},
-    {text:'mar',status:statusElement.COMPLETE},
-    {text:'Abr',status:statusElement.ONGOING},
-    {text:'Jun',status:statusElement.NEXT},
+    {text:'May',status:statusElement.COMPLETE},
+    {text:'ene',status:statusElement.ONGOING},
+    {text:'May',status:statusElement.NEXT},
+    {text:'May',status:statusElement.NEXT},
+    {text:'May',status:statusElement.NEXT},
     {text:'May',status:statusElement.NEXT},
   ]
 
@@ -23,12 +23,15 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const percent=Math.round(100/this.elements.length);
+    const percent=(100/this.elements.length);
+    console.log(percent);
+    
 
     this.elements.forEach(el=>{
       if(el.status==='COMPLETE')
         this.percent+=percent
-    })
+    });
+
   }
 
 }

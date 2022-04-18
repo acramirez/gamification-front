@@ -9,7 +9,9 @@ import { ModalChallengesComponent } from './modal-challenges/modal-challenges.co
 
 import { IconButtonModule } from '@ngx-mxflame/atoms/icon-button';
 import { TimelineModule } from '../molecules/timeline/timeline.module';
-import { ElementListModule } from '../atoms/element-list/element-list.module';
+import { ElementListModule } from '../molecules/element-list/element-list.module';
+import { CircleProgressComponent } from '../molecules/circle-progress/circle-progress.component';
+import { CircleProgressModule } from '../molecules/circle-progress/circle-progress.module';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { ElementListModule } from '../atoms/element-list/element-list.module';
     CommonModule,
     IconButtonModule,
     TimelineModule,
-    ElementListModule
+    ElementListModule,
+    CircleProgressModule 
   ],
   exports:[
     CardDataComponent,

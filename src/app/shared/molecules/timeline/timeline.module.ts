@@ -4,8 +4,6 @@ import { TimelineComponent } from './timeline.component';
 import { IconModule } from '@ngx-mxflame/atoms/icon';
 
 
-
-
 @NgModule({
   declarations: [TimelineComponent],
   imports: [

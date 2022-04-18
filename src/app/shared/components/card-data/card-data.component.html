@@ -8,20 +8,7 @@
 
 
     <div class="percent">
-        <sn-icon-button enable="false"  [spinner]="70"></sn-icon-button>
-        <div class="percent__background">
-            <div class="percent__circle " >
-                <svg viewBox="0, 0, 100, 100">
-                    <circle stroke-width="5" fill="transparent" stroke="var(--theme-color-ui-04)" r="47" cx="50" cy="50" style="stroke-dasharray: 295.31; stroke-dashoffset: 0;"></circle>
-                </svg>
-                <div class="percent__description">
-                    <span class="percent__text">{{'.7' | percent}}</span>
-                    <span class="percent__potential-limit">{{'13500' | currency:'MXN':'symbol-narrow':'1.0'}}</span>
-                </div>
-            </div>
-        </div>
-
-        
+        <sn-circle-progress [percent]="50" [total]="13500"></sn-circle-progress>
     </div>
 
 </div>
