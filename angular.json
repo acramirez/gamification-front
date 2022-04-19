@@ -25,12 +25,39 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "*",
+                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/icons",
+                "output": "assets/fonts/icons"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/open-sans",
+                "output": "assets/fonts/open-sans"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/santander",
+                "output": "assets/fonts/santander"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/@ngx-mxflame/atoms/assets/animations/navbar",
+                "output": "assets/animations/navbar"
+              },
+              {
+                "glob": "*",
+                "input": "src/assets/animations",
+                "output": "lotties"
+              }
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/colorthief/dist/color-thief.min.js"
+            ]
           },
           "configurations": {
             "production": {

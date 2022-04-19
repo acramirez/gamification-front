@@ -1,44 +1,9 @@
 <div class="card-general">
 
-    <div class="card-general__limit-increase">
-
-        <div class="potential-limit">
-            <figure class="potential-limit__icons">
-                <img class="potential-limit__icon">
-            </figure>
-            <div class="potential-limit__texts">
-                <span class="potential-limit__title">Tú límite potencial</span>
-                <span class="potential-limit__limit"> {{cardData.potential_limit.amount | currency}}  </span>
-            </div>
-        </div>
-
-        <div class="next-increase">
-            <figure class="next-increase__icons">
-                <img class="next-increase__icon">
-            </figure>
-            <div class="next-increase__texts">
-                <span class="next-increase__title">Tú próximo incremento</span>
-                <span class="next-increase__limit">{{cardData.next_increase.amount | currency}} </span>
-            </div>
-        </div>
-
-    </div>
-
     <div class="advance">
-        <h2>Tú avance</h2>
+        <h2>Retos mensuales</h2>
         <div class="months-challenges">
-            <div class="month-challenge"  *ngFor="let period of [0,1,2,3,4,5]; let i = index">
-                <div class="month-challenge__mark">
-                    
-                </div>
-                <span class="month-challenges__text"> Mes {{i+1}}</span>
-                <div [ngSwitch]="i">
-                    <span *ngSwitchCase="2">1<span class="month-challenges__text-superindice">er</span> incremento <span class="month-challenges__text-percent"> 50% </span> </span>
-                    <span *ngSwitchCase="3">2<span class="month-challenges__text-superindice">do</span> incremento <span class="month-challenges__text-percent"> 70% </span> </span>
-                    <span *ngSwitchCase="4">3<span class="month-challenges__text-superindice">er</span> incremento <span class="month-challenges__text-percent"> 90% </span> </span>
-                    <span *ngSwitchCase="5">4<span class="month-challenges__text-superindice">to</span> incremento <span class="month-challenges__text-percent"> 100% </span> </span>
-                </div>
-            </div>
+            <sn-timeline></sn-timeline>
         </div>
     </div>
 

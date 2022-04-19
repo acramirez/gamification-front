@@ -7,11 +7,21 @@ import { CardMonthChallengesComponent } from './card-month-challenges/card-month
 import { ModalChallengeLikeuComponent } from './modal-challenge-likeu/modal-challenge-likeu.component';
 import { ModalChallengesComponent } from './modal-challenges/modal-challenges.component';
 
+import { IconButtonModule } from '@ngx-mxflame/atoms/icon-button';
+import { TimelineModule } from '../molecules/timeline/timeline.module';
+import { ElementListModule } from '../molecules/element-list/element-list.module';
+import { CircleProgressComponent } from '../molecules/circle-progress/circle-progress.component';
+import { CircleProgressModule } from '../molecules/circle-progress/circle-progress.module';
+
 
 @NgModule({
   declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, CardMonthChallengesComponent, ModalChallengeLikeuComponent, ModalChallengesComponent],
   imports: [
     CommonModule,
+    IconButtonModule,
+    TimelineModule,
+    ElementListModule,
+    CircleProgressModule 
   ],
   exports:[
     CardDataComponent,

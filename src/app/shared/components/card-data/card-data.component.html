@@ -1,14 +1,13 @@
 <div class="card-data">
-    <figure class="card-image">
-        <img class="card-image__img" src="" alt="">
-    </figure>
     <div class="card-details">
-        <span class="card-details__current-limit-title">Tu límite actual</span>
+        <span class="card-details__current-limit-title">Límite actual</span>
         <ng-container *ngIf="cardData.current_limit">
-            <span class="card-details__current-limit"> <span class="card-details__current-limit-amount">{{cardData.current_limit?.amount | currency}}</span> <span class="card-details__current-limit-currency"> {{cardData.current_limit.currency_code}} </span> </span>
-
+            <span class="card-details__current-limit"> <span class="card-details__current-limit-amount">{{cardData.current_limit?.amount | currency}}</span></span>
         </ng-container>
-        <span class="card-details__type">{{cardData.type}}</span>
-        <span class="card-details__display-number">{{cardData.display_number}}</span>
     </div>
+
+    <div class="percent">
+        <sn-circle-progress [percent]="50" [total]="13500"></sn-circle-progress>
+    </div>
+
 </div>
