@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
-  declarations: [ChallengeLikeuComponent, PageNotFoundComponent],
+  declarations: [ChallengeLikeuComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

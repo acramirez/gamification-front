@@ -1,0 +1,11 @@
+{
+    "tokenValidator":
+    {
+        "stokenValidatorResponse": {
+            "mensaje": "Operaci�n exitosa",
+            "codigoMensaje": "TVT_000",
+            "idusuario": "00000010",
+            "pAdicional": "eyJzZXNpb25TZWd1cmlkYWQiOiI3eW8zYjZrK2VVZTAxaWpxbmwvSk1sMHNPcUFcdTAwM2QiLCJpZEFwbGljYWNpb24iOiJTTkVUIiwiaWRlbnRpZmljYWRvciI6IlNORVQiLCJpZFVzdWFyaW8iOiIwMDAwMDAxMCIsInNlc2lvbkFwbGljYXRpdm8iOiJLbkJHRXpBY3JmRW1VT215VTBVOWlqViJ9"
+        }
+    }
+}
