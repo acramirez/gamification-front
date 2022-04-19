@@ -1,7 +1,10 @@
+export interface OpaqueToken {
+    stokenValidatorResponse: StokenValidatorResponse;
+}
 
-export interface TokenOauthResponse {
-    scope:        string;
-    access_token: string;
-    token_type:   string;
-    expires_in:   number;
+export interface StokenValidatorResponse {
+    mensaje:       string;
+    codigoMensaje: string;
+    idusuario:     string;
+    pAdicional:    string;
 }

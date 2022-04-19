@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from "./app-routing.module";
 
 import { HttpErrorsInterceptor } from './services/interceptors/http.error.interceptor';
 
@@ -13,7 +15,9 @@ import { HttpErrorsInterceptor } from './services/interceptors/http.error.interc
   imports: [
     BrowserModule,    
     PagesModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

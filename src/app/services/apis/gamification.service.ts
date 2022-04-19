@@ -23,5 +23,4 @@ export class GamificationService {
 
         return this.httpClient.get<Gamifications>(`${this._getApiUri}`, {headers});
     }
-
 }
