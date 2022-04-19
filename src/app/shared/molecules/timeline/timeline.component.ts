@@ -10,8 +10,8 @@ export class TimelineComponent implements OnInit {
 
   @Input() elements:ITimeLineElement[]=[
     {text:'May',status:statusElement.COMPLETE},
+    {text:'May',status:statusElement.COMPLETE},
     {text:'ene',status:statusElement.ONGOING},
-    {text:'May',status:statusElement.NEXT},
     {text:'May',status:statusElement.NEXT},
     {text:'May',status:statusElement.NEXT},
     {text:'May',status:statusElement.NEXT},
@@ -29,9 +29,10 @@ export class TimelineComponent implements OnInit {
 
     this.elements.forEach(el=>{
       if(el.status==='COMPLETE')
-        this.percent+=percent
-    });
-
+        this.percent+=percent;
+        this.percent+=0.6
+      });
+      
   }
 
 }
