@@ -8,7 +8,7 @@ import { ElementListModule } from './molecules/element-list/element-list.module'
 
 
 @NgModule({
-  declarations: [PageNotFoundComponent],
+  declarations: [],
   imports: [
     CommonModule,
     ComponentsModule,

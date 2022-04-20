@@ -18,10 +18,12 @@ export class TokenValidatorService {
 
     getValidateToken(token: string): Observable<OpaqueToken> {
         this._token = token;
-        const url = 'http://localhost:8000/tokenValidator';
+        const url = `${this._apiUrl}/${environment.tkn.apiService.validator}`;
         return this.httpClient.get<OpaqueToken>( url, {params: this.httpParams} );
     }
 
+
+    
     get httpParams(): HttpParams {
         const jsonEntry = {
             stokenValidatorRequest: {
@@ -37,16 +39,4 @@ export class TokenValidatorService {
             }
         });
     }
-    
-    /* generateToken() {
-        const url = `${this._apiUrl}/${environment.tkn.apiService.generator}`;
-
-        return this.httpClient.get<any>( url, { params: this.httpParams } );
-    }
-
-    get httpParams(): HttpParams {
-        return new HttpParams()
-            .set('jsonEntrada', '{"tokenGeneratorRequest":{"idusuario":"00000010","idAplicativo":"snet","sesionSN":"KnBGEzAcrfEmUOmyU0U9ijV","ipUsuario":"127.0.0.1","PAdicional":"eyJzZXNpb25TZWd1cmlkYWQiOiI3eW8zYjZrK2VVZTAxaWpxbmwvSk1sMHNPcUFcdTAwM2QiLCJpZEFwbGljYWNpb24iOiJTTkVUIiwiaWRlbnRpZmljYWRvciI6IlNORVQiLCJpZFVzdWFyaW8iOiIwMDAwMDAxMCIsInNlc2lvbkFwbGljYXRpdm8iOiJLbkJHRXpBY3JmRW1VT215VTBVOWlqViJ9"}}');
-    } */
-
 }

@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "json-server --watch ./src/assets/mock-data/tokenValidator.json --port 8000"
+    "server": "json-server --watch ./src/assets/mock-data/gamificacion.json --port 8000"
   },
   "private": true,
   "dependencies": {

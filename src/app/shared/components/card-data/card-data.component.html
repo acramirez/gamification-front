@@ -1,9 +1,7 @@
 <div class="card-data">
     <div class="card-details">
         <span class="card-details__current-limit-title">Límite actual</span>
-        <ng-container *ngIf="cardData.current_limit">
-            <span class="card-details__current-limit"> <span class="card-details__current-limit-amount">{{cardData.current_limit?.amount | currency}}</span></span>
-        </ng-container>
+        <span class="card-details__current-limit"> <span class="card-details__current-limit-amount"></span></span>
     </div>
 
     <div class="percent">

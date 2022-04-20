@@ -17,18 +17,18 @@ import {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,    
-    PagesModule,
     HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
     ThemeModule.forRoot({ 
       themes: [DigitalBankTheme, DigitalBankDarkTheme],
       active: 'theme--digitalbank-dark'
     }),
-    RouterModule,
-    AppRoutingModule
+    PagesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

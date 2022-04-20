@@ -13,13 +13,16 @@ export class SsoGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
+      console.log(this.ssoFacade.validToken);
+      
     return this.ssoFacade.validToken
 
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
+      console.log(this.ssoFacade.validToken);
+
     return this.ssoFacade.validToken
   }
 }

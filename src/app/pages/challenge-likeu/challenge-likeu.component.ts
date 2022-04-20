@@ -6,7 +6,7 @@ import { PeriodDetail } from 'src/app/models/period-detail.model';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 
 @Component({
-  selector: 'app-challenge-likeu',
+  selector: 'challenge-likeu',
   templateUrl: './challenge-likeu.component.html',
   styleUrls: ['./challenge-likeu.component.css']
 })
@@ -29,6 +29,8 @@ export class ChallengeLikeuComponent implements OnInit,OnDestroy {
         .pipe(takeUntil(destroy$))
         .subscribe(resp => {
       this.cardDetail=resp
+      console.log(this.cardDetail);
+      
     });
 
     this.gamificacionFacade

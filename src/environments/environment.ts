@@ -10,7 +10,7 @@ export const environment = {
       generator:'tokenGeneratorWS',
       validator:'tokenValidatorWS'
     },
-    dummy: 'wO3A0H34qYlzFUO12aZTgxMDpAJRfGwZcFK36MPA7t+MFcofx+JW0rKWWI7colTM4OT9skd4zyYONTS0Z1Bu3slfsdQEoMjI5eGzpxWEXyfkZI1t6JQjrTjZw8gNiJMFoWV0Y6hDouMGAR5yHj5QWd0LPx2tlhNot9TbsZc4JDqwXSbNhHQZ1yJfCHPcyYogo1dqEyQNU/TPZbDlZys2LzLa2FP6rrsuMcc3HsKiThJ1m2GBkaYe0R8isvnZliPl63DTPQFOGkxMk9Sgd2awjguGYqss89SpaSk/0aXDfTlnEDDsOIdAMoyvMP3g7ID//AXlUsm+Y+G11F5VnRG8eQ=='
+    dummy: 'NMckJtXRhbGuhidVlH+bl2zEXo1DiV7UF6Jfb/xLKarIPV5VSGM3ja5EijBJaIHrmE0Sx89if3Gnf3yVsn7/iv9XG6Istp6s+wXacO62t/age2hANke1XScPBnW4Da/G0f7EtvWQqS3Yl7B5gLWOU6fgk25casxolC/EPC7vG1MMNBwYV2yYAubL3MnTT4NyxfP4p9TpT5IaRz1ipxUtUmg8n+tIcwyUrpLUc/07WsxY0TRqvoncZ0RCtRgk2VTI0a/yHCWtwUl/qnzFQpCpomLmNB36TOU5TJwJ9izgZpclV0dvg0elGUfRhLl0D+p+dLSA74NfdUigiZavYaFvjQ=='
   }
 };
 
