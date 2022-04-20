@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { TokenRequest } from "../../models/token.model";
+import { TokenRequest } from "../../shared/models/token.model";
 
 import { TokenOauthService } from "../apis/token-oauth.service";
-import { TokenOauthResponse } from "../interfaces/token.interface";
+import {  } from "../interfaces/token.interface";
 
 @Injectable({
     providedIn: 'root'

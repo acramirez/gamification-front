@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Card } from 'src/app/models/card.model';
-import { PeriodDetail } from 'src/app/models/period-detail.model';
+import { Card } from 'src/app/shared/models/card.model';
+import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 
 @Component({

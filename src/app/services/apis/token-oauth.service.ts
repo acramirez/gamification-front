@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-import { TokenRequest } from "../../models/token.model";
+import { TokenRequest } from "../../shared/models/token.model";
 import { TokenOauthResponse } from "../interfaces/token.interface";
 
 @Injectable({

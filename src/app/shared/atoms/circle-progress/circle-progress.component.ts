@@ -9,7 +9,7 @@ export class CircleProgressComponent implements OnInit {
 
 
   @Input() percent:number=0;
-  @Input() total:number=0;
+  @Input() icon:string='';
   circunference:number=295.31;
   strokeDashoffset:number=0;
 

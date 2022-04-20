@@ -1,11 +1,10 @@
 <div class="card-data">
-    <div class="card-details">
-        <span class="card-details__current-limit-title">Límite actual</span>
-        <span class="card-details__current-limit"> <span class="card-details__current-limit-amount"></span></span>
-    </div>
+    <sn-round-card [principalText]="3000" [secondaryText]="'Tu crédito actual'"></sn-round-card>
 
     <div class="percent">
-        <sn-circle-progress [percent]="50" [total]="13500"></sn-circle-progress>
+        <sn-circle-progress [percent]="50" [icon]="'../../../../assets/icons/trophy.svg'"></sn-circle-progress>
     </div>
+
+    <sn-round-card [principalText]="'3/6'" [secondaryText]="'Misiones restantes'"></sn-round-card>
 
 </div>

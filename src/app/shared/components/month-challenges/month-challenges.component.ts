@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { PeriodDetail } from 'src/app/models/period-detail.model';
+import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 
 @Component({
   selector: 'app-month-challenges',

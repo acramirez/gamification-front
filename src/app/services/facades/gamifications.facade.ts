@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { Card } from "../../models/card.model";
-import { PeriodDetail } from "../../models/period-detail.model";
+import { Card } from "../../shared/models/card.model";
+import { PeriodDetail } from "../../shared/models/period-detail.model";
 import { GamificationService } from "../apis/gamification.service";
 import { Gamifications } from "../interfaces/gamification.interfaces";
 

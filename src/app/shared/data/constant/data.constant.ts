@@ -34,7 +34,7 @@ export const gamificationData: Gamification={
         currency_code: "MXN"
       },
       period: {
-        current_period: "o",
+        current_period: "1",
         status: StatusPeriodInfo.ACTIVE,
         period_detail: [
           {
