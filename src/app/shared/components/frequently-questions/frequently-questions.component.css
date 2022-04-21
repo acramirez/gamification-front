@@ -1,0 +1,14 @@
+.frequently-questions{
+    background:var(--theme-color-background-03);
+    border-radius: 1rem;
+    display: grid;
+    gap: .5rem;
+    margin: 0 1rem;
+    padding: 1rem .625rem 1.5rem .625rem;
+}
+h2{
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-left: .375rem;
+    margin-bottom: 1rem;
+}
