@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Card } from 'src/app/shared/models/card.model';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Card } from '../../interfaces/response/icard-details';
 
 @Component({
   selector: 'app-card-data',
@@ -14,11 +14,12 @@ export class CardDataComponent implements OnInit {
    * @type {Card}
    * 
    */
-  @Input() cardData!:Card
+  @Input() data!:Card
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

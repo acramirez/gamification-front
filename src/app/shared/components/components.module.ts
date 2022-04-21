@@ -11,10 +11,11 @@ import { CircleProgressModule } from '../atoms/circle-progress/circle-progress.m
 import { RoundCardModule } from '../atoms/round-card/round-card.module';
 import { ChallengeModule } from '../atoms/challenge/challenge.module';
 import { TabModule } from '../atoms/tab/tab.module';
+import { FrequentlyQuestionsComponent } from './frequently-questions/frequently-questions.component';
 
 
 @NgModule({
-  declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, ],
+  declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, FrequentlyQuestionsComponent, ],
   imports: [
     CommonModule,
     IconButtonModule,
@@ -29,6 +30,7 @@ import { TabModule } from '../atoms/tab/tab.module';
     CardDataComponent,
     CardGeneralAdvanceComponent,
     MonthChallengesComponent,
+    FrequentlyQuestionsComponent,
     TabModule
   ]
 })

@@ -18,6 +18,7 @@ body{
     background-color: #F5F7FA;
     margin:auto;
     width: 375px;
+    max-width: 375px;
     font-size: 12px;
 }
 *{

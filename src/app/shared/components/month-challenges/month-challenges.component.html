@@ -1,22 +1,35 @@
-<div class="tabs">
-    <lu-tab></lu-tab>
-    <lu-tab></lu-tab>
-    <lu-tab></lu-tab>
-    <lu-tab></lu-tab>
-    <lu-tab></lu-tab>
-    <lu-tab></lu-tab>
+<div class="tabs" >
+    <ng-container *ngFor="let tab of tabs">
+        <lu-tab [tab]="tab"></lu-tab>
+    </ng-container>
 </div>
 
-<div class="month-challenges">
+<div class="general-challenges">
+
     <div class="time-remaining">
         <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">15 días</span> </span>
     </div>
-    <h2 class="month-challenges__title">Retos por completar</h2>
-    <div class="challenges">
-        <sn-challenge></sn-challenge>
-        <sn-challenge></sn-challenge>
-        <sn-challenge></sn-challenge>
+
+    <div class="normal-challenges">
+        <h2 class="challenges__title">Retos por completar</h2>
+        <div class="challenges">
+            <sn-challenge></sn-challenge>
+            <sn-challenge></sn-challenge>
+            <sn-challenge></sn-challenge>
+        </div>
     </div>
+    <div class="special-challenges">
+        <h2 class="challenges__title">Retos especiales</h2>
+        <div class="challenges">
+            <sn-challenge></sn-challenge>
+            <sn-challenge></sn-challenge>
+            <sn-challenge></sn-challenge>
+            <sn-challenge></sn-challenge>
+        </div>
+    </div>
+
+
+
 </div>
 
 

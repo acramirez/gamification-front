@@ -1,4 +1,5 @@
-import { CurrentLimit } from "../../services/interfaces/gamification.interfaces";
+import { CurrentLimit } from "../interfaces/response/gamification.interface";
+
 
 export class Card {
 

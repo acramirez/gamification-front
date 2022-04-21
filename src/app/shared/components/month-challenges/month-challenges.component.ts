@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
+import { Tab } from '../../interfaces/atoms/tab.interface';
+import { Period } from '../../interfaces/response/gamification.interface';
 
 @Component({
   selector: 'app-month-challenges',
@@ -8,11 +10,8 @@ import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 })
 export class MonthChallengesComponent implements OnInit {
 
-  @Input() periodData!:PeriodDetail[];
-  @ViewChild('CarouselChallenge') carouselChallenge!:ElementRef<HTMLDivElement>
-
-  switchChallengeModal:boolean=false ;
-  currentPosition:number=0
+  @Input() periodData!:Period;
+  @Input() tabs:Tab[]=[]
 
   constructor() { }
 
@@ -26,7 +25,6 @@ export class MonthChallengesComponent implements OnInit {
   }
 
   openModal(){
-    this.switchChallengeModal=true
   }
 
 }

@@ -8,14 +8,14 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 })
 export class TabComponent implements OnInit {
 
-  @Input() tab!:Tab
-  icon!:string;
+  @Input() tab:Tab={texto:'',status:''}
+  icon:string='';
 
   constructor() { }
 
   ngOnInit(): void {
     switch (this.tab.status) {
-      case 'FINISH':
+      case 'FINISHED':
         this.icon='check'
         break;
       case 'ONGOING':

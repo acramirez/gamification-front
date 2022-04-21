@@ -1,9 +1,9 @@
-export interface Gamifications {
-    data: Data;
+export interface Gamification {
+    data:          Data;
+    notifications: Notification[];
 }
 
 export interface Data {
-    customer_key:         string;
     hiring_date:          Date;
     contract_key:         string;
     activation_date:      Date;
@@ -27,7 +27,11 @@ export interface Card {
 
 export interface CurrentLimit {
     amount:        number;
-    currency_code: string;
+    currency_code: CurrencyCode;
+}
+
+export enum CurrencyCode {
+    Mxn = "MXN",
 }
 
 export interface Period {
@@ -37,25 +41,33 @@ export interface Period {
 }
 
 export interface PeriodDetail {
-    period_id:         string;
-    initial_date:      Date;
-    due_date:          Date;
-    acumulated_limit:  CurrentLimit;
-    payment_card:      PaymentCard[];
-    recurring_payment: Assintance[];
-    domiciliation:     Assintance[];
-    assintance:        Assintance[];
-    payroll:           Assintance[];
-    status:            string;
+    period_id:             string;
+    initial_date:          Date;
+    due_date:              Date;
+    accumulated_purchases: CurrentLimit;
+    card_payment:          CardPayment[];
+    recurrent_payment:     RecurrentPayment[];
+    domiciliation:         any[];
+    assistance:            any[];
+    payroll_portability:   any[];
+    status:                string;
 }
 
-export interface Assintance {
+export interface CardPayment {
+    amount_payment: CurrentLimit;
+    minimum_amount: CurrentLimit;
+    operation_date: Date;
+}
+
+export interface RecurrentPayment {
+    id:             string;
     status:         string;
     operation_date: Date;
 }
 
-export interface PaymentCard {
-    amount_payment: CurrentLimit;
-    minimum_amount: CurrentLimit;
-    operation_date: Date;
+export interface Notification {
+    code:      string;
+    level:     string;
+    message:   string;
+    timestamp: string;
 }

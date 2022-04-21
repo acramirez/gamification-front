@@ -1,6 +1,6 @@
-import { Card, Status } from "../../interfaces/icard-details";
-import { StatusPeriodDetails, StatusPeriodInfo } from "../../interfaces/iperiod-details";
-import { Gamification } from "../../interfaces/iresponse-gamification";
+import { Card, Status } from "../../interfaces/response/icard-details";
+import { StatusPeriodDetails, StatusPeriodInfo } from "../../interfaces/response/iperiod-details";
+import { Gamification } from "../../interfaces/response/iresponse-gamification";
 
 
 export const gamificationData: Gamification={

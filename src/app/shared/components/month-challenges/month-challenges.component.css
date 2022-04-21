@@ -1,24 +1,23 @@
 .tabs{
     display: grid;
-    gap: .5rem;
+    column-gap: .5rem;
+    margin:0 1rem 1.5rem 1rem;
     grid-auto-flow: column;
-    grid-auto-columns: 7rem;
-    max-width: 327PX; 
-    margin: 0 1rem 1.5rem 1rem;
-    width: 100%;
+    max-width: 375px;
     overflow: auto;
+
+    width: 100%;
 }
 
 .tabs::-webkit-scrollbar{
     display: none;
 }
 
-.month-challenges{
+.general-challenges{
     background-color: var(--theme-color-background-03);
     box-shadow: 0px 6px 14px rgba(32, 45, 81, 0.05);
     border-radius: 16px;
     display: grid;
-    gap:1.5rem;
     margin: 0 1rem;
     overflow: auto;
     padding-bottom: 1.5rem;
@@ -40,20 +39,27 @@
     font-weight: 700;
 }
 
-.month-challenges__title{
+.challenges__title{
     font-size: 1.25rem;
-    padding: 1rem 0 0 1rem;
+    padding: 1rem 0 0 0;
 }
 
 .challenges{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
-    margin: 0 1.5rem;
+    margin-top:  1.5rem;
+    margin-bottom:  1rem;
     row-gap: 1.5rem;
-    
-
 }
 
+.normal-challenges{
+    border-bottom: 1px solid var(--theme-color-ui-04);
+    margin: 0 1.5rem;
+}
+
+.special-challenges{
+    margin: 0 1.5rem;
+}
 
 

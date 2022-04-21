@@ -1,4 +1,9 @@
 <div class="challenge-likeu">
-    <app-card-data [cardData]="cardDetail"></app-card-data>
-    <app-month-challenges [periodData]="periodDetail"></app-month-challenges>
+    <ng-container *ngIf="cardDetail">
+        <app-card-data [data]="cardDetail"></app-card-data>
+    </ng-container>
+    <ng-container *ngIf="periods">
+        <app-month-challenges [periodData]="periods" [tabs]="tabs"></app-month-challenges>
+    </ng-container>
+    <app-frequently-questions></app-frequently-questions>
 </div>

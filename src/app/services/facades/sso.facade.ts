@@ -19,11 +19,11 @@ export class TokenSsoFacade {
 
     private _token: string = `${environment.tkn.dummy}`;
 
-    validationToken(): Observable<boolean> {
-        return this.tokenService.getValidateToken(this._token).pipe(
-            map( resp => {
-                return ( resp.stokenValidatorResponse.codigoMensaje==='TVT_000')?this.validToken=true : this.validToken=false
-            })
-        );
-    }
+    // validationToken(): Observable<boolean> {
+    //     return this.tokenService.getValidateToken(this._token).pipe(
+    //         map( resp => {
+    //             return ( resp.stokenValidatorResponse.codigoMensaje==='TVT_000')?this.validToken=true : this.validToken=false
+    //         })
+    //     );
+    // }
 }

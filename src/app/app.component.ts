@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void { 
 
-    this.tokenFacade.validationToken().subscribe(
-      console.log
-    );
+    // this.tokenFacade.validationToken().subscribe(
+    //   console.log
+    // );
     //this.ssoFacade.validationToken().subscribe(
     //  console.log
       
