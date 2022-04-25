@@ -1,5 +1,11 @@
+export interface ITimeLine{
+    elements:ITimeLine[],
+    finalIcon:string,
+}
+
 export interface ITimeLineElement{
-    text:string,
+    principalText?:string,
+    secondaryText?:string,
     status?:statusElement
 }
 

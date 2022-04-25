@@ -9,9 +9,40 @@
     --theme-color-text-01:#FFFFFFFF;
     --theme-color-text-02:#595959FF;
     --theme-color-text-03:#999999FF;
+    --theme-color-text-06:#EC0000FF;
     --theme-color-primary-01:#EC0000FF;
     --theme-color-background-default:#F2F2F2FF;
     --theme-color-ui-04:#D9D9D9FF;
+}
+
+@font-face {
+    font-family: 'SantanderText';
+    src: url('./assets/fonts/santander/SantanderText-Regular.otf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SantanderText';
+    src: url('./assets/fonts/santander/SantanderText-Bold.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'SantanderText';
+    src: url('./assets/fonts/santander/SantanderText-Light.otf');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: 'SantanderHeadline';
+    src: url('./assets/fonts/santander/SantanderHeadline-Regular.otf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SantanderHeadline';
+    src: url('./assets/fonts/santander/SantanderHeadline-Bold.otf');
+    font-weight: bold;
 }
 
 body{
@@ -20,11 +51,12 @@ body{
     width: 375px;
     max-width: 375px;
     font-size: 12px;
+    font-family: 'SantanderText';
 }
 *{
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Santander-Text', Arial, Helvetica, sans-serif;
+
 }
 
 .modal-container{
