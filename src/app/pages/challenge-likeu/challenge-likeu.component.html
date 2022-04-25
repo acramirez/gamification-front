@@ -1,10 +1,10 @@
-<app-header></app-header>
-<div class="challenge-likeu">
-    <ng-container *ngIf="cardDetail">
+<!-- <app-header></app-header> -->
+<ng-container *ngIf="cardDetail">
+    <div class="challenge-likeu">
         <app-card-data [data]="cardDetail"></app-card-data>
-    </ng-container>
-    <ng-container *ngIf="periods">
         <app-month-challenges [periodData]="periods" [tabs]="tabs"></app-month-challenges>
-    </ng-container>
-    <app-frequently-questions></app-frequently-questions>
-</div>
+        <app-frequently-questions></app-frequently-questions>
+    </div>
+</ng-container>
+    
+<app-modal></app-modal>

@@ -1,18 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root{
-    --theme-color-primary-05:#000000ff;
     --theme-color-background-gradient-likeu:linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
     --theme-color-background-default:#F2F2F2FF;
     --theme-color-background-default2:rgba(255, 255, 255, 0.7);;
     --theme-color-background-03:#FFFFFFFF;
+    --theme-color-primary-01:#EC0000FF;
+    --theme-color-primary-05:#000000ff;
+    --theme-color-neutral-02:#191919;
     --theme-color-text-01:#FFFFFFFF;
     --theme-color-text-02:#595959FF;
-    --theme-color-text-03:#999999FF;
+    --theme-color-text-03:#767676;
+    --theme-color-text-04:#999999FF;
     --theme-color-text-06:#EC0000FF;
-    --theme-color-primary-01:#EC0000FF;
-    --theme-color-background-default:#F2F2F2FF;
-    --theme-color-ui-04:#D9D9D9FF;
+    --theme-color-ui-04:rgb(36, 23, 23);
 }
 
 @font-face {

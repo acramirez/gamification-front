@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { TimelineModule } from './molecules/timeline/timeline.module';
 import { ElementListModule } from './molecules/element-list/element-list.module';
+import { ModalModule } from './molecules/modal/modal.module';
 
 
 
@@ -13,12 +14,14 @@ import { ElementListModule } from './molecules/element-list/element-list.module'
     CommonModule,
     ComponentsModule,
     TimelineModule,
-    ElementListModule
+    ElementListModule,
+    ModalModule
   ],
   exports:[
     ComponentsModule,
     TimelineModule,
-    ElementListModule
+    ElementListModule,
+    ModalModule
   ]
 })
 export class SharedModule { }

@@ -20,5 +20,5 @@
 .tab--disabled{
     background:transparent;
     border: 1px solid var(--theme-color-ui-04);
-    color: var(--theme-color-text-03);
+    color: var(--theme-color-text-04);
 }
