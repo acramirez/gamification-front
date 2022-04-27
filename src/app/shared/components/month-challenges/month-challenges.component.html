@@ -1,30 +1,29 @@
 <div class="tabs" >
-    <ng-container *ngFor="let tab of tabs">
-        <lu-tab [tab]="tab"></lu-tab>
+    <ng-container *ngFor="let tab of tabs;let i=index">
+        <lu-tab (click)="indexTab.emit(i)" [tab]="tab"></lu-tab>
     </ng-container>
 </div>
 
 <div class="general-challenges">
 
     <div class="time-remaining">
-        <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">15 días</span> </span>
+        <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">15 días</span></span>
     </div>
 
     <div class="normal-challenges">
         <h2 class="challenges__title">Retos por completar</h2>
         <div class="challenges">
-            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
-            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
-            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
+            <ng-container *ngFor="let challenge of mandatoryChallenges">
+                <sn-challenge [title]="challenge.name" [icon]="challenge.icon" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
+            </ng-container>
         </div>
     </div>
-    <div class="special-challenges">
+    <div *ngIf="optionalChallenges.length>0" class="special-challenges">
         <h2 class="challenges__title">Retos especiales</h2>
         <div class="challenges">
-            <sn-challenge></sn-challenge>
-            <sn-challenge></sn-challenge>
-            <sn-challenge></sn-challenge>
-            <sn-challenge></sn-challenge>
+            <ng-container *ngFor="let challenge of optionalChallenges">
+                <sn-challenge [title]="challenge.name" [icon]="challenge.icon" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
+            </ng-container>
         </div>
     </div>
 </div>

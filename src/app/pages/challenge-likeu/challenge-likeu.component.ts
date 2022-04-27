@@ -4,8 +4,9 @@ import { map, takeUntil, tap } from 'rxjs/operators';
 import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
-import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
+import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
+import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'challenge-likeu',
@@ -15,13 +16,22 @@ import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
-  public periods!:Period;
+  mandatoryChallenges:Challenge[]=[]
+  optionalChallenges:Challenge[]=[]
+  activeTab:number=0;
+  challengeActive!:Challenge;
+
+
   tabs:Tab[]=[];
   showModal:boolean=false;
 
+
   private destroy$!:Subject<any>;
 
-  constructor(private gamificacionFacade: GamificationFacade) { }
+  constructor(
+    private gamificacionFacade: GamificationFacade,
+    private challengesFacade: ChallengesFacade
+  ) { }
 
   ngAfterViewInit(): void {
 
@@ -32,33 +42,66 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       ).subscribe(resp=>{
         
         const{current_limit,potential_limit,period}=resp
-        
         this.cardDetail={current_limit,potential_limit}
-        this.periods=period
 
-        
         this.getTabs(period.period_detail)
       })  
   }
 
-  openModal(){
-    this.showModal=true
+  get challenges(){
+    return this.challengesFacade.getChallenges();
+  }
+
+
+  getChallenges(tab:number){
+
+    this.mandatoryChallenges=[];
+    this.optionalChallenges=[];
+    const mandatoryChallenges=this.challenges.missions[tab].mandatoryChallenges;
+    const optionalChallenges=this.challenges.missions[tab].optionalChallenges;
+    
+    this.challenges.challenges.forEach(challenge=>{
+
+      mandatoryChallenges.forEach(mandatory=>{
+        if (mandatory===challenge.id) {
+          this.mandatoryChallenges.push(challenge)
+        }
+      })
+
+      optionalChallenges.forEach(optional=>{
+        if (optional===challenge.id) {
+          this.optionalChallenges.push(challenge)
+        }
+      })
+    })
+    
   }
 
   getTabs(periods:PeriodDetail[]){
-    periods.forEach((period)=>{
 
+    this.challenges.missions.forEach(mission=>{
       const tab:Tab=
-      {
-        texto:`Misión ${period.period_id}`,
-        status:period.status
-      }
+       {
+         texto:`Misión ${mission.id}`,
+         status:'FINISHED'
+       }
 
-      this.tabs.push(tab)
-      console.log();
-      
+       this.tabs.push(tab)
     })
+    // periods.forEach((period)=>{
+
+    //   const tab:Tab=
+    //   {
+    //     texto:`Misión ${period.period_id}`,
+    //     status:period.status
+    //   }
+
+    //   this.tabs.push(tab)
+    //   console.log();
+      
+    // })
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();

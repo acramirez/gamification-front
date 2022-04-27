@@ -3,14 +3,17 @@
     column-gap: .5rem;
     margin:0 1rem 1.5rem 1rem;
     grid-auto-flow: column;
-    max-width: 375px;
-    overflow: auto;
-
-    width: 100%;
+    max-width: 340px;
+    overflow-x: auto;
+    width: 375px;
 }
 
 .tabs::-webkit-scrollbar{
     display: none;
+}
+
+lu-tab{
+    cursor: pointer;
 }
 
 .general-challenges{
@@ -54,11 +57,11 @@
 }
 
 .normal-challenges{
-    border-bottom: 1px solid var(--theme-color-ui-04);
     margin: 0 1.5rem;
 }
 
 .special-challenges{
+    border-top: 1px solid var(--theme-color-ui-04);
     margin: 0 1.5rem;
 }
 

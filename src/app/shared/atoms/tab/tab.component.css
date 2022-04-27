@@ -8,8 +8,9 @@
     font-size: .875rem;
     font-weight: 700;
     justify-content: center;
+    min-width: 8rem;
     padding: .5rem 1rem;
-    width: 100%;
+    width: fit-content;
 
 }
 

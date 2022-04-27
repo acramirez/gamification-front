@@ -18,6 +18,7 @@ export interface Challenge {
     description: string;
     specs:       string[];
     conditions:  string[];
+    icon:        string;
     redirection: boolean;
 }
 

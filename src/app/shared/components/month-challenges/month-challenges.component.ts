@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 import { Tab } from '../../interfaces/atoms/tab.interface';
-import { Period } from '../../interfaces/response/gamification.interface';
+import { Challenge, ChallengesContract } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'app-month-challenges',
@@ -10,12 +10,14 @@ import { Period } from '../../interfaces/response/gamification.interface';
 })
 export class MonthChallengesComponent implements OnInit {
 
-  @Input() periodData!:Period;
+  @Input() mandatoryChallenges!:Challenge[];
+  @Input() optionalChallenges!:Challenge[];
+
   @Input() tabs:Tab[]=[]
-  modal=true
 
+  @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
-
+  @Output() challengeActive = new EventEmitter<Challenge>()
 
   constructor() { }
 

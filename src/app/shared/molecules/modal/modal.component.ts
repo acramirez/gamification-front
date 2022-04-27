@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef,ViewContainerRef } from '@angular/core';
 import { Modal } from '../../interfaces/atoms/modal';
+import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'app-modal',
@@ -9,18 +10,13 @@ import { Modal } from '../../interfaces/atoms/modal';
 export class ModalComponent implements OnInit {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
-  @Input() data:Modal={
-    icon:'',
-    btnClose:'Cerrar',
-    title:'Titulo',
-    subtitle:'subtitulo o descripción',
-    body:[]
-  }
+  @Input() data!:Challenge
 
   constructor(
   ) { }
 
   ngOnInit(): void {
+    
   }
   
 }

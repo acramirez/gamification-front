@@ -10,6 +10,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"card",
         redirection: false
       },
       {
@@ -22,6 +23,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"",
         redirection: true
       },
       {
@@ -34,6 +36,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"calendar",
         redirection: true
       },
       {
@@ -49,6 +52,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"calendar",
         redirection: true
       },
       {
@@ -64,6 +68,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"lightning",
         redirection: true
       },
       {
@@ -77,6 +82,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"briefcase",
         redirection: true
       },
       {
@@ -89,6 +95,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"squares",
         redirection: true
       },
       {
@@ -101,6 +108,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"bubble-chat",
         redirection: true
       },
       {
@@ -113,6 +121,7 @@ export const challengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
+        icon:"",
         redirection: true
       }
     ],
