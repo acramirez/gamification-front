@@ -4,6 +4,8 @@ import { ComponentsModule } from './components/components.module';
 import { TimelineModule } from './molecules/timeline/timeline.module';
 import { ElementListModule } from './molecules/element-list/element-list.module';
 import { ModalModule } from './molecules/modal/modal.module';
+import { ModalDirective } from './directives/modal.directive';
+import { DirectivesModule } from './directives/directives.module';
 
 
 
@@ -15,13 +17,14 @@ import { ModalModule } from './molecules/modal/modal.module';
     ComponentsModule,
     TimelineModule,
     ElementListModule,
-    ModalModule
+    ModalModule,
+    DirectivesModule
   ],
   exports:[
     ComponentsModule,
     TimelineModule,
     ElementListModule,
-    ModalModule
+    ModalModule,DirectivesModule
   ]
 })
 export class SharedModule { }

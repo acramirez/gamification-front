@@ -15,6 +15,8 @@ import { TabModule } from '../atoms/tab/tab.module';
 import { FrequentlyQuestionsComponent } from './frequently-questions/frequently-questions.component';
 import { HeaderComponent } from './header/header.component';
 import { QuestionModule } from '../atoms/question/question.module';
+import { DirectivesModule } from '../directives/directives.module';
+import { ModalModule } from '../molecules/modal/modal.module';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { QuestionModule } from '../atoms/question/question.module';
     ChallengeModule,
     TabModule,
     IconModule,
-    QuestionModule
+    QuestionModule,
+    DirectivesModule,
+    ModalModule
   ],
   exports:[
     CardDataComponent,

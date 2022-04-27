@@ -13,9 +13,9 @@
     <div class="normal-challenges">
         <h2 class="challenges__title">Retos por completar</h2>
         <div class="challenges">
-            <sn-challenge></sn-challenge>
-            <sn-challenge></sn-challenge>
-            <sn-challenge></sn-challenge>
+            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
+            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
+            <sn-challenge (click)="openModal.emit($event)"></sn-challenge>
         </div>
     </div>
     <div class="special-challenges">
@@ -27,9 +27,8 @@
             <sn-challenge></sn-challenge>
         </div>
     </div>
-
-
-
 </div>
+
+
 
 

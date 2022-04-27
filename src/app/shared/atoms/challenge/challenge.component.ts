@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'sn-challenge',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChallengeComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

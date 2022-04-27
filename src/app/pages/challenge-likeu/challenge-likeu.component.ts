@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
@@ -12,15 +12,17 @@ import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
   templateUrl: './challenge-likeu.component.html',
   styleUrls: ['./challenge-likeu.component.css']
 })
-export class ChallengeLikeuComponent implements OnInit,OnDestroy,AfterViewInit {
+export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
   public periods!:Period;
   tabs:Tab[]=[];
+  showModal:boolean=false;
 
   private destroy$!:Subject<any>;
 
   constructor(private gamificacionFacade: GamificationFacade) { }
+
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
@@ -36,21 +38,15 @@ export class ChallengeLikeuComponent implements OnInit,OnDestroy,AfterViewInit {
 
         
         this.getTabs(period.period_detail)
-        console.log(this.tabs);
-      })
+      })  
   }
 
-
-
-  ngOnInit(): void {
-
-    
+  openModal(){
+    this.showModal=true
   }
 
   getTabs(periods:PeriodDetail[]){
-    
     periods.forEach((period)=>{
-      console.log(periods);
 
       const tab:Tab=
       {

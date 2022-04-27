@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 import { Period } from '../../interfaces/response/gamification.interface';
@@ -12,19 +12,14 @@ export class MonthChallengesComponent implements OnInit {
 
   @Input() periodData!:Period;
   @Input() tabs:Tab[]=[]
+  modal=true
+
+  @Output() openModal = new EventEmitter<MouseEvent>();
+
 
   constructor() { }
 
   ngOnInit(): void {
     
   }
-
-
-  setCurrentPosition(position:number){
-
-  }
-
-  openModal(){
-  }
-
 }

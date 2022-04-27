@@ -13,7 +13,8 @@
     --theme-color-text-03:#767676;
     --theme-color-text-04:#999999FF;
     --theme-color-text-06:#EC0000FF;
-    --theme-color-ui-04:rgb(36, 23, 23);
+    --theme-color-ui-04:#D9D9D9
+    ;
 }
 
 @font-face {
@@ -48,12 +49,13 @@
 
 body{
     background-color: #F5F7FA;
-    margin:auto;
-    width: 375px;
-    max-width: 375px;
     font-size: 12px;
     font-family: 'SantanderText';
+    margin:auto;
+    max-width: 375px;
+    width: 375px;
 }
+
 *{
     margin: 0;
     box-sizing: border-box;

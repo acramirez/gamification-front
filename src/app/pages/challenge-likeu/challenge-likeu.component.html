@@ -1,10 +1,11 @@
-<!-- <app-header></app-header> -->
+<app-header></app-header> 
 <ng-container *ngIf="cardDetail">
     <div class="challenge-likeu">
         <app-card-data [data]="cardDetail"></app-card-data>
-        <app-month-challenges [periodData]="periods" [tabs]="tabs"></app-month-challenges>
+        <app-month-challenges (openModal)="showModal=true" [periodData]="periods" [tabs]="tabs"></app-month-challenges>
         <app-frequently-questions></app-frequently-questions>
     </div>
 </ng-container>
+
+<app-modal *modal="showModal" (closeModal)="showModal=$event"></app-modal>
     
-<app-modal></app-modal>

@@ -1,13 +1,13 @@
-<div class="modal-bg">
+<div #modal class="modal-bg">
     <div class="modal">
-        <button class="modal__btn-cerrar">Cerrar</button>
+        <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">{{data.btnClose}}</button>
         <div class="modal__header">
-            <img src="../../../../assets/icons/card.svg" alt="icono">
-            <h2 class="modal__title">Conoce tu tarjeta</h2>
-            <span class="modal__subtitle">Conoce las características de tu tarjeta Santander LikeU</span>            
+            <img [src]="data.icon" alt="icono">
+            <h2 class="modal__title">{{data.title}}</h2>
+            <span class="modal__subtitle">{{data.subtitle}}</span>            
         </div>
         <ul>
-            <ng-container >
+            <ng-container *ngFor="let element of data.body">
                 <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis, possimus!</li>
             </ng-container>
         </ul>
