@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
-import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
+import {  takeUntil } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
+import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 
 @Component({
   selector: 'challenge-likeu',
@@ -44,7 +44,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         const{current_limit,potential_limit,period}=resp
         this.cardDetail={current_limit,potential_limit}
 
-        this.getTabs(period.period_detail)
+        this.getTabs(period);
+        this.getChallenges(Number(period.current_period))
       })  
   }
 
@@ -77,29 +78,35 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     
   }
 
-  getTabs(periods:PeriodDetail[]){
+  getTabs(period:Period){
 
-    this.challenges.missions.forEach(mission=>{
+    period.period_detail.forEach((period)=>{
+
       const tab:Tab=
-       {
-         texto:`Misión ${mission.id}`,
-         status:'FINISHED'
-       }
+      {
+        texto:`Misión ${period.period_id}`,
+        status:period.status
+      }
 
-       this.tabs.push(tab)
+      this.tabs.push(tab)
+    
+    });
+
+
+    this.challenges.missions.forEach((mission,i)=>{
+      if (i>this.tabs.length) {
+        const tab:Tab=
+        {
+          texto:`Misión ${mission.id}`,
+          status:''
+        }
+  
+        this.tabs.push(tab)
+      }
     })
-    // periods.forEach((period)=>{
 
-    //   const tab:Tab=
-    //   {
-    //     texto:`Misión ${period.period_id}`,
-    //     status:period.status
-    //   }
 
-    //   this.tabs.push(tab)
-    //   console.log();
-      
-    // })
+
   }
 
 
