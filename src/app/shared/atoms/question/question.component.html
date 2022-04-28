@@ -1,4 +1,15 @@
 <div class="question">
-    <span class="question__text">Pregunta</span>
-    <sn-icon icon="sn-SMOV006"></sn-icon>
+    <div (click)="show()" class="question__header">
+        <span class="question__text">{{question.question}}</span>
+        <sn-icon 
+            [icon]="(showAnswer)?'sn-SMOV007':'sn-SMOV006'"></sn-icon>
+    </div>
+
+    <div *show="showAnswer" class="question__body">
+        <p class="question__answer">{{question.answer}}</p>
+        <span *ngIf="question.additionalInfo" class="question__aditional">
+            {{question.additionalInfo}}
+            <a class="question__link">{{question.link}}</a>
+        </span>
+    </div>
 </div>

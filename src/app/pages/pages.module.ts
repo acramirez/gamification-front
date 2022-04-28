@@ -8,6 +8,8 @@ import { ButtonModule } from "@ngx-mxflame/atoms/button";
 import { MessageComponent } from './message/message.component';
 import { IconModule } from "@ngx-mxflame/atoms/icon";
 import { FirstPageComponent } from './first-page/first-page.component';
+// import { SpinnerModule } from '@ngx-mxflame/atoms/spinner';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { FirstPageComponent } from './first-page/first-page.component';
     PagesRoutingModule,
     SharedModule,
     ButtonModule,
-    IconModule
+    IconModule,
+    // SpinnerModule
   ],
   exports:[ChallengeLikeuComponent]
 })

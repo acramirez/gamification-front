@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FAQ } from "../../interfaces/response/challengesContract.interface";
 
 @Component({
   selector: 'app-question',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionComponent implements OnInit {
 
+  @Input() question!:FAQ;
+
+  showAnswer:boolean=false
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  show(){
+    this.showAnswer=!this.showAnswer
+  }
 }

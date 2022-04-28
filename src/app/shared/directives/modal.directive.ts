@@ -1,13 +1,13 @@
 import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[modal]'
+  selector: '[show]'
 })
 export class ModalDirective implements OnInit {
 
   htmlElement!:ElementRef<HTMLElement>
 
-  @Input() set modal(condicion:boolean){
+  @Input() set show(condicion:boolean){
     (condicion)
     ?this.viewContainer.createEmbeddedView(this.templateRef)
     :this.viewContainer.clear();
@@ -20,7 +20,6 @@ export class ModalDirective implements OnInit {
     this.htmlElement=this.templateRef.elementRef
   }
   ngOnInit(): void {
-    console.log(this.htmlElement);
     
   }
 

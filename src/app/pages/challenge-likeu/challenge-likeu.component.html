@@ -1,5 +1,5 @@
 <app-header></app-header> 
-<ng-container *ngIf="cardDetail">
+<ng-container *ngIf="cardDetail" >
     <div class="challenge-likeu">
         <app-card-data [data]="cardDetail"></app-card-data>
         <app-month-challenges 
@@ -11,9 +11,12 @@
          (openModal)="showModal=true"
         >
         </app-month-challenges>
-        <app-frequently-questions></app-frequently-questions>
+        <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
 </ng-container>
 
-<app-modal *modal="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
+<app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
     
+<!-- <ng-template #spinner>
+    <sn-spinner></sn-spinner>
+</ng-template> -->

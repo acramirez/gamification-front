@@ -10,6 +10,7 @@ export interface FAQ {
     question:       string;
     answer:         string;
     additionalInfo: string;
+    link:           string
 }
 
 export interface Challenge {

@@ -53,6 +53,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return this.challengesFacade.getChallenges();
   }
 
+  get FAQs(){
+    return this.challenges.FAQ
+  }
+
 
   getChallenges(tab:number){
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { FAQ } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'app-frequently-questions',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frequently-questions.component.css']
 })
 export class FrequentlyQuestionsComponent implements OnInit {
+
+  @Input() questions:FAQ[]=[]
 
   constructor() { }
 

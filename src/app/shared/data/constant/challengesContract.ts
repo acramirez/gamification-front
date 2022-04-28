@@ -1,3 +1,4 @@
+
 export const challengesContract={
     challenges: [
       {
@@ -250,17 +251,20 @@ export const challengesContract={
       {
         question: "¿Qué es el reto Like U?",
         answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
-        additionalInfo: "*Consulta beneficios, términos y condiciones completos en www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
+        additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
+        link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
       },
       {
         question: "¿Qué es el reto Like U?",
         answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
-        additionalInfo: "*Consulta beneficios, términos y condiciones completos en www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
+        additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
+        link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
       },
       {
         question: "¿Qué es el reto Like U?",
         answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
-        additionalInfo: "*Consulta beneficios, términos y condiciones completos en www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
+        additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
+        link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
       }
     ]
   }
