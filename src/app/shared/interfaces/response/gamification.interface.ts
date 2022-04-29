@@ -50,6 +50,7 @@ export interface PeriodDetail {
     domiciliation:         any[];
     assistance:            any[];
     payroll_portability:   any[];
+    digital_channels?:      any[];
     status:                string;
 }
 

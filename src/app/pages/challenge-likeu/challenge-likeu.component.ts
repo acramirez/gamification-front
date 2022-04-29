@@ -7,6 +7,7 @@ import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { Period, PeriodDetail } from 'src/app/shared/interfaces/response/gamification.interface';
+import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 
 @Component({
   selector: 'challenge-likeu',
@@ -21,6 +22,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   specialChallenges:Challenge[]=[]
   activeTab:number=0;
   challengeActive!:Challenge;
+  statusMissions:statusMissions[]=[]
 
 
   tabs:Tab[]=[];
@@ -43,10 +45,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         
         const{current_limit,potential_limit,period}=resp
         this.cardDetail={current_limit,potential_limit}
-
+        this.period=period;
+        
+        this.checkChallenges()
         this.getTabs(period);
         this.getChallenges(Number(period.current_period));
-        this.period=period;
       })  
   }
 
@@ -60,8 +63,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   getChallenges(tab:number){
-
-    console.log(tab);
     
     this.mandatoryChallenges=[];
     this.specialChallenges=[];
@@ -72,19 +73,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
       mandatoryChallenges.forEach(mandatory=>{
         if (mandatory===challenge.id) {
-          // challenge=this.checkChallenges(tab,challenge)
+          challenge.status=this.setStatusChallenges(tab,challenge)
           this.mandatoryChallenges.push(challenge)
         }
       });
 
-      specialChallenges.forEach(optional=>{
-        if (optional===challenge.id) {
-          // challenge=this.checkChallenges(tab,challenge)
+      specialChallenges.forEach(special=>{
+        if (special===challenge.id) {
+
+          challenge.status=this.setStatusChallenges(tab,challenge)
+
           this.specialChallenges.push(challenge)
         }
       });
-
     })
+
+    console.log(this.mandatoryChallenges);
+    
   }
 
   getTabs(period:Period){
@@ -113,27 +118,112 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         }
         
       })
+    })    
+  }
+
+  checkChallenges(){
+
+    this.period.period_detail.forEach((period,i)=>{
+      const statusChallenges:statusChallenges[]=[];
+
+      const {
+        accumulated_purchases,
+        card_payment,recurrent_payment, 
+        domiciliation,
+        assistance,
+        payroll_portability,
+        digital_channels
+      } = period
+
+      if (accumulated_purchases && accumulated_purchases.amount>=200) {
+        statusChallenges.push({id:'minimum_monthly_billing',status:true})
+      }
+
+      if(card_payment){
+        for (let i = 0; i < card_payment.length; i++) {
+          const card = card_payment[i];
+          
+          if(card.amount_payment.amount>card.minimum_amount.amount){
+            statusChallenges.push({id:'card_payment',status:true})
+            break
+          }
+        }
+      }
+
+      if (recurrent_payment) {
+        for (let i = 0; i < recurrent_payment.length; i++) {
+          const recurrent = recurrent_payment[i];
+          if (recurrent.status==='ACTIVE') {
+            statusChallenges.push({id:'recurrent_payment',status:true});
+            break;
+          }
+        }
+      }
+
+      if (domiciliation) {
+        for (let i = 0; i < domiciliation.length; i++) {
+          const dom = domiciliation[i];
+          if (dom.status==='ACTIVE') {
+            statusChallenges.push({id:'domicialitation',status:true})
+            break
+          }
+        }
+      }
+
+      if (assistance) {
+        for (let i = 0; i < assistance.length; i++) {
+          const assis = assistance[i];
+          if (assis.status==='ACTIVE') {
+            statusChallenges.push({id:'assistance',status:true})
+            break
+          }
+        }
+      }
+      
+      if (payroll_portability) {
+        for (let i = 0; i < payroll_portability.length; i++) {
+          const payroll = payroll_portability[i];
+          if (payroll.status==='ACTIVE') {
+            statusChallenges.push({id:'assistance',status:true})
+            break
+          }
+        }
+      }
+      if (digital_channels) {
+        for (let i = 0; i < digital_channels.length; i++) {
+          const channel = digital_channels[i];
+          if (channel.status==='ACTIVE') {
+            statusChallenges.push({id:'assistance',status:true})
+            break
+          }
+        }
+      }
+
+      this.statusMissions.push({mission:period.period_id,challenges:statusChallenges})
+
     })
 
-    console.log(this.tabs);
-    
   }
 
-  checkChallenges(tab:number, challenge:Challenge){
-    const period = this.period.period_detail[tab]
-
-      switch (challenge.id) {
-        case 'accumulated_purchases':
-          if(period['accumulated_purchases'] && period['accumulated_purchases'].amount>200){
-            challenge={...challenge,status:true}
+  setStatusChallenges(tab:number,challenge:Challenge){
+    console.log(this.statusMissions);
+    console.log(this.mandatoryChallenges);
+    let status=false
+    this.statusMissions.forEach(mission=>{
+      if (mission.mission===tab.toString()) {
+        
+        mission.challenges?.forEach(chall=>{
+          if (chall.id===challenge.id) {
+            status=chall.status
+            console.log(chall);
           }
-          return  challenge  
-        default:
-          return challenge
-      }
-    
-  }
+        })
 
+      }
+    })
+      
+    return status
+  }
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();

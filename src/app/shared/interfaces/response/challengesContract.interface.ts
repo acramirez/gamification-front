@@ -27,7 +27,7 @@ export interface Challenge {
 export interface Mission {
     id:                    string;
     mandatoryChallenges:   string[];
-    optionalChallenges:    string[];
+    specialChallenges:    string[];
     acceleratorChallenges: string[];
     creditIncrease:        boolean;
 }

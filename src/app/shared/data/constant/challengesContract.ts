@@ -1,5 +1,6 @@
+import { ChallengesContract } from "../../interfaces/response/challengesContract.interface";
 
-export const challengesContract={
+export const challengesContract:ChallengesContract={
     challenges: [
       {
         id: "card_acquaintanceship",

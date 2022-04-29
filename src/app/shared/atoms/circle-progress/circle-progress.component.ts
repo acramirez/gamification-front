@@ -18,8 +18,6 @@ export class CircleProgressComponent implements OnInit {
   ngOnInit(): void {
     this.percent= this.percent/100;
     this.strokeDashoffset=this.circunference*(1-this.percent)
-    console.log(this.strokeDashoffset);
-
   }
 
 }
