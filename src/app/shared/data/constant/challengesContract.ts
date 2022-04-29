@@ -133,13 +133,8 @@ export const challengesContract={
           "card_acquaintanceship",
           "card_payment"
         ],
-        optionalChallenges: [
-          "minimum_monthly_billing",
-          "domiciliation",
-          "recurrent_payment",
-          "payroll_portability",
-          "assistance",
-          "digital_channels"
+        specialChallenges: [
+
         ],
         acceleratorChallenges: [],
         creditIncrease: false
@@ -150,12 +145,7 @@ export const challengesContract={
           "minimum_monthly_billing",
           "card_payment"
         ],
-        optionalChallenges: [
-          "domiciliation",
-          "recurrent_payment",
-          "payroll_portability",
-          "assistance",
-          "digital_channels"
+        specialChallenges: [
         ],
         acceleratorChallenges: [],
         creditIncrease: false
@@ -166,12 +156,7 @@ export const challengesContract={
           "minimum_monthly_billing",
           "card_payment"
         ],
-        optionalChallenges: [
-          "domiciliation",
-          "recurrent_payment",
-          "payroll_portability",
-          "assistance",
-          "digital_channels"
+        specialChallenges: [
         ],
         acceleratorChallenges: [],
         creditIncrease: false
@@ -182,12 +167,8 @@ export const challengesContract={
           "minimum_monthly_billing",
           "card_payment"
         ],
-        optionalChallenges: [
-          "domiciliation",
-          "recurrent_payment",
-          "payroll_portability",
-          "assistance",
-          "digital_channels"
+        specialChallenges: [
+
         ],
         acceleratorChallenges: [
           "higher_payment"
@@ -199,13 +180,13 @@ export const challengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
+          "digital_channels"
+        ],
+        specialChallenges: [
           "domiciliation",
           "recurrent_payment",
           "payroll_portability",
           "assistance"
-        ],
-        optionalChallenges: [
-          "digital_channels"
         ],
         acceleratorChallenges: [
           "higher_payment"
@@ -217,13 +198,15 @@ export const challengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
+          "digital_channels"
+        ],
+        specialChallenges: [
           "domiciliation",
           "recurrent_payment",
           "payroll_portability",
           "assistance",
-          "digital_channels"
+
         ],
-        optionalChallenges: [],
         acceleratorChallenges: [
           "higher_payment"
         ],
@@ -234,13 +217,14 @@ export const challengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
+          "digital_channels"
+        ],
+        specialChallenges: [
           "domiciliation",
           "recurrent_payment",
           "payroll_portability",
           "assistance",
-          "digital_channels"
         ],
-        optionalChallenges: [],
         acceleratorChallenges: [],
         creditIncrease: false
       }

@@ -12,6 +12,7 @@
 
     <div class="normal-challenges">
         <h2 class="challenges__title">Retos por completar</h2>
+        <p class="challenge__description">La validación de los retos se realiza cada fecha de corte. No lo olvides.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of mandatoryChallenges">
                 <sn-challenge [title]="challenge.name" [icon]="challenge.icon" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>

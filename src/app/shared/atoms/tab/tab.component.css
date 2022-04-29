@@ -8,10 +8,13 @@
     font-size: .875rem;
     font-weight: 700;
     justify-content: center;
-    min-width: 8rem;
+    min-width: 7.25rem;
     padding: .5rem 1rem;
     width: fit-content;
 
+}
+.tab__text{
+    display: block;
 }
 
 .tab__icon{

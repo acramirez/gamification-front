@@ -6,7 +6,7 @@ import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
-import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
+import { Period, PeriodDetail } from 'src/app/shared/interfaces/response/gamification.interface';
 
 @Component({
   selector: 'challenge-likeu',
@@ -16,8 +16,9 @@ import { Period } from 'src/app/shared/interfaces/response/gamification.interfac
 export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
+  public period!:Period;
   mandatoryChallenges:Challenge[]=[]
-  optionalChallenges:Challenge[]=[]
+  specialChallenges:Challenge[]=[]
   activeTab:number=0;
   challengeActive!:Challenge;
 
@@ -34,7 +35,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-
     this.destroy$=new Subject;
     this.gamificacionFacade.getGamification()
       .pipe(
@@ -45,7 +45,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         this.cardDetail={current_limit,potential_limit}
 
         this.getTabs(period);
-        this.getChallenges(Number(period.current_period))
+        this.getChallenges(Number(period.current_period));
+        this.period=period;
       })  
   }
 
@@ -60,57 +61,77 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   getChallenges(tab:number){
 
+    console.log(tab);
+    
     this.mandatoryChallenges=[];
-    this.optionalChallenges=[];
+    this.specialChallenges=[];
     const mandatoryChallenges=this.challenges.missions[tab].mandatoryChallenges;
-    const optionalChallenges=this.challenges.missions[tab].optionalChallenges;
+    const specialChallenges=this.challenges.missions[tab].specialChallenges;
     
     this.challenges.challenges.forEach(challenge=>{
 
       mandatoryChallenges.forEach(mandatory=>{
         if (mandatory===challenge.id) {
+          // challenge=this.checkChallenges(tab,challenge)
           this.mandatoryChallenges.push(challenge)
         }
-      })
+      });
 
-      optionalChallenges.forEach(optional=>{
+      specialChallenges.forEach(optional=>{
         if (optional===challenge.id) {
-          this.optionalChallenges.push(challenge)
+          // challenge=this.checkChallenges(tab,challenge)
+          this.specialChallenges.push(challenge)
         }
-      })
+      });
+
     })
-    
   }
 
   getTabs(period:Period){
 
-    period.period_detail.forEach((period)=>{
-
-      const tab:Tab=
-      {
-        texto:`Misión ${period.period_id}`,
-        status:period.status
-      }
-
-      this.tabs.push(tab)
-    
-    });
-
-
     this.challenges.missions.forEach((mission,i)=>{
-      if (i>this.tabs.length) {
-        const tab:Tab=
-        {
-          texto:`Misión ${mission.id}`,
-          status:''
-        }
-  
-        this.tabs.push(tab)
+      let tab:Tab={
+        id:'',
+        texto:'',
+        status:''
       }
+      if(mission.id==='0'){
+        tab.texto='Intro',
+        tab.id=mission.id
+      }
+      else{
+        tab.texto=`Misión ${mission.id}`
+        tab.id=mission.id
+      }
+      this.tabs.push(tab);
     })
 
+    this.tabs.forEach((tab,i)=>{
+      period.period_detail.forEach(mission=>{
+        if (tab.id===mission.period_id) {
+          tab.status=mission.status
+        }
+        
+      })
+    })
 
+    console.log(this.tabs);
+    
+  }
 
+  checkChallenges(tab:number, challenge:Challenge){
+    const period = this.period.period_detail[tab]
+
+      switch (challenge.id) {
+        case 'accumulated_purchases':
+          if(period['accumulated_purchases'] && period['accumulated_purchases'].amount>200){
+            challenge={...challenge,status:true}
+          }
+          return  challenge  
+        default:
+          return challenge
+      }
+    
   }
 
 

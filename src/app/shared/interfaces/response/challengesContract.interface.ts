@@ -21,6 +21,7 @@ export interface Challenge {
     conditions:  string[];
     icon:        string;
     redirection: boolean;
+    status?:     boolean;
 }
 
 export interface Mission {
