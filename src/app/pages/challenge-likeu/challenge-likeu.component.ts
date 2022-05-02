@@ -6,7 +6,7 @@ import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
-import { Period, PeriodDetail } from 'src/app/shared/interfaces/response/gamification.interface';
+import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 
 @Component({
@@ -20,9 +20,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   public period!:Period;
   mandatoryChallenges:Challenge[]=[]
   specialChallenges:Challenge[]=[]
-  activeTab:number=0;
   challengeActive!:Challenge;
   statusMissions:statusMissions[]=[]
+  percent:number=0;
+  currentPeriod:number=0
 
 
   tabs:Tab[]=[];
@@ -46,10 +47,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         const{current_limit,potential_limit,period}=resp
         this.cardDetail={current_limit,potential_limit}
         this.period=period;
+        this.currentPeriod=Number(period.current_period)
+
         
         this.checkChallenges()
         this.getTabs(period);
-        this.getChallenges(Number(period.current_period));
+        this.getChallenges(this.currentPeriod);
       })  
   }
 
@@ -88,7 +91,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       });
     })
 
-    console.log(this.mandatoryChallenges);
     
   }
 
@@ -206,8 +208,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   setStatusChallenges(tab:number,challenge:Challenge){
-    console.log(this.statusMissions);
-    console.log(this.mandatoryChallenges);
+
     let status=false
     this.statusMissions.forEach(mission=>{
       if (mission.mission===tab.toString()) {
@@ -215,7 +216,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         mission.challenges?.forEach(chall=>{
           if (chall.id===challenge.id) {
             status=chall.status
-            console.log(chall);
           }
         })
 
@@ -225,6 +225,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return status
   }
 
+  getPercent(){
+    let missionsComplete:number=0;
+    this.statusMissions.forEach(mission=>{
+      missionsComplete+=mission.challenges!.length
+    })
+    const percent= (missionsComplete * 100)/Number(this.challenges.challengeCount)
+    
+    return percent
+  }
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
   }

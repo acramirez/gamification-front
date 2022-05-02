@@ -15,6 +15,7 @@ export class CardDataComponent implements OnInit {
    * 
    */
   @Input() data!:Card
+  @Input() percent:number=0
 
   constructor() { }
 

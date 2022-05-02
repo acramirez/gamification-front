@@ -1,8 +1,8 @@
 export interface ChallengesContract {
     challenges:     Challenge[];
     missions:       Mission[];
-    challengeCount: string;
-    missionsCount:  string;
+    challengeCount: number;
+    missionsCount:  number;
     FAQ:            FAQ[];
 }
 

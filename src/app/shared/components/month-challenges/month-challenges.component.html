@@ -1,4 +1,4 @@
-<div class="tabs" >
+<div #tab class="tabs">
     <ng-container *ngFor="let tab of tabs;let i=index">
         <lu-tab (click)="indexTab.emit(i)" [tab]="tab"></lu-tab>
     </ng-container>

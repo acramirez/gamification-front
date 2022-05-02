@@ -230,8 +230,8 @@ export const challengesContract:ChallengesContract={
         creditIncrease: false
       }
     ],
-    challengeCount: "27",
-    missionsCount: "6",
+    challengeCount: 22,
+    missionsCount: 6,
     FAQ: [
       {
         question: "¿Qué es el reto Like U?",
