@@ -1,7 +1,6 @@
 .error-dialog{
     align-items: center;
     background: var(--theme-color-background-03);
-    bottom: 0;
     border-radius: 12px 12px 0px 0px;
     display: flex;
     flex-direction: column;
@@ -12,6 +11,7 @@
     position: fixed;
     right: 0;
     text-align: center;
+    transition: all .3s ease;
     width: 100%;
 }
 
