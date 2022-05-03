@@ -22,14 +22,7 @@
 
 }
 
-.modal__btn-cerrar{
-    background: none;
-    border: none;
-    color: var(--theme-color-text-06);
-    position: absolute;
-    right: 1.5rem;
-    top: .875rem;
-}
+
 
 .modal__header{
     display: grid;

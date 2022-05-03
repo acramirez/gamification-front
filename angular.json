@@ -56,7 +56,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/colorthief/dist/color-thief.min.js"
             ]
           },
           "configurations": {

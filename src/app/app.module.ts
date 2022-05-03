@@ -6,13 +6,13 @@ import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from "./app-routing.module";
 
-import { HttpErrorsInterceptor } from './services/interceptors/http.error.interceptor';
 
 import {
   DigitalBankDarkTheme,
   DigitalBankTheme,
   ThemeModule
 } from '@ngx-mxflame/atoms/theme';
+import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 
 
 @NgModule({
@@ -30,11 +30,13 @@ import {
     }),
     PagesModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpErrorsInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide:  HTTP_INTERCEPTORS,
+      useClass:ErrorInterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

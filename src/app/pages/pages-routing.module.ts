@@ -4,6 +4,7 @@ import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.compo
 import { FirstPageComponent } from './first-page/first-page.component';
 import { MessageComponent } from './message/message.component';
 
+
 const routes: Routes = [
   {
     path:'',

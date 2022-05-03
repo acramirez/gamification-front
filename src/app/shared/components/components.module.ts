@@ -33,7 +33,8 @@ import { ModalModule } from '../molecules/modal/modal.module';
     IconModule,
     QuestionModule,
     DirectivesModule,
-    ModalModule
+    ModalModule,
+    
   ],
   exports:[
     CardDataComponent,

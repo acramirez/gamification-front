@@ -4,14 +4,14 @@ import { ComponentsModule } from './components/components.module';
 import { TimelineModule } from './molecules/timeline/timeline.module';
 import { ElementListModule } from './molecules/element-list/element-list.module';
 import { ModalModule } from './molecules/modal/modal.module';
-import { ModalDirective } from './directives/modal.directive';
 import { DirectivesModule } from './directives/directives.module';
+import { ErrorDialogComponent } from './atoms/error-dialog/error-dialog.component';
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ErrorDialogComponent],
   imports: [
     CommonModule,
     ComponentsModule,
@@ -24,7 +24,8 @@ import { DirectivesModule } from './directives/directives.module';
     ComponentsModule,
     TimelineModule,
     ElementListModule,
-    ModalModule,DirectivesModule
+    ModalModule,DirectivesModule,
+    ErrorDialogComponent
   ]
 })
 export class SharedModule { }

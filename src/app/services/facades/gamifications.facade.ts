@@ -21,11 +21,13 @@ export class GamificationFacade {
     getGamification():Observable<ChallengeLikeU>{
         return this.gamificacionAPI.getGamifications(this._authorization).pipe(
             map(resp=>{
+                const{cut_of_date}=resp.data
                 const{current_limit,potential_limit,period}=resp.data.card
                 return {
                     current_limit,
                     potential_limit,
-                    period
+                    period,
+                    cut_of_date:new Date()
                 }
             })
         )

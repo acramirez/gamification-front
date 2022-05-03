@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import {  takeUntil } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
@@ -8,6 +8,8 @@ import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
+import { ErrorService } from 'src/app/services/error.service';
+import { ErrorInterceptorService } from 'src/app/services/interceptors/error-interceptor.service';
 
 @Component({
   selector: 'challenge-likeu',
@@ -34,7 +36,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   constructor(
     private gamificacionFacade: GamificationFacade,
-    private challengesFacade: ChallengesFacade
+    private challengesFacade: ChallengesFacade,
+    private errorService:ErrorService
   ) { }
 
   ngAfterViewInit(): void {
@@ -53,7 +56,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         this.checkChallenges()
         this.getTabs(period);
         this.getChallenges(this.currentPeriod);
-      })  
+      })
+
   }
 
   get challenges(){
@@ -64,6 +68,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return this.challenges.FAQ
   }
 
+  get showError(){
+    
+    return this.errorService.showError
+  }
 
   getChallenges(tab:number){
     
@@ -234,6 +242,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     
     return percent
   }
+
+  // diferenceDays(cutDay:Date | undefined){
+  //   const day = new Date()
+
+  //   console.log(cutDay!.getTime());
+  //   console.log(day.getTime());
+    
+    
+  // }
+
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
   }

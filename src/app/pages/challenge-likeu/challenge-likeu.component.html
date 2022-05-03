@@ -22,6 +22,4 @@
 
 <app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
     
-<!-- <ng-template #spinner>
-    <sn-spinner></sn-spinner>
-</ng-template> -->
+<app-error-dialog *ngIf="showError"></app-error-dialog>

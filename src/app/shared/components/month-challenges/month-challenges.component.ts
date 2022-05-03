@@ -23,7 +23,6 @@ export class MonthChallengesComponent implements OnInit,AfterViewInit {
 
   constructor() { }
   ngAfterViewInit(): void {
-    console.log(this.scrollTabs.nativeElement);
     this.scrollTabs.nativeElement.scrollLeft=this.activeTab*124
   }
 
