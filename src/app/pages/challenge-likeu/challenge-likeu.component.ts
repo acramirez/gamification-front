@@ -9,7 +9,7 @@ import { Challenge } from 'src/app/shared/interfaces/response/challengesContract
 import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { ErrorService } from 'src/app/services/error.service';
-import { ErrorInterceptorService } from 'src/app/services/interceptors/error-interceptor.service';
+import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 
 @Component({
   selector: 'challenge-likeu',
@@ -69,8 +69,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   get showError(){
-    
     return this.errorService.showError
+  }
+
+  get challengesFather(){
+    return challengesFather
   }
 
   getChallenges(tab:number){
@@ -99,7 +102,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       });
     })
 
-    
+    this.challengesRedirect();
   }
 
   getTabs(period:Period){
@@ -235,22 +238,50 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   getPercent(){
     let missionsComplete:number=0;
-    this.statusMissions.forEach(mission=>{
-      missionsComplete+=mission.challenges!.length
+
+    this.mandatoryChallenges.forEach(mandatory=>{
+      if (mandatory.status===true) {
+        missionsComplete++
+      }
     })
+
+    if (this.specialChallenges.length>0) {
+      
+      for (let i = 0; i < this.specialChallenges.length; i++) {
+        const special = this.specialChallenges[i];
+  
+        if (special.status===true) {
+          missionsComplete++
+          break;
+        }
+      }
+    }
+
+    console.log(this.mandatoryChallenges);
+    
+    
     const percent= (missionsComplete * 100)/Number(this.challenges.challengeCount)
     
     return percent
   }
 
-  // diferenceDays(cutDay:Date | undefined){
-  //   const day = new Date()
+  challengesRedirect(){
+    this.challengesFather.challenges.forEach(challenge=>{
+      this.mandatoryChallenges.forEach(mandatory=>{
+        if(mandatory.id===challenge){
+          mandatory.redirection=true
+        }
+      })
 
-  //   console.log(cutDay!.getTime());
-  //   console.log(day.getTime());
-    
-    
-  // }
+      if (this.specialChallenges.length>0) {
+        this.specialChallenges.forEach(special=>{
+          if (special.id===challenge) {
+            special.redirection=true;
+          }
+        })
+      }
+    })
+  }
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();

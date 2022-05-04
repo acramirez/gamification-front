@@ -24,8 +24,6 @@ export class AnimationsDirective {
       default:
         break;
     }
-    if (direction==='up') {
-    }
   };
 
   selectAnimation(){
@@ -40,7 +38,7 @@ export class AnimationsDirective {
   }
   
 
-  zoomIn(){
+  zoomIn(){    
     this.element.nativeElement.classList.add('zoomIn')
   }
 

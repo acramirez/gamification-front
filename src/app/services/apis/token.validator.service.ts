@@ -24,19 +24,19 @@ export class TokenValidatorService {
 
 
     
-    // get httpParams(): HttpParams {
-    //     const jsonEntry = {
-    //         stokenValidatorRequest: {
-    //             token: this._token,
-    //             ipUsuario: '180.186.107.23',
-    //             idAplicativo: 'SNET',
-    //             PAdicional: ''
-    //         }
-    //     }
-    //     return new HttpParams({
-    //         fromObject:{
-    //           jsonEntrada:JSON.stringify( jsonEntry )
-    //         }
-    //     });
-    // }
+    //  get httpParams(): HttpParams {
+    //      const jsonEntry = {
+    //          stokenValidatorRequest: {
+    //              token: this._token,
+    //              ipUsuario: '180.186.107.23',
+    //              idAplicativo: 'SNET',
+    //              PAdicional: ''
+    //          }
+    //      }
+    //      return new HttpParams({
+    //          fromObject:{
+    //            jsonEntrada:JSON.stringify( jsonEntry )
+    //          }
+    //      });
+    //  }
 }

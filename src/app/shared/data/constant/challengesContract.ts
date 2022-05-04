@@ -26,7 +26,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"",
-        redirection: true
+        redirection: false
       },
       {
         id: "card_payment",
@@ -39,7 +39,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"calendar",
-        redirection: true
+        redirection: false
       },
       {
         id: "domiciliation",
@@ -55,7 +55,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"calendar",
-        redirection: true
+        redirection: false
       },
       {
         id: "recurrent_payment",
@@ -71,7 +71,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"lightning",
-        redirection: true
+        redirection: false
       },
       {
         id: "payroll_portability",
@@ -85,7 +85,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"briefcase",
-        redirection: true
+        redirection: false
       },
       {
         id: "assistance",
@@ -98,7 +98,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"squares",
-        redirection: true
+        redirection: false
       },
       {
         id: "digital_channels",
@@ -111,7 +111,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"bubble-chat",
-        redirection: true
+        redirection: false
       },
       {
         id: "higher_payment",
@@ -124,7 +124,7 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"",
-        redirection: true
+        redirection: false
       }
     ],
     missions: [
