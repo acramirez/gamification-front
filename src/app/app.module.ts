@@ -13,6 +13,7 @@ import {
   ThemeModule
 } from '@ngx-mxflame/atoms/theme';
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
+import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
 
 
 @NgModule({
@@ -31,6 +32,11 @@ import { ErrorInterceptorService } from './services/interceptors/error-intercept
     PagesModule
   ],
   providers: [
+    {
+      provide:  HTTP_INTERCEPTORS,
+      useClass:SsoInterceptorService,
+      multi:true
+    },
     {
       provide:  HTTP_INTERCEPTORS,
       useClass:ErrorInterceptorService,

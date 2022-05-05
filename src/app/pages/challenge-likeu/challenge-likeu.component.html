@@ -1,5 +1,5 @@
-<app-header></app-header> 
 <ng-container *ngIf="cardDetail" >
+    <app-header></app-header> 
     <div class="challenge-likeu">
         <app-card-data 
             [data]="cardDetail"
@@ -10,7 +10,8 @@
          [mandatoryChallenges]="mandatoryChallenges" 
          [optionalChallenges]="specialChallenges" 
          [tabs]="tabs"
-         (indexTab)="getChallenges($event)"
+         [days]="getDays(cut_of_day)"
+         (indexTab)="getChallenges($event);index=$event"
          [activeTab]="currentPeriod"
          (challengeActive)="challengeActive=$event"
          (openModal)="showModal=true"

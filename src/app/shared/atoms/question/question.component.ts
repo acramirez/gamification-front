@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FAQ } from "../../interfaces/response/challengesContract.interface";
 
 @Component({
@@ -9,13 +9,13 @@ import { FAQ } from "../../interfaces/response/challengesContract.interface";
 export class QuestionComponent implements OnInit {
 
   @Input() question!:FAQ;
-
   showAnswer:boolean=false
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
   show(){
     this.showAnswer=!this.showAnswer

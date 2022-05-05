@@ -15,6 +15,7 @@ export class MonthChallengesComponent implements OnInit,AfterViewInit {
 
   @Input() tabs:Tab[]=[]
   @Input() activeTab:number=0
+  @Input() days!:Number | null
 
   @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
@@ -27,7 +28,6 @@ export class MonthChallengesComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    
     
   }
 }

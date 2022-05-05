@@ -235,7 +235,7 @@ export const challengesContract:ChallengesContract={
     FAQ: [
       {
         question: "¿Qué es el reto Like U?",
-        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
+        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero. Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
         additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
         link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
       },

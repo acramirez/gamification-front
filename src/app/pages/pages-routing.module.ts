@@ -18,7 +18,7 @@ const routes: Routes = [
         component:MessageComponent
       },
       {
-        path:'reto-likeu',
+        path:'bienvenido',
         component:FirstPageComponent
       }
     ]
