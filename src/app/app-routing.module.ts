@@ -8,10 +8,8 @@ import { SsoGuard } from './shared/guards/sso.guard';
 
 const routes:Routes=[
   {
-    path:'challenge-likeu',
+    path:'',
     loadChildren:()=>import('./pages/pages.module').then(m=>m.PagesModule),
-    // canLoad:[SsoGuard],
-    // canActivate:[SsoGuard],
 
   },
   {

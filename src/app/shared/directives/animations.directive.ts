@@ -33,7 +33,7 @@ export class AnimationsDirective implements AfterViewInit {
     this.element.nativeElement.style.bottom='-100%'
     setTimeout(() => {
       this.element.nativeElement.style.bottom='0'
-    }, 300);
+    }, 3000);
   }
   
   zoomIn(){    
@@ -49,10 +49,7 @@ export class AnimationsDirective implements AfterViewInit {
 
     if (!active) {
       this.element.nativeElement.classList.add('drop-down-hidden')
-      this.element.nativeElement.style.height= '0' 
-      console.log(this.height);
-      console.log(this.element.nativeElement.style.height);
-      
+      this.element.nativeElement.style.height= '0'       
       
     }else if(this.height>0){
       this.element.nativeElement.style.height= `${this.height.toString()}px`

@@ -1,13 +1,10 @@
 
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { OpaqueToken } from "src/app/shared/interfaces/response/opaqueToken.interfaace";
+import { Observable, throwError } from "rxjs";
 
-import { environment } from "src/environments/environment";
 import { TokenValidatorService } from "../apis/token.validator.service";
+import { ErrorService } from "../apis/error.service";
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +17,8 @@ export class TokenSsoFacade {
 
     constructor(
         private tokenService: TokenValidatorService,
-        private activatedRoute:ActivatedRoute
+        private activatedRoute:ActivatedRoute,
+        private errorService:ErrorService
     ) {
 
         if (this.activatedRoute.queryParams) {
@@ -35,8 +33,14 @@ export class TokenSsoFacade {
           }
     }
 
-    validationToken(): Observable<OpaqueToken> {
-        return this.tokenService.getValidateToken(this._token)
+    validationToken(): Observable<any> {
+        if (this.isBase64) {
+            return this.tokenService.getValidateToken(this._token)
+            
+        }else{
+            this.errorService.showError=true
+            return throwError('El token no es base 64')
+        }
     }
 
 
@@ -46,19 +50,15 @@ export class TokenSsoFacade {
     
         
         const tk=this._token.split(' ')
-        console.log(tk);
            
         this._token='';
         tk.forEach((tkn,i)=>{
             
             if (i<tk.length-1) {
                 this._token+=`${tkn}+`
-                console.log(tk.length);
-                console.log(i);
             }else{
                 this._token+=`${tkn}`
             }
-
         })
 
         const validateBase64=base64regex.test(this._token);

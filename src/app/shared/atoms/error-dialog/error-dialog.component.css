@@ -2,6 +2,7 @@
     align-items: center;
     background: var(--theme-color-background-03);
     border-radius: 12px 12px 0px 0px;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     height: fit-content;

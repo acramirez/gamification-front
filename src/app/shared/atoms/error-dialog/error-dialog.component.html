@@ -3,8 +3,8 @@
     }" 
     animation="up"
 >
-    <img class="error-dialog__img" src="../../../../assets/icons/cloud-error.svg" alt="">
-    <span class="error-dialog__title">¡Oh, oh!</span>
-    <p class="error-dialog__description">No pudimos atender tu solicitud por ahora. Inténtalo después.</p>
+    <img class="error-dialog__img" [src]="'../../../../assets/icons/'+errorData.icon+'.svg'" alt="">
+    <span class="error-dialog__title">{{errorData.title}}</span>
+    <p class="error-dialog__description">{{errorData.message}}</p>
     <button class="modal__btn-cerrar" >Cerrar</button>
 </div>

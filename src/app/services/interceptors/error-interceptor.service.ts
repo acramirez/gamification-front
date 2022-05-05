@@ -1,8 +1,9 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { ErrorService } from '../error.service';
+import { ErrorService } from '../apis/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,19 @@ export class ErrorInterceptorService implements HttpInterceptor {
         }else {
           this.errorService.showError=true;
           errorMessage = `Error server: ${error.status}, message: ${error.message}`;
+        }
+
+        switch (error.status) {
+          case 404:
+          this.errorService.showError=true;
+            this.errorService.error={
+              title:'Error del cliente',
+              message:'',
+            }
+            break;
+        
+          default:
+            break;
         }
         
         return throwError (errorMessage)

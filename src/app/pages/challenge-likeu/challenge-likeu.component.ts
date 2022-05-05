@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import {  switchMap, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -8,11 +8,8 @@ import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
-import { ErrorService } from 'src/app/services/error.service';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'challenge-likeu',
@@ -47,10 +44,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-    private errorService:ErrorService,
   ) { }
 
   ngOnInit(): void {
+
+    this.tokenFacade.validationToken().subscribe(console.log)
 
   }
 
@@ -89,10 +87,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
 
   get FAQs(){
     return this.challenges.FAQ
-  }
-
-  get showError(){
-    return this.errorService.showError
   }
 
   get challengesFather(){

@@ -5,27 +5,27 @@ import { TimelineModule } from './molecules/timeline/timeline.module';
 import { ElementListModule } from './molecules/element-list/element-list.module';
 import { ModalModule } from './molecules/modal/modal.module';
 import { DirectivesModule } from './directives/directives.module';
-import { ErrorDialogComponent } from './atoms/error-dialog/error-dialog.component';
+import { ErrorDialogModule } from './atoms/error-dialog/error-dialog.module';
 
 
 
 
 @NgModule({
-  declarations: [ErrorDialogComponent],
+  declarations: [],
   imports: [
     CommonModule,
     ComponentsModule,
     TimelineModule,
     ElementListModule,
     ModalModule,
-    DirectivesModule
+    DirectivesModule,
+    ErrorDialogModule
   ],
   exports:[
     ComponentsModule,
     TimelineModule,
     ElementListModule,
     ModalModule,DirectivesModule,
-    ErrorDialogComponent
   ]
 })
 export class SharedModule { }

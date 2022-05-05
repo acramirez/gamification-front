@@ -14,6 +14,7 @@ import {
 } from '@ngx-mxflame/atoms/theme';
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
+import { ErrorDialogModule } from './shared/atoms/error-dialog/error-dialog.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SsoInterceptorService } from './services/interceptors/sso-interceptor.s
       themes: [DigitalBankTheme, DigitalBankDarkTheme],
       active: 'theme--digitalbank-dark'
     }),
-    PagesModule
+    PagesModule,
+    
   ],
   providers: [
     {
