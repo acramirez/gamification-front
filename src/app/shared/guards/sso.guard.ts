@@ -13,7 +13,6 @@ export class SsoGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      console.log(this.errorService.showError);
       
     return this.errorService.showError
 

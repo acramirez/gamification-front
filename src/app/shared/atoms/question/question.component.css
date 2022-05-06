@@ -42,3 +42,12 @@ sn-icon>i[class^=sn-]{
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.chevron::before{
+    border-style: solid;
+    border-width: .25em .25em 0 0;
+    content: '';
+    display: inline-block;
+    height: .45rem;
+    width: .45rem;
+}

@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ErrorService } from '../apis/error.service';
@@ -11,7 +11,8 @@ import { ErrorService } from '../apis/error.service';
 export class ErrorInterceptorService implements HttpInterceptor {
 
   constructor(
-    private errorService:ErrorService
+    private errorService:ErrorService,
+    private route:Router
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -46,7 +47,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
           default:
             break;
         }
-        
+        this.route.navigate(['/error'])
         return throwError (errorMessage)
   }
 }

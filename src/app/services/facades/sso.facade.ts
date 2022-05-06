@@ -1,6 +1,6 @@
 
 import { Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
 
 import { TokenValidatorService } from "../apis/token.validator.service";
@@ -18,17 +18,20 @@ export class TokenSsoFacade {
     constructor(
         private tokenService: TokenValidatorService,
         private activatedRoute:ActivatedRoute,
-        private errorService:ErrorService
+        private errorService:ErrorService,
+        private router:Router
     ) {
 
         if (this.activatedRoute.queryParams) {
             const queryParams=this.activatedRoute.queryParams
-            
+
             queryParams.subscribe(param=>{
               if (param['token']) {
                 this._token=param['token']
-                this.isBase64=this.isBase64Token()     
-              }              
+                this.isBase64=this.isBase64Token()
+              }else{
+                  console.log(this.errorService.showError);
+              }
             })
           }
     }
@@ -36,24 +39,25 @@ export class TokenSsoFacade {
     validationToken(): Observable<any> {
         if (this.isBase64) {
             return this.tokenService.getValidateToken(this._token)
-            
+
         }else{
             this.errorService.showError=true
+            // this.router.navigate(['error'])
             return throwError('El token no es base 64')
         }
     }
 
 
     isBase64Token(){
-    
+
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/
-    
-        
+
+
         const tk=this._token.split(' ')
-           
+
         this._token='';
         tk.forEach((tkn,i)=>{
-            
+
             if (i<tk.length-1) {
                 this._token+=`${tkn}+`
             }else{
@@ -64,7 +68,7 @@ export class TokenSsoFacade {
         const validateBase64=base64regex.test(this._token);
         console.log(validateBase64);
         console.log(this._token);
-        
+
         if (!validateBase64) {
           return false
         }

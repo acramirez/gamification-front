@@ -6,15 +6,19 @@ import { FAQ } from "../../interfaces/response/challengesContract.interface";
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements AfterViewInit {
 
   @Input() question!:FAQ;
   showAnswer:boolean=false
+  height!:number;
+  @ViewChild('answer') answer!:ElementRef<HTMLElement>;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+      
   }
+
 
 
   show(){

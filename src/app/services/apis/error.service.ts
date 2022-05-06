@@ -18,7 +18,7 @@ export class ErrorService {
   }
 
   constructor() { 
-
+    
   }
 
   errorShow(error:HttpErrorResponse){

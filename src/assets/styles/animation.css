@@ -23,8 +23,28 @@
     overflow: hidden;
     padding-bottom: 0!important;
     transition: all ease .3s;
+    height: 0;
 }
 
+.downUp{
+    bottom: -100%;
+    transition: all ease .3s;
+}
+
+@keyframes downUp {
+    0%{
+        bottom: -100%;
+    }
+    50%{
+        bottom: -50%;
+    }
+    75%{
+        bottom: -25%;
+    }
+    100%{
+        bottom: 0;
+    }
+}
 
 
 

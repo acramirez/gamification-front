@@ -3,7 +3,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/co
 @Directive({
   selector: '[animation]'
 })
-export class AnimationsDirective implements AfterViewInit {
+export class AnimationsDirective implements OnInit {
 
 
 
@@ -11,17 +11,15 @@ export class AnimationsDirective implements AfterViewInit {
     private element:ElementRef<HTMLElement>
   ) { }
 
-  @Input() height:number=0
+  height!:number;
   @Input() set animation(direction:string){
 
     switch (direction) {
-      case 'up':
+      case 'downUp':
         this.downUp()
         break;
       case 'zoomIn':
         this.zoomIn()
-        break;
-      case 'dropDown':
         break;
       
       default:
@@ -30,30 +28,41 @@ export class AnimationsDirective implements AfterViewInit {
   };
 
   downUp(){
-    this.element.nativeElement.style.bottom='-100%'
+    this.element.nativeElement.classList.add('downUp')
     setTimeout(() => {
       this.element.nativeElement.style.bottom='0'
-    }, 3000);
+    }, 300);
   }
   
   zoomIn(){    
     this.element.nativeElement.classList.add('zoomIn')
   }
 
-  ngAfterViewInit(): void {
-    this.height=this.element.nativeElement.clientHeight
 
+  ngOnInit(): void {
+    
   }
 
   @Input() set dropDown(active:boolean){
 
+    const h = this.height;
+    
     if (!active) {
+      this.height=this.element.nativeElement.clientHeight
       this.element.nativeElement.classList.add('drop-down-hidden')
-      this.element.nativeElement.style.height= '0'       
+      console.log(this.height);
       
-    }else if(this.height>0){
+    }else{
+      this.element.nativeElement.classList.add('drop-down-hidden')
       this.element.nativeElement.style.height= `${this.height.toString()}px`
     }
-     
+  }
+
+  @Input() set loadProgress(progress:number){
+    this.element.nativeElement.style.strokeDashoffset=progress.toString();
+
   }
 }
+
+
+

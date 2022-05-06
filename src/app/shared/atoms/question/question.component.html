@@ -2,10 +2,11 @@
     <div (click)="show()" class="question__header">
         <span class="question__text">{{question.question}}</span>
         <sn-icon 
-            [icon]="(showAnswer)?'sn-SMOV007':'sn-SMOV006'"></sn-icon>
+            [icon]="(showAnswer)?'sn-SMOV007':'sn-SMOV006'">
+        </sn-icon>
     </div>
 
-    <div #answer animation="dropDown" [dropDown]="showAnswer" class="question__body">
+    <div *show="showAnswer" class="question__body">
         <p class="question__answer">{{question.answer}}</p>
         <span *ngIf="question.additionalInfo" class="question__aditional">
             {{question.additionalInfo}}
@@ -13,3 +14,4 @@
         </span>
     </div>
 </div>
+ 
