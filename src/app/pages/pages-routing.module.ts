@@ -24,12 +24,12 @@ const routes: Routes = [
         component:FirstPageComponent
       }
     ],
-    // canLoad:[SsoGuard],
-    // canActivate:[SsoGuard],
+    //  canLoad:[SsoGuard],
+    //  canActivate:[SsoGuard],
   },
   {
     path:'error',
-    component:ErrorPageComponent
+    component:ErrorPageComponent,
   }
 ];
 

@@ -6,22 +6,22 @@ import { ErrorService } from 'src/app/services/apis/error.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SsoGuard implements CanActivate, CanLoad {
+export class ErrorGuard implements CanActivate, CanLoad {
 
-  constructor( private errorService: ErrorService ) {}
+  constructor(
+    private errorService:ErrorService
+  ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    return this.errorService.showError
-
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      
+    
+      return true;
   }
   canLoad(
     route: Route,
-    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-      console.log(this.errorService.showError);
-
-    return this.errorService.showError
+    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return true;
   }
 }

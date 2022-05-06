@@ -14,7 +14,6 @@ import {
 } from '@ngx-mxflame/atoms/theme';
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
-import { ErrorDialogModule } from './shared/atoms/error-dialog/error-dialog.module';
 
 
 @NgModule({

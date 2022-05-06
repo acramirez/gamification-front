@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 
 import { TokenValidatorService } from "../apis/token.validator.service";
 import { ErrorService } from "../apis/error.service";
@@ -30,6 +30,8 @@ export class TokenSsoFacade {
                 this._token=param['token']
                 this.isBase64=this.isBase64Token()
               }else{
+                  
+                  throwError('param Token no existe')
                   console.log(this.errorService.showError);
               }
             })
@@ -38,15 +40,15 @@ export class TokenSsoFacade {
 
     validationToken(): Observable<any> {
         if (this.isBase64) {
-            return this.tokenService.getValidateToken(this._token)
+            return of(true)
+            // return this.tokenService.getValidateToken(this._token)
 
         }else{
             this.errorService.showError=true
-            // this.router.navigate(['error'])
+            this.router.navigate(['error'])
             return throwError('El token no es base 64')
         }
     }
-
 
     isBase64Token(){
 
