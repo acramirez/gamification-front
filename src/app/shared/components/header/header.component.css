@@ -1,0 +1,29 @@
+.header{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* .header::before{
+    content: '';
+    background: var(--theme-color-background-03);
+    border-radius: 45%;
+    height: 184px;
+    position: absolute;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    width: 100%;
+    z-index: 0;
+} */
+
+h2{
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+sn-icon{
+    font-size: 2rem;
+}

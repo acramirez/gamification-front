@@ -1,184 +1,249 @@
-import { Card, Status } from "../../interfaces/icard-details";
-import { StatusPeriodDetails, StatusPeriodInfo } from "../../interfaces/iperiod-details";
-import { Gamification } from "../../interfaces/iresponse-gamification";
 
 
-export const gamificationData: Gamification={
-  data: {
-    customer_key: "00000020",
-    hiring_date: new Date( 2022,2,16,23,38,45,408),
-    contract_key: "213131315446",
-    activation_date: new Date( 2022,2,16,23,38,45,408),
-    type: "GM_2",
-    status: "INITIAL",
-    last_evaluation_date: new Date( 2022,2,16,23,38,45,408),
-    cut_of_date: new Date( 2022,2,16,23,38,45,408),
-    card:{
-      current_limit: {
-        amount: 50000,
-        currency_code: "MXN"
+export const challenges = {
+  challenges: [
+      {
+          id: "1",
+          validation: "Facturacion minima mensual",
+          description: "$200 (equiparable al monto de consumo minimo del producto LIKEU)",
+          cuttingPeriods: [
+              {
+                  id: 1,
+                  percent: 0,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 2,
+                  percent: 0,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 3,
+                  percent: 0.5,
+                  meet: true,
+                  required: true
+              },
+              {
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
+              }
+          ],
+          rapidIncrease: false
       },
-      display_number: "*8825",
-      type: "LikeU Green Card",
-      status: Status.ACTIVE,
-      potential_limit: {
-        amount: 50000,
-        currency_code: "MXN"
+      {
+          id: "2",
+          validation: "Pago minimo",
+          description: "que realice el pago minimo en cada mes puntual conforme a la fecha de pago",
+          cuttingPeriods: [
+              {
+                  id: 1,
+                  percent: 0,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 2,
+                  percent: 0,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 3,
+                  percent: 0.5,
+                  meet: true,
+                  required: true
+              },
+              {
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
+              }
+          ],
+          rapidIncrease: false
       },
-      lower_limit: {
-        amount: 50000,
-        currency_code: "MXN"
+      {
+          id: "3a",
+          validation: "Domiciliacion TDC",
+          description: "Pago de TDC domiciliado a cuenta (nomina o no nomina)",
+          cuttingPeriods: [
+              {
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: true
+              },
+              {
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
+              }
+          ],
+          rapidIncrease: false
       },
-      next_increase: {
-        amount: 50000,
-        currency_code: "MXN"
+      {
+          id: "3b",
+          validation: "Pago recurrente (suscripcion)",
+          description: "Aplicable para clientes 'monoproductistas'",
+          cuttingPeriods: [
+              {
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: true
+              },
+              {
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
+              {
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
+              }
+          ],
+          rapidIncrease: false
       },
-      period: {
-        current_period: "o",
-        status: StatusPeriodInfo.ACTIVE,
-        period_detail: [
-          {
-            period_id: "PERIOD_01",
-            initial_date: new Date( 2022,2,16,23,38,45,408),
-            due_date: new Date( 2022,2,16,23,38,45,408),
-            acumulated_limit: {
-              amount: 50000,
-              currency_code: "MXN"
-            },
-            payment_card: [
+      {
+          id: "3c",
+          validation: "Contratar una asistencia (en validacion con riesgos)",
+          description: "Definir el periodo de minimo de la contratacion",
+          cuttingPeriods: [
               {
-                amount_payment: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                minimum_amount: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            recurring_payment: [
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: true
+              },
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            domiciliation: [
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
               }
-            ],
-            assintance: [
+          ],
+          rapidIncrease: false
+      },
+      {
+          id: "3d",
+          validation: "Portabilidad",
+          description: "Que traiga su pago de nomina mediante la portabilidad",
+          cuttingPeriods: [
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            payroll: [
+                  id: 4,
+                  percent: 0.7,
+                  meet: true,
+                  required: true
+              },
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            status:StatusPeriodDetails.FINISH
-          },
-          {
-            period_id: "PERIOD_02",
-            initial_date: new Date( 2022,2,16,23,38,45,408),
-            due_date: new Date( 2022,2,16,23,38,45,408),
-            acumulated_limit: {
-              amount: 50000,
-              currency_code: "MXN"
-            },
-            payment_card: [
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
               {
-                amount_payment: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                minimum_amount: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                operation_date: new Date( 2022,2,16,23,38,45,408)
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
               }
-            ],
-            recurring_payment: [
+          ],
+          rapidIncrease: false
+      },
+      {
+          id: "4",
+          validation: "Uso de canales digitales",
+          description: "Uso vigente en los ultimos 3 meses (3, 4 y 5 o 4, 5 o 6). Variable existente",
+          cuttingPeriods: [
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            domiciliation: [
+                  id: 5,
+                  percent: 0.9,
+                  meet: true,
+                  required: false
+              },
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
+                  id: 6,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
               }
-            ],
-            assintance: [
+          ],
+          rapidIncrease: false
+      },
+      {
+          id: "5",
+          validation: "Pago mayor al minimo",
+          description: "Se debera considerar el campo de pago minimo, aun cuando el cliente sea totalero. Que se pague el monto para no generar intereses o un % superior al minimo",
+          cuttingPeriods: [
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            payroll: [
+                  id: 3,
+                  percent: 0.6,
+                  meet: true,
+                  required: false
+              },
               {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            status:StatusPeriodDetails.ONGOING
-          },          {
-            period_id: "PERIOD_01",
-            initial_date: new Date( 2022,2,16,23,38,45,408),
-            due_date: new Date( 2022,2,16,23,38,45,408),
-            acumulated_limit: {
-              amount: 50000,
-              currency_code: "MXN"
-            },
-            payment_card: [
+                  id: 4,
+                  percent: 0.8,
+                  meet: true,
+                  required: false
+              },
               {
-                amount_payment: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                minimum_amount: {
-                  amount: 50000,
-                  currency_code: "MXN"
-                },
-                operation_date: new Date( 2022,2,16,23,38,45,408)
+                  id: 5,
+                  percent: 1.0,
+                  meet: true,
+                  required: false
               }
-            ],
-            recurring_payment: [
-              {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            domiciliation: [
-              {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            assintance: [
-              {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            payroll: [
-              {
-                status: StatusPeriodInfo.ACTIVE,
-                operation_date: new Date( 2022,2,16,23,38,45,408)
-              }
-            ],
-            status:StatusPeriodDetails.ONGOING
-          }
-        ]
+          ],
+          rapidIncrease: true
       }
-    }
-  }
+  ] 
 }
+
+export const challengesFather={
+    challenges: ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels", "higher_payment"]
+}
+

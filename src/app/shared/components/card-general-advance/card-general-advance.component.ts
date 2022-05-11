@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Card } from 'src/app/models/card.model';
-import { PeriodDetail } from 'src/app/models/period-detail.model';
+import { Card } from 'src/app/shared/models/card.model';
+import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
 
 @Component({
   selector: 'app-card-general-advance',

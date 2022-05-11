@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ErrorService } from './services/apis/error.service';
 
 import { TokenSsoFacade } from './services/facades/sso.facade';
 
@@ -12,18 +13,11 @@ export class AppComponent implements OnInit {
   title = 'Application Gramificacion';
   
   constructor(
-      private tokenFacade: TokenSsoFacade
+    private errorService:ErrorService
     ) {}
   
   ngOnInit(): void { 
-
-    this.tokenFacade.validationToken().subscribe(
-      console.log
-    );
-    //this.ssoFacade.validationToken().subscribe(
-    //  console.log
-      
-    //)
   }
+
 
 }

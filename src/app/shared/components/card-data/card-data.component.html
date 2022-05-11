@@ -1,11 +1,11 @@
 <div class="card-data">
-    <div class="card-details">
-        <span class="card-details__current-limit-title">Límite actual</span>
-        <span class="card-details__current-limit"> <span class="card-details__current-limit-amount"></span></span>
-    </div>
+    
+    <sn-round-card [principalText]="data.current_limit.amount" [secondaryText]="'Tu crédito actual'"></sn-round-card>
 
     <div class="percent">
-        <sn-circle-progress [percent]="50" [total]="13500"></sn-circle-progress>
+        <sn-circle-progress [percent]="percent" [icon]="'../../../../assets/icons/trophy.svg'"></sn-circle-progress>
     </div>
+
+    <sn-round-card [principalText]="data.potential_limit.amount" [secondaryText]="'Crédito potencial'"></sn-round-card>
 
 </div>

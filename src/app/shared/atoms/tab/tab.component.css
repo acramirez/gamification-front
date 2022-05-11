@@ -1,0 +1,28 @@
+.tab{
+    align-items: center;
+    background: linear-gradient(97.56deg, #FF1D53 -35.86%, #A540D7 87.68%);
+    border: none;
+    border-radius: 24px;
+    color: var(--theme-color-text-01);
+    display: flex;
+    font-size: .875rem;
+    font-weight: 700;
+    justify-content: center;
+    min-width: 7.25rem;
+    padding: .5rem 1rem;
+    width: fit-content;
+
+}
+.tab__text{
+    display: block;
+}
+
+.tab__icon{
+    margin-right: .25rem;
+}
+
+.tab--disabled{
+    background:transparent;
+    border: 1px solid var(--theme-color-ui-04);
+    color: var(--theme-color-text-04);
+}

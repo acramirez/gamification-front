@@ -9,15 +9,15 @@ import { ITimeLineElement, statusElement } from './interface/itimeline-element';
 export class TimelineComponent implements OnInit {
 
   @Input() elements:ITimeLineElement[]=[
-    {text:'May',status:statusElement.COMPLETE},
-    {text:'May',status:statusElement.COMPLETE},
-    {text:'ene',status:statusElement.ONGOING},
-    {text:'May',status:statusElement.NEXT},
-    {text:'May',status:statusElement.NEXT},
-    {text:'May',status:statusElement.NEXT},
+    {principalText:'Usa tu tarjeta',secondaryText:'Gasta $500 pesos al mes.',status:statusElement.COMPLETE},
+    {principalText:'Paga tu tarjeta',secondaryText:'Paga puntualmente tu tarjeta antes de tu fecha límite.',status:statusElement.ONGOING},
+    {principalText:'Trae tu nómina, domicilia tu tarjeta o contrata una asistencia',secondaryText:'Puede ser cualquiera de las tres opciones.',status:statusElement.NEXT},
+    {principalText:'¡Listo!',secondaryText:'Lograste tu objetivo mensual e incrementaste tu línea de crédito.',status:statusElement.NEXT},
   ]
 
   percent:number=0;
+
+  direction:string='';
 
   constructor() { }
 

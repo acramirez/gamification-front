@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
+import { Observable, throwError } from "rxjs";
+import { OpaqueToken } from "src/app/shared/interfaces/response/opaqueToken.interfaace";
 
 import { environment } from "src/environments/environment";
-import { OpaqueToken } from "../interfaces/token.interface";
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,12 +16,15 @@ export class TokenValidatorService {
 
     private _token: string = '';
 
-    constructor( private httpClient: HttpClient ) { }
+    constructor( 
+        private httpClient: HttpClient,
+    ) { }
 
-    getValidateToken(token: string): Observable<OpaqueToken> {
-        this._token = token;
-        const url = `${this._apiUrl}/${environment.tkn.apiService.validator}`;
+    getValidateToken(tkn:string): Observable<OpaqueToken> {
+        
+        const url = `${this._apiUrl}/${tkn}`;
         return this.httpClient.get<OpaqueToken>( url, {params: this.httpParams} );
+
     }
 
 

@@ -1,5 +1,6 @@
 .challenge-likeu{
     display: grid;
-    gap: 1em;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    max-width: 375px;
 }

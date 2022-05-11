@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
+import { ErrorService } from 'src/app/services/apis/error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SsoGuard implements CanActivate, CanLoad {
 
-  constructor( private ssoFacade: TokenSsoFacade ) {}
+  constructor( private errorService: ErrorService ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      console.log(this.ssoFacade.validToken);
-      
-    return this.ssoFacade.validToken
+
+    return this.errorService.showError
 
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-      console.log(this.ssoFacade.validToken);
+      console.log(this.errorService.showError);
 
-    return this.ssoFacade.validToken
+    return this.errorService.showError
   }
 }

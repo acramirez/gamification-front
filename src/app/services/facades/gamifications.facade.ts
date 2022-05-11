@@ -1,42 +1,36 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { ChallengeLikeU } from "src/app/shared/interfaces/response/challenges.interface";
+import { Gamification, Period } from "src/app/shared/interfaces/response/gamification.interface";
+import { Card } from "src/app/shared/interfaces/response/icard-details";
+import { environment } from "src/environments/environment";
 
-import { Card } from "../../models/card.model";
-import { PeriodDetail } from "../../models/period-detail.model";
 import { GamificationService } from "../apis/gamification.service";
-import { Gamifications } from "../interfaces/gamification.interfaces";
 
 @Injectable({
     providedIn: 'root'
 })
 export class GamificationFacade {
 
-    private _responseGamifications: Observable<Gamifications>;
+    private _authorization=environment.gamification.dummy
 
-    constructor( private gamificacionAPI: GamificationService ) {
-        this._responseGamifications = this.gamificacionAPI.getGamifications();
+    constructor( private gamificacionAPI: GamificationService ) {        
     }
 
-    getCard(): Observable<Card> {
-        return this._responseGamifications.pipe(
-            map( card => {
-                const {current_limit, next_increase,display_number,type,potential_limit} = card.data.card
-                return new Card(current_limit,type,display_number,potential_limit,next_increase
-                );
+    getGamification():Observable<ChallengeLikeU>{
+        return this.gamificacionAPI.getGamifications(this._authorization).pipe(
+            map(resp=>{
+                const{cut_of_date}=resp.data
+                const{current_limit,potential_limit,period}=resp.data.card
+                return {
+                    current_limit,
+                    potential_limit,
+                    period,
+                    cut_of_date:new Date()
+                }
             })
-        );
-    }
-
-    getPeriodDetails(): Observable<PeriodDetail[]> {
-        return this._responseGamifications.pipe(
-            map( resp => {
-                return  resp.data.card.period.period_detail.map(period => {
-                    return new PeriodDetail(
-                        period.period_id, period.initial_date, period.due_date, period.status);
-                })
-            })
-        );
+        )
     }
 
 }
