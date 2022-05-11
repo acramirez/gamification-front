@@ -17,30 +17,52 @@
     box-shadow: 0px 6px 14px rgba(153, 153, 153, 0.3);
     margin: 5.5rem 1.5rem;
     max-width: 375px;
-    padding: 3rem 1.25rem 4.625rem 1.25rem;
     position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-
+    flex-direction: column;
+    padding: 3rem 1.25rem 3rem 1.25rem;
+    
+}
+.modal__body{
+    display: grid;
+    gap: 1.5rem;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .modal__header{
     display: grid;
     gap:.5rem;
     justify-items: center;
-    margin-bottom: 1.5rem;
     text-align: center;
 }
+
 
 .modal__title{
     font-size: 1.25rem;
     font-weight: 700;
 }
+
+.modal__title--accelerator{
+    background: var(--theme-color-background-gradient-likeu);
+    background-clip: text;
+    color: transparent;
+}
+
 .modal__subtitle{
     color: var( --theme-color-text-03);
 }
 
 .modal__btn-continuar{
     align-self: center;
+}
+
+.modal__specs{
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal_description{
+    font-size: .875rem;
 }

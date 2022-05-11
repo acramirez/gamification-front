@@ -5,12 +5,27 @@ export const challengesContract:ChallengesContract={
       {
         id: "card_acquaintanceship",
         name: "Conoce tu tarjeta",
-        description: "Facturación minima de $200 pesos MN (equiparable al monto de consumo mínimo del producto LIKEU).",
+        description: "Conoce las características de tu tarjeta Santander LikeU",
         specs: [
-          "La facturación del periodo puede incluir los cargos de las compras a meses con o sin intereses."
+          "Compras seguras ",
+          "CVV  dinámico para todas tus compras en línea y tarjeta física ¡sin números! ",
+          "Sin anualidad ",
+          "Olvídate de cargos sorpresa, ¡la anualidad va por nuestra cuenta! ",
+          "Personalización ",
+          "Contrata los beneficios que realmente necesites. ",
+          "Apoya una causa ",
+          "Apoya una causa dependiendo el color de la tarjeta LikeU que tú elijas.",
+          "Recompensas ",
+          "Todas tus compras en línea generan recompensas. ",
+          "2x1 en Cinépolis ",
+          "10% de descuento en Despegar.com ",
+          "30% de bonificación en WOW+ de Grupo ALSEA ",
+          "3 meses gratis de UBERpass ",
+          "Garantía Extendida y Protección de Compras ",
+          "Usa tu tarjeta y ¡hazla ¡LikeU!"   
         ],
         conditions: [
-          "Solo aplicable en portabilidades dispensando en Santander"
+          "Tu tarjeta de Crédito LikeU tiene beneficios increíbles que podrás disfrutar desde el primer día como: ",
         ],
         icon:"card",
         redirection: false
@@ -31,7 +46,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "card_payment",
         name: "Paga tu tarjeta",
-        description: "Que realice el pago correspondiente al concepto de pago mínimo antes de la fecha limite de pago del periodo.",
+        description: "Conoce los beneficios exclusivos de activar una asistencia Iké",
         specs: [
           "Esta regla se mide en los 20 dias correspondientes al periodo de pago"
         ],
@@ -60,15 +75,11 @@ export const challengesContract:ChallengesContract={
       {
         id: "recurrent_payment",
         name: "Activa un pago recurrente",
-        description: "Suscripción de pago de servicio (telefonía o plataformas de streaming)",
+        description: "Conoce los beneficios exclusivos de activar un pago recurrente",
         specs: [
-          "Pago mínimo recurrente Nómina",
-          "Pago total recurrente Nómina",
-          "Monto Fijo Recurrente Nómina",
-          "Pago mínimo recurrente"
         ],
         conditions: [
-          "Solo aplicable en portabilidades dispensando en Santander"
+          "Paga los servicios de streaming, música o telefonía con tu tarjeta LikeU y ¡dale play a tu entretenimiento!"
         ],
         icon:"clock",
         redirection: false
@@ -76,13 +87,17 @@ export const challengesContract:ChallengesContract={
       {
         id: "payroll_portability",
         name: "Portabilidad de nómina",
-        description: "Tener activo el servcio de portabilidad de pago de nómina",
+        description: "No lo pienses más y trae tu nómina con nosotros.",
         specs: [
-          "Portabilidad Efectiva",
-          "Marca de portabilidad + dispersión"
+          "Santander Plus ",
+          "El programa sin costo donde obtendrás: bonificaciones, promociones y descuentos. ",
+          "Seguro por muerte accidental",
+          "Hasta por $50,000 pesos",
+          "Asistencia funeraria ",
+          "Sin costo para titular, cónyugue y un hijo, llamando al 800 703 6600",
         ],
         conditions: [
-          "Solo aplicable en portabilidades dispensando en Santander"
+          "Hazlo y disfruta de beneficios como:"
         ],
         icon:"briefcase",
         redirection: false
@@ -90,12 +105,11 @@ export const challengesContract:ChallengesContract={
       {
         id: "assistance",
         name: "Contrata una asistencia Iké",
-        description: "Tener contratada una asistencia de LikeU por un perido de 1 año",
+        description: "Conoce los beneficios exclusivos de activar una asistencia Iké",
         specs: [
-          "De cualquiera de las asistencias se debe contar con la factura correspondiente a 1 año, este es un evento unico no es recurrente"
         ],
         conditions: [
-          "Solo aplicable en portabilidades dispensando en Santander"
+          "La vida está llena de momentos para compartir e IKÉ se encargará de los disfrutes al máximo. Contrata la asistencia IKÉ que mejor te convenga con tu tarjeta Likeu."
         ],
         icon:"squares",
         redirection: false

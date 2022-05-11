@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable, throwError } from "rxjs";
@@ -21,27 +21,19 @@ export class TokenValidatorService {
     ) { }
 
     getValidateToken(tkn:string): Observable<OpaqueToken> {
+
+        const headers:HttpHeaders = new HttpHeaders({
+            'Authorization':tkn
+        })
+
+        console.log(headers);
+        console.log(tkn);
         
-        const url = `${this._apiUrl}/${tkn}`;
-        return this.httpClient.get<OpaqueToken>( url, {params: this.httpParams} );
+        
+        const url = `${this._apiUrl}`;
+        console.log(url);
+        
+        return this.httpClient.get<OpaqueToken>( url, {headers} );
 
-    }
-
-
-    
-    get httpParams(): HttpParams {
-        const jsonEntry = {
-            stokenValidatorRequest: {
-                token: this._token,
-                ipUsuario: '180.186.107.23',
-                idAplicativo: 'SNET',
-                PAdicional: ''
-            }
-        }
-        return new HttpParams({
-            fromObject:{
-              jsonEntrada:JSON.stringify( jsonEntry )
-            }
-        });
     }
 }

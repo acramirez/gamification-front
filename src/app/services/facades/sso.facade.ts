@@ -13,13 +13,17 @@ export class TokenSsoFacade {
 
     private _token!:string
     private isBase64!:boolean
-    validToken!:boolean;
 
     constructor(
         private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
-        private router:Router
+        private tokenService:TokenValidatorService
     ) {
+
+       
+    }
+
+    validationToken(): Observable<any> {
 
         if (this.activatedRoute.queryParams) {
             const queryParams=this.activatedRoute.queryParams
@@ -28,23 +32,18 @@ export class TokenSsoFacade {
               if (param['token']) {
                 this._token=param['token']
                 this.isBase64=this.isBase64Token()
-              }else{
-                  
-                  throwError('param Token no existe')
-                  console.log(this.errorService.showError);
+                sessionStorage.setItem('token',this._token)
               }
             })
           }
-    }
-
-    validationToken(): Observable<any> {
+          
         if (this.isBase64) {
+                  
             return of(true)
-            // return this.tokenService.getValidateToken(this._token)
+            return this.tokenService.getValidateToken(this._token)
 
         }else{
             this.errorService.showError=true
-            this.router.navigate(['error'])
             return throwError('El token no es base 64')
         }
     }

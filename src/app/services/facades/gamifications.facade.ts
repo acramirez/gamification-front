@@ -27,7 +27,7 @@ export class GamificationFacade {
                     current_limit,
                     potential_limit,
                     period,
-                    cut_of_date:new Date()
+                    cut_of_date,
                 }
             })
         )

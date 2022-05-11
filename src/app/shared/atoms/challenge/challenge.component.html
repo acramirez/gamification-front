@@ -4,7 +4,7 @@
         'challenge__content--accelerator':challenge.accelerator
     }">
         <img class="challenge__img" [src]="'../../../../assets/icons/'+challenge.icon+'.svg'" alt="">
-        <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/check-challenge.svg'" alt="">
+        <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/'+(challenge.status)?'challenge-passed':'challenge-not-passed'+'.svg'" alt="">
     </div>
     <h3 class="challenge__title">{{challenge.name}}</h3>
 </div>

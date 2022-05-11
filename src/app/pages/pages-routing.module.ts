@@ -16,7 +16,7 @@ const routes: Routes = [
         component:ChallengeLikeuComponent
       },
       {
-        path:'message/:message',
+        path:'notificacion/:message',
         component:MessageComponent
       },
       {

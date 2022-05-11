@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ErrorService } from './services/apis/error.service';
-
-import { TokenSsoFacade } from './services/facades/sso.facade';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +6,11 @@ import { TokenSsoFacade } from './services/facades/sso.facade';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy  {
   title = 'Application Gramificacion';
 
+
+  ngOnDestroy(): void {
+    sessionStorage.removeItem('token')
+  }
 }
