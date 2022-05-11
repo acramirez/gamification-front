@@ -6,8 +6,6 @@ import { challengesContract } from 'src/app/shared/data/constant/challengesContr
 })
 export class ChallengesService {
 
-  constructor() { }
-
   get challenges(){
     return challengesContract
   }

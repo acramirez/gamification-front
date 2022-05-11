@@ -17,10 +17,6 @@ export class ErrorService {
 
   }
 
-  constructor() { 
-    
-  }
-
   errorShow(error:HttpErrorResponse){
     console.error(error);
     if (error.error!=='') {

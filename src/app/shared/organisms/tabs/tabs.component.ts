@@ -6,13 +6,9 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.css']
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent {
 
   @Input() tabs!:Tab[];
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

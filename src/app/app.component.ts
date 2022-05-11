@@ -9,15 +9,7 @@ import { TokenSsoFacade } from './services/facades/sso.facade';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Application Gramificacion';
-  
-  constructor(
-    private errorService:ErrorService
-    ) {}
-  
-  ngOnInit(): void { 
-  }
-
 
 }
