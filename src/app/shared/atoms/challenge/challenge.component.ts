@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'sn-challenge',
@@ -7,14 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ChallengeComponent implements OnInit {
 
-  @Input() title:string=''
-  @Input() icon:string=''
-  @Input() status:boolean | undefined=false
 
+  @Input() challenge!:Challenge;
   constructor() { }
 
   ngOnInit(): void {
   }
-
 
 }

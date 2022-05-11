@@ -15,7 +15,7 @@
         <p class="challenge__description">La validación de los retos se realiza cada fecha de corte. No lo olvides.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of mandatoryChallenges">
-                <sn-challenge animation="zoomIn" [title]="challenge.name" [icon]="challenge.icon" [status]="challenge.status" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
+                <sn-challenge animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
             </ng-container>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <p class="challenge__description">Completa cualquiera de las misiones para aumentar tu límite de crédito.   </p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of optionalChallenges">
-                <sn-challenge animation="zoomIn" [title]="challenge.name" [icon]="challenge.icon" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
+                <sn-challenge animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
             </ng-container>
         </div>
     </div>

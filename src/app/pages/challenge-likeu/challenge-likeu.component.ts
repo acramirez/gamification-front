@@ -97,8 +97,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
     
     this.mandatoryChallenges=[];
     this.specialChallenges=[];
-    const mandatoryChallenges=this.challenges.missions[tab].mandatoryChallenges;
-    const specialChallenges=this.challenges.missions[tab].specialChallenges;
+
+    const {mandatoryChallenges,acceleratorChallenges,specialChallenges} =this.challenges.missions[tab]
     
     this.challenges.challenges.forEach(challenge=>{
 
@@ -117,6 +117,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
           this.specialChallenges.push(challenge)
         }
       });
+
+      acceleratorChallenges.forEach(accelerator=>{
+        if (accelerator===challenge.id) {
+          challenge.status=this.setStatusChallenges(tab,challenge)
+          challenge.accelerator=true
+          this.mandatoryChallenges.push(challenge)
+        }
+      });
+
+
     })
 
     this.challengesRedirect();

@@ -16,6 +16,20 @@
     min-height: 100px;
     min-width: 100px;
     position: relative;
+}
+
+.challenge__content--accelerator{
+    background: var(--theme-color-background-gradient-likeu);
+}
+
+.challenge__content--accelerator::after{
+    background: var(--theme-color-background-03);
+    border-radius: 1rem ;
+    content: '';
+    height: 100%;
+    position: absolute;
+    transform: scale( .96 );
+    width: 100%;
 
 }
 
@@ -24,6 +38,12 @@
     font-size: 1rem;
     line-height: 150%;
     text-align: center;
+}
+
+.challenge__img{
+    height: 4rem;
+    width: 4rem;
+    z-index: 1;
 }
 
 .challenge__check{

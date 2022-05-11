@@ -22,6 +22,7 @@ export interface Challenge {
     icon:        string;
     redirection: boolean;
     status?:     boolean;
+    accelerator?:boolean
 }
 
 export interface Mission {

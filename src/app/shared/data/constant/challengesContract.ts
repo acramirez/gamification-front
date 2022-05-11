@@ -17,7 +17,7 @@ export const challengesContract:ChallengesContract={
       },
       {
         id: "minimum_monthly_billing",
-        name: "Facturacion minima mensual",
+        name: "Usa tu tarjeta",
         description: "Facturación minima de $200 pesos MN (equiparable al monto de consumo mínimo del producto LIKEU).",
         specs: [
           "La facturación del periodo puede incluir los cargos de las compras a meses con o sin intereses."
@@ -25,12 +25,12 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"",
+        icon:"card",
         redirection: false
       },
       {
         id: "card_payment",
-        name: "Pago mínimo",
+        name: "Paga tu tarjeta",
         description: "Que realice el pago correspondiente al concepto de pago mínimo antes de la fecha limite de pago del periodo.",
         specs: [
           "Esta regla se mide en los 20 dias correspondientes al periodo de pago"
@@ -43,7 +43,7 @@ export const challengesContract:ChallengesContract={
       },
       {
         id: "domiciliation",
-        name: "Domiciliación TDC",
+        name: "Domicilia tu tarjeta",
         description: "Contratación activa del pago domiciliado de la TDC  (cuenta nómina o no nómina)",
         specs: [
           "Pago mínimo recurrente Nómina",
@@ -54,12 +54,12 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"calendar",
+        icon:"card",
         redirection: false
       },
       {
         id: "recurrent_payment",
-        name: "Pago recurrente",
+        name: "Activa un pago recurrente",
         description: "Suscripción de pago de servicio (telefonía o plataformas de streaming)",
         specs: [
           "Pago mínimo recurrente Nómina",
@@ -70,12 +70,12 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"lightning",
+        icon:"clock",
         redirection: false
       },
       {
         id: "payroll_portability",
-        name: "Portabilidad",
+        name: "Portabilidad de nómina",
         description: "Tener activo el servcio de portabilidad de pago de nómina",
         specs: [
           "Portabilidad Efectiva",
@@ -89,7 +89,7 @@ export const challengesContract:ChallengesContract={
       },
       {
         id: "assistance",
-        name: "Asistencias",
+        name: "Contrata una asistencia Iké",
         description: "Tener contratada una asistencia de LikeU por un perido de 1 año",
         specs: [
           "De cualquiera de las asistencias se debe contar con la factura correspondiente a 1 año, este es un evento unico no es recurrente"
@@ -102,7 +102,7 @@ export const challengesContract:ChallengesContract={
       },
       {
         id: "digital_channels",
-        name: "Uso de canales digitales",
+        name: "Usa los canales digitales",
         description: "La validación consite en medir el uso en los últimos 3 meses a cada mes de validación, para el 5 debe tenerla el 3, 4, 5; y para el 6, será el 4, 5, 6.",
         specs: [
           "Variable existente en los KPI´s de Digital Performance"
@@ -123,7 +123,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"",
+        icon:"lightning",
         redirection: false
       }
     ],
@@ -155,7 +155,8 @@ export const challengesContract:ChallengesContract={
         id: "2",
         mandatoryChallenges: [
           "minimum_monthly_billing",
-          "card_payment"
+          "card_payment",
+          "digital_channels"
         ],
         specialChallenges: [
         ],
@@ -166,7 +167,8 @@ export const challengesContract:ChallengesContract={
         id: "3",
         mandatoryChallenges: [
           "minimum_monthly_billing",
-          "card_payment"
+          "card_payment",
+          "digital_channels"
         ],
         specialChallenges: [
 
@@ -184,9 +186,9 @@ export const challengesContract:ChallengesContract={
           "digital_channels"
         ],
         specialChallenges: [
+          "payroll_portability",
           "domiciliation",
           "recurrent_payment",
-          "payroll_portability",
           "assistance"
         ],
         acceleratorChallenges: [
@@ -202,9 +204,9 @@ export const challengesContract:ChallengesContract={
           "digital_channels"
         ],
         specialChallenges: [
+          "payroll_portability",
           "domiciliation",
           "recurrent_payment",
-          "payroll_portability",
           "assistance",
 
         ],
@@ -221,9 +223,9 @@ export const challengesContract:ChallengesContract={
           "digital_channels"
         ],
         specialChallenges: [
+          "payroll_portability",
           "domiciliation",
           "recurrent_payment",
-          "payroll_portability",
           "assistance",
         ],
         acceleratorChallenges: [],

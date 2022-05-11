@@ -16,7 +16,6 @@ export class TokenSsoFacade {
     validToken!:boolean;
 
     constructor(
-        private tokenService: TokenValidatorService,
         private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
         private router:Router
@@ -68,8 +67,6 @@ export class TokenSsoFacade {
         })
 
         const validateBase64=base64regex.test(this._token);
-        console.log(validateBase64);
-        console.log(this._token);
 
         if (!validateBase64) {
           return false
