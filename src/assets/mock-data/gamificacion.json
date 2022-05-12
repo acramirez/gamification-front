@@ -1,0 +1,75 @@
+{
+    "gamifications": {
+        "data": {
+            "hiring_date": "2022-03-16T09:00:21.408",
+            "contract_key": "6497741929",
+            "activation_date": "2022-03-16T23:38:45.408",
+            "type": "GM_2",
+            "status": "INITIAL",
+            "last_evaluation_date": "2022-03-16T23:38:45.408",
+            "cut_of_date": "2022-03-16T23:38:45.408",
+            "card": {
+                "current_limit": {
+                    "amount": 3000.00,
+                    "currency_code": "MXN"
+                },
+                "display_number": "*8825",
+                "type": "LikeU Greeen Card",
+                "status": "ACTIVE",
+                "potential_limit": {
+                    "amount": 50000.00,
+                    "currency_code": "MXN"
+                },
+                "lower_limit": {
+                    "amount": 3000.00,
+                    "currency_code": "MXN"
+                },
+                "next_increase": {
+                    "amount": 10000.00,
+                    "currency_code": "MXN"
+                },
+                "period": {
+                    "current_period": "1",
+                    "status": "ACTIVE",
+                    "period_detail": [
+                        {
+                            "period_id": "1",
+                            "initial_date": "2022-02-16T12:38:45.408",
+                            "due_date": "2012-03-16T23:38:45.408",
+                            "accumulated_purchases": {
+                                "amount": 200.00,
+                                "currency_code": "MXN"
+                            },
+                            "card_payment": [
+                                {
+                                    "amount_payment": {
+                                        "amount": 200.00,
+                                        "currency_code": "MXN"
+                                    },
+                                    "minimum_amount": {
+                                        "amount": 30.00,
+                                        "currency_code": "MXN"
+                                    },
+                                    "operation_date": "2012-02-16T23:38:45.408"
+                                }
+                            ],
+                            "recurrent_payment": [],
+                            "domiciliation": [],
+                            "assistance": [],
+                            "payroll_portability": [],
+                            "status": "ONGOING"
+                        }
+                    ]
+                }
+            }
+        },
+        "notifications": [
+            {
+                "code": "SUCCESSFUL",
+                "level": "INFO",
+                "message": "successful",
+                "timestamp": "2022-04-05T23:14:46.202+0000"
+            }
+        ]
+    }
+}

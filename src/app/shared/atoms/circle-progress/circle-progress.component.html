@@ -1,0 +1,32 @@
+<div class="progress">
+    
+    <div class="progress__background">
+        <div class="progress__circle"  >
+            <svg viewBox="0, 0, 100, 100">
+                <circle class="circle circle--bg" r="46" cx="50" cy="50"></circle>
+            </svg>
+        </div>
+        <div class="progress__circle  " >
+            <svg viewBox="0, 0, 100, 100">
+                <defs>
+                    <linearGradient id="grad">
+                        <stop offset="90%" stop-color="#A540D7"></stop>
+                        <!-- <stop offset="100%" stop-color="#FFD153"></stop> -->
+                    </linearGradient>
+                </defs>
+                <circle class="circle circle--active" r="46" cx="50" cy="50" [ngStyle]="{'stroke-dashoffset': strokeDashoffset}"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <div class="progress__description">
+        <span class="progress__icon">
+            <img [src]="icon" alt="icon">
+        </span>
+        <span class="progress__text">{{percent | percent}}</span>
+
+    </div>
+
+    
+</div>
+

@@ -1,0 +1,75 @@
+.progress{
+    border-radius: 50%;
+    box-shadow: 0px 10px 16px rgba(153, 153, 153, 0.25);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.progress__background{
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.progress__circle{
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin: auto;
+    position: absolute;   
+    transition: stroke-dashoffset .3s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    width: 100%;
+
+}
+
+.progress__description{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center ;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.progress__text{
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+
+}
+
+.progress__potential-limit{
+    color: var(--theme-color-text-02);
+    font-size: .6rem;
+}
+
+.circle{
+    stroke-width:.5rem; 
+
+    fill: none;
+    stroke-linecap:round;
+    stroke-dasharray: 295.31; 
+    stroke-dashoffset: 0;
+}
+
+.circle--active{
+    stroke-width:.5rem;
+    stroke: url(#grad);
+}
+
+.circle--bg{
+    stroke: var(--theme-color-background-default);
+    fill: var(--theme-color-background-03);
+}
+

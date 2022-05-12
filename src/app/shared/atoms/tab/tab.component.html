@@ -1,0 +1,7 @@
+<button [ngClass]="{
+    'tab':true,
+    'tab--disabled':(tab.status!=='ONGOING')
+}">
+    <img class="tab__icon" [src]="'../../../../assets/icons/'+icon+'.svg'" alt="">
+    <span class="tab__text">{{tab.texto}}</span>
+</button>

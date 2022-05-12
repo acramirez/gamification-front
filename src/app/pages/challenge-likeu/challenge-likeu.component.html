@@ -1,0 +1,25 @@
+<ng-container *ngIf="cardDetail" >
+    <app-header animation="up"></app-header> 
+    <div class="challenge-likeu">
+        <app-card-data 
+            [data]="cardDetail"
+            [percent]="getPercent()"
+        >
+        </app-card-data>
+        <app-month-challenges 
+         [mandatoryChallenges]="mandatoryChallenges" 
+         [optionalChallenges]="specialChallenges" 
+         [tabs]="tabs"
+         [days]="getDays(cut_of_day)"
+         (indexTab)="getChallenges($event);index=$event"
+         [activeTab]="currentPeriod"
+         (challengeActive)="challengeActive=$event"
+         (openModal)="showModal=true"
+        >
+        </app-month-challenges>
+        <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
+    </div>
+</ng-container>
+
+<app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
+    

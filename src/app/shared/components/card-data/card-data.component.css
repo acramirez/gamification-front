@@ -1,0 +1,27 @@
+.card-data{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1.5rem;
+    position: relative;
+    height: 100px;
+}
+
+.percent{
+    left: calc( 50% - 50px);
+    height: 100px; 
+    position: absolute;
+    top: calc(50% - 50px);
+    width: 100px;
+
+}
+
+
+
+
+@media (min-width: 360px) and (max-width: 414px){
+
+}
+@media screen and (min-width: 415px){
+
+}
