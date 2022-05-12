@@ -6,12 +6,6 @@ import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from "./app-routing.module";
 
-
-import {
-  DigitalBankDarkTheme,
-  DigitalBankTheme,
-  ThemeModule
-} from '@ngx-mxflame/atoms/theme';
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
 
@@ -25,10 +19,6 @@ import { SsoInterceptorService } from './services/interceptors/sso-interceptor.s
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    ThemeModule.forRoot({ 
-      themes: [DigitalBankTheme, DigitalBankDarkTheme],
-      active: 'theme--digitalbank-dark'
-    }),
     PagesModule,
     
   ],
