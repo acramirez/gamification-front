@@ -62,7 +62,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
       )
       .subscribe(resp=>{
         
-        let{cut_of_day}=resp
+        let{cut_of_date}=resp
         const{current_limit,potential_limit,period}=resp
         this.cardDetail={current_limit,potential_limit}
         this.period=period;

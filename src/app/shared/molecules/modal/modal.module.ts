@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { DirectivesModule } from '../../directives/directives.module';
-import { ButtonModule } from "@ngx-mxflame/atoms/button";
 
 
 
@@ -11,7 +10,7 @@ import { ButtonModule } from "@ngx-mxflame/atoms/button";
   imports: [
     CommonModule,
     DirectivesModule,
-    ButtonModule
+    // ButtonModule
   ],
   exports:[
     ModalComponent
