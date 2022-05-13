@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ErrorService } from './services/apis/error.service';
-
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { TokenSsoFacade } from './services/facades/sso.facade';
 
 @Component({
@@ -9,15 +10,7 @@ import { TokenSsoFacade } from './services/facades/sso.facade';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Application Gramificacion';
-  
-  constructor(
-    private errorService:ErrorService
-    ) {}
-  
-  ngOnInit(): void { 
-  }
-
-
+  constructor(){}
 }

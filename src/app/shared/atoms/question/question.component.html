@@ -1,9 +1,9 @@
 <div class="question">
     <div (click)="show()" class="question__header">
         <span class="question__text">{{question.question}}</span>
-        <!-- <sn-icon 
+        <sn-icon 
             [icon]="(showAnswer)?'sn-SMOV007':'sn-SMOV006'">
-        </sn-icon> -->
+        </sn-icon>
     </div>
 
     <div *show="showAnswer" class="question__body">

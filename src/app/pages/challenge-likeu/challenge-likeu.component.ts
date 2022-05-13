@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { forkJoin, Subject, throwError } from 'rxjs';
+import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -10,6 +10,7 @@ import { Period } from 'src/app/shared/interfaces/response/gamification.interfac
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'challenge-likeu',
@@ -27,58 +28,62 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   percent:number=0;
   currentPeriod:number=0
   cut_of_day!:Date
-  index!:Number
-
-
+  indexTab!:Number
+  remainingDays!:Number | null
 
   // Temporaly
 
 
   tabs:Tab[]=[];
   showModal:boolean=false;
+  token!:string
 
 
   private destroy$!:Subject<any>;
 
   constructor(
     private gamificacionFacade: GamificationFacade,
-    private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
+    private tokenFacade:TokenSsoFacade,
+    private activatedRoute:ActivatedRoute,
+
   ) { }
 
   ngOnInit(): void {
-
-    this.tokenFacade.validationToken().subscribe(console.log)
 
   }
 
   ngAfterViewInit(): void {
     this.destroy$=new Subject;
 
+    this.activatedRoute.queryParams.subscribe(param=>{
+      this.token=param['token']
+      console.log(this.token);
+    });
+
+    forkJoin(
+      this.tokenFacade.validationToken(this.token),
+      this.gamificacionFacade.getGamification()
+    ).subscribe(resp=>{
+      console.log(resp[0]);
+      
+      let{cut_of_date}=resp[1]
+      const{current_limit,potential_limit,period}=resp[1]
+      this.cardDetail={current_limit,potential_limit}
+      this.period=period;
+      this.currentPeriod=Number(period.current_period)
+      this.indexTab=this.currentPeriod
+      this.checkChallenges()
+      this.getTabs(period);
+      this.getChallenges(this.currentPeriod);
+
+      if (cut_of_date) {
+          this.cut_of_day=new Date(cut_of_date)
+          this.remainingDays=this.getDays(this.cut_of_day)
+          localStorage.setItem('message','')
+      }
+    })
     
-    this.gamificacionFacade.getGamification()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(resp=>{
-        
-        let{cut_of_date}=resp
-        const{current_limit,potential_limit,period}=resp
-        this.cardDetail={current_limit,potential_limit}
-        this.period=period;
-        this.currentPeriod=Number(period.current_period)
-        this.index=this.currentPeriod
-        
-
-        this.checkChallenges()
-        this.getTabs(period);
-        this.getChallenges(this.currentPeriod);
-        this.cut_of_day=new Date('2022-05-12')
-        this.getDays(this.cut_of_day)
-
-        
-      })
-
   }
 
   get challenges(){
@@ -309,13 +314,26 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
 
   getDays(date:Date){
 
-    if (this.currentPeriod===this.index) {
+    if (this.currentPeriod===this.indexTab) {
       const currenDate=new Date().getTime()
       const cutDate=date.getTime();
   
       const result= cutDate-currenDate
   
       const days=Math.round(result/(1000 * 60 * 60 * 24))
+
+
+      console.log(this.mandatoryChallenges);
+      
+
+      // if (result<0) {
+      //   for (let i = 0; i < this.mandatoryChallenges.length; i++) {
+      //     const challenge = this.mandatoryChallenges[i];
+      //     if (!challenge.status) {
+      //       break
+      //     }
+      //   }
+      // }
       
       return days
       
@@ -323,8 +341,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
     return null
   }
 
+  
+
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
   }
 
 

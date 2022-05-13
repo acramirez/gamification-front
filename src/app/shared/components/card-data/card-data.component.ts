@@ -6,7 +6,7 @@ import { Card } from '../../interfaces/response/icard-details';
   templateUrl: './card-data.component.html',
   styleUrls: ['./card-data.component.css']
 })
-export class CardDataComponent implements OnInit {
+export class CardDataComponent {
 
   /**
    * Has the info which is used in the component
@@ -16,11 +16,5 @@ export class CardDataComponent implements OnInit {
    */
   @Input() data!:Card
   @Input() percent:number=0
-
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
 
 }

@@ -4,12 +4,16 @@
             <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
             <div class="modal__header">
                 <img [src]="'../../../../assets/icons/'+data.icon+'.svg'"  alt="icono">
-                <h2 class="modal__title">{{data.name}}</h2>
+                <h2 [ngClass]="{
+                    'modal__title':true,
+                    'modal__title--accelerator':data.accelerator
+                }">{{data.name}}</h2>
                 <span class="modal__subtitle">{{data.description}}</span>            
             </div>
-            <ul>
-                <ng-container *ngFor="let condition of data.conditions">
-                    <li>{{condition}}</li>
+            <p class="modal_description">{{data.conditions[0]}}</p>
+            <ul class="modal__specs" *ngIf="data.specs.length>0">
+                <ng-container *ngFor="let spec of data.specs">
+                    <li>{{spec}}</li>
                 </ng-container>
             </ul>
         </div>
