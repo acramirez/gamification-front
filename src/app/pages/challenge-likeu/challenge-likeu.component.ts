@@ -84,34 +84,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
       }
     })
     
-    // this.gamificacionFacade.getGamification()
-    //   .pipe(
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe(resp=>{
-        
-    //     let{cut_of_date}=resp
-    //     const{current_limit,potential_limit,period}=resp
-    //     this.cardDetail={current_limit,potential_limit}
-    //     this.period=period;
-    //     this.currentPeriod=Number(period.current_period)
-    //     this.indexTab=this.currentPeriod
-    //     this.checkChallenges()
-    //     this.getTabs(period);
-    //     this.getChallenges(this.currentPeriod);
-    //     if (cut_of_date) {
-    //       if(!localStorage.getItem('message')){    
-    //         this.cut_of_day=new Date(cut_of_date)
-    //         this.remainingDays=this.getDays(this.cut_of_day)
-    //       }
-    //       else{
-    //         localStorage.setItem('message','')
-    //       }
-    //     }
-
-        
-    //   })
-
   }
 
   get challenges(){
