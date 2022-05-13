@@ -25,13 +25,8 @@ export class TokenValidatorService {
         const headers:HttpHeaders = new HttpHeaders({
             'Authorization':tkn
         })
-
-        console.log(headers);
-        console.log(tkn);
-        
         
         const url = `${this._apiUrl}`;
-        console.log(url);
         
         return this.httpClient.get<OpaqueToken>( url, {headers} );
 

@@ -1,4 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { TokenSsoFacade } from './services/facades/sso.facade';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +10,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnDestroy  {
+export class AppComponent {
   title = 'Application Gramificacion';
-
-
-  ngOnDestroy(): void {
-    sessionStorage.removeItem('token')
-  }
+  constructor(){}
 }

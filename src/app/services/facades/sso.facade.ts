@@ -11,7 +11,7 @@ import { ErrorService } from "../apis/error.service";
 })
 export class TokenSsoFacade {
 
-    private _token!:string
+    public _token!:string
     private isBase64!:boolean
 
     constructor(
@@ -23,24 +23,18 @@ export class TokenSsoFacade {
        
     }
 
-    validationToken(): Observable<any> {
+    validationToken(tkn:string): Observable<any> {
 
-        if (this.activatedRoute.queryParams) {
-            const queryParams=this.activatedRoute.queryParams
-
-            queryParams.subscribe(param=>{
-              if (param['token']) {
-                this._token=param['token']
-                this.isBase64=this.isBase64Token()
-                sessionStorage.setItem('token',this._token)
-              }
-            })
-          }
-          
+        
+        tkn=this.transformBase64(tkn)    
+        this.isBase64=this.isBase64Token(tkn);
+        
+        console.log(tkn);
+        
+        console.log(tkn);
         if (this.isBase64) {
-                  
             return of(true)
-            return this.tokenService.getValidateToken(this._token)
+            return this.tokenService.getValidateToken(tkn)
 
         }else{
             this.errorService.showError=true
@@ -48,28 +42,32 @@ export class TokenSsoFacade {
         }
     }
 
-    isBase64Token(){
+    isBase64Token(tkn:string){
 
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/
 
-
-        const tk=this._token.split(' ')
-
-        this._token='';
-        tk.forEach((tkn,i)=>{
-
-            if (i<tk.length-1) {
-                this._token+=`${tkn}+`
-            }else{
-                this._token+=`${tkn}`
-            }
-        })
-
-        const validateBase64=base64regex.test(this._token);
+        tkn = this.transformBase64(tkn);
+         
+        const validateBase64=base64regex.test(tkn);
 
         if (!validateBase64) {
           return false
         }
         return true
       }
+
+    transformBase64(tkn:string){
+    const tk=tkn.split(' ')
+
+    tkn='';
+    tk.forEach((token,i)=>{
+
+        if (i<tk.length-1) {
+            tkn+=`${token}+`
+        }else{
+            tkn+=`${token}`
+        }
+    })        
+    return tkn
+    }
 }

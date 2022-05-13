@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Subject, throwError } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -10,7 +10,7 @@ import { Period } from 'src/app/shared/interfaces/response/gamification.interfac
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'challenge-likeu',
@@ -36,15 +36,17 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
 
   tabs:Tab[]=[];
   showModal:boolean=false;
+  token!:string
 
 
   private destroy$!:Subject<any>;
 
   constructor(
     private gamificacionFacade: GamificationFacade,
-    private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-    private router:Router,
+    private tokenFacade:TokenSsoFacade,
+    private activatedRoute:ActivatedRoute,
+
   ) { }
 
   ngOnInit(): void {
@@ -54,17 +56,17 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   ngAfterViewInit(): void {
     this.destroy$=new Subject;
 
+    this.activatedRoute.queryParams.subscribe(param=>{
+      this.token=param['token']
+      console.log(this.token);
+    });
+
     forkJoin(
-      this.tokenFacade.validationToken()
-      .pipe(
-        catchError(error=>{
-          this.router.navigate(['error']) 
-          return throwError(error)
-        })
-      ),
+      this.tokenFacade.validationToken(this.token),
       this.gamificacionFacade.getGamification()
     ).subscribe(resp=>{
-
+      console.log(resp[0]);
+      
       let{cut_of_date}=resp[1]
       const{current_limit,potential_limit,period}=resp[1]
       this.cardDetail={current_limit,potential_limit}
@@ -370,7 +372,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   
 
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
   }
 
 
