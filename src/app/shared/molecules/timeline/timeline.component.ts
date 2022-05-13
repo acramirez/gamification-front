@@ -19,6 +19,7 @@ export class TimelineComponent implements OnInit {
 
   direction:string='';
 
+  constructor() { }
 
   ngOnInit(): void {
 

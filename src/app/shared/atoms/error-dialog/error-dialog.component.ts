@@ -6,7 +6,7 @@ import { ErrorData } from '../../interfaces/atoms/error';
   templateUrl: './error-dialog.component.html',
   styleUrls: ['./error-dialog.component.css']
 })
-export class ErrorDialogComponent {
+export class ErrorDialogComponent implements OnInit {
 
   @Input()errorData:ErrorData={
     title:'¡Oh, oh!',
@@ -14,6 +14,11 @@ export class ErrorDialogComponent {
     icon:'cloud-error',
     button:false,
     redirect:'/',
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
   }
 
 }

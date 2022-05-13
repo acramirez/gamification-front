@@ -5,9 +5,16 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './round-card.component.html',
   styleUrls: ['./round-card.component.css']
 })
-export class RoundCardComponent {
+export class RoundCardComponent implements OnInit {
 
   @Input() principalText!:string | number;
   @Input() secondaryText!:string;
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+    
+  }
 
 }

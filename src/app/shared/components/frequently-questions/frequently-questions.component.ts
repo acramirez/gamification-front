@@ -6,8 +6,13 @@ import { FAQ } from '../../interfaces/response/challengesContract.interface';
   templateUrl: './frequently-questions.component.html',
   styleUrls: ['./frequently-questions.component.css']
 })
-export class FrequentlyQuestionsComponent{
+export class FrequentlyQuestionsComponent implements OnInit {
 
   @Input() questions:FAQ[]=[]
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
 }
