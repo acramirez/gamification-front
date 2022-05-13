@@ -7,10 +7,16 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
   @Input() data!:Challenge
 
+  constructor(
+  ) { }
+
+  ngOnInit(): void {
+    
+  }
   
 }

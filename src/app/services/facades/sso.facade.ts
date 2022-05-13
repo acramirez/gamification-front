@@ -11,63 +11,66 @@ import { ErrorService } from "../apis/error.service";
 })
 export class TokenSsoFacade {
 
-    public _token!:string
+    private _token!:string
     private isBase64!:boolean
+    validToken!:boolean;
 
     constructor(
         private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
-        private tokenService:TokenValidatorService
+        private router:Router
     ) {
 
-       
+        if (this.activatedRoute.queryParams) {
+            const queryParams=this.activatedRoute.queryParams
+
+            queryParams.subscribe(param=>{
+              if (param['token']) {
+                this._token=param['token']
+                this.isBase64=this.isBase64Token()
+              }else{
+                  
+                  throwError('param Token no existe')
+                  console.log(this.errorService.showError);
+              }
+            })
+          }
     }
 
-    validationToken(tkn:string): Observable<any> {
-
-        
-        tkn=this.transformBase64(tkn)    
-        this.isBase64=this.isBase64Token(tkn);
-        
-        console.log(tkn);
-        
-        console.log(tkn);
+    validationToken(): Observable<any> {
         if (this.isBase64) {
             return of(true)
-            return this.tokenService.getValidateToken(tkn)
+            // return this.tokenService.getValidateToken(this._token)
 
         }else{
             this.errorService.showError=true
+            this.router.navigate(['error'])
             return throwError('El token no es base 64')
         }
     }
 
-    isBase64Token(tkn:string){
+    isBase64Token(){
 
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/
 
-        tkn = this.transformBase64(tkn);
-         
-        const validateBase64=base64regex.test(tkn);
+
+        const tk=this._token.split(' ')
+
+        this._token='';
+        tk.forEach((tkn,i)=>{
+
+            if (i<tk.length-1) {
+                this._token+=`${tkn}+`
+            }else{
+                this._token+=`${tkn}`
+            }
+        })
+
+        const validateBase64=base64regex.test(this._token);
 
         if (!validateBase64) {
           return false
         }
         return true
       }
-
-    transformBase64(tkn:string){
-    const tk=tkn.split(' ')
-
-    tkn='';
-    tk.forEach((token,i)=>{
-
-        if (i<tk.length-1) {
-            tkn+=`${token}+`
-        }else{
-            tkn+=`${token}`
-        }
-    })        
-    return tkn
-    }
 }

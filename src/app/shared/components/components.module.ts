@@ -4,8 +4,6 @@ import { CardDataComponent } from './card-data/card-data.component';
 import { CardGeneralAdvanceComponent } from './card-general-advance/card-general-advance.component';
 import { MonthChallengesComponent } from './month-challenges/month-challenges.component';
 
-import { IconButtonModule } from '@ngx-mxflame/atoms/icon-button';
-import { IconModule } from '@ngx-mxflame/atoms/icon';
 import { TimelineModule } from '../molecules/timeline/timeline.module';
 import { ElementListModule } from '../molecules/element-list/element-list.module';
 import { CircleProgressModule } from '../atoms/circle-progress/circle-progress.module';
@@ -23,14 +21,12 @@ import { ModalModule } from '../molecules/modal/modal.module';
   declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, FrequentlyQuestionsComponent, HeaderComponent, ],
   imports: [
     CommonModule,
-    IconButtonModule,
     TimelineModule,
     ElementListModule,
     CircleProgressModule ,
     RoundCardModule,
     ChallengeModule,
     TabModule,
-    IconModule,
     QuestionModule,
     DirectivesModule,
     ModalModule,
