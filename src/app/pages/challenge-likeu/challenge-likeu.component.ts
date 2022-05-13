@@ -10,6 +10,7 @@ import { Period } from 'src/app/shared/interfaces/response/gamification.interfac
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'challenge-likeu',
@@ -36,6 +37,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
 
   tabs:Tab[]=[];
   showModal:boolean=false;
+  token!:string;
 
 
   private destroy$!:Subject<any>;
@@ -44,17 +46,22 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
+    private activatedRoute:ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
-    this.tokenFacade.validationToken().subscribe(console.log)
-
+    
   }
-
+  
   ngAfterViewInit(): void {
     this.destroy$=new Subject;
 
+    this.activatedRoute.queryParams.subscribe(params=>{
+      this.token=params['token']
+    })
+
+    this.tokenFacade.validationToken(this.token).subscribe(console.log)
     
     this.gamificacionFacade.getGamification()
       .pipe(

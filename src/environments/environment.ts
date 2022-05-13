@@ -5,12 +5,7 @@
 export const environment = {
   production: false,
   tkn:{
-    url:'https://otpmuro.pre.mx.corp/TokenManagerWeb/service/tokenmanager',
-    apiService:{
-      generator:'tokenGeneratorWS',
-      validator:'tokenValidatorWS'
-    },
-    dummy: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMDAwMDAwMyIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.jUoYhM22tGisVe9ZI2c3n6gqX69mIp7Cc-i9a2HZYxk+bl2zEXo1DiV7UF6Jfb/xLKarIPV5VSGM3ja5EijBJaIHrmE0Sx89if3Gnf3yVsn7/iv9XG6Istp6s+wXacO62t/age2hANke1XScPBnW4Da/G0f7EtvWQqS3Yl7B5gLWOU6fgk25casxolC/EPC7vG1MMNBwYV2yYAubL3MnTT4NyxfP4p9TpT5IaRz1ipxUtUmg8n+tIcwyUrpLUc/07WsxY0TRqvoncZ0RCtRgk2VTI0a/yHCWtwUl/qnzFQpCpomLmNB36TOU5TJwJ9izgZpclV0dvg0elGUfRhLl0D+p+dLSA74NfdUigiZavYaFvjQ=='
+    url:'https://gamification-service-sec-mx-gamification-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/api/session',
   },
   gamification:{
     url:"https://gamification-service-mx-gamification-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/credits/v2/credits/623a6e307ac5946aa98d388e/benefits",
