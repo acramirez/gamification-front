@@ -10,7 +10,10 @@ export class AnimationsDirective {
   ) { }
 
   height!:number;
-  deg!:number
+  @Input() set rotate(deg:number){
+      this.element.nativeElement.classList.add('rotate')
+      this.element.nativeElement.style.transform=`rotate(${deg}deg)`
+  }
 
   @Input() set animation(direction:string){
 
@@ -20,9 +23,6 @@ export class AnimationsDirective {
         break;
       case 'zoomIn':
         this.zoomIn()
-        break;
-      case 'rotate':
-        this.rotate()
         break;
       
       default:
@@ -39,12 +39,6 @@ export class AnimationsDirective {
   
   zoomIn(){    
     this.element.nativeElement.classList.add('zoomIn')
-  }
-  
-  rotate(){
-    if(this.deg){
-      this.element.nativeElement.style.transform=`${this.deg}deg`
-    }
   }
 
   @Input() set dropDown(active:boolean){

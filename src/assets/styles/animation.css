@@ -31,6 +31,10 @@
     transition: all ease .3s;
 }
 
+.rotate{
+    transition: all ease .3s;
+}
+
 @keyframes downUp {
     0%{
         bottom: -100%;
