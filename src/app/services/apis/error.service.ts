@@ -11,9 +11,7 @@ export class ErrorService {
 
   constructor(
     private router:Router
-    ){
-
-  }
+  ){}
 
   showError:boolean=false;
   error:ErrorData={
@@ -26,9 +24,8 @@ export class ErrorService {
   }
 
   errorShow(error:Observable<never>){
+
     this.router.navigateByUrl('error')
-    console.log(error);
-    
     
   }
 

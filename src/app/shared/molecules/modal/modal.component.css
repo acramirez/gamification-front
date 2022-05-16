@@ -66,3 +66,13 @@
 .modal_description{
     font-size: .875rem;
 }
+
+.modal__btn-continuar{
+    background-color: var(--theme-color-primary-01);
+    border: none;
+    border-radius: 3rem;
+    color: var(--theme-color-text-01);
+    font-weight: 700;
+    padding: .75rem 1.5rem;
+
+}

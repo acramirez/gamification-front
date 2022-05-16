@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Subject, throwError } from 'rxjs';
-import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, takeUntil } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -11,6 +11,8 @@ import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/chec
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorService } from 'src/app/services/apis/error.service';
+import { ChallengeLikeU } from 'src/app/shared/interfaces/response/challenges.interface';
 
 @Component({
   selector: 'challenge-likeu',
@@ -30,60 +32,95 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   cut_of_day!:Date
   indexTab!:Number
   remainingDays!:Number | null
+  resp!:ChallengeLikeU
 
   // Temporaly
 
 
   tabs:Tab[]=[];
   showModal:boolean=false;
-  token!:string
 
 
   private destroy$!:Subject<any>;
 
   constructor(
     private gamificacionFacade: GamificationFacade,
+    private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-    private tokenFacade:TokenSsoFacade,
     private activatedRoute:ActivatedRoute,
-
+    private errorService:ErrorService,
+    private router:Router,
   ) { }
 
   ngOnInit(): void {
+
 
   }
 
   ngAfterViewInit(): void {
     this.destroy$=new Subject;
 
-    this.activatedRoute.queryParams.subscribe(param=>{
-      this.token=param['token']
-      console.log(this.token);
-    });
-
-    forkJoin(
-      this.tokenFacade.validationToken(this.token),
-      this.gamificacionFacade.getGamification()
-    ).subscribe(resp=>{
-      console.log(resp[0]);
+    if (!this.tokenFacade._token) {
       
-      let{cut_of_date}=resp[1]
-      const{current_limit,potential_limit,period}=resp[1]
-      this.cardDetail={current_limit,potential_limit}
-      this.period=period;
-      this.currentPeriod=Number(period.current_period)
-      this.indexTab=this.currentPeriod
-      this.checkChallenges()
-      this.getTabs(period);
-      this.getChallenges(this.currentPeriod);
+      this.activatedRoute.queryParams.subscribe(params=>{
+        if (params['token']) {
+          const token= params['token'];
 
-      if (cut_of_date) {
-          this.cut_of_day=new Date(cut_of_date)
-          this.remainingDays=this.getDays(this.cut_of_day)
-          localStorage.setItem('message','')
-      }
-    })
+          return forkJoin(
+            this.tokenFacade.validationToken(token).pipe(
+              catchError(err=>{
+                this.errorService.errorShow(err)
+                return throwError(err)
+              })
+              ),
+              this.gamificacionFacade.getGamification()
+          ).subscribe(resp=>{
+            this.proccessData(resp[1])
+          })
+          
+        }else{
+          console.log('error');
+          
+          const error= throwError('El token no existe')
+          this.errorService.errorShow(error)
+          return  error
+        }
+      })
+    }else if (this.tokenFacade._token) {   
+      this.gamificacionFacade.getGamification()
+      .subscribe(resp=>{
+        this.proccessData(resp)
+      })
+    }
+  }
+
+
+  proccessData(resp:ChallengeLikeU){
+    let{cut_of_date}=resp
+    const{current_limit,potential_limit,period}=resp
+    this.cardDetail={current_limit,potential_limit}
+    this.period=period;
+    this.currentPeriod=Number(period.current_period)
+    this.indexTab=this.currentPeriod
+    this.getTabs(period);
+    this.getChallenges(this.currentPeriod);
+    this.checkChallenges()
+
+    if (cut_of_date) {
+        this.cut_of_day=new Date(cut_of_date)
+        this.remainingDays=this.getDays(this.cut_of_day)
+    }
+
     
+    
+     if (this.remainingDays && this.remainingDays <0 && !sessionStorage.getItem('message')) {
+       this.mandatoryChallenges.forEach(challenge=>{
+         if (challenge.status===false) {
+           sessionStorage.setItem('message','true')
+           this.router.navigate(['notificacion','mision-no-cumplida'])
+         }
+       })  
+     }
   }
 
   get challenges(){
@@ -321,19 +358,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
       const result= cutDate-currenDate
   
       const days=Math.round(result/(1000 * 60 * 60 * 24))
-
-
-      console.log(this.mandatoryChallenges);
-      
-
-      // if (result<0) {
-      //   for (let i = 0; i < this.mandatoryChallenges.length; i++) {
-      //     const challenge = this.mandatoryChallenges[i];
-      //     if (!challenge.status) {
-      //       break
-      //     }
-      //   }
-      // }
       
       return days
       
@@ -344,6 +368,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   
 
   ngOnDestroy(): void {
+    this.destroy$.unsubscribe();
   }
 
 
