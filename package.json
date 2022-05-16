@@ -21,8 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.1.1",
     "@angular/router": "~11.1.1",
     "@ngx-mxflame/atoms": "^1.0.13",
-    "@ngx-mxflame/tokens": "^1.0.1",
-    "json-server": "^0.17.0",
+    "@ngx-mxflame/tokens": "^1.0.1",    
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
