@@ -10,7 +10,7 @@
          [mandatoryChallenges]="mandatoryChallenges" 
          [optionalChallenges]="specialChallenges" 
          [tabs]="tabs"
-         [days]="getDays(cut_of_day)"
+         [days]="getDays(cutOfDay)"
          (indexTab)="getChallenges($event);indexTab=$event"
          [activeTab]="currentPeriod"
          (challengeActive)="challengeActive=$event"

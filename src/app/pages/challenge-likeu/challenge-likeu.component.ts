@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { forkJoin, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
@@ -31,10 +31,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   statusMissions:StatusMissions[]=[]
   percent:number=0;
   currentPeriod:number=0
-  cut_of_day!:Date
+  cutOfDay!:Date
 
-  indexTab!:Number
-  remainingDays!:Number | null
+  indexTab!:number
+  remainingDays!:number | null
   resp!:ChallengeLikeU
   statusChallenges:StatusChallenges[]=[]
 
@@ -68,13 +68,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           const token= params['token'];
 
           return forkJoin(
-            this.tokenFacade.validationToken(token).pipe(
+            [this.tokenFacade.validationToken(token).pipe(
               catchError(err=>{
                 this.errorService.errorShow(err)
                 return throwError(err)
               })
               ),
-              this.gamificacionFacade.getGamification()
+              this.gamificacionFacade.getGamification()]
           ).subscribe(resp=>{
             this.proccessData(resp[1])
           })
@@ -108,8 +108,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.checkChallenges()
 
     if (cut_of_date) {
-        this.cut_of_day=new Date(cut_of_date)
-        this.remainingDays=this.getDays(this.cut_of_day)
+        this.cutOfDay=new Date(cut_of_date)
+        this.remainingDays=this.getDays(this.cutOfDay)
     }
 
     
@@ -184,7 +184,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         status:''
       }
       if(mission.id==='0'){
-        tab.texto='Intro',
+        tab.texto='Intro'
         tab.id=mission.id
       }
       else{
@@ -239,16 +239,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   }
 
-  checkAccumulatedPurchases(accumulated_purchases:CurrentLimit){
-    if (accumulated_purchases && accumulated_purchases.amount>=200) {
+  checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit){
+    if (accumulatedPurchases && accumulatedPurchases.amount>=200) {
       this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
     }
   }
 
-  checkCardPayment(card_payment:CardPayment[]){
-    if(card_payment){
-      for (let i = 0; i < card_payment.length; i++) {
-        const card = card_payment[i];
+  checkCardPayment(cardPayment:CardPayment[]){
+    if(cardPayment){
+      for (const card of cardPayment) {
         
         if(card.amount_payment.amount>card.minimum_amount.amount){
           this.statusChallenges.push({id:'card_payment',status:true})
@@ -258,10 +257,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkRecurrentPayment(recurrent_payment:RecurrentPayment[]){
-    if (recurrent_payment) {
-      for (let i = 0; i < recurrent_payment.length; i++) {
-        const recurrent = recurrent_payment[i];
+  checkRecurrentPayment(recurrentPayment:RecurrentPayment[]){
+    if (recurrentPayment) {
+      for (const recurrent of recurrentPayment) {
         if (recurrent.status==='ACTIVE') {
           this.statusChallenges.push({id:'recurrent_payment',status:true});
           break;
@@ -272,8 +270,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   checkDomiciliation(domiciliation:any[]){
     if (domiciliation) {
-      for (let i = 0; i < domiciliation.length; i++) {
-        const dom = domiciliation[i];
+      for (const dom of domiciliation) {
         if (dom.status==='ACTIVE') {
           this.statusChallenges.push({id:'domicialitation',status:true})
           break
@@ -284,8 +281,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   checkAssistance(assistance:any[]){
     if (assistance) {
-      for (let i = 0; i < assistance.length; i++) {
-        const assis = assistance[i];
+      for (const assis of assistance) {
         if (assis.status==='ACTIVE') {
           this.statusChallenges.push({id:'assistance',status:true})
           break
@@ -294,10 +290,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkPayrollPortability(payroll_portability:any[]){
-    if (payroll_portability) {
-      for (let i = 0; i < payroll_portability.length; i++) {
-        const payroll = payroll_portability[i];
+  checkPayrollPortability(payrollPortability:any[]){
+    if (payrollPortability) {
+      for (const payroll of payrollPortability) {
         if (payroll.status==='ACTIVE') {
           this.statusChallenges.push({id:'payroll_portability',status:true})
           break
@@ -306,10 +301,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkDigitalChannels(digital_channels:any[] | undefined){
-    if (digital_channels) {
-      for (let i = 0; i < digital_channels.length; i++) {
-        const channel = digital_channels[i];
+  checkDigitalChannels(digitalChannels:any[] | undefined){
+    if (digitalChannels) {
+      for (const channel of digitalChannels) {
         if (channel.status==='ACTIVE') {
           this.statusChallenges.push({id:'digital_channels',status:true})
           break

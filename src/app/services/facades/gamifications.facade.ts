@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ChallengeLikeU } from "src/app/shared/interfaces/response/challenges.interface";
-import { Gamification, Period } from "src/app/shared/interfaces/response/gamification.interface";
-import { Card } from "src/app/shared/interfaces/response/icard-details";
 import { environment } from "src/environments/environment";
 
 import { GamificationService } from "../apis/gamification.service";
@@ -27,7 +25,7 @@ export class GamificationFacade {
                     current_limit,
                     potential_limit,
                     period,
-                    cut_of_date:new Date()
+                    cut_of_date
                 }
             })
         )

@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[animation]'
@@ -28,7 +28,7 @@ export class AnimationsDirective {
       default:
         break;
     }
-  };
+  }
 
   downUp(){
     this.element.nativeElement.classList.add('downUp')
@@ -42,8 +42,6 @@ export class AnimationsDirective {
   }
 
   @Input() set dropDown(active:boolean){
-
-    const h = this.height;
     
     if (!active) {
       this.height=this.element.nativeElement.clientHeight

@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
-import { Challenge, ChallengesContract } from '../../interfaces/response/challengesContract.interface';
+import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
   selector: 'app-month-challenges',

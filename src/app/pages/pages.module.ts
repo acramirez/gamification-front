@@ -9,9 +9,6 @@ import { DirectivesModule } from '../shared/directives/directives.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ErrorDialogModule } from '../shared/atoms/error-dialog/error-dialog.module';
 
-// import { SpinnerModule } from '@ngx-mxflame/atoms/spinner';
-
-
 
 @NgModule({
   declarations: [ChallengeLikeuComponent, MessageComponent, FirstPageComponent, ErrorPageComponent],

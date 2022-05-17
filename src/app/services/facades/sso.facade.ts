@@ -32,8 +32,7 @@ export class TokenSsoFacade {
         }
         
         this._token=tkn
-        //return of(true)
-        return this.tokenService.getValidateToken(this._token)
+        return of(true)
     }
 
     isBase64Token(tkn:string){

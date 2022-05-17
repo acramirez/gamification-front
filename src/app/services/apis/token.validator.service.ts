@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Observable, throwError } from "rxjs";
+import { Observable } from "rxjs";
 import { OpaqueToken } from "src/app/shared/interfaces/response/opaqueToken.interfaace";
 
 import { environment } from "src/environments/environment";
@@ -12,9 +11,7 @@ import { environment } from "src/environments/environment";
 })
 export class TokenValidatorService {
 
-    private _apiUrl: string = `${environment.tkn.url}`;
-
-    private _token: string = '';
+    private _apiUrl: string = environment.tkn.url;
 
     constructor( 
         private httpClient: HttpClient,
