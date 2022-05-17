@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } f
 @Directive({
   selector: '[show]'
 })
-export class ModalDirective implements OnInit {
+export class ModalDirective {
 
   htmlElement!:ElementRef<HTMLElement>
 
@@ -19,13 +19,4 @@ export class ModalDirective implements OnInit {
   ) { 
     this.htmlElement=this.templateRef.elementRef
   }
-  ngOnInit(): void {
-    
-  }
-
-
-  closeModal(){
-    
-  }
-
 }

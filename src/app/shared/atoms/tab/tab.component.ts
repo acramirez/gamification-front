@@ -11,8 +11,6 @@ export class TabComponent implements OnInit {
   @Input() tab:Tab={texto:'',status:''}
   icon:string='';
 
-  constructor() { }
-
   ngOnInit(): void {
     switch (this.tab.status) {
       case 'FINISHED':

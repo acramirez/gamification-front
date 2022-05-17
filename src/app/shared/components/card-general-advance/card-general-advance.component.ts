@@ -7,7 +7,7 @@ import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
   templateUrl: './card-general-advance.component.html',
   styleUrls: ['./card-general-advance.component.css']
 })
-export class CardGeneralAdvanceComponent implements OnInit {
+export class CardGeneralAdvanceComponent {
 
     /**
    * Has the info which is used in the component
@@ -23,10 +23,5 @@ export class CardGeneralAdvanceComponent implements OnInit {
    * 
    */
   @Input() periodData!:PeriodDetail[]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

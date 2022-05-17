@@ -12,7 +12,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
 
   constructor(
     private errorService:ErrorService,
-    private route:Router
+    private router:Router
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,29 +25,11 @@ export class ErrorInterceptorService implements HttpInterceptor {
   }
 
 
-  manejarError(error:HttpErrorResponse){
-    let errorMessage = '';
+  manejarError(error:Observable<never>){
 
-        if (error.error instanceof ErrorEvent)  {
-          errorMessage = `Error client: ${error.error.message}`;
-        }else {
-          this.errorService.showError=true;
-          errorMessage = `Error server: ${error.status}, message: ${error.message}`;
-        }
-
-        switch (error.status) {
-          case 404:
-          this.errorService.showError=true;
-            this.errorService.error={
-              title:'Error del cliente',
-              message:'',
-            }
-            break;
-        
-          default:
-            break;
-        }
-        this.route.navigate(['error'])
-        return throwError (errorMessage)
+    if (error) {
+      this.router.navigate(['error'])
+    }
+    return throwError (error)
   }
 }

@@ -11,7 +11,7 @@
          [optionalChallenges]="specialChallenges" 
          [tabs]="tabs"
          [days]="getDays(cut_of_day)"
-         (indexTab)="getChallenges($event);index=$event"
+         (indexTab)="getChallenges($event);indexTab=$event"
          [activeTab]="currentPeriod"
          (challengeActive)="challengeActive=$event"
          (openModal)="showModal=true"

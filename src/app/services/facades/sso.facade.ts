@@ -1,9 +1,7 @@
 
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, of, throwError } from "rxjs";
 
-import { TokenValidatorService } from "../apis/token.validator.service";
 import { ErrorService } from "../apis/error.service";
 
 @Injectable({
@@ -15,35 +13,31 @@ export class TokenSsoFacade {
     private isBase64!:boolean
 
     constructor(
-        private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
-        private tokenService:TokenValidatorService
     ) {
-
        
     }
 
     validationToken(tkn:string ): Observable<any> {
-
-        this.isBase64=this.isBase64Token(tkn);
-        tkn=this.transformBase64(tkn)    
         
-        if (this.isBase64) {
-            return of(true)
-            return this.tokenService.getValidateToken(tkn)
+        tkn=this.transformBase64(tkn)
+        this.isBase64=this.isBase64Token(tkn)
+        
+        if (!this.isBase64) {
 
-        }else{
             this.errorService.showError=true
             return throwError('El token no es base 64')
         }
+        
+        this._token=tkn
+        return of(true)
+        //return this.tokenService.getValidateToken(this._token)
     }
 
     isBase64Token(tkn:string){
 
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/
 
-        tkn = this.transformBase64(tkn);
-         
         const validateBase64=base64regex.test(tkn);
 
         if (!validateBase64) {
@@ -52,18 +46,21 @@ export class TokenSsoFacade {
         return true
       }
 
-    transformBase64(tkn:string){
-    const tk=tkn.split(' ')
+      transformBase64(tkn:string){
 
-    tkn='';
-    tk.forEach((token,i)=>{
+        const token=tkn.split(' ')
 
-        if (i<tk.length-1) {
-            tkn+=`${token}+`
-        }else{
-            tkn+=`${token}`
-        }
-    })        
-    return tkn
-    }
+        tkn='';
+        token.forEach((t,i)=>{
+
+            if (i<token.length-1) {
+                tkn+=`${t}+`
+            }else{
+                tkn+=`${t}`
+            }
+        })
+        
+        return tkn
+
+      }
 }

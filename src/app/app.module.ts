@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from "./app-routing.module";
 
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
-import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
 
 
 @NgModule({
@@ -23,11 +22,6 @@ import { SsoInterceptorService } from './services/interceptors/sso-interceptor.s
     
   ],
   providers: [
-    {
-      provide:  HTTP_INTERCEPTORS,
-      useClass:SsoInterceptorService,
-      multi:true
-    },
     {
       provide:  HTTP_INTERCEPTORS,
       useClass:ErrorInterceptorService,

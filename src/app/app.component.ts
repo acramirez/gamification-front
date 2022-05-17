@@ -1,7 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ErrorService } from './services/apis/error.service';
-
-import { TokenSsoFacade } from './services/facades/sso.facade';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +8,8 @@ import { TokenSsoFacade } from './services/facades/sso.facade';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Application Gramificacion';
-  
-  constructor(
-    private errorService:ErrorService
-    ) {}
-  
-  ngOnInit(): void { 
-  }
 
 
 }

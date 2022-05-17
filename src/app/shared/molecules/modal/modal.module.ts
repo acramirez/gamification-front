@@ -10,7 +10,6 @@ import { DirectivesModule } from '../../directives/directives.module';
   imports: [
     CommonModule,
     DirectivesModule,
-    // ButtonModule
   ],
   exports:[
     ModalComponent

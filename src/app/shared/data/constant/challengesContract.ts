@@ -237,21 +237,27 @@ export const challengesContract:ChallengesContract={
     FAQ: [
       {
         question: "¿Qué es el reto Like U?",
-        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero. Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
+        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcanzar tu potencial financiero.",
         additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
         link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
       },
       {
-        question: "¿Qué es el reto Like U?",
-        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
-        additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
-        link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
+        question: "¿Cómo puedo avanzar en las misiones?",
+        answer: "Superando retos que aparecen en las misiones como: Conoce tu tarjeta, paga más del mínimo, domicilia pagos, etc. ",
+        additionalInfo: "",
+        link: ""
       },
       {
-        question: "¿Qué es el reto Like U?",
-        answer: "Incrementa tu línea de crédito de forma automática cumpliendo los objetivos para alcancar tu potencial financiero.",
-        additionalInfo: "*Consulta beneficios, términos y condiciones completos en",
-        link: "www.santander.com.mx/personas/tarjetas-de-credito/likeu.html"
+        question: "¿Cuándo se incrementa mi crédito?",
+        answer: "Tu crédito comenzará a aumentar cuando superes los retos de la tercera misión en adelante. Si lo prefieres, puedes usar el comodín: Paga más del mínimo, para incrementar tu línea de crédito. ",
+        additionalInfo: "",
+        link: ""
+      },
+      {
+        question: "¿Qué pasa con mi tarjeta LikeU si no cumplo con los retos de las misiones?",
+        answer: "La podrás seguir usando con toda normalidad. Sin embargo, tu línea de crédito no aumentaría debido a que no estás superando las misiones del Reto LikeU. ¡Anímate y participa!",
+        additionalInfo: "",
+        link: ""
       }
     ]
   }

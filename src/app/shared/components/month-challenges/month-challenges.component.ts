@@ -8,7 +8,7 @@ import { Challenge, ChallengesContract } from '../../interfaces/response/challen
   templateUrl: './month-challenges.component.html',
   styleUrls: ['./month-challenges.component.css']
 })
-export class MonthChallengesComponent implements OnInit,AfterViewInit {
+export class MonthChallengesComponent implements AfterViewInit {
 
   @Input() mandatoryChallenges!:Challenge[];
   @Input() optionalChallenges!:Challenge[];
@@ -22,12 +22,7 @@ export class MonthChallengesComponent implements OnInit,AfterViewInit {
   @Output() challengeActive = new EventEmitter<Challenge>()
   @ViewChild('tab') scrollTabs!:ElementRef<HTMLDivElement>
 
-  constructor() { }
   ngAfterViewInit(): void {
     this.scrollTabs.nativeElement.scrollLeft=this.activeTab*124
-  }
-
-  ngOnInit(): void {
-    
   }
 }

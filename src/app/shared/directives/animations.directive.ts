@@ -3,15 +3,18 @@ import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/co
 @Directive({
   selector: '[animation]'
 })
-export class AnimationsDirective implements OnInit {
-
-
+export class AnimationsDirective {
 
   constructor(
     private element:ElementRef<HTMLElement>
   ) { }
 
   height!:number;
+  @Input() set rotate(deg:number){
+      this.element.nativeElement.classList.add('rotate')
+      this.element.nativeElement.style.transform=`rotate(${deg}deg)`
+  }
+
   @Input() set animation(direction:string){
 
     switch (direction) {
@@ -36,11 +39,6 @@ export class AnimationsDirective implements OnInit {
   
   zoomIn(){    
     this.element.nativeElement.classList.add('zoomIn')
-  }
-
-
-  ngOnInit(): void {
-    
   }
 
   @Input() set dropDown(active:boolean){

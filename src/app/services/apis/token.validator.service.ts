@@ -26,6 +26,7 @@ export class TokenValidatorService {
             'authorization':tkn
         })
         const url = `${this._apiUrl}`;
+        
         return this.httpClient.post<OpaqueToken>( url, {headers} );
 
     }

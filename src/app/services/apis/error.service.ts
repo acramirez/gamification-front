@@ -1,36 +1,23 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ErrorData } from 'src/app/shared/interfaces/atoms/error';
+import {Router} from '@angular/router'
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
 
+  constructor(
+    private router:Router
+  ){}
+
   showError:boolean=false;
-  error:ErrorData={
-    title:'',
-    message:'',
-    icon:'',
-    button:false,
-    redirect:''
 
-  }
+  errorShow(error:Observable<never>){
 
-  constructor() { 
-    
-  }
-
-  errorShow(error:HttpErrorResponse){
-    console.error(error);
-    if (error.error!=='') {
-      console.log(error);
-      this.showError=true
-    }else{
-      this.showError=false
+    if (error) {
+      this.router.navigateByUrl('error')
     }
-
-    console.log(this.showError);
     
   }
 

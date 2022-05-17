@@ -1,9 +1,9 @@
-export interface statusMissions {
+export interface StatusMissions {
     mission:string,
-    challenges?:statusChallenges[]
+    challenges?:StatusChallenges[]
 }
 
-export interface statusChallenges{
+export interface StatusChallenges{
     id:string,
     status:boolean
 }
