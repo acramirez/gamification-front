@@ -7,7 +7,7 @@ import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/shared/interfaces/response/gamification.interface';
-import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
+import { StatusChallenges, StatusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,14 +26,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   mandatoryChallenges:Challenge[]=[]
   specialChallenges:Challenge[]=[]
   challengeActive!:Challenge;
-  statusMissions:statusMissions[]=[]
+  statusMissions:StatusMissions[]=[]
   percent:number=0;
   currentPeriod:number=0
   cut_of_day!:Date
   indexTab!:Number
   remainingDays!:Number | null
   resp!:ChallengeLikeU
-  statusChallenges:statusChallenges[]=[]
+  statusChallenges:StatusChallenges[]=[]
 
   // Temporaly
 
