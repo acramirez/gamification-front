@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef,ViewContainerRef } from '@angular/core';
-import { Modal } from '../../interfaces/atoms/modal';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({

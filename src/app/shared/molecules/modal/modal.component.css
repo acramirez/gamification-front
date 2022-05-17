@@ -41,10 +41,6 @@
     color: var( --theme-color-text-03);
 }
 
-.modal__btn-continuar{
-    align-self: center;
-}
-
 .modal__specs{
     height: 100%;
     overflow-y: auto;
@@ -55,6 +51,7 @@
 }
 
 .modal__btn-continuar{
+    align-self: center;
     background-color: var(--theme-color-primary-01);
     border: none;
     border-radius: 3rem;

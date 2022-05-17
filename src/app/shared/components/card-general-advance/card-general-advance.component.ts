@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Card } from 'src/app/shared/models/card.model';
-import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
+import { Component, Input } from '@angular/core';
+import { Card, PeriodDetail } from '../../interfaces/response/gamification.interface';
 
 @Component({
   selector: 'app-card-general-advance',
