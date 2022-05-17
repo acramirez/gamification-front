@@ -12,7 +12,7 @@ export class CircleProgressComponent implements OnInit {
   @Input() icon:string='';
   circunference:number=295.31;
   strokeDashoffset:number=0;
-  
+
   ngOnInit(): void {
     this.percent= this.percent/100;
     this.strokeDashoffset=this.circunference*(1-this.percent)

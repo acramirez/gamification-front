@@ -6,7 +6,7 @@ import { ErrorData } from '../../interfaces/atoms/error';
   templateUrl: './error-dialog.component.html',
   styleUrls: ['./error-dialog.component.css']
 })
-export class ErrorDialogComponent {
+export class ErrorDialogComponent{
 
   @Input()errorData:ErrorData={
     title:'¡Oh, oh!',

@@ -1,9 +1,7 @@
 
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, of, throwError } from "rxjs";
 
-import { TokenValidatorService } from "../apis/token.validator.service";
 import { ErrorService } from "../apis/error.service";
 
 @Injectable({
@@ -15,20 +13,18 @@ export class TokenSsoFacade {
     private isBase64!:boolean
 
     constructor(
-        private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
-        private tokenService:TokenValidatorService
     ) {
        
     }
 
-    validationToken(tkn:string): Observable<any> {
-
+    validationToken(tkn:string ): Observable<any> {
         
         tkn=this.transformBase64(tkn)
         this.isBase64=this.isBase64Token(tkn)
         
         if (!this.isBase64) {
+
             this.errorService.showError=true
             return throwError('El token no es base 64')
         }

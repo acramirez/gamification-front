@@ -9,5 +9,4 @@ import { FAQ } from '../../interfaces/response/challengesContract.interface';
 export class FrequentlyQuestionsComponent{
 
   @Input() questions:FAQ[]=[]
-
 }

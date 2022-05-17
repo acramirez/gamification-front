@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
+import { Component, OnInit } from '@angular/core';
+import { ErrorService } from './services/apis/error.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
 export class AppComponent {
   title = 'Application Gramificacion';
-  constructor(){}
+
+
 }

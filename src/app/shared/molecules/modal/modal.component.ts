@@ -11,6 +11,5 @@ export class ModalComponent {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
   @Input() data!:Challenge
-
   
 }

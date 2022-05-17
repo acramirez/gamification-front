@@ -21,13 +21,14 @@ export class TokenValidatorService {
     ) { }
 
     getValidateToken(tkn:string): Observable<OpaqueToken> {
-
-        const headers:HttpHeaders = new HttpHeaders({
-            'Authorization':tkn
-        })
         
+        const headers = new HttpHeaders({
+            'authorization':tkn
+        })
         const url = `${this._apiUrl}`;
         
         return this.httpClient.post<OpaqueToken>( url, {headers} );
+
     }
+
 }

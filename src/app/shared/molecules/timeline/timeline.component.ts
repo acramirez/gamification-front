@@ -19,7 +19,6 @@ export class TimelineComponent implements OnInit {
 
   direction:string='';
 
-
   ngOnInit(): void {
 
     const percent=(100/this.elements.length);

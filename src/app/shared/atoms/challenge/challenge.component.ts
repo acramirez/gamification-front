@@ -6,7 +6,7 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.css']
 })
-export class ChallengeComponent {
+export class ChallengeComponent{
 
   @Input() challenge!:Challenge;
 

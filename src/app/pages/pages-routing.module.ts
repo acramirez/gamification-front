@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SsoGuard } from '../shared/guards/sso.guard';
 import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { FirstPageComponent } from './first-page/first-page.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
         component:ChallengeLikeuComponent
       },
       {
-        path:'notificacion/:message',
+        path:'message/:message',
         component:MessageComponent
       },
       {

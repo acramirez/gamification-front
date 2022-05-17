@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Subject, throwError } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -10,9 +10,11 @@ import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/sha
 import { StatusChallenges, StatusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorService } from 'src/app/services/apis/error.service';
 import { ChallengeLikeU } from 'src/app/shared/interfaces/response/challenges.interface';
+
 
 @Component({
   selector: 'challenge-likeu',
@@ -30,10 +32,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   percent:number=0;
   currentPeriod:number=0
   cut_of_day!:Date
+
   indexTab!:Number
   remainingDays!:Number | null
   resp!:ChallengeLikeU
   statusChallenges:StatusChallenges[]=[]
+
 
   // Temporaly
 
@@ -48,6 +52,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
+
     private activatedRoute:ActivatedRoute,
     private errorService:ErrorService,
     private router:Router,
@@ -390,8 +395,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
     return null
   }
-
-  
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
