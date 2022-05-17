@@ -28,7 +28,6 @@ export class TokenValidatorService {
         
         const url = `${this._apiUrl}`;
         
-        return this.httpClient.get<OpaqueToken>( url, {headers} );
-
+        return this.httpClient.post<OpaqueToken>( url, {headers} );
     }
 }

@@ -14,8 +14,6 @@ export class QuestionComponent {
   deg:number=0
   @ViewChild('answer') answer!:ElementRef<HTMLElement>;
 
-
-
   show(){
     
     this.showAnswer=!this.showAnswer

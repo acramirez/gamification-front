@@ -25,7 +25,9 @@ export class ErrorService {
 
   errorShow(error:Observable<never>){
 
-    this.router.navigateByUrl('error')
+    if (error) {
+      this.router.navigateByUrl('error')
+    }
     
   }
 

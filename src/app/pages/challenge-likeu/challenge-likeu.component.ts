@@ -6,7 +6,7 @@ import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
-import { Period } from 'src/app/shared/interfaces/response/gamification.interface';
+import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/shared/interfaces/response/gamification.interface';
 import { statusChallenges, statusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
 import { challengesFather } from 'src/app/shared/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
@@ -19,7 +19,7 @@ import { ChallengeLikeU } from 'src/app/shared/interfaces/response/challenges.in
   templateUrl: './challenge-likeu.component.html',
   styleUrls: ['./challenge-likeu.component.css']
 })
-export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit {
+export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
   public period!:Period;
@@ -33,6 +33,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   indexTab!:Number
   remainingDays!:Number | null
   resp!:ChallengeLikeU
+  statusChallenges:statusChallenges[]=[]
 
   // Temporaly
 
@@ -51,11 +52,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
     private errorService:ErrorService,
     private router:Router,
   ) { }
-
-  ngOnInit(): void {
-
-
-  }
 
   ngAfterViewInit(): void {
     this.destroy$=new Subject;
@@ -206,85 +202,115 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit, OnInit 
   checkChallenges(){
 
     this.period.period_detail.forEach((period,i)=>{
-      const statusChallenges:statusChallenges[]=[];
+      this.statusChallenges=[];
 
       const {
         accumulated_purchases,
-        card_payment,recurrent_payment, 
+        card_payment,
+        recurrent_payment, 
         domiciliation,
         assistance,
         payroll_portability,
         digital_channels
       } = period
 
-      if (accumulated_purchases && accumulated_purchases.amount>=200) {
-        statusChallenges.push({id:'minimum_monthly_billing',status:true})
-      }
+      this.checkAccumulatedPurchases(accumulated_purchases);
 
-      if(card_payment){
-        for (let i = 0; i < card_payment.length; i++) {
-          const card = card_payment[i];
-          
-          if(card.amount_payment.amount>card.minimum_amount.amount){
-            statusChallenges.push({id:'card_payment',status:true})
-            break
-          }
-        }
-      }
+      this.checkCardPayment(card_payment);
 
-      if (recurrent_payment) {
-        for (let i = 0; i < recurrent_payment.length; i++) {
-          const recurrent = recurrent_payment[i];
-          if (recurrent.status==='ACTIVE') {
-            statusChallenges.push({id:'recurrent_payment',status:true});
-            break;
-          }
-        }
-      }
+      this.checkRecurrentPayment(recurrent_payment);
 
-      if (domiciliation) {
-        for (let i = 0; i < domiciliation.length; i++) {
-          const dom = domiciliation[i];
-          if (dom.status==='ACTIVE') {
-            statusChallenges.push({id:'domicialitation',status:true})
-            break
-          }
-        }
-      }
+      this.checkDomiciliation(domiciliation);
 
-      if (assistance) {
-        for (let i = 0; i < assistance.length; i++) {
-          const assis = assistance[i];
-          if (assis.status==='ACTIVE') {
-            statusChallenges.push({id:'assistance',status:true})
-            break
-          }
-        }
-      }
+      this.checkAssistance(assistance);
       
-      if (payroll_portability) {
-        for (let i = 0; i < payroll_portability.length; i++) {
-          const payroll = payroll_portability[i];
-          if (payroll.status==='ACTIVE') {
-            statusChallenges.push({id:'assistance',status:true})
-            break
-          }
-        }
-      }
-      if (digital_channels) {
-        for (let i = 0; i < digital_channels.length; i++) {
-          const channel = digital_channels[i];
-          if (channel.status==='ACTIVE') {
-            statusChallenges.push({id:'assistance',status:true})
-            break
-          }
-        }
-      }
+      this.checkPayrollPortability(payroll_portability)
 
-      this.statusMissions.push({mission:period.period_id,challenges:statusChallenges})
+      this.checkDigitalChannels(digital_channels)
+
+      this.statusMissions.push({mission:period.period_id,challenges:this.statusChallenges})
 
     })
 
+  }
+
+  checkAccumulatedPurchases(accumulated_purchases:CurrentLimit){
+    if (accumulated_purchases && accumulated_purchases.amount>=200) {
+      this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
+    }
+  }
+
+  checkCardPayment(card_payment:CardPayment[]){
+    if(card_payment){
+      for (let i = 0; i < card_payment.length; i++) {
+        const card = card_payment[i];
+        
+        if(card.amount_payment.amount>card.minimum_amount.amount){
+          this.statusChallenges.push({id:'card_payment',status:true})
+          break
+        }
+      }
+    }
+  }
+
+  checkRecurrentPayment(recurrent_payment:RecurrentPayment[]){
+    if (recurrent_payment) {
+      for (let i = 0; i < recurrent_payment.length; i++) {
+        const recurrent = recurrent_payment[i];
+        if (recurrent.status==='ACTIVE') {
+          this.statusChallenges.push({id:'recurrent_payment',status:true});
+          break;
+        }
+      }
+    }
+  }
+
+  checkDomiciliation(domiciliation:any[]){
+    if (domiciliation) {
+      for (let i = 0; i < domiciliation.length; i++) {
+        const dom = domiciliation[i];
+        if (dom.status==='ACTIVE') {
+          this.statusChallenges.push({id:'domicialitation',status:true})
+          break
+        }
+      }
+    }
+  }
+
+  checkAssistance(assistance:any[]){
+    if (assistance) {
+      for (let i = 0; i < assistance.length; i++) {
+        const assis = assistance[i];
+        if (assis.status==='ACTIVE') {
+          this.statusChallenges.push({id:'assistance',status:true})
+          break
+        }
+      }
+    }
+  }
+
+  checkPayrollPortability(payroll_portability:any[]){
+    if (payroll_portability) {
+      for (let i = 0; i < payroll_portability.length; i++) {
+        const payroll = payroll_portability[i];
+        if (payroll.status==='ACTIVE') {
+          this.statusChallenges.push({id:'payroll_portability',status:true})
+          break
+        }
+      }
+    }
+  }
+
+  checkDigitalChannels(digital_channels:any[] | undefined){
+    if (digital_channels) {
+      for (let i = 0; i < digital_channels.length; i++) {
+        const channel = digital_channels[i];
+        if (channel.status==='ACTIVE') {
+          this.statusChallenges.push({id:'digital_channels',status:true})
+          break
+        }
+      }
+    }
   }
 
   setStatusChallenges(tab:number,challenge:Challenge){

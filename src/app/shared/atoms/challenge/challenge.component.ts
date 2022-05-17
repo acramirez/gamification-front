@@ -8,7 +8,6 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class ChallengeComponent {
 
-
   @Input() challenge!:Challenge;
 
 }
