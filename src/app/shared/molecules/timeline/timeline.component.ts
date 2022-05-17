@@ -26,9 +26,10 @@ export class TimelineComponent implements OnInit {
     
 
     this.elements.forEach(el=>{
-      if(el.status==='COMPLETE')
+      if(el.status==='COMPLETE'){
         this.percent+=percent;
         this.percent+=0.6
+      }
       });
       
   }
