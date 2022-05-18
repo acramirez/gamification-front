@@ -349,38 +349,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       })
     })
 
-
-    console.log(missionPassed, this.challenges.challengeCount);
-
     const percent= (missionPassed * 100)/Number(this.challenges.challengeCount)
     return percent
-    // let missionsComplete:number=0;
-    
-    // console.log(this.mandatoryChallenges);
-    
-    // this.mandatoryChallenges.forEach(mandatory=>{
-    //   if (mandatory.status===true) {
-    //     missionsComplete++
-    //   }
-    // })
-
-    // if (this.specialChallenges.length>0) {
-      
-    //   for (let i = 0; i < this.specialChallenges.length; i++) {
-    //     const special = this.specialChallenges[i];
-  
-    //     if (special.status===true) {
-    //       missionsComplete++
-    //       break;
-    //     }
-    //   }
-    // }    
-    
-    // console.log(missionsComplete);
-    
-    // const percent= (missionsComplete * 100)/Number(this.challenges.challengeCount)
-    
-    // return percent
   }
 
   challengesRedirect(){
