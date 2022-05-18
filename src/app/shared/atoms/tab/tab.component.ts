@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 
 @Component({
@@ -9,6 +9,8 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 export class TabComponent implements OnInit {
 
   @Input() tab:Tab={texto:'',status:''}
+  @ViewChild('btn') btnActive!:ElementRef<HTMLButtonElement>
+  
   icon:string='';
 
   ngOnInit(): void {
