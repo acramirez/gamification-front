@@ -232,7 +232,7 @@ export const challengesContract:ChallengesContract={
         creditIncrease: false
       }
     ],
-    challengeCount: 22,
+    challengeCount: 20,
     missionsCount: 6,
     FAQ: [
       {

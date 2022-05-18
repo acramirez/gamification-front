@@ -1,4 +1,4 @@
-<ng-container *ngIf="cardDetail" >
+<div class="challenge-likeu__container bg__circle" *ngIf="cardDetail" >
     <app-header animation="up"></app-header> 
     <div class="challenge-likeu">
         <app-card-data 
@@ -19,7 +19,7 @@
         </app-month-challenges>
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
-</ng-container>
+</div>
 
 <app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
     

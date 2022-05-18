@@ -13,7 +13,7 @@ export class TabComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.tab.status) {
-      case 'FINISHED':
+      case 'FINISH':
         this.icon='check'
         break;
       case 'ONGOING':

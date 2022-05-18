@@ -18,10 +18,14 @@ export class TokenValidatorService {
     ) { }
 
     getValidateToken(tkn:string): Observable<OpaqueToken> {
+        console.log(tkn);
         
         const headers = new HttpHeaders({
-            'authorization':tkn
-        })
+            'Authorization': 
+            tkn
+        });
+        console.log(headers);
+        
         const url = `${this._apiUrl}`;
         
         return this.httpClient.post<OpaqueToken>( url, {headers} );
