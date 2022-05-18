@@ -1,6 +1,11 @@
+.challenge-likeu__container{
+    overflow: hidden;
+    position: relative
+}
+
 .challenge-likeu{
     display: grid;
     gap: 1.5rem;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     max-width: 375px;
 }

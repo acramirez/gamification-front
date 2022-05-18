@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 
 @Component({
@@ -9,15 +9,17 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 export class TabComponent implements OnInit {
 
   @Input() tab:Tab={texto:'',status:''}
+  @ViewChild('btn') btnActive!:ElementRef<HTMLButtonElement>
+  
   icon:string='';
 
   ngOnInit(): void {
     switch (this.tab.status) {
-      case 'FINISHED':
-        this.icon='check'
+      case 'FINISH':
+        this.icon='Activa _tu_tarjeta'
         break;
       case 'ONGOING':
-        this.icon='clock'
+        this.icon='Pagos_recurrentes'
         break;
       default:
         this.icon='lock'

@@ -37,6 +37,14 @@
     font-size: 1.25rem;
     font-weight: 700;
 }
+
+.modal__title--gradient{
+    background: var(--theme-color-background-gradient-likeu);
+    color:transparent;
+    background-clip: text;
+}
+
+
 .modal__subtitle{
     color: var( --theme-color-text-03);
 }

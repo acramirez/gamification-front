@@ -10,15 +10,22 @@
     justify-content: center;
     min-width: 7.25rem;
     padding: .5rem 1rem;
+    transition: all ease .3s;
     width: fit-content;
 
 }
+
+.tab--active{
+    transform: scale(1.2);
+}
+
 .tab__text{
     display: block;
 }
 
 .tab__icon{
     margin-right: .25rem;
+    max-width: 20px;
 }
 
 .tab--disabled{

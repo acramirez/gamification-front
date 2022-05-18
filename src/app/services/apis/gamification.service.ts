@@ -12,8 +12,6 @@ export class GamificationService {
 
     private _getApiUri: string = environment.gamification.url;
 
-    //private _getApiUri: string = 'http://127.0.0.1:8000/gamifications';
-
     constructor( private httpClient: HttpClient ) { }
 
     getGamifications(authorization:string): Observable<Gamification> {
@@ -22,6 +20,8 @@ export class GamificationService {
             authorization
         });
 
+        console.log(headers);
+        
         return this.httpClient.get<Gamification>(`${this._getApiUri}`, {headers});
     }
 }

@@ -12,7 +12,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"card",
+        icon:"Conoce_tu_tarjeta",
         redirection: false
       },
       {
@@ -25,7 +25,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"card",
+        icon:"Conoce_tu_tarjeta",
         redirection: false
       },
       {
@@ -38,7 +38,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"calendar",
+        icon:"Paga_tu_tarjeta",
         redirection: false
       },
       {
@@ -54,7 +54,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"card",
+        icon:"Conoce_tu_tarjeta",
         redirection: false
       },
       {
@@ -70,7 +70,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"clock",
+        icon:"Pagos_recurrentes",
         redirection: false
       },
       {
@@ -84,7 +84,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"briefcase",
+        icon:"Portabilidad_nomina",
         redirection: false
       },
       {
@@ -97,7 +97,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"squares",
+        icon:"Asistencia_ike",
         redirection: false
       },
       {
@@ -110,7 +110,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"bubble-chat",
+        icon:"Canales_Digitales",
         redirection: false
       },
       {
@@ -123,7 +123,7 @@ export const challengesContract:ChallengesContract={
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
-        icon:"lightning",
+        icon:"Pago_minimo",
         redirection: false
       }
     ],
@@ -232,7 +232,7 @@ export const challengesContract:ChallengesContract={
         creditIncrease: false
       }
     ],
-    challengeCount: 22,
+    challengeCount: 20,
     missionsCount: 6,
     FAQ: [
       {

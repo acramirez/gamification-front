@@ -19,9 +19,10 @@ export class MonthChallengesComponent implements AfterViewInit {
   @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
   @Output() challengeActive = new EventEmitter<Challenge>()
+
   @ViewChild('tab') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-    this.scrollTabs.nativeElement.scrollLeft=this.activeTab*124
+    this.scrollTabs.nativeElement.scrollLeft=this.activeTab*132
   }
 }
