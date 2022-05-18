@@ -19,7 +19,9 @@
 
 .tab__icon{
     margin-right: .25rem;
+    max-width: 20px;
 }
+
 
 .tab--disabled{
     background:transparent;

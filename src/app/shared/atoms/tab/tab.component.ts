@@ -14,10 +14,10 @@ export class TabComponent implements OnInit {
   ngOnInit(): void {
     switch (this.tab.status) {
       case 'FINISH':
-        this.icon='check'
+        this.icon='Activa _tu_tarjeta'
         break;
       case 'ONGOING':
-        this.icon='clock'
+        this.icon='Pagos_recurrentes'
         break;
       default:
         this.icon='lock'
