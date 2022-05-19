@@ -61,7 +61,6 @@ export class AnimationsDirective {
     setTimeout(() => {
       this.element.nativeElement.style.strokeDashoffset=progress.toString();
     }, 0);
-
   }
 }
 

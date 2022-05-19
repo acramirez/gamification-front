@@ -56,6 +56,18 @@
 }
 
 
+.hidden{
+    display: none;
+}
 
 
+.hidden--dropdown{
+    height: 0;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
+.active--tab{
+    transform: scale(1.2);
+}
