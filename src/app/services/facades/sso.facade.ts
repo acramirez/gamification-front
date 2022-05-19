@@ -1,6 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
+import { TokenValidator } from "src/app/shared/interfaces/response/opaqueToken.interface";
 
 import { ErrorService } from "../apis/error.service";
 import { TokenValidatorService } from "../apis/token.validator.service";
@@ -20,7 +21,7 @@ export class TokenSsoFacade {
        
     }
 
-    validationToken(tkn:string ): Observable<any> {
+    validationToken(tkn:string ): Observable<TokenValidator> {
         
         tkn=this.transformBase64(tkn)
         this.isBase64=this.isBase64Token(tkn)
@@ -33,7 +34,7 @@ export class TokenSsoFacade {
         
         this._token=tkn
         
-        return of(true)
+        //return of(true)
         return this.tokenService.getValidateToken(tkn)
     }
 

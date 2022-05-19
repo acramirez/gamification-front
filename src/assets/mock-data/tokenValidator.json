@@ -1,11 +1,22 @@
 {
-    "tokenValidator":
-    {
-        "stokenValidatorResponse": {
-            "mensaje": "Operaci�n exitosa",
-            "codigoMensaje": "TVT_000",
-            "idusuario": "00000010",
-            "pAdicional": "eyJzZXNpb25TZWd1cmlkYWQiOiI3eW8zYjZrK2VVZTAxaWpxbmwvSk1sMHNPcUFcdTAwM2QiLCJpZEFwbGljYWNpb24iOiJTTkVUIiwiaWRlbnRpZmljYWRvciI6IlNORVQiLCJpZFVzdWFyaW8iOiIwMDAwMDAxMCIsInNlc2lvbkFwbGljYXRpdm8iOiJLbkJHRXpBY3JmRW1VT215VTBVOWlqViJ9"
+    "Status": {
+        "StatusCode": 0,
+        "StatusDesc": "EXITO"
+    },
+    "SecObjRec": {
+        "SecObjInfoBean": {
+            "SecObjData": [
+                {
+                    "SecObjDataKey": "challenges",
+                    "SecObjDataValue": "{\"challenges\": [\"card_payment\", \"domiciliation\", \"payroll_portability\", \"digital_channel\"], \"ultimoAcceso\" : \"hoy\"}",
+                    "SecObjDataType": "STRING"
+                },
+                {
+                    "SecObjDataKey": "buc",
+                    "SecObjDataValue": "12345",
+                    "SecObjDataType": "STRING"
+                }
+            ]
         }
     }
 }

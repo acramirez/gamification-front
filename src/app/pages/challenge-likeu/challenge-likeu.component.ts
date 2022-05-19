@@ -8,7 +8,7 @@ import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
-import { challengesFather } from 'src/app/shared/data/constant/data.constant';
+import { challengesFather } from 'src/assets/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,6 +37,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   remainingDays!:number | null
   resp!:ChallengeLikeU
   statusChallenges:StatusChallenges[]=[]
+
+  challengesRedirect:string[]=[]
 
 
   // Temporaly
@@ -75,7 +77,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               })
               ),
               this.gamificacionFacade.getGamification()]
-          ).subscribe(resp=>{
+          ).subscribe(resp=>{    
+            
+            const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
+            const cutChallenges2=cutChallenges[1].split(']')
+            this.challengesRedirect=cutChallenges2[0].split(',')
+            
+            this.challengesRedirect.forEach((challenge,i)=>{
+              this.challengesRedirect[i]=challenge.trim().slice(1,-1)
+            })
             this.proccessData(resp[1])
           })
           
@@ -172,7 +182,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     })
 
-    this.challengesRedirect();
+    // this.challengesRedirect();
   }
 
   getTabs(period:Period){
@@ -353,23 +363,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return percent
   }
 
-  challengesRedirect(){
-    this.challengesFather.challenges.forEach(challenge=>{
-      this.mandatoryChallenges.forEach(mandatory=>{
-        if(mandatory.id===challenge){
-          mandatory.redirection=true
-        }
-      })
+  // challengesRedirect(){
+  //   this.challengesFather.challenges.forEach(challenge=>{
+  //     this.mandatoryChallenges.forEach(mandatory=>{
+  //       if(mandatory.id===challenge){
+  //         mandatory.redirection=true
+  //       }
+  //     })
 
-      if (this.specialChallenges.length>0) {
-        this.specialChallenges.forEach(special=>{
-          if (special.id===challenge) {
-            special.redirection=true;
-          }
-        })
-      }
-    })
-  }
+  //     if (this.specialChallenges.length>0) {
+  //       this.specialChallenges.forEach(special=>{
+  //         if (special.id===challenge) {
+  //           special.redirection=true;
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 
   getDays(date:Date){
 
