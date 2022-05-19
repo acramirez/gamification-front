@@ -86,6 +86,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.challengesRedirect.forEach((challenge,i)=>{
               this.challengesRedirect[i]=challenge.trim().slice(1,-1)
             })
+
             this.proccessData(resp[1])
           })
           
@@ -179,10 +180,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         }
       });
 
-
     })
 
-    // this.challengesRedirect();
+    this.setChallengeRedirect();
   }
 
   getTabs(period:Period){
@@ -363,23 +363,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return percent
   }
 
-  // challengesRedirect(){
-  //   this.challengesFather.challenges.forEach(challenge=>{
-  //     this.mandatoryChallenges.forEach(mandatory=>{
-  //       if(mandatory.id===challenge){
-  //         mandatory.redirection=true
-  //       }
-  //     })
-
-  //     if (this.specialChallenges.length>0) {
-  //       this.specialChallenges.forEach(special=>{
-  //         if (special.id===challenge) {
-  //           special.redirection=true;
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
+  setChallengeRedirect(){
+    this.challengesRedirect.forEach(challenge=>{
+      this.mandatoryChallenges.forEach(mandatory=>{
+        if(mandatory.id===challenge){
+          mandatory.redirection=true
+        }
+      })
+    
+      if (this.specialChallenges.length>0) {
+        this.specialChallenges.forEach(special=>{
+          if (special.id===challenge) {
+            special.redirection=true;
+          }
+        })
+      }
+    })
+  }
 
   getDays(date:Date){
 

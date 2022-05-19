@@ -10,10 +10,6 @@ export class AnimationsDirective {
   ) { }
 
   height!:number;
-  @Input() set rotate(deg:number){
-      this.element.nativeElement.classList.add('rotate')
-      this.element.nativeElement.style.transform=`rotate(${deg}deg)`
-  }
 
   @Input() set animation(direction:string){
 
@@ -41,6 +37,11 @@ export class AnimationsDirective {
     this.element.nativeElement.classList.add('zoomIn')
   }
 
+  @Input() set rotate(deg:number){
+    this.element.nativeElement.classList.add('rotate')
+    this.element.nativeElement.style.transform=`rotate(${deg}deg)`
+  }
+
   @Input() set dropDown(active:boolean){
     
     if (!active) {
@@ -55,7 +56,11 @@ export class AnimationsDirective {
   }
 
   @Input() set loadProgress(progress:number){
-    this.element.nativeElement.style.strokeDashoffset=progress.toString();
+    this.element.nativeElement.classList.add('transition')
+    this.element.nativeElement.style.strokeDashoffset='295.31';
+    setTimeout(() => {
+      this.element.nativeElement.style.strokeDashoffset=progress.toString();
+    }, 0);
 
   }
 }

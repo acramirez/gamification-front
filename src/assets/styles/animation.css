@@ -1,4 +1,9 @@
 
+.transition{
+    transition: all ease 1s;
+}
+
+
 .zoomIn{
     animation: zoomIn .3s ease-in normal;
 }

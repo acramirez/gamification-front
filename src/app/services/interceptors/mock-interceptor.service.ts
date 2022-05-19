@@ -13,7 +13,7 @@ export class MockInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    if (req.url===environment.tkn.url) {      
+    if (req.url===environment.tkn.url && !environment.production) {      
       return of(new HttpResponse({status:200, body:(mockToken)}))
     }
 
