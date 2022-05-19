@@ -118,8 +118,20 @@ sn-icon>i[class^=sn-]{
 }
 
 .active--tab{
-    transform: scale(1.2);
+    color: #fff!important;
+    position: relative;
+    transform: scale(0.85);
+    background-color: var(--theme-color-background-default)!important;
+}
 
+.active--tab::before{
+    content: '';
+    background: var(--theme-color-background-gradient-likeu);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border-radius: inherit;
+    z-index: -1;
 }
 
 /*Animation styles*/

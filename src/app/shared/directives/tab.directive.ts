@@ -3,20 +3,30 @@ import { from, fromEvent } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 @Directive({
-  selector: '[tabs-container]'
+  selector: '[tabsDirective]'
 })
-export class TabDirective implements AfterViewInit {
+export class TabDirective  {
 
   constructor(
     private elementRef:ElementRef<HTMLElement>
   ) { }
 
-  ngAfterViewInit(): void {
-  
-
+  @Input() set tabsDirective(type:string){
+    switch (type) {
+      case 'tab':
+        this.elementTab()
+        break;
+      case 'tab-container':
+        this.elementTab()
+        break;
+      default:
+        break;
+    }
   }
 
-  @Input() set activeTab(index:number){
+
+
+  elementTab(){
     
 
     fromEvent(document,'click')
@@ -28,12 +38,12 @@ export class TabDirective implements AfterViewInit {
 
 
   isActive(elementCheck:HTMLElement){
-    const children=this.elementRef;
-
-    if (elementCheck===this.elementRef.nativeElement || this.elementRef.nativeElement.contains(elementCheck)) {
-      this.elementRef.nativeElement.classList.add('active--tab')
-    }else{
-      this.elementRef.nativeElement.classList.remove('active--tab')
+    const element=this.elementRef.nativeElement;
+  
+    if (elementCheck===element || element.contains(elementCheck)) {
+      element.classList.add('active--tab')
+    }else if (elementCheck.classList.contains('tab') || elementCheck.classList.contains('tab__text') || elementCheck.classList.contains('tab__icon')) {
+      element.classList.remove('active--tab')
     }
 
   }
