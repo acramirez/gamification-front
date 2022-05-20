@@ -1,19 +1,19 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { forkJoin, interval, Subject, Subscription, throwError, timer } from 'rxjs';
 import { catchError, min, switchMap } from 'rxjs/operators';
-import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
-import { Card } from 'src/app/shared/interfaces/response/icard-details';
-import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
-import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
-import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
-import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/shared/interfaces/response/gamification.interface';
-import { StatusChallenges, StatusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
-import { challengesFather } from 'src/assets/data/constant/data.constant';
-import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
+import { GamificationFacade } from '../../services/facades/gamifications.facade';
+import { Card } from '../../shared/interfaces/response/icard-details';
+import { Tab } from '../../shared/interfaces/atoms/tab.interface';
+import { ChallengesFacade } from '../../services/facades/challenges.facade';
+import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
+import { CardPayment, CurrentLimit, Period, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
+import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
+import { challengesFather } from '../../../assets/data/constant/data.constant';
+import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorService } from 'src/app/services/apis/error.service';
-import { ChallengeLikeU } from 'src/app/shared/interfaces/response/challenges.interface';
+import { ErrorService } from '../../services/apis/error.service';
+import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 
 
 @Component({
@@ -108,7 +108,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   proccessData(resp:ChallengeLikeU){
-    let{cut_of_date}=resp
     const{current_limit,potential_limit,period}=resp
     this.cardDetail={current_limit,potential_limit}
     this.period=period;
@@ -127,7 +126,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         this.dueDay=new Date('2022-05-20T17:36:00')
 
       
-        const time = this.getTime(this.dueDay)
+        this.getTime(this.dueDay)
         
         this.timer$=timer(0,1000).subscribe(()=>
           {            
@@ -141,15 +140,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         );
 
     }
-
-    //  if (this.remainingDays && this.remainingDays <0 && !sessionStorage.getItem('message')) {
-    //    this.mandatoryChallenges.forEach(challenge=>{
-    //      if (challenge.status===false) {
-    //        sessionStorage.setItem('message','true')
-    //        this.router.navigate(['notificacion','mision-no-cumplida'])
-    //      }
-    //    })  
-    //  }
   }
 
   get challenges(){

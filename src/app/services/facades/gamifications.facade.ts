@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { ChallengeLikeU } from "src/app/shared/interfaces/response/challenges.interface";
-import { environment } from "src/environments/environment";
+import { ChallengeLikeU } from "../../shared/interfaces/response/challenges.interface";
+import { environment } from "../../../environments/environment";
 
 import { GamificationService } from "../apis/gamification.service";
 

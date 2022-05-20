@@ -1,15 +1,13 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mockToken } from 'src/assets/data/constant/token.mock';
-import { environment } from 'src/environments/environment';
+import { mockToken } from '../../../assets/data/constant/token.mock';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MockInterceptorService implements HttpInterceptor {
-
-  constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     

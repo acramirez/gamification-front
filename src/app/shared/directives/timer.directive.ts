@@ -5,10 +5,5 @@ import { Directive, Input } from '@angular/core';
 })
 export class TimerDirective {
 
-  constructor() { }
-
-  @Input() set timer(tiem:number){
-
-  }
 
 }

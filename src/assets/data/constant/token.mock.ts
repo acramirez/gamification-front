@@ -1,4 +1,4 @@
-import { TokenValidator } from "src/app/shared/interfaces/response/opaqueToken.interface";
+import { TokenValidator } from "../../../app/shared/interfaces/response/opaqueToken.interface";
 
 export const mockToken:TokenValidator={
     Status: {

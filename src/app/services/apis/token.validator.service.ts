@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { TokenValidator } from "src/app/shared/interfaces/response/opaqueToken.interface";
+import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
-import { environment } from "src/environments/environment";
+import { environment } from "../../../environments/environment";
 
 
 @Injectable({

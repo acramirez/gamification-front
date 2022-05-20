@@ -5,7 +5,7 @@ import { Tab } from '../interfaces/atoms/tab.interface';
 @Directive({
   selector: '[tabsDirective]'
 })
-export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
+export class TabDirective implements OnInit, OnDestroy  {
 
   @Output() indexTab:EventEmitter<number> =new EventEmitter;
   
@@ -34,18 +34,6 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
       })
   }
 
-
-  containersTabs(scroll:number){
-
-    const nodes=this.elementRef.nativeElement.childNodes
-
-    for (let i = 0; i < nodes.length; i++) {
-      const element = nodes[i];
-
-    }
-
-  }
-
   isActive(elementCheck:HTMLElement){
     const element=this.elementRef.nativeElement;
 
@@ -62,13 +50,6 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
       this.elementRef.nativeElement.classList.add('active--tab')
     }
     
-  }
-
-  ngAfterViewInit(): void {
-    
-
-
-
   }
 
   ngOnDestroy(): void {

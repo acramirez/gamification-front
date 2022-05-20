@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { TokenValidator } from "src/app/shared/interfaces/response/opaqueToken.interface";
+import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
 import { ErrorService } from "../apis/error.service";
 import { TokenValidatorService } from "../apis/token.validator.service";
