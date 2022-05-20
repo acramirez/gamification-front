@@ -1,7 +1,6 @@
-<button [ngClass]="{
+<button tabsDirective="tab" [id]="tab" [ngClass]="{
     'tab':true,
-    'tab--active':false,
-    'tab--disabled':(tab.status!=='ONGOING')
+    'active--tab':(tab.status==='ONGOING')
 }"
 >
     <img class="tab__icon" [src]="'../../../../assets/icons/'+icon+'.png'" alt="">

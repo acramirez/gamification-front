@@ -1,4 +1,4 @@
-import { ChallengesContract } from "../../interfaces/response/challengesContract.interface";
+import { ChallengesContract } from "../../../app/shared/interfaces/response/challengesContract.interface";
 
 export const challengesContract:ChallengesContract={
     challenges: [

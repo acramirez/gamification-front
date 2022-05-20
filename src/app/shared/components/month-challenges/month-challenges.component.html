@@ -1,13 +1,14 @@
-<div #tab class="tabs">
+<div #tabsContainer id="tabs--container" tabsDirective="tabs-container" class="tabs">
     <ng-container *ngFor="let tab of tabs;let i=index">
-        <lu-tab  (click)="indexTab.emit(i);" [tab]="tab"></lu-tab>
+        <lu-tab (click)="indexTab.emit(i);" [tab]="tab"></lu-tab>
     </ng-container>
 </div>
 
 <div class="general-challenges">
 
     <div *ngIf="days!==null" class="time-remaining">
-        <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">{{days}} días</span></span>
+        <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">{{days}}</span></span>
+
     </div>
 
     <div class="normal-challenges">

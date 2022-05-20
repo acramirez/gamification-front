@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { OpaqueToken } from "src/app/shared/interfaces/response/opaqueToken.interfaace";
+import { TokenValidator } from "src/app/shared/interfaces/response/opaqueToken.interface";
 
 import { environment } from "src/environments/environment";
 
@@ -17,18 +17,16 @@ export class TokenValidatorService {
         private httpClient: HttpClient,
     ) { }
 
-    getValidateToken(tkn:string): Observable<OpaqueToken> {
-        console.log(tkn);
+    getValidateToken(tkn:string): Observable<TokenValidator> {
         
         const headers = new HttpHeaders({
             'Authorization': 
             tkn
         });
-        console.log(headers);
         
         const url = `${this._apiUrl}`;
         
-        return this.httpClient.post<OpaqueToken>( url, {headers} );
+        return this.httpClient.post<TokenValidator>( url, {headers} );
 
     }
 

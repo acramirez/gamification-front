@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { forkJoin, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { forkJoin, interval, Subject, Subscription, throwError, timer } from 'rxjs';
+import { catchError, min, switchMap } from 'rxjs/operators';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Card } from 'src/app/shared/interfaces/response/icard-details';
 import { Tab } from 'src/app/shared/interfaces/atoms/tab.interface';
@@ -8,7 +8,7 @@ import { ChallengesFacade } from 'src/app/services/facades/challenges.facade';
 import { Challenge } from 'src/app/shared/interfaces/response/challengesContract.interface';
 import { CardPayment, CurrentLimit, Period, RecurrentPayment } from 'src/app/shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from 'src/app/shared/interfaces/checkChallenges.interface';
-import { challengesFather } from 'src/app/shared/data/constant/data.constant';
+import { challengesFather } from 'src/assets/data/constant/data.constant';
 import { TokenSsoFacade } from 'src/app/services/facades/sso.facade';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,20 +31,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   statusMissions:StatusMissions[]=[]
   percent:number=0;
   currentPeriod:number=0
-  cutOfDay!:Date
+  dueDay!:Date
 
   indexTab!:number
-  remainingDays!:number | null
+  remainingDays!:number | string | null
   resp!:ChallengeLikeU
   statusChallenges:StatusChallenges[]=[]
 
+  challengesRedirect:string[]=[]
 
+
+
+  timer$!:Subscription;
   // Temporaly
 
 
   tabs:Tab[]=[];
   showModal:boolean=false;
-
 
   private destroy$!:Subject<any>;
 
@@ -75,7 +78,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               })
               ),
               this.gamificacionFacade.getGamification()]
-          ).subscribe(resp=>{
+          ).subscribe(resp=>{    
+            
+            const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
+            const cutChallenges2=cutChallenges[1].split(']')
+            this.challengesRedirect=cutChallenges2[0].split(',')
+            
+            this.challengesRedirect.forEach((challenge,i)=>{
+              this.challengesRedirect[i]=challenge.trim().slice(1,-1)
+            })
+
             this.proccessData(resp[1])
           })
           
@@ -102,26 +114,42 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.period=period;
     this.currentPeriod=Number(period.current_period)
     this.indexTab=this.currentPeriod
+    
     this.getTabs(period);
-    this.checkChallenges()
+    this.checkChallenges();
     this.getChallenges(this.currentPeriod);
+    this.getPercent();
 
-    this.getPercent()
-    if (cut_of_date) {
-        this.cutOfDay=new Date(cut_of_date)
-        this.remainingDays=this.getDays(this.cutOfDay)
+    this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
+    console.log(this.dueDay);
+    
+    if (this.dueDay) {
+        this.dueDay=new Date('2022-05-20T17:36:00')
+
+      
+        const time = this.getTime(this.dueDay)
+        
+        this.timer$=timer(0,1000).subscribe(()=>
+          {            
+            
+            let time=this.getTime(this.dueDay)
+            if(typeof time === 'number'){
+              this.remainingDays= this.transformSeconds(time);
+            }
+            
+          }
+        );
+
     }
 
-    
-    
-     if (this.remainingDays && this.remainingDays <0 && !sessionStorage.getItem('message')) {
-       this.mandatoryChallenges.forEach(challenge=>{
-         if (challenge.status===false) {
-           sessionStorage.setItem('message','true')
-           this.router.navigate(['notificacion','mision-no-cumplida'])
-         }
-       })  
-     }
+    //  if (this.remainingDays && this.remainingDays <0 && !sessionStorage.getItem('message')) {
+    //    this.mandatoryChallenges.forEach(challenge=>{
+    //      if (challenge.status===false) {
+    //        sessionStorage.setItem('message','true')
+    //        this.router.navigate(['notificacion','mision-no-cumplida'])
+    //      }
+    //    })  
+    //  }
   }
 
   get challenges(){
@@ -136,6 +164,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return challengesFather
   }
 
+/**  
+ * Metodo mediante el cual se obtienen los challenges de acuerdo al tab seleccionado
+*/
   getChallenges(tab:number){
     
     this.mandatoryChallenges=[];
@@ -169,10 +200,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         }
       });
 
-
     })
 
-    this.challengesRedirect();
+    this.setChallengeRedirect();
   }
 
   getTabs(period:Period){
@@ -353,14 +383,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return percent
   }
 
-  challengesRedirect(){
-    this.challengesFather.challenges.forEach(challenge=>{
+  setChallengeRedirect(){
+    this.challengesRedirect.forEach(challenge=>{
       this.mandatoryChallenges.forEach(mandatory=>{
         if(mandatory.id===challenge){
           mandatory.redirection=true
         }
       })
-
+    
       if (this.specialChallenges.length>0) {
         this.specialChallenges.forEach(special=>{
           if (special.id===challenge) {
@@ -371,26 +401,53 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     })
   }
 
-  getDays(date:Date){
-
+  getTime(date:Date){    
+    
     if (this.currentPeriod===this.indexTab) {
-      const currenDate=new Date().getTime()
-      const cutDate=date.getTime();
-  
-      const result= cutDate-currenDate
-  
-      const days=Math.round(result/(1000 * 60 * 60 * 24))
       
+      const currenDate=new Date().getTime()
+      const dueDate=date.getTime();
+  
+      const result= dueDate-currenDate
+      
+      let days:number | string=result/(1000)
+
       return days
       
     }
     return null
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
+
+  transformSeconds(segundos:number){
+    let hour:number | string= Math.floor(segundos/3600)
+    hour=(hour<10)?'0' + hour:hour
+    let minutes:number | string= Math.floor((segundos/60)%60)
+    minutes=(minutes<10)?'0' + minutes:minutes
+    let seconds:number | string= Math.floor(segundos%60)
+    seconds=(seconds<10)?'0' + seconds:seconds
+
+    let resp=''
+    if (typeof hour === 'number' && hour>=24) {
+      resp = Math.round(hour/24) + ' días'
+    }else if(hour==0){
+      resp = hour + ':' + minutes + ':' + seconds +' min'
+    }else if(hour==0  && minutes == 0){
+      resp = hour + ':' + minutes + ':' + seconds +' sec'
+    }else{
+      resp = hour + ':' + minutes + ':' + seconds +' hrs'
+    }
+
+    return resp
+
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.unsubscribe();
 
+    setTimeout(() => {
+      this.timer$.unsubscribe()
+    }, 1000);
+  }
 
 }

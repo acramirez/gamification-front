@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { challengesContract } from 'src/app/shared/data/constant/challengesContract';
+import { challengesContract } from 'src/assets/data/constant/challengesContract';
 
 @Injectable({
   providedIn: 'root'

@@ -19,8 +19,6 @@ export class GamificationService {
             'Authorization': 
             authorization
         });
-
-        console.log(headers);
         
         return this.httpClient.get<Gamification>(`${this._getApiUri}`, {headers});
     }
