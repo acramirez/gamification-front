@@ -2,6 +2,7 @@
 
 :root{
     --theme-color-background-gradient-likeu:linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
+    --theme-color-background-gradient-likeu:linear-gradient(80deg, #FF1D53 0%, #A540D7 86.96%);
     --theme-color-background-default:#F2F2F2FF;
     --theme-color-background-default2:rgba(255, 255, 255, 0.7);
     --theme-color-background-03:#FFFFFFFF;
@@ -117,22 +118,8 @@ sn-icon>i[class^=sn-]{
     z-index: -1;
 }
 
-.active--tab{
-    color: #fff!important;
-    position: relative;
-    transform: scale(0.85);
-    background-color: var(--theme-color-background-default)!important;
-}
 
-.active--tab::before{
-    content: '';
-    background: var(--theme-color-background-gradient-likeu);
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    border-radius: inherit;
-    z-index: -1;
-}
+
 
 /*Animation styles*/
 

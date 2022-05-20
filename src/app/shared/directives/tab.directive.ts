@@ -1,11 +1,17 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Inject, Input } from '@angular/core';
-import { from, fromEvent } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { Tab } from '../interfaces/atoms/tab.interface';
 
 @Directive({
   selector: '[tabsDirective]'
 })
-export class TabDirective  {
+export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
+
+  @Output() indexTab:EventEmitter<number> =new EventEmitter;
+  
+  sub!:Subscription
+  @Input() tabData!:Tab;
+  @Input() tabsData!:Tab[];
 
   constructor(
     private elementRef:ElementRef<HTMLElement>
@@ -16,36 +22,57 @@ export class TabDirective  {
       case 'tab':
         this.elementTab()
         break;
-      case 'tab-container':
-        this.elementTab()
-        break;
       default:
         break;
     }
   }
 
-
-
   elementTab(){
-    
-
-    fromEvent(document,'click')
+    this.sub = fromEvent(document,'click')
       .subscribe(event=>{
-
         this.isActive(event.target as HTMLElement)
       })
   }
 
 
+  containersTabs(scroll:number){
+
+    const nodes=this.elementRef.nativeElement.childNodes
+
+    for (let i = 0; i < nodes.length; i++) {
+      const element = nodes[i];
+
+    }
+
+  }
+
   isActive(elementCheck:HTMLElement){
     const element=this.elementRef.nativeElement;
-  
+
     if (elementCheck===element || element.contains(elementCheck)) {
       element.classList.add('active--tab')
     }else if (elementCheck.classList.contains('tab') || elementCheck.classList.contains('tab__text') || elementCheck.classList.contains('tab__icon')) {
       element.classList.remove('active--tab')
     }
+  }
 
+  ngOnInit(): void {
+    if (this.tabData && this.tabData.status==='ONGOING') {
+      console.log(this.elementRef.nativeElement.offsetLeft);
+      this.elementRef.nativeElement.classList.add('active--tab')
+    }
+    
+  }
+
+  ngAfterViewInit(): void {
+    
+
+
+
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 } 

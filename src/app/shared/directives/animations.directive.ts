@@ -50,7 +50,7 @@ export class AnimationsDirective {
       console.log(this.height);
       
     }else{
-      this.element.nativeElement.classList.add('drop-down-hidden')
+      this.element.nativeElement.classList.remove('drop-down-hidden')
       this.element.nativeElement.style.height= `${this.height.toString()}px`
     }
   }
