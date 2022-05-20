@@ -123,8 +123,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     console.log(this.dueDay);
     
     if (this.dueDay) {
-        this.dueDay=new Date('2022-05-20T17:36:00')
-
       
         this.getTime(this.dueDay)
         
@@ -418,7 +416,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     seconds=(seconds<10)?'0' + seconds:seconds
 
     let resp=''
-    if (typeof hour === 'number' && hour>=24) {
+    if (segundos<0) {
+      resp = Math.round(segundos/(60 * 60 * 24)) + ' días'
+    } else if (typeof hour === 'number' && hour>=24) {
       resp = Math.round(hour/24) + ' días'
     }else if(hour==0){
       resp = hour + ':' + minutes + ':' + seconds +' min'
