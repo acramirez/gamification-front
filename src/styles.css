@@ -51,7 +51,7 @@
 body{
     background-color: #F5F7FA;
     font-size: 16px;
-    font-family: 'SantanderText', Arial, Helvetica, sans-serif;
+    font-family: 'SantanderText', sans-serif, Arial, Helvetica;
     margin:auto;
     max-width: 375px;
     width: 375px;

@@ -28,7 +28,6 @@ export class TokenSsoFacade {
         
         if (!this.isBase64) {
 
-            this.errorService.showError=true
             return throwError('El token no es base 64')
         }
         

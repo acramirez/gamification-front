@@ -14,8 +14,9 @@
     display: none;
 }
 
-lu-tab{
+.tab{
     cursor: pointer;
+    border-radius: 24px;
 }
 
 .general-challenges{

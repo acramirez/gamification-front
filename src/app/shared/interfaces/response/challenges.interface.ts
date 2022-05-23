@@ -4,5 +4,6 @@ export interface ChallengeLikeU{
     current_limit:CurrentLimit,
     cut_of_date?:Date| undefined,
     potential_limit:CurrentLimit,
-    period:Period
+    period:Period,
+    status:string;
 }
