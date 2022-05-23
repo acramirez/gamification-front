@@ -16,7 +16,6 @@ export class ErrorService {
 
     getClientError(error:Error){
 
-      const errorMessage=''
 
       if (!navigator.onLine) {
         return 'No Internet Connection'
@@ -32,11 +31,8 @@ export class ErrorService {
     }
 
     error.subscribe(err=>{
-
-      
     })
-    
-    
+
   }
 
 }

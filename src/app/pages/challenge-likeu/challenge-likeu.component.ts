@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { forkJoin, interval, Subject, Subscription, throwError, timer } from 'rxjs';
-import { catchError, min, switchMap } from 'rxjs/operators';
+import { forkJoin, Subject, Subscription, throwError, timer } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
-import { CardPayment, CurrentLimit, Period, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
+import { CardPayment, CurrentLimit, Period, PeriodDetail, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { challengesFather } from '../../../assets/data/constant/data.constant';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
@@ -120,24 +120,24 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.getPercent();
 
     this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
-    console.log(this.dueDay);
     
     if (this.dueDay) {
       
-        this.getTime(this.dueDay)
-        
-        this.timer$=timer(0,1000).subscribe(()=>
-          {            
-            
-            let time=this.getTime(this.dueDay)
-            if(typeof time === 'number'){
-              this.remainingDays= this.transformSeconds(time);
-            }
-            
+      this.getTime(this.dueDay)
+      
+      this.timer$=timer(0,1000).subscribe(()=>
+        {            
+          
+          let time=this.getTime(this.dueDay)
+          if(typeof time === 'number'){
+            this.remainingDays= this.transformSeconds(time);
           }
-        );
-
+          
+        }
+      );
     }
+
+    this.messageNotification(resp);
   }
 
   get challenges(){
@@ -399,7 +399,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       const result= dueDate-currenDate
       
       let days:number | string=result/(1000)
-
+      
       return days
       
     }
@@ -431,6 +431,89 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return resp
 
   }
+
+
+  messageNotification(resp:ChallengeLikeU){
+
+    const {period,current_limit,potential_limit}=resp
+
+    const {current_period,period_detail} = period
+
+    const previousPeriod= Number(current_period) - 1
+    const previousPeriodDetail=period_detail[previousPeriod]
+
+    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH') {
+      const dueDate=new Date(period_detail[previousPeriod].due_date)
+
+      const date=new Date();
+      
+      if (date>dueDate && !this.gamificacionFacade.message) {
+        
+        const status=this.getStatusMission(2)
+
+        if (current_limit.amount===potential_limit.amount) {
+          this.router.navigate(['notificacion','lo-has-logrado'])
+        }else if(!status){
+          this.router.navigate(['notificacion','lo-sentimos'])
+        }else if(status){
+          this.router.navigate(['notificacion','mision-cumplida'])
+        }
+        
+        this.gamificacionFacade.message=true;
+      }
+
+      
+    }
+
+  }
+
+
+  getStatusMission(index:number):boolean{
+
+    let status=true
+
+    console.log(this.challenges.missions[index]);
+    console.log(this.statusMissions[index]);
+
+    
+    if (this.statusMissions[index]) {
+    const {challenges}=this.statusMissions[index]
+    const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=this.challenges.missions[index]
+    
+      
+      const statusMandatory=(challenge:StatusChallenges)=>{
+        if (mandatoryChallenges.includes(challenge.id)) {
+          return true
+        }
+        return false
+      };
+  
+  
+      const statusSpecial=(challenge:StatusChallenges)=>{
+        if (specialChallenges.includes(challenge.id)) {
+          return true
+        }
+        return false
+      };
+  
+  
+      const mandatoryChallengesStatus= challenges?.filter(statusMandatory)
+      const specialChallengesStatus= challenges?.filter(statusSpecial)
+  
+  
+      if(mandatoryChallengesStatus && mandatoryChallengesStatus?.length!== mandatoryChallenges.length){
+        status=false
+      }else if (specialChallengesStatus && specialChallengesStatus?.length<1 && specialChallenges.length>0) {
+        status=false
+      }
+      console.log(mandatoryChallengesStatus);
+      console.log(specialChallengesStatus);
+      console.log(status);
+    }
+
+    return status
+  }
+
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
