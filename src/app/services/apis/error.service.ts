@@ -30,8 +30,7 @@ export class ErrorService {
       this.router.navigateByUrl('error')
     }
 
-    error.subscribe(err=>{
-    })
+    error.subscribe()
 
   }
 
