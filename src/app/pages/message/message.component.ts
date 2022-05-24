@@ -26,8 +26,6 @@ export class MessageComponent implements OnInit {
     this.activatedRoute.params.subscribe(param=>{
       message=param.message
     })
-
-    console.log(message);
     
     switch (message) {
       case 'lo-sentimos':
@@ -35,21 +33,18 @@ export class MessageComponent implements OnInit {
         this.notification.title='¡Lo sentimos!'
         this.notification.subtitle='No has logrado completar el reto LikeU'
         this.notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
-
         break;
       case 'mision-cumplida':
         this.notification.icon='mission-complete'
         this.notification.title='¡Misión cumplida!'
         this.notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
         this.notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-
         break;
       case 'lo-has-logrado':
         this.notification.icon='challenge-complete'
         this.notification.title='¡Lo has logrado!'
         this.notification.subtitle='Tu límite de crédito ha aumentado'
         this.notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
-
         break;
     
       default:

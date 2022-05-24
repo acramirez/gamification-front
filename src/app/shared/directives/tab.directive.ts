@@ -46,7 +46,6 @@ export class TabDirective implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     if (this.tabData && this.tabData.status==='ONGOING') {
-      console.log(this.elementRef.nativeElement.offsetLeft);
       this.elementRef.nativeElement.classList.add('active--tab')
     }
     

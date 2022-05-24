@@ -101,7 +101,7 @@ export const challengesContract:ChallengesContract={
         redirection: false
       },
       {
-        id: "digital_channels",
+        id: "digitalChannels",
         name: "Usa los canales digitales",
         description: "La validación consite en medir el uso en los últimos 3 meses a cada mes de validación, para el 5 debe tenerla el 3, 4, 5; y para el 6, será el 4, 5, 6.",
         specs: [
@@ -156,7 +156,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
-          "digital_channels"
+          "digitalChannels"
         ],
         specialChallenges: [
         ],
@@ -168,7 +168,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
-          "digital_channels"
+          "digitalChannels"
         ],
         specialChallenges: [
 
@@ -183,7 +183,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
-          "digital_channels"
+          "digitalChannels"
         ],
         specialChallenges: [
           "payroll_portability",
@@ -201,7 +201,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
-          "digital_channels"
+          "digitalChannels"
         ],
         specialChallenges: [
           "payroll_portability",
@@ -220,7 +220,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "minimum_monthly_billing",
           "card_payment",
-          "digital_channels"
+          "digitalChannels"
         ],
         specialChallenges: [
           "payroll_portability",

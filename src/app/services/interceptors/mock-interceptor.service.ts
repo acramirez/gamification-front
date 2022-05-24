@@ -14,7 +14,6 @@ export class MockInterceptorService implements HttpInterceptor {
     if (req.url===environment.tkn.url && !environment.production) {      
       return of(new HttpResponse({status:200, body:(mockToken)}))
     }
-    console.log(req);
     return next.handle(req)
     
   }

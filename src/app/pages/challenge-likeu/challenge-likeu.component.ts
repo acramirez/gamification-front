@@ -325,7 +325,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     if (digitalChannels) {
       for (const channel of digitalChannels) {
         if (channel.status==='ACTIVE') {
-          this.statusChallenges.push({id:'digital_channels',status:true})
+          this.statusChallenges.push({id:'digitalChannels',status:true})
           break
         }
       }
@@ -374,7 +374,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   setChallengeRedirect(){
     this.challengesRedirect.forEach(challenge=>{
       this.mandatoryChallenges.forEach(mandatory=>{
+        
         if(mandatory.id===challenge){
+          mandatory.redirection=true
+        }
+        else if(challenge==='digital_channel' && mandatory.id==='digitalChannels'){
           mandatory.redirection=true
         }
       })
@@ -449,7 +453,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       
       if (date>dueDate && !this.gamificacionFacade.message) {
         
-        const status=this.getStatusMission(2)
+        const status=this.getStatusMission(previousPeriod)
 
         if (current_limit.amount===potential_limit.amount) {
           this.router.navigate(['notificacion','lo-has-logrado'])
@@ -458,7 +462,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         }else if(status){
           this.router.navigate(['notificacion','mision-cumplida'])
         }
-        
+
         this.gamificacionFacade.message=true;
       }
 
@@ -471,11 +475,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   getStatusMission(index:number):boolean{
 
     let status=true
-
-    console.log(this.challenges.missions[index]);
-    console.log(this.statusMissions[index]);
-
-    
+ 
     if (this.statusMissions[index]) {
     const {challenges}=this.statusMissions[index]
     const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=this.challenges.missions[index]
@@ -506,9 +506,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }else if (specialChallengesStatus && specialChallengesStatus?.length<1 && specialChallenges.length>0) {
         status=false
       }
-      console.log(mandatoryChallengesStatus);
-      console.log(specialChallengesStatus);
-      console.log(status);
     }
 
     return status

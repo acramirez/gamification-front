@@ -244,6 +244,6 @@ export const challenges = {
 }
 
 export const challengesFather={
-    challenges: ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels", "higher_payment"]
+    challenges: ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels", "higher_payment"]
 }
 
