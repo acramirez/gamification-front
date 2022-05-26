@@ -8,10 +8,11 @@
         </app-card-data>
         <app-month-challenges 
          [mandatoryChallenges]="mandatoryChallenges" 
-         [optionalChallenges]="specialChallenges" 
+         [specialChallenges]="specialChallenges" 
          [tabs]="tabs"
          [days]="remainingDays"
          (indexTab)="getChallenges($event);indexTab=$event"
+         [missionStatus]="missionStatus"
          [initialTab]="currentPeriod"
          (challengeActive)="challengeActive=$event"
          (openModal)="showModal=true"

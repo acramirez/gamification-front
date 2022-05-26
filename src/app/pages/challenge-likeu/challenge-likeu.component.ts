@@ -31,12 +31,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   statusMissions:StatusMissions[]=[]
   percent:number=0;
   currentPeriod:number=0
-  dueDay!:Date
-
+  dueDay!:Date;
+  cutOfDate!:Date;
   indexTab!:number
   remainingDays!:number | string | null
-  resp!:ChallengeLikeU
   statusChallenges:StatusChallenges[]=[]
+  missionStatus!:boolean | undefined;
 
   challengesRedirect:string[]=[]
 
@@ -102,22 +102,28 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
         this.proccessData(resp)
-      })
+      })       
     }
   }
 
 
   proccessData(resp:ChallengeLikeU){
+
     const{current_limit,potential_limit,period}=resp
     this.cardDetail={current_limit,potential_limit}
     this.period=period;
     this.currentPeriod=Number(period.current_period)
     this.indexTab=this.currentPeriod
+    this.cutOfDate=new Date(resp.cut_of_date as Date)
+    
+    // this.showFirstAccess(resp.seen_first_time)
     
     this.getTabs(period);
+
     this.checkChallenges();
     this.getChallenges(this.currentPeriod);
     this.getPercent();
+    
 
     this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
     
@@ -126,17 +132,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.getTime(this.dueDay)
       
       this.timer$=timer(0,1000).subscribe(()=>
-        {            
-          
-          let time=this.getTime(this.dueDay)
-          if(typeof time === 'number'){
-            this.remainingDays= this.transformSeconds(time);
-          }
-          
+      {            
+        
+        let time=this.getTime(this.dueDay)
+        if(typeof time === 'number'){
+          this.remainingDays= this.transformSeconds(time);
         }
+        
+      }
       );
     }
-
     this.messageNotification(resp);
   }
 
@@ -191,6 +196,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     })
 
     this.setChallengeRedirect();
+    this.missionStatus=this.getStatusMission(tab);
+    
   }
 
   getTabs(period:Period){
@@ -233,42 +240,37 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         domiciliation,
         assistance,
         payroll_portability,
-        digitalChannels
+        digitalChannels,
+        due_date
       } = period      
-
-      this.checkAccumulatedPurchases(accumulated_purchases);
-
-      this.checkCardPayment(card_payment);
-
-      this.checkRecurrentPayment(recurrent_payment);
-
-      this.checkDomiciliation(domiciliation);
-
-      this.checkAssistance(assistance);
       
-      this.checkPayrollPortability(payroll_portability)
+      this.checkCardPayment(card_payment, due_date);
 
-      this.checkDigitalChannels(digitalChannels)
+      this.checkAccumulatedPurchases(accumulated_purchases,this.cutOfDate);
+
+      this.checkRecurrentPayment(recurrent_payment,this.cutOfDate);
+
+      this.checkDomiciliation(domiciliation,this.cutOfDate);
+
+      this.checkAssistance(assistance,this.cutOfDate);
       
+      this.checkPayrollPortability(payroll_portability,this.cutOfDate)
+
+      this.checkDigitalChannels(digitalChannels,this.cutOfDate)
+            
       this.statusMissions.push({mission:period.period_id,challenges:this.statusChallenges})
       this.statusChallenges=[];
       
     })
-
-
   }
 
-  checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit){
-    if (accumulatedPurchases && accumulatedPurchases.amount>=200) {
-      this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
-    }
-  }
+  checkCardPayment(cardPayment:CardPayment[],dueDate:Date){
+    dueDate=new Date(dueDate)
 
-  checkCardPayment(cardPayment:CardPayment[]){
     if(cardPayment){
       for (const card of cardPayment) {
-        
-        if(card.amount_payment.amount>card.minimum_amount.amount){
+        card.operation_date = new Date(card.operation_date);
+        if(card.amount_payment.amount>card.minimum_amount.amount && card.operation_date<dueDate){
           this.statusChallenges.push({id:'card_payment',status:true})
           break
         }
@@ -276,10 +278,20 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkRecurrentPayment(recurrentPayment:RecurrentPayment[]){
+  checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit, cutDate:Date){
+    const today=new Date()
+    
+    if (accumulatedPurchases && accumulatedPurchases.amount>=200 && today<cutDate) {
+      this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
+    }
+  }
+
+  checkRecurrentPayment(recurrentPayment:RecurrentPayment[],cutDate:Date){
     if (recurrentPayment) {
       for (const recurrent of recurrentPayment) {
-        if (recurrent.status==='ACTIVE') {
+        recurrent.operation_date= new Date(recurrent.operation_date)
+
+        if (recurrent.status==='ACTIVE' && recurrent.operation_date && recurrent.operation_date<cutDate) {
           this.statusChallenges.push({id:'recurrent_payment',status:true});
           break;
         }
@@ -287,10 +299,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkDomiciliation(domiciliation:any[]){
+  checkDomiciliation(domiciliation:any[], cutDate:Date){
     if (domiciliation) {
+      
       for (const dom of domiciliation) {
-        if (dom.status==='ACTIVE') {
+        dom.operation_date= new Date(dom.operation_date)
+
+        if (dom.status==='ACTIVE' && dom.operation_date<cutDate) {
           this.statusChallenges.push({id:'domicialitation',status:true})
           break
         }
@@ -298,10 +313,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkAssistance(assistance:any[]){
-    if (assistance) {
+  checkAssistance(assistance:any[], cutDate:Date){
+    if (assistance ) {
       for (const assis of assistance) {
-        if (assis.status==='ACTIVE') {
+        assis.operation_date= new Date(assis.operation_date)
+        if (assis.status==='ACTIVE' && assis.operation_date<cutDate) {
           this.statusChallenges.push({id:'assistance',status:true})
           break
         }
@@ -309,10 +325,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkPayrollPortability(payrollPortability:any[]){
+  checkPayrollPortability(payrollPortability:any[], cutDate:Date){
+
     if (payrollPortability) {
       for (const payroll of payrollPortability) {
-        if (payroll.status==='ACTIVE') {
+        payroll.operation_date= new Date(payroll.operation_date)
+        if (payroll.status==='ACTIVE' && payroll.operation_date<cutDate) {
           this.statusChallenges.push({id:'payroll_portability',status:true})
           break
         }
@@ -320,11 +338,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkDigitalChannels(digitalChannels:any[] | undefined){
-    
+  checkDigitalChannels(digitalChannels:any[], cutDate:Date ){
+        
     if (digitalChannels) {
       for (const channel of digitalChannels) {
-        if (channel.status==='ACTIVE') {
+        channel.operation_date= new Date(channel.operation_date)
+        
+        if (channel.status==='ACTIVE' && channel.operation_date<cutDate) {
           this.statusChallenges.push({id:'digitalChannels',status:true})
           break
         }
@@ -356,15 +376,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     this.statusMissions.forEach(status=>{
       const mission= this.challenges.missions[Number(status.mission)]
-
-      status.challenges?.forEach(challenge=>{
-        if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
-          missionPassed++
-        }
-        if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
-          missionPassed++
-        }
-      })
+      if (status.mission!=='0') {
+        status.challenges?.forEach(challenge=>{
+          if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
+            missionPassed++
+          }
+          if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
+            missionPassed++
+          }
+        })
+      }
     })
 
     const percent= (missionPassed * 100)/Number(this.challenges.challengeCount)
@@ -431,9 +452,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }else{
       resp = hour + ':' + minutes + ':' + seconds +' hrs'
     }
-
     return resp
-
   }
 
 
@@ -446,23 +465,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     const previousPeriod= Number(current_period) - 1
     const previousPeriodDetail=period_detail[previousPeriod]
 
-    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH') {
+    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>1) {
       const dueDate=new Date(period_detail[previousPeriod].due_date)
 
       const date=new Date();
       
       if (date>dueDate && !this.gamificacionFacade.message) {
         
-        const status=this.getStatusMission(previousPeriod)
-
-        if (current_limit.amount===potential_limit.amount) {
-          this.router.navigate(['notificacion','lo-has-logrado'])
-        }else if(!status){
-          this.router.navigate(['notificacion','lo-sentimos'])
-        }else if(status){
-          this.router.navigate(['notificacion','mision-cumplida'])
-        }
-
+          const status=this.getStatusMission(previousPeriod)
+          
+          if (current_limit.amount===potential_limit.amount) {
+            this.router.navigate(['notificacion','lo-has-logrado'])
+          }else if(!status){
+            this.router.navigate(['notificacion','lo-sentimos'])
+          }else if(status){
+            this.router.navigate(['notificacion','mision-cumplida'])
+          }
+  
         this.gamificacionFacade.message=true;
       }
 
@@ -472,13 +491,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
 
-  getStatusMission(index:number):boolean{
+  getStatusMission(index:number):boolean | undefined{
 
-    let status=true
+    let status=undefined
  
     if (this.statusMissions[index]) {
     const {challenges}=this.statusMissions[index]
-    const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=this.challenges.missions[index]
+    const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
     
       
       const statusMandatory=(challenge:StatusChallenges)=>{
@@ -509,6 +528,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
 
     return status
+  }
+
+
+  showFirstAccess(seenFirstTime:boolean){
+    if (seenFirstTime  && !this.gamificacionFacade.firstaccess) {
+      this.router.navigateByUrl('bienvenido')
+    }
   }
 
 

@@ -6,4 +6,5 @@ export interface ChallengeLikeU{
     potential_limit:CurrentLimit,
     period:Period,
     status:string;
+    seen_first_time:boolean
 }
