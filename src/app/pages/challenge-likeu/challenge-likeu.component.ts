@@ -34,7 +34,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   dueDay!:Date;
   cutOfDate!:Date;
   indexTab!:number
-  remainingDays!:number | string | null
+  remainingDays!:number
   statusChallenges:StatusChallenges[]=[]
   missionStatus!:boolean | undefined;
 
@@ -131,16 +131,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       
       this.getTime(this.dueDay)
       
-      this.timer$=timer(0,1000).subscribe(()=>
-      {            
-        
-        let time=this.getTime(this.dueDay)
-        if(typeof time === 'number'){
-          this.remainingDays= this.transformSeconds(time);
-        }
-        
-      }
-      );
     }
     this.messageNotification(resp);
   }
@@ -432,30 +422,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
 
-  transformSeconds(segundos:number){
-    let hour:number | string= Math.floor(segundos/3600)
-    hour=(hour<10)?'0' + hour:hour
-    let minutes:number | string= Math.floor((segundos/60)%60)
-    minutes=(minutes<10)?'0' + minutes:minutes
-    let seconds:number | string= Math.floor(segundos%60)
-    seconds=(seconds<10)?'0' + seconds:seconds
-
-    let resp=''
-    if (segundos<0) {
-      resp = Math.round(segundos/(60 * 60 * 24)) + ' días'
-    } else if (typeof hour === 'number' && hour>=24) {
-      resp = Math.round(hour/24) + ' días'
-    }else if(hour==0){
-      resp = hour + ':' + minutes + ':' + seconds +' min'
-    }else if(hour==0  && minutes == 0){
-      resp = hour + ':' + minutes + ':' + seconds +' sec'
-    }else{
-      resp = hour + ':' + minutes + ':' + seconds +' hrs'
-    }
-    return resp
-  }
-
-
   messageNotification(resp:ChallengeLikeU){
 
     const {period,current_limit,potential_limit}=resp
@@ -540,10 +506,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
-
-    setTimeout(() => {
-      this.timer$.unsubscribe()
-    }, 1000);
   }
 
 }

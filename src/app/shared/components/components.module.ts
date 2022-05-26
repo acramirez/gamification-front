@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuestionModule } from '../atoms/question/question.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { ModalModule } from '../molecules/modal/modal.module';
+import { TimerModule } from '../atoms/timer/timer.module';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { ModalModule } from '../molecules/modal/modal.module';
     QuestionModule,
     DirectivesModule,
     ModalModule,
-    
+    TimerModule
   ],
   exports:[
     CardDataComponent,
