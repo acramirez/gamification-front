@@ -26,6 +26,8 @@ export class TokenSsoFacade {
         tkn=this.transformBase64(tkn)
         this.isBase64=this.isBase64Token(tkn)
         
+        console.log(tkn);
+        
         if (!this.isBase64) {
 
             return throwError('El token no es base 64')
