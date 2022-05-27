@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalDirective } from './modal.directive';
 import { AnimationsDirective } from './animations.directive';
 import { TabDirective } from './tab.directive';
-import { TimerDirective } from './timer.directive';
+
 
 
 
@@ -11,7 +11,8 @@ import { TimerDirective } from './timer.directive';
   declarations: [
     ModalDirective,
     AnimationsDirective, 
-    TabDirective, TimerDirective],
+    TabDirective
+  ],
   imports: [
     CommonModule
   ],

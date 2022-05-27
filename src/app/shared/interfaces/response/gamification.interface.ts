@@ -12,6 +12,7 @@ export interface Data {
     last_evaluation_date: Date;
     cut_of_date:          Date;
     card:                 Card;
+    seen_first_time:      boolean;
 }
 
 export interface Card {
@@ -27,11 +28,7 @@ export interface Card {
 
 export interface CurrentLimit {
     amount:        number;
-    currency_code: CurrencyCode;
-}
-
-export enum CurrencyCode {
-    Mxn = "MXN",
+    currency_code: string;
 }
 
 export interface Period {
@@ -50,7 +47,7 @@ export interface PeriodDetail {
     domiciliation:         any[];
     assistance:            any[];
     payroll_portability:   any[];
-    digitalChannels?:      any[];
+    digitalChannels:      any[];
     status:                string;
 }
 

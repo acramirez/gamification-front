@@ -6,6 +6,7 @@ import { environment } from "../../../environments/environment";
 
 import { GamificationService } from "../apis/gamification.service";
 import { ErrorService } from "../apis/error.service";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +14,16 @@ import { ErrorService } from "../apis/error.service";
 export class GamificationFacade {
 
     private _authorization=environment.gamification.dummy
+    public firstaccess:boolean=false
     public message:boolean=false
+    public route:string='';
 
 
     constructor( 
         private gamificacionAPI: GamificationService,
-        private errorService:ErrorService) {        
+        private errorService:ErrorService,
+        private router:Router
+        ) {        
     }
 
     getGamification():Observable<ChallengeLikeU>{
@@ -30,19 +35,28 @@ export class GamificationFacade {
                 }                
             }),
             map(resp=>{
-                const{cut_of_date}=resp.data
-                const{current_limit,potential_limit,period,status}=resp.data.card
+                
+                const{cut_of_date,seen_first_time}=resp.data
+                const{current_limit,potential_limit,period,status,}=resp.data.card
                 return {
                     current_limit,
                     potential_limit,
                     period,
                     cut_of_date,
-                    status
+                    status,
+                    seen_first_time
+                }
+            }),
+            tap(resp=>{
+
+                if (resp.seen_first_time ) {
+                    console.log(resp.seen_first_time,this.firstaccess);
+                    this.router.navigateByUrl('bienvenido')
+                    console.log(resp.seen_first_time,this.firstaccess);
+                    this.firstaccess=true
                 }
             })
         )
     }
-
-
 }
 

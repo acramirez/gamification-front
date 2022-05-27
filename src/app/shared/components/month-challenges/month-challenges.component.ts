@@ -10,11 +10,14 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 export class MonthChallengesComponent implements AfterViewInit {
 
   @Input() mandatoryChallenges!:Challenge[];
-  @Input() optionalChallenges!:Challenge[];
-
+  @Input() specialChallenges!:Challenge[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
-  @Input() days!:number | string | null
+  @Input() seconds!:number
+  @Input() dueDate!:Date
+  @Input() missionStatus!:boolean | undefined
+
+  activeTab!:number
 
   @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
@@ -23,6 +26,8 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;    
+    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
+    console.log(this.seconds);
+      
   }
 }

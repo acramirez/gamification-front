@@ -1,30 +1,30 @@
 <div #tabsContainer id="tabs--container" tabsDirective="tabs-container" class="tabs">
     <ng-container *ngFor="let tab of tabs;let i=index">
-        <lu-tab class="tab" (click)="indexTab.emit(i);" [tab]="tab"></lu-tab>
+        <lu-tab class="tab" (click)="indexTab.emit(i); activeTab=i" [tab]="tab"></lu-tab>
     </ng-container>
 </div>
 
 <div class="general-challenges">
 
-    <div *ngIf="days!==null" class="time-remaining">
-        <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">{{days}}</span></span>
+    <ng-container *ngIf="activeTab===initialTab">
+        <lu-timer [seconds]="seconds" [dueDate]="dueDate"></lu-timer>
+    </ng-container>
 
-    </div>
 
     <div class="normal-challenges">
         <h2 class="challenges__title">Retos por completar</h2>
         <p class="challenge__description">La validación de los retos se realiza cada fecha de corte. No lo olvides.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of mandatoryChallenges">
-                <sn-challenge animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
+                <sn-challenge [statusMission]="missionStatus" animation="zoomIn" [challenge]="challenge"  (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
             </ng-container>
         </div>
     </div>
-    <div *ngIf="optionalChallenges.length>0" class="special-challenges">
+    <div *ngIf="specialChallenges.length>0" class="special-challenges">
         <h2 class="challenges__title">Retos especiales</h2>
         <p class="challenge__description">Completa cualquiera de las misiones para aumentar tu límite de crédito.   </p>
         <div class="challenges">
-            <ng-container *ngFor="let challenge of optionalChallenges">
+            <ng-container *ngFor="let challenge of specialChallenges">
                 <sn-challenge animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
             </ng-container>
         </div>
