@@ -28,11 +28,7 @@ export interface Card {
 
 export interface CurrentLimit {
     amount:        number;
-    currency_code: CurrencyCode;
-}
-
-export enum CurrencyCode {
-    Mxn = "MXN",
+    currency_code: string;
 }
 
 export interface Period {

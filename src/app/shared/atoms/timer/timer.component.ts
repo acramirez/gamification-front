@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Subscriber, Subscription, timer } from 'rxjs';
 
 @Component({
@@ -6,30 +6,27 @@ import { Subscriber, Subscription, timer } from 'rxjs';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements AfterViewInit,OnDestroy  {
+export class TimerComponent implements AfterViewInit  {
 
   timer$!:Subscription
   remainingDays!:number | string | null
+  @Input() dueDate!:Date
+
   @Input() seconds!:number;
 
-  constructor() { }
-
   ngAfterViewInit(): void {
+    this.dueDate=new Date('2022-05-28')
+    
+    
     this.timer$=timer(0,1000).subscribe(()=>
-      {            
-        let time=this.seconds
+    { 
+      let time=this.getTime(this.dueDate)
+      if(typeof time === 'number'){
         this.remainingDays= this.transformSeconds(time);
-
-        console.log('2');
       }
-    );
-
-  }
-
-  ngOnDestroy(): void {
-    setTimeout(() => {
-      this.timer$.unsubscribe()
-    }, 1000);
+    }
+  );
+    
   }
 
   transformSeconds(segundos:number){
@@ -53,6 +50,18 @@ export class TimerComponent implements AfterViewInit,OnDestroy  {
       resp = hour + ':' + minutes + ':' + seconds +' hrs'
     }
     return resp
+  }
+
+  getTime(date:Date){    
+    
+      const currenDate=new Date().getTime()
+      const dueDate=date.getTime();
+  
+      const result= dueDate-currenDate
+      
+      let days:number | string=result/(1000)
+      
+      return days
   }
 
 }

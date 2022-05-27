@@ -10,7 +10,6 @@ export class ConfigService {
     private http:HttpClient
   ) { }
 
-
   gamificationURL!:string;
   tokenURL!:string;
 
@@ -20,15 +19,12 @@ export class ConfigService {
       .toPromise()
         .then(resp=>{
           console.log(resp);
-          
         }
           
-        ).catch(()=>{
+        ).catch((err)=>{
+          console.warn(err)
           console.log('error');
-
-        }
-          
+        } 
         )
-
   }
 }

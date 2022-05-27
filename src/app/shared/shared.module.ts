@@ -6,13 +6,12 @@ import { ElementListModule } from './molecules/element-list/element-list.module'
 import { ModalModule } from './molecules/modal/modal.module';
 import { DirectivesModule } from './directives/directives.module';
 import { ErrorDialogModule } from './atoms/error-dialog/error-dialog.module';
-import { TimerPipe } from './pipes/timer.pipe';
 
 
 
 
 @NgModule({
-  declarations: [TimerPipe],
+  declarations: [],
   imports: [
     CommonModule,
     ComponentsModule,

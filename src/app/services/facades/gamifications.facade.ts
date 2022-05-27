@@ -35,6 +35,7 @@ export class GamificationFacade {
                 }                
             }),
             map(resp=>{
+                
                 const{cut_of_date,seen_first_time}=resp.data
                 const{current_limit,potential_limit,period,status,}=resp.data.card
                 return {
@@ -47,6 +48,7 @@ export class GamificationFacade {
                 }
             }),
             tap(resp=>{
+
                 if (resp.seen_first_time ) {
                     console.log(resp.seen_first_time,this.firstaccess);
                     this.router.navigateByUrl('bienvenido')

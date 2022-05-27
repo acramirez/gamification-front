@@ -14,6 +14,7 @@ export class MonthChallengesComponent implements AfterViewInit {
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
+  @Input() dueDate!:Date
   @Input() missionStatus!:boolean | undefined
 
   activeTab!:number
@@ -25,6 +26,8 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;    
+    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
+    console.log(this.seconds);
+      
   }
 }

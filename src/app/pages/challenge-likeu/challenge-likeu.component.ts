@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { forkJoin, Subject, Subscription, throwError, timer } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
@@ -8,7 +8,6 @@ import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
 import { CardPayment, CurrentLimit, Period, PeriodDetail, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
-import { challengesFather } from '../../../assets/data/constant/data.constant';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,7 +41,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
 
-  timer$!:Subscription;
   // Temporaly
 
 
@@ -61,7 +59,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private router:Router,
   ) { }
 
+
   ngAfterViewInit(): void {
+
     this.destroy$=new Subject;
 
     if (!this.tokenFacade._token) {
@@ -89,6 +89,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             })
 
             this.proccessData(resp[1])
+
           })
           
         }else{
@@ -101,14 +102,18 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }else if (this.tokenFacade._token) {   
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
+
         this.proccessData(resp)
-      })       
+      })     
     }
+
   }
 
 
   proccessData(resp:ChallengeLikeU){
 
+    
+    
     const{current_limit,potential_limit,period}=resp
     this.cardDetail={current_limit,potential_limit}
     this.period=period;
@@ -117,6 +122,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.cutOfDate=new Date(resp.cut_of_date as Date)
     
     // this.showFirstAccess(resp.seen_first_time)
+
+    
     
     this.getTabs(period);
 
@@ -127,11 +134,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
     
-    if (this.dueDay) {
-      
-      this.getTime(this.dueDay)
-      
-    }
     this.messageNotification(resp);
   }
 
@@ -143,10 +145,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return this.challenges.FAQ
   }
 
-  get challengesFather(){
-    return challengesFather
-  }
-
 /**  
  * Metodo mediante el cual se obtienen los challenges de acuerdo al tab seleccionado
 */
@@ -156,7 +154,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.specialChallenges=[];
 
     const {mandatoryChallenges,acceleratorChallenges,specialChallenges} =this.challenges.missions[tab]
-    
+      
+
     this.challenges.challenges.forEach(challenge=>{
 
       mandatoryChallenges.forEach(mandatory=>{
@@ -255,9 +254,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   checkCardPayment(cardPayment:CardPayment[],dueDate:Date){
-    dueDate=new Date(dueDate)
-
+    
     if(cardPayment){
+      dueDate=new Date(dueDate)
       for (const card of cardPayment) {
         card.operation_date = new Date(card.operation_date);
         if(card.amount_payment.amount>card.minimum_amount.amount && card.operation_date<dueDate){
@@ -361,24 +360,26 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   getPercent(){
+
+    this.period
     
-    let missionPassed:number=0
+    // let missionPassed:number=0
 
-    this.statusMissions.forEach(status=>{
-      const mission= this.challenges.missions[Number(status.mission)]
-      if (status.mission!=='0') {
-        status.challenges?.forEach(challenge=>{
-          if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
-            missionPassed++
-          }
-          if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
-            missionPassed++
-          }
-        })
-      }
-    })
+    // this.statusMissions.forEach(status=>{
+    //   const mission= this.challenges.missions[Number(status.mission)]
+    //   if (status.mission!=='0') {
+    //     status.challenges?.forEach(challenge=>{
+    //       if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
+    //         missionPassed++
+    //       }
+    //       if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
+    //         missionPassed++
+    //       }
+    //     })
+    //   }
+    // })
 
-    const percent= (missionPassed * 100)/Number(this.challenges.challengeCount)
+    const percent= 0;
     return percent
   }
 
@@ -403,24 +404,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }
     })
   }
-
-  getTime(date:Date){    
-    
-    if (this.currentPeriod===this.indexTab) {
-      
-      const currenDate=new Date().getTime()
-      const dueDate=date.getTime();
-  
-      const result= dueDate-currenDate
-      
-      let days:number | string=result/(1000)
-      
-      return days
-      
-    }
-    return null
-  }
-
 
   messageNotification(resp:ChallengeLikeU){
 

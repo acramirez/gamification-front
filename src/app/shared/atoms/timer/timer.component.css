@@ -1,0 +1,14 @@
+.time-remaining{
+    color: var(--theme-color-text-01);
+    background: linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
+    border-radius: 0px 14px 0px 9px;
+    font-size: .75rem;
+    right: 0;
+    padding: .25rem .75rem;
+    position: absolute;
+    top: 0;
+}
+
+.time-remaining__days{
+    font-weight: 700;
+}
