@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private configService:ConfigService){
     
-    // this.configService.getConfig();
+    this.configService.getConfig();
 
   }
 }

@@ -78,6 +78,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               ),
               this.gamificacionFacade.getGamification()]
           ).subscribe(resp=>{    
+            console.log(resp);
+            
             
             const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
             const cutChallenges2=cutChallenges[1].split(']')
