@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfigService } from './services/apis/config.service';
 
 @Component({
@@ -8,12 +8,16 @@ import { ConfigService } from './services/apis/config.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Application Gramificacion';
 
   constructor(private configService:ConfigService){
     
+    
+  }
+  
+  ngOnInit(): void {
+    
     // this.configService.getConfig();
-
   }
 }
