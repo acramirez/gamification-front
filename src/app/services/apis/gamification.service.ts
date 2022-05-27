@@ -14,12 +14,9 @@ export class GamificationService {
 
     constructor( private httpClient: HttpClient ) { }
 
-    getGamifications(authorization:string): Observable<Gamification> {
-        const headers = new HttpHeaders({
-            'Authorization': 
-            authorization
-        });
+    getGamifications(): Observable<Gamification> {
+
         
-        return this.httpClient.get<Gamification>(`${this._getApiUri}`, {headers});
+        return this.httpClient.get<Gamification>(`${this._getApiUri}`);
     }
 }

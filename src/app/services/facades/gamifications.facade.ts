@@ -27,7 +27,7 @@ export class GamificationFacade {
     }
 
     getGamification():Observable<ChallengeLikeU>{
-        return this.gamificacionAPI.getGamifications(this._authorization).pipe(
+        return this.gamificacionAPI.getGamifications().pipe(
             tap(resp=>{ 
                 if(resp.data.card.status!=="ACTIVE"){
                     const error = throwError('Tarjeta bloqueada')
