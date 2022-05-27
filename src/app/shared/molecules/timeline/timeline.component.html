@@ -22,6 +22,9 @@
                     'time-line__point--next':element.status==='NEXT',
                     'time-line__point--complete':element.status!=='NEXT'
                 }"></div>
+                <div *ngIf="(i===elements.length-1)" class="time-line__goal-icon">
+                    <img   class="time-line__star" src="../../../../assets/icons/star.png" alt="">
+                </div>
             </div>
             <div class="time-line__texts">
                 <span class="time-line__principal-text"> {{element.principalText}} </span>

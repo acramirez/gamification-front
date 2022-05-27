@@ -1,12 +1,12 @@
-import { AfterContentChecked, AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { forkJoin, Subject, Subscription, throwError, timer } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { forkJoin, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
-import { CardPayment, CurrentLimit, Period, PeriodDetail, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
+import { CardPayment, CurrentLimit, Period, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
@@ -114,8 +114,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     
     
-    const{current_limit,potential_limit,period}=resp
-    this.cardDetail={current_limit,potential_limit}
+    const{current_limit,potential_limit,period, lower_limit}=resp
+    this.cardDetail={current_limit,potential_limit,lower_limit}
     this.period=period;
     this.currentPeriod=Number(period.current_period)
     this.indexTab=this.currentPeriod
@@ -361,25 +361,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   getPercent(){
 
-    this.period
+    const {lower_limit,current_limit,potential_limit}=this.cardDetail
+
+    let totalIncrease=potential_limit.amount-lower_limit.amount;
+
+    let currentIncrease=current_limit.amount-lower_limit.amount;
+
+    let percent=(currentIncrease * 100) / totalIncrease
     
-    // let missionPassed:number=0
-
-    // this.statusMissions.forEach(status=>{
-    //   const mission= this.challenges.missions[Number(status.mission)]
-    //   if (status.mission!=='0') {
-    //     status.challenges?.forEach(challenge=>{
-    //       if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
-    //         missionPassed++
-    //       }
-    //       if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
-    //         missionPassed++
-    //       }
-    //     })
-    //   }
-    // })
-
-    const percent= 0;
     return percent
   }
 

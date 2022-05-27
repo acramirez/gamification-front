@@ -37,14 +37,15 @@ export class GamificationFacade {
             map(resp=>{
                 
                 const{cut_of_date,seen_first_time}=resp.data
-                const{current_limit,potential_limit,period,status,}=resp.data.card
+                const{current_limit,potential_limit,period,status,lower_limit}=resp.data.card
                 return {
                     current_limit,
                     potential_limit,
                     period,
                     cut_of_date,
                     status,
-                    seen_first_time
+                    seen_first_time,
+                    lower_limit
                 }
             }),
             tap(resp=>{
