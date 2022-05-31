@@ -112,8 +112,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   proccessData(resp:ChallengeLikeU){
-
-    
     
     const{current_limit,potential_limit,period, lower_limit}=resp
     this.cardDetail={current_limit,potential_limit,lower_limit}
@@ -122,9 +120,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.indexTab=this.currentPeriod
     this.cutOfDate=new Date(resp.cut_of_date as Date)
     
-    // this.showFirstAccess(resp.seen_first_time)
-
-    
+    // this.showFirstAccess(resp.seen_first_time)    
     
     this.getTabs(period);
 

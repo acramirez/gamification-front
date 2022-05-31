@@ -8,6 +8,7 @@ import { FirstPageComponent } from './first-page/first-page.component';
 import { DirectivesModule } from '../shared/directives/directives.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ErrorDialogModule } from '../shared/atoms/error-dialog/error-dialog.module';
+import { SpinnerModule } from '../shared/atoms/spinner/spinner.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ErrorDialogModule } from '../shared/atoms/error-dialog/error-dialog.mod
     PagesRoutingModule,
     SharedModule,
     DirectivesModule,
-    ErrorDialogModule
+    ErrorDialogModule,
+    SpinnerModule
     
   ],
   exports:[ChallengeLikeuComponent]
