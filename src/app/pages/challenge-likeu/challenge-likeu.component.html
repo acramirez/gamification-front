@@ -1,4 +1,4 @@
-<div class="challenge-likeu__container bg__circle" *ngIf="cardDetail" >
+<div class="challenge-likeu__container bg__circle" *ngIf="cardDetail;else spinner" >
     <app-header animation="up"></app-header> 
     <div class="challenge-likeu">
         <app-card-data 
@@ -22,6 +22,9 @@
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
 </div>
+<ng-template #spinner>
+    <sn-spinner ></sn-spinner>
+</ng-template>
 
 <app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
     

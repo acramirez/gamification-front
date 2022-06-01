@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
 import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
-import { ErrorService } from "../apis/error.service";
 import { TokenValidatorService } from "../apis/token.validator.service";
 
 @Injectable({
@@ -15,7 +14,6 @@ export class TokenSsoFacade {
     private isBase64!:boolean
 
     constructor(
-        private errorService:ErrorService,
         private tokenService:TokenValidatorService
     ) {
        

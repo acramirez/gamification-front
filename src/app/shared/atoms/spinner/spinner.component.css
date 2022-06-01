@@ -2,17 +2,17 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    background: white;
+    background: inherit;
 }
 
 .spinner__content{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     position: relative;
-    background: white;
+    background: #fff;
     filter: contrast(20);
     overflow: hidden;
 }
@@ -69,13 +69,13 @@
     animation:dot-move 5s 3.75s ease infinite; 
 }
 
-
-
-
-
-.spinner__dot--rotate{
-    animation: dot-rotate 5s 0s ease infinite; 
-} 
+.loader-logo{
+    position: absolute;
+    fill: #Fff;
+    z-index: 3;
+    height: 22px;
+    width: 22px;
+}
 
 @keyframes dot-move {
     0% {

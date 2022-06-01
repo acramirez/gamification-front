@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[animation]'
@@ -25,6 +25,8 @@ export class AnimationsDirective {
         break;
     }
   }
+
+
 
   downUp(){
     this.element.nativeElement.classList.add('downUp')
