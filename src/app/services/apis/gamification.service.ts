@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Gamification } from "../../shared/interfaces/response/gamification.interface";
 import { environment } from "../../../environments/environment";
+import { ConfigService } from "./config.service";
 
 
 @Injectable({
@@ -10,9 +11,12 @@ import { environment } from "../../../environments/environment";
 })
 export class GamificationService {
 
-    private _getApiUri: string = environment.gamification.url;
+    private _getApiUri: string = this.configService.gamificationURL;
 
-    constructor( private httpClient: HttpClient ) { }
+    constructor( 
+        private httpClient: HttpClient,
+        private configService:ConfigService
+    ) { }
 
     getGamifications(): Observable<Gamification> {
 

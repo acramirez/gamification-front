@@ -8,16 +8,6 @@ import { ConfigService } from './services/apis/config.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Application Gramificacion';
-
-  constructor(private configService:ConfigService){
-    
-    
-  }
-  
-  ngOnInit(): void {
-    
-    this.configService.getConfig()
-  }
 }

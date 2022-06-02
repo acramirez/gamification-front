@@ -13,7 +13,6 @@ import { Router } from "@angular/router";
 })
 export class GamificationFacade {
 
-    private _authorization=environment.gamification.dummy
     public firstaccess:boolean=false
     public message:boolean=false
     public route:string='';

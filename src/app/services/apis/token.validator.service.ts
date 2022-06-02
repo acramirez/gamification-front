@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
 import { environment } from "../../../environments/environment";
+import { ConfigService } from "./config.service";
 
 
 @Injectable({
@@ -11,10 +12,11 @@ import { environment } from "../../../environments/environment";
 })
 export class TokenValidatorService {
 
-    private _apiUrl: string = environment.tkn.url;
+    private _apiUrl: string = this.configService.tokenURL;
 
     constructor( 
         private httpClient: HttpClient,
+        private configService:ConfigService
     ) { }
 
     getValidateToken(tkn:string): Observable<TokenValidator> {
