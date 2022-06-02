@@ -15,16 +15,6 @@ export class ConfigService {
 
   getConfig(){
 
-    this.http.get('/config.json')
-      .toPromise()
-        .then(resp=>{
-          console.log(resp);
-        }
-          
-        ).catch((err)=>{
-          console.warn(err)
-          console.log('error');
-        } 
-        )
+    return this.http.get('/config.json')
   }
 }

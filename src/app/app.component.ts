@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     
-    // this.configService.getConfig();
+    this.configService.getConfig().subscribe(console.log);
   }
 }
