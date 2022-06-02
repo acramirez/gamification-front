@@ -12,12 +12,13 @@ export class AppComponent implements OnInit {
   title = 'Application Gramificacion';
 
   constructor(private configService:ConfigService){
-    
-    
   }
   
   ngOnInit(): void {
     
-    this.configService.getConfig().subscribe(console.log);
+    this.configService.getConfig().subscribe(resp=>{
+      console.log();
+      
+    });
   }
 }
