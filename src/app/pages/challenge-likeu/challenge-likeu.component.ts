@@ -64,11 +64,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     this.destroy$=new Subject;
 
+    
     if (!this.tokenFacade._token) {
       
       this.activatedRoute.queryParams.subscribe(params=>{
         if (params['token']) {
           const token= params['token'];
+          this.tokenFacade.validationToken(token).subscribe(console.log)
           return forkJoin(
             [this.tokenFacade.validationToken(token).pipe(
               catchError(err=>{
@@ -78,6 +80,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               ),
               this.gamificacionFacade.getGamification()]
           ).subscribe(resp=>{                
+            console.log(resp);
             
             const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
             const cutChallenges2=cutChallenges[1].split(']')
@@ -86,7 +89,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.challengesRedirect.forEach((challenge,i)=>{
               this.challengesRedirect[i]=challenge.trim().slice(1,-1)
             })
-            console.log(resp);
 
             this.proccessData(resp[1])
 
