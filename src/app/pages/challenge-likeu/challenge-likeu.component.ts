@@ -70,6 +70,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.activatedRoute.queryParams.subscribe(params=>{
         if (params['token']) {
           const token= params['token'];
+          this.tokenFacade.validationToken(token).subscribe(console.log)
           return forkJoin(
             [this.tokenFacade.validationToken(token).pipe(
               catchError(err=>{
