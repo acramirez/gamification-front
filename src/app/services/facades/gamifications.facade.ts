@@ -50,9 +50,7 @@ export class GamificationFacade {
             tap(resp=>{
 
                 if (resp.seen_first_time ) {
-                    console.log(resp.seen_first_time,this.firstaccess);
                     this.router.navigateByUrl('bienvenido')
-                    console.log(resp.seen_first_time,this.firstaccess);
                     this.firstaccess=true
                 }
             })

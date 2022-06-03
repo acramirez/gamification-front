@@ -25,7 +25,6 @@ export class TokenValidatorService {
           })
       
         console.log(headers);
-        console.log(headers.get("Authorization"));
         
         const url = this.configService.tokenURL;
         

@@ -49,7 +49,6 @@ export class AnimationsDirective {
     if (!active) {
       this.height=this.element.nativeElement.clientHeight
       this.element.nativeElement.classList.add('drop-down-hidden')
-      console.log(this.height);
       
     }else{
       this.element.nativeElement.classList.remove('drop-down-hidden')

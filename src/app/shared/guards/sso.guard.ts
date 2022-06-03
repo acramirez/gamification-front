@@ -20,7 +20,6 @@ export class SsoGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-      console.log(this.errorService.showError);
 
     return this.errorService.showError
   }
