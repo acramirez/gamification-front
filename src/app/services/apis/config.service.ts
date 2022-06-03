@@ -19,6 +19,8 @@ export class ConfigService {
     return this.http.get<Config>(environment.config)
       .toPromise()
         .then(data=>{
+          console.log(data);
+          
           this.gamificationURL=data['urls']['gamification-service'];
           this.tokenURL=data['urls']['gamification-service-sec'];
           

@@ -12,23 +12,24 @@ import { ConfigService } from "./config.service";
 })
 export class TokenValidatorService {
 
-    private _apiUrl: string = this.configService.tokenURL;
-
     constructor( 
         private httpClient: HttpClient,
         private configService:ConfigService
     ) { }
 
     getValidateToken(tkn:string): Observable<TokenValidator> {
-        
+    
+
         const headers = new HttpHeaders({
-            'Authorization': 
-            tkn
-        });
+            "Authorization":tkn
+          })
+      
+        console.log(headers);
+        console.log(headers.get("Authorization"));
         
-        const url = `${this._apiUrl}`;
+        const url = this.configService.tokenURL;
         
-        return this.httpClient.post<TokenValidator>( url, {headers} );
+        return this.httpClient.post<TokenValidator>( url,null,{headers} );
 
     }
 
