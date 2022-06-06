@@ -63,7 +63,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
-
     
     if (!this.tokenFacade._token) {
       
