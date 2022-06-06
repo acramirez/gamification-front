@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  config:'https://mx-gamification-front-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/config.json'
+  config:'https://mx-gamification-front-test-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/config.json'
   // tkn:{
   //   url:'https://nginx-gamification-mx-gamification-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/api/session',
 
