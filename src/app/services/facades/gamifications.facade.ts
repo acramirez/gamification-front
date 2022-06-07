@@ -34,6 +34,7 @@ export class GamificationFacade {
                 }                
             }),
             map(resp=>{
+                console.log(resp);
                 
                 const{cut_of_date,seen_first_time}=resp.data
                 const{current_limit,potential_limit,period,status,lower_limit}=resp.data.card
