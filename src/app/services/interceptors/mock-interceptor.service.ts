@@ -1,8 +1,6 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mockToken } from '../../../assets/data/constant/token.mock';
-import { environment } from '../../../environments/environment';
 import { ConfigService } from '../apis/config.service';
 import { TokenValidatorService } from '../apis/token.validator.service';
 
