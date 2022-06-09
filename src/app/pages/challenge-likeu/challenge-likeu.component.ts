@@ -86,28 +86,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
                 this.errorService.errorShow(err)
                 return throwError(err)
               })
-
-          // return forkJoin(
-          //   [this.tokenFacade.validationToken(token).pipe(
-          //     catchError(err=>{
-          //       this.errorService.errorShow(err)
-          //       return throwError(err)
-          //     })
-          //     ),
-          //     this.gamificacionFacade.getGamification()]
-          // ).subscribe(resp=>{                
-          //   console.log(resp);
-            
-          //   const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
-          //   const cutChallenges2=cutChallenges[1].split(']')
-          //   this.challengesRedirect=cutChallenges2[0].split(',')
-          //   this.challengesRedirect.forEach((challenge,i)=>{
-          //     this.challengesRedirect[i]=challenge.trim().slice(1,-1)
-          //   })
-
-          //   this.proccessData(resp[1])
-
-          // })
           
         }else{
           
