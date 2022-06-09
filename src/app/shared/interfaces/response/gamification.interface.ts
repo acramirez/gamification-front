@@ -1,15 +1,10 @@
 export interface Gamification {
-    data:          Data;
-    notifications: Notification[];
-}
-
-export interface Data {
     hiring_date:          Date;
     contract_key:         string;
     activation_date:      Date;
     type:                 string;
     status:               string;
-    last_evaluation_date: Date;
+    last_evaluation_date: null;
     cut_of_date:          Date;
     card:                 Card;
     seen_first_time:      boolean;
@@ -17,9 +12,9 @@ export interface Data {
 
 export interface Card {
     current_limit:   CurrentLimit;
-    display_number:  string;
-    type:            string;
-    status:          string;
+    display_number:  null;
+    type:            null;
+    status:          Status;
     potential_limit: CurrentLimit;
     lower_limit:     CurrentLimit;
     next_increase:   CurrentLimit;
@@ -28,7 +23,11 @@ export interface Card {
 
 export interface CurrentLimit {
     amount:        number;
-    currency_code: string;
+    currency_code: CurrencyCode;
+}
+
+export enum CurrencyCode {
+    Mxn = "MXN",
 }
 
 export interface Period {
@@ -43,29 +42,27 @@ export interface PeriodDetail {
     due_date:              Date;
     accumulated_purchases: CurrentLimit;
     card_payment:          CardPayment[];
-    recurrent_payment:     RecurrentPayment[];
-    domiciliation:         any[];
-    assistance:            any[];
-    payroll_portability:   any[];
-    digitalChannels:      any[];
+    recurrent_payment:     Assistance[];
+    digitalChannels:       Assistance[];
+    domiciliation:         Assistance[];
+    assistance:            Assistance[];
+    payroll_portability:   Assistance[];
     status:                string;
+}
+
+export interface Assistance {
+    id:             string;
+    status:         Status;
+    operation_date: Date;
+}
+
+export enum Status {
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
 }
 
 export interface CardPayment {
     amount_payment: CurrentLimit;
     minimum_amount: CurrentLimit;
     operation_date: Date;
-}
-
-export interface RecurrentPayment {
-    id:             string;
-    status:         string;
-    operation_date: Date;
-}
-
-export interface Notification {
-    code:      string;
-    level:     string;
-    message:   string;
-    timestamp: string;
 }

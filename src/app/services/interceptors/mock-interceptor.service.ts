@@ -2,7 +2,6 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, Http
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { mockToken } from '../../../assets/data/constant/token.mock';
-import { gamification } from "../../../assets/data/constant/gamification";
 import { environment } from '../../../environments/environment';
 import { ConfigService } from '../apis/config.service';
 import { TokenValidatorService } from '../apis/token.validator.service';

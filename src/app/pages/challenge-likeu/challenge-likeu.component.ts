@@ -6,7 +6,7 @@ import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
-import { CardPayment, CurrentLimit, Period, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
+import { Assistance, CardPayment, CurrentLimit, Period } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
@@ -289,7 +289,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  checkRecurrentPayment(recurrentPayment:RecurrentPayment[],cutDate:Date){
+  checkRecurrentPayment(recurrentPayment:Assistance[],cutDate:Date){
     if (recurrentPayment) {
       for (const recurrent of recurrentPayment) {
         recurrent.operation_date= new Date(recurrent.operation_date)
