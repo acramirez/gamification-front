@@ -27,16 +27,5 @@ export class ConfigService {
           console.log(error);
           
         })
-
-    // return new Promise((resolve,reject)=>{
-    //   this.http.get<Config>('https://mx-gamification-front-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp/config.json').subscribe(
-    //     data=>{
-    //       this.gamificationURL=data['urls']['gamification-service'];
-    //       this.tokenURL=data['urls']['gamification-service-sec'];
-          
-    //       resolve(true)
-    //     }
-    //   )
-    // })
   }
 }

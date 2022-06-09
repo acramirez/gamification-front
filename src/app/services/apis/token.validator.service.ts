@@ -22,9 +22,7 @@ export class TokenValidatorService {
 
         const headers = new HttpHeaders({
             "Authorization":tkn
-          })
-
-        console.log(headers);
+        })
         
         const url = this.configService.tokenURL;
         

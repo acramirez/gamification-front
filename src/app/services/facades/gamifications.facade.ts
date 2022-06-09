@@ -28,13 +28,13 @@ export class GamificationFacade {
     getGamification():Observable<ChallengeLikeU>{
         return this.gamificacionAPI.getGamifications().pipe(
             tap(resp=>{ 
+                console.log(resp);
                 if(resp.data.card.status!=="ACTIVE"){
                     const error = throwError('Tarjeta bloqueada')
                     this.errorService.errorShow(error)
                 }                
             }),
             map(resp=>{
-                console.log(resp);
                 
                 const{cut_of_date,seen_first_time}=resp.data
                 const{current_limit,potential_limit,period,status,lower_limit}=resp.data.card
