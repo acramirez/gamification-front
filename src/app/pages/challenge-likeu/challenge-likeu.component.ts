@@ -72,8 +72,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         .toPromise()
           .then(challenges=>{
             this.getChallengesRedirect(challenges);
-            console.log(this.challengesRedirect);
-            
+             
+            this.gamificacionFacade.getGamification().subscribe(resp=>{
+              this.proccessData(resp)
+            })
           })
         // .toPromise()
         //   .then(challenges=>{
