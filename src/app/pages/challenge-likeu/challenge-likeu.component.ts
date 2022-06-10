@@ -63,19 +63,25 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
+
+    
     
     if (!this.tokenFacade._token) {
+
       this.tokenFacade.validationToken()
         .toPromise()
           .then(challenges=>{
+
             this.getChallengesRedirect(challenges);
+            console.log(challenges);
+            
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               this.proccessData(resp)
             })
           }).catch(err=>{
             this.errorService.errorShow(err)
             return throwError(err)
-          })  
+          })
     }else if (this.tokenFacade._token) {
       
       this.gamificacionFacade.getGamification()
