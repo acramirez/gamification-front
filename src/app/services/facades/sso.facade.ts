@@ -53,8 +53,8 @@ export class TokenSsoFacade {
                 .then(challenges=>{
                     this.getRedirectChallenges(challenges)
                 
-                }).catch(error=>{
-                    this.errorService.errorShow(error)
+                }).catch(err=>{
+                    this.errorService.errorShow(err)
                 })
     }
 
