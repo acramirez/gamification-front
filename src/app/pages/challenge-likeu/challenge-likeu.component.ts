@@ -12,6 +12,7 @@ import { TokenSsoFacade } from '../../services/facades/sso.facade';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorService } from '../../services/apis/error.service';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
+import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   challengesRedirect:string[]=[]
 
 
+
   // Temporaly
 
 
@@ -52,6 +54,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
 
+    private activatedRoute:ActivatedRoute,
+    private errorService:ErrorService,
     private router:Router,
   ) { }
 
@@ -59,15 +63,28 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
-
-    this.challengesRedirect=this.tokenFacade.challengesRedirect;
     
+    if (!this.tokenFacade._token) {
+      this.tokenFacade.validationToken()
+        .toPromise()
+          .then(challenges=>{
+            this.getChallengesRedirect(challenges);
+            this.gamificacionFacade.getGamification().subscribe(resp=>{
+              this.proccessData(resp)
+            })
+          }).catch(err=>{
+            this.errorService.errorShow(err)
+            return throwError(err)
+          })  
+    }else if (this.tokenFacade._token) {
+      
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
         console.log(resp);
 
         this.proccessData(resp)
       })     
+    }
 
   }
 
@@ -328,6 +345,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     let percent=(currentIncrease * 100) / totalIncrease
     
     return percent
+  }
+
+  getChallengesRedirect(challenges:TokenValidator){
+    const cutChallenges=challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
+    const cutChallenges2=cutChallenges[1].split(']')
+    this.challengesRedirect=cutChallenges2[0].split(',')
+    this.challengesRedirect.forEach((challenge,i)=>{
+    this.challengesRedirect[i]=challenge.trim().slice(1,-1)
+    })
   }
 
   setChallengeRedirect(){

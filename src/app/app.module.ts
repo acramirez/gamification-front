@@ -16,9 +16,6 @@ export function appConfigProvider(provider:ConfigFacade){
   return () => provider.getConfig();
 }
 
-export function appTokenProvider(provider:TokenSsoFacade){
-  return () => provider.validationToken();
-}
 
 @NgModule({
   declarations: [
@@ -48,13 +45,6 @@ export function appTokenProvider(provider:TokenSsoFacade){
       provide:APP_INITIALIZER,
       useFactory:appConfigProvider,
       deps:[ConfigFacade],
-      multi:true
-    },
-    TokenSsoFacade,
-    {
-      provide:APP_INITIALIZER,
-      useFactory:appTokenProvider,
-      deps:[TokenSsoFacade],
       multi:true
     }
   ],

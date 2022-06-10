@@ -48,27 +48,8 @@ export class TokenSsoFacade {
             return error
         }
         
-        return this.tokenService.getValidateToken(tkn)
-            .toPromise()
-                .then(challenges=>{
-                    this.getRedirectChallenges(challenges)
-                
-                }).catch(err=>{
-                    this.errorService.errorShow(err)
-                })
-    }
-
-    getRedirectChallenges(challenges:TokenValidator){
-
-        const cutChallenges=challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
-        const cutChallenges2=cutChallenges[1].split(']')
-        this.challengesRedirect=cutChallenges2[0].split(',')
-        this.challengesRedirect.forEach((challenge,i)=>{
-        this.challengesRedirect[i]=challenge.trim().slice(1,-1)
-        })
-        console.log(this.challengesRedirect);
-        
-    }
+        return this.tokenService.getValidateToken(tkn);
+   }
 
     isBase64Token(tkn:string){
 
