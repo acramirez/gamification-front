@@ -9,7 +9,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
 import { ConfigFacade } from './services/facades/config.facade';
-import { TokenSsoFacade } from './services/facades/sso.facade';
 
 
 export function appConfigProvider(provider:ConfigFacade){

@@ -31,12 +31,11 @@ export class TokenSsoFacade {
 
         this.activatedRoute.queryParams.subscribe(params=>{
             if (params['token']) {
-                console.log(params['token']);
                 
-                tkn= params['token'];
-                tkn=this.transformBase64(tkn)
+                tkn=this.transformBase64(params['token'])
                 isBase64=this.isBase64Token(tkn)
             }else{
+                console.log(params['token']);
                 error= throwError('El token no existe')
                 this.errorService.errorShow(error)
             }

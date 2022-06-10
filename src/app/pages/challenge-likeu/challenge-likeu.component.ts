@@ -64,24 +64,24 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     this.destroy$=new Subject;
 
-    
+
     
     if (!this.tokenFacade._token) {
 
-      this.tokenFacade.validationToken()
-        .toPromise()
-          .then(challenges=>{
+      this.tokenFacade.validationToken().subscribe(console.log)
+        // .toPromise()
+        //   .then(challenges=>{
 
-            this.getChallengesRedirect(challenges);
-            console.log(challenges);
+        //     this.getChallengesRedirect(challenges);
+        //     console.log(challenges);
             
-            this.gamificacionFacade.getGamification().subscribe(resp=>{
-              this.proccessData(resp)
-            })
-          }).catch(err=>{
-            this.errorService.errorShow(err)
-            return throwError(err)
-          })
+        //     this.gamificacionFacade.getGamification().subscribe(resp=>{
+        //       this.proccessData(resp)
+        //     })
+        //   }).catch(err=>{
+        //     this.errorService.errorShow(err)
+        //     return throwError(err)
+        //   })
     }else if (this.tokenFacade._token) {
       
       this.gamificacionFacade.getGamification()
