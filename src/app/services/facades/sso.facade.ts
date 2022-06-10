@@ -40,7 +40,7 @@ export class TokenSsoFacade {
             }
         })
         
-        if (isBase64) {
+        if (!isBase64) {
             error = throwError('El token no es base 64')
         }
         
