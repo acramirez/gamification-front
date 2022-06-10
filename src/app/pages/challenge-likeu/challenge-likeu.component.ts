@@ -39,7 +39,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   challengesRedirect:string[]=[]
 
 
-
   // Temporaly
 
 
@@ -53,8 +52,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
 
-    private activatedRoute:ActivatedRoute,
-    private errorService:ErrorService,
     private router:Router,
   ) { }
 
@@ -62,46 +59,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
-    
-    if (!this.tokenFacade._token) {
-      
-      this.activatedRoute.queryParams.subscribe(params=>{
-        if (params['token']) {
-          const token= params['token'];
 
-          return this.tokenFacade.validationToken(token)
-            .toPromise()
-              .then(challenges=>{
-                this.gamificacionFacade.getGamification().subscribe(resp=>{
-                  const cutChallenges=challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
-                  const cutChallenges2=cutChallenges[1].split(']')
-                  this.challengesRedirect=cutChallenges2[0].split(',')
-                  this.challengesRedirect.forEach((challenge,i)=>{
-                  this.challengesRedirect[i]=challenge.trim().slice(1,-1)
-                  })
-                  this.proccessData(resp)
-                })
-              }).catch(err=>{
-                this.errorService.errorShow(err)
-                return throwError(err)
-              })
-          
-        }else{
-          
-          const error= throwError('El token no existe')
-          this.errorService.errorShow(error)
-          return  error
-        }
-      })
-    }else if (this.tokenFacade._token) {
-      
+    this.challengesRedirect=this.tokenFacade.challengesRedirect;
+    
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
         console.log(resp);
 
         this.proccessData(resp)
       })     
-    }
 
   }
 

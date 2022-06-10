@@ -9,10 +9,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
 import { ConfigFacade } from './services/facades/config.facade';
+import { TokenSsoFacade } from './services/facades/sso.facade';
 
 
 export function appConfigProvider(provider:ConfigFacade){
   return () => provider.getConfig();
+}
+
+export function appTokenProvider(provider:TokenSsoFacade){
+  return () => provider.validationToken();
 }
 
 @NgModule({
@@ -43,6 +48,13 @@ export function appConfigProvider(provider:ConfigFacade){
       provide:APP_INITIALIZER,
       useFactory:appConfigProvider,
       deps:[ConfigFacade],
+      multi:true
+    },
+    TokenSsoFacade,
+    {
+      provide:APP_INITIALIZER,
+      useFactory:appTokenProvider,
+      deps:[TokenSsoFacade],
       multi:true
     }
   ],
