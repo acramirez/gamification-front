@@ -8,10 +8,10 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
-import { ConfigService } from './services/apis/config.service';
+import { ConfigFacade } from './services/facades/config.facade';
 
 
-export function appConfigProvider(provider:ConfigService){
+export function appConfigProvider(provider:ConfigFacade){
   return () => provider.getConfig();
 }
 
@@ -38,11 +38,11 @@ export function appConfigProvider(provider:ConfigService){
       useClass:ErrorInterceptorService,
       multi:true
     },
-    ConfigService,
+    ConfigFacade,
     {
       provide:APP_INITIALIZER,
       useFactory:appConfigProvider,
-      deps:[ConfigService],
+      deps:[ConfigFacade],
       multi:true
     }
   ],

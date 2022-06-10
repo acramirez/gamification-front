@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { forkJoin, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -94,7 +93,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           return  error
         }
       })
-    }else if (this.tokenFacade._token) {   
+    }else if (this.tokenFacade._token) {
+      
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
         console.log(resp);

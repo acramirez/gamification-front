@@ -15,7 +15,7 @@ export class TimerComponent implements AfterViewInit  {
   @Input() seconds!:number;
 
   ngAfterViewInit(): void {
-    this.dueDate=new Date('2022-05-28')
+    this.dueDate=new Date(this.dueDate)
     
     
     this.timer$=timer(0,1000).subscribe(()=>

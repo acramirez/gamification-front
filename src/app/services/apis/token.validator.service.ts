@@ -3,8 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
-import { environment } from "../../../environments/environment";
-import { ConfigService } from "./config.service";
+import { ConfigFacade } from "../facades/config.facade";
 
 
 @Injectable({
@@ -14,7 +13,7 @@ export class TokenValidatorService {
 
     constructor( 
         private httpClient: HttpClient,
-        private configService:ConfigService
+        private configFacade:ConfigFacade
     ) { }
 
     getValidateToken(tkn:string): Observable<TokenValidator> {
@@ -24,7 +23,7 @@ export class TokenValidatorService {
             "Authorization":tkn
         })
         
-        const url = this.configService.tokenURL;
+        const url = this.configFacade.tokenURL;
         
         return this.httpClient.post<TokenValidator>( url,null,{headers} );
 

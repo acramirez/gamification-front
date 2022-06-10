@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { ChallengeLikeU } from "../../shared/interfaces/response/challenges.interface";
-import { environment } from "../../../environments/environment";
 
 import { GamificationService } from "../apis/gamification.service";
 import { ErrorService } from "../apis/error.service";
