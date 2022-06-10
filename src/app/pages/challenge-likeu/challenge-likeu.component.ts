@@ -68,7 +68,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     
     if (!this.tokenFacade._token) {
 
-      this.tokenFacade.validationToken().subscribe(console.log)
+      this.tokenFacade.validationToken()
+        .toPromise()
+          .then(challenges=>{
+            this.getChallengesRedirect(challenges);
+            console.log(this.challengesRedirect);
+            
+          })
         // .toPromise()
         //   .then(challenges=>{
 
