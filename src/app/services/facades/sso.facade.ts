@@ -37,15 +37,15 @@ export class TokenSsoFacade {
             }else{
                 console.log(params['token']);
                 error= throwError('El token no existe')
-                this.errorService.errorShow(error)
             }
         })
         
         if (isBase64) {
             error = throwError('El token no es base 64')
         }
-
+        
         if (error) {
+            this.errorService.errorShow(error)
             return error
         }
         
