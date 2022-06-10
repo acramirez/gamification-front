@@ -31,8 +31,8 @@ export class TokenSsoFacade {
 
         this.activatedRoute.queryParams.subscribe(params=>{
             if (params['token']) {
-                
                 tkn=this.transformBase64(params['token'])
+                this._token=tkn
                 isBase64=this.isBase64Token(tkn)
             }else{
                 console.log(params['token']);
