@@ -15,7 +15,7 @@ export class ConfigFacade{
     ){}
 
     getConfig(){
-        return this.confService.getConfig().then(data=>{
+        return this.confService.getConfig().toPromise().then(data=>{
           
             this.gamificationURL=data['urls']['gamification-service'];
             this.tokenURL=data['urls']['gamification-service-sec'];
