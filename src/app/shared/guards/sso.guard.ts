@@ -8,19 +8,18 @@ import { ErrorService } from '../../services/apis/error.service';
 })
 export class SsoGuard implements CanActivate, CanLoad {
 
-  constructor( private errorService: ErrorService ) {}
+  constructor( ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    return this.errorService.showError
-
+    return true
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
-    return this.errorService.showError
+    return false
   }
 }

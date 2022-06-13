@@ -1,9 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable, of, throwError } from "rxjs";
-import { map, tap } from "rxjs/operators";
-import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
+import { throwError } from "rxjs";
 import { ErrorService } from "../apis/error.service";
 
 import { TokenValidatorService } from "../apis/token.validator.service";

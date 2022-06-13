@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MessageGuard } from '../shared/guards/message.guard';
 import { SsoGuard } from '../shared/guards/sso.guard';
 import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
@@ -17,7 +18,9 @@ const routes: Routes = [
       },
       {
         path:'notificacion/:message',
-        component:MessageComponent
+        component:MessageComponent,
+        canActivate:[MessageGuard],
+        canLoad:[MessageGuard]
       },
       {
         path:'bienvenido',

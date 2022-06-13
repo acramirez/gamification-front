@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Notification } from "../../shared/interfaces/notification";
 
 @Component({
@@ -17,7 +18,8 @@ export class MessageComponent implements OnInit {
   }
 
   constructor(
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private gamificacionFacade:GamificationFacade
   ){}
 
   ngOnInit(): void {
@@ -51,6 +53,10 @@ export class MessageComponent implements OnInit {
         break;
     }
 
+  }
+
+  onClick(){
+    this.gamificacionFacade.message=false;
   }
 
 
