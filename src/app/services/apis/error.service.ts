@@ -29,8 +29,8 @@ export class ErrorService {
     this.showError=true
     if (error && this.showError===true) {
       this.router.navigateByUrl('error')
+      this.showError=false
     }
-    this.showError=false
 
     
   }
