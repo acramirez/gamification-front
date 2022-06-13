@@ -475,7 +475,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
+    // this.destroy$.unsubscribe();
   }
 
 }
