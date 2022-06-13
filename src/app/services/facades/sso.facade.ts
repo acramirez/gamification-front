@@ -33,7 +33,6 @@ export class TokenSsoFacade {
                 this._token=tkn
                 isBase64=this.isBase64Token(tkn)
             }else{
-                console.log(params['token']);
                 error= throwError('El token no existe')
             }
         })
