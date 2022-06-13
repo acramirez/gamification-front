@@ -54,7 +54,6 @@ body{
     font-family: 'SantanderText', sans-serif, Arial, Helvetica;
     margin:auto;
     max-width: 375px;
-    overflow: hidden;
     width: 375px;
 }
 
