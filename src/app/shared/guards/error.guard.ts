@@ -17,17 +17,13 @@ export class ErrorGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      console.log(this.errorService.showError);
-      
       return !this.errorService.showError
 
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
-      console.log(this.errorService.showError);
-      
+            
       return !this.errorService.showError
 
   }

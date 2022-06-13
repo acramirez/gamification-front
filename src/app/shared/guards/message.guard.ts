@@ -15,20 +15,12 @@ export class MessageGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (!this.gamificationFacade.message) {
-        return true;
-        
-      }
-      return false
+      return this.gamificationFacade.message
     
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (!this.gamificationFacade.message) {
-        return true;
-        
-      }
-      return false 
+      return this.gamificationFacade.message 
   }
 }
