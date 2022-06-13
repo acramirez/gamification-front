@@ -53,9 +53,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-
-    private activatedRoute:ActivatedRoute,
-    private errorService:ErrorService,
     private router:Router,
   ) { }
 
@@ -71,12 +68,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.tokenFacade.validationToken()
         .toPromise()
           .then(challenges=>{
+            console.log(challenges);
+            
             this.getChallengesRedirect(challenges);
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               this.proccessData(resp)
             })
           })
+
     }else if (this.tokenFacade._token) {
       
       this.gamificacionFacade.getGamification()
