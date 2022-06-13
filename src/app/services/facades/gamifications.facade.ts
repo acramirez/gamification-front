@@ -15,6 +15,7 @@ export class GamificationFacade {
     public firstaccess:boolean=false
     public message:boolean=false
     public route:string='';
+    public resp!:ChallengeLikeU
 
 
     constructor( 
@@ -37,7 +38,7 @@ export class GamificationFacade {
                 
                 const{cut_of_date,seen_first_time}=resp
                 const{current_limit,potential_limit,period,status,lower_limit}=resp.card
-                return {
+                this.resp ={
                     current_limit,
                     potential_limit,
                     period,
@@ -46,6 +47,7 @@ export class GamificationFacade {
                     seen_first_time,
                     lower_limit
                 }
+                return this.resp
             }),
             tap(resp=>{
 
