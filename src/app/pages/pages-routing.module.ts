@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorGuard } from '../shared/guards/error.guard';
 import { MessageGuard } from '../shared/guards/message.guard';
 import { SsoGuard } from '../shared/guards/sso.guard';
 import { ChallengeLikeuComponent } from './challenge-likeu/challenge-likeu.component';
@@ -33,6 +34,8 @@ const routes: Routes = [
   {
     path:'error',
     component:ErrorPageComponent,
+    canActivate:[ErrorGuard],
+    canLoad:[ErrorGuard]
   }
 ];
 
