@@ -31,8 +31,6 @@ export class ErrorService {
       this.router.navigateByUrl('error')
       this.showError=false
     }
-
-    
   }
 
 }
