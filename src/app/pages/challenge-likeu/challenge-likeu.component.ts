@@ -60,8 +60,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   ngAfterViewInit(): void {
 
     this.destroy$=new Subject;
-
-
     
     if (!this.tokenFacade._token) {
 
@@ -393,12 +391,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
       const date=new Date();
       
-      if (date>dueDate && !this.gamificacionFacade.message) {
+      if (date>dueDate && this.gamificacionFacade.message) {
         
           const status=this.getStatusMission(previousPeriod)
-
-          this.gamificacionFacade.message=true;
-
           
           if (current_limit.amount===potential_limit.amount) {
             this.router.navigate(['notificacion','lo-has-logrado'])
@@ -406,12 +401,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.router.navigate(['notificacion','lo-sentimos'])
           }else if(status){
             this.router.navigate(['notificacion','mision-cumplida'])
-          }
-  
-        this.gamificacionFacade.message=false;
+          }  
       }
-
-      
     }
 
   }

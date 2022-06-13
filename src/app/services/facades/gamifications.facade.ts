@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 export class GamificationFacade {
 
     public firstaccess:boolean=false
-    public message:boolean=false
+    public message:boolean=true
     public route:string='';
     public resp!:ChallengeLikeU
 
@@ -46,6 +46,7 @@ export class GamificationFacade {
                     seen_first_time,
                     lower_limit
                 }
+                
                 return this.resp
             }),
             tap(resp=>{
