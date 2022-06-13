@@ -380,6 +380,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   messageNotification(resp:ChallengeLikeU){
 
+
     const {period,current_limit,potential_limit}=resp
 
     const {current_period,period_detail} = period
@@ -395,6 +396,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       if (date>dueDate && !this.gamificacionFacade.message) {
         
           const status=this.getStatusMission(previousPeriod)
+
+          this.gamificacionFacade.message=true;
+
           
           if (current_limit.amount===potential_limit.amount) {
             this.router.navigate(['notificacion','lo-has-logrado'])
@@ -404,7 +408,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.router.navigate(['notificacion','mision-cumplida'])
           }
   
-        this.gamificacionFacade.message=true;
+        this.gamificacionFacade.message=false;
       }
 
       
