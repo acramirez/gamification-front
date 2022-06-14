@@ -1,6 +1,5 @@
-import { ComponentFactory, ElementRef, Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Modal } from '../../interfaces/atoms/modal';
-import { ModalComponent } from './modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +8,11 @@ export class ModalService {
 
   modalData!:Modal
 
-  generateModal(container:ViewContainerRef,component:any){
+  generateModal(container:ViewContainerRef,modal:TemplateRef<HTMLElement>){
     console.log(container);
-    console.log(component);
+    console.log(modal);
     
     
-    container.createComponent<any>(component)
+    container.createEmbeddedView<any>(modal)
   }
 }

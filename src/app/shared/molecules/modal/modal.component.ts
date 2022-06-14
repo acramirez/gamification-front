@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
@@ -11,9 +11,10 @@ export class ModalComponent {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
   @Input() challenge!:Challenge
+  @ViewChild('modal',{read:TemplateRef}) modal !:TemplateRef<HTMLElement>
 
   constructor(
-    private callback:GamificationCallbacksService
+    private callback:GamificationCallbacksService,
   ){
 
   }
