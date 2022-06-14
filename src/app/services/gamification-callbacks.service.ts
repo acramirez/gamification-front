@@ -21,6 +21,7 @@ export class GamificationCallbacksService {
 
 
   close() {
+		console.log('close');
 		
 		if (typeof Gamification !== 'undefined') {
 			
@@ -33,18 +34,18 @@ export class GamificationCallbacksService {
 		}		
 	}
 
-  redirect(challengeId:string) {
-		
-		if (typeof Gamification !== 'undefined') {
-			
-			Gamification.redirect(challengeId);
-			
-		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-			
-			(window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
-			
-		}		
-	}
-  
+	redirect(challengeId:string) {
 
+		console.log('redirect');
+
+		if (typeof Gamification !== 'undefined') {
+
+		Gamification.redirect(challengeId);
+
+		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
+
+		(window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
+
+		}		
+	}	
 }

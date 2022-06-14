@@ -3,21 +3,21 @@
         <div class="modal__body">
             <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
             <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+data.icon+'.png'"  alt="icono">
+                <img [src]="'../../../../assets/icons/'+challenge.icon+'.png'"  alt="icono">
                 <h2 [ngClass]="{
                     'modal__title':true,
-                    'modal__title--gradient':(data.accelerator)
+                    'modal__title--gradient':(challenge.accelerator)
                 }">
-                    {{data.name}}
+                    {{challenge.name}}
                 </h2>
-                <span class="modal__subtitle">{{data.description}}</span>            
+                <span class="modal__subtitle">{{challenge.description}}</span>            
             </div>
             <ul>
-                <ng-container *ngFor="let condition of data.conditions">
+                <ng-container *ngFor="let condition of challenge.conditions">
                     <li>{{condition}}</li>
                 </ng-container>
             </ul>
         </div>
-        <button class="btn" *ngIf="data.redirection">Continuar</button>
+        <button class="btn" *ngIf="challenge.redirection" (click)="redirect()">Continuar</button>
     </div>
 </div>

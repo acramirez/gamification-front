@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { ErrorData } from '../../interfaces/atoms/error';
 
 @Component({
@@ -14,6 +15,14 @@ export class ErrorDialogComponent{
     icon:'cloud-error',
     button:false,
     redirect:'/',
+  }
+
+  constructor(
+    private callback:GamificationCallbacksService
+  ){}
+
+  close(){
+    this.callback.close()
   }
 
 }
