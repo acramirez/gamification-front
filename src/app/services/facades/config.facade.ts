@@ -21,6 +21,8 @@ export class ConfigFacade{
             this.tokenURL=data['urls']['gamification-service-sec'];
 
           }).catch(error=>{
+              console.warn(error);
+              
           })
     }
 
