@@ -9,6 +9,10 @@ export class ModalService {
   modalData!:Modal
 
   generateModal(container:ViewContainerRef,component:any){
-    container.createEmbeddedView<any>(component)
+    console.log(container);
+    console.log(component);
+    
+    
+    container.createComponent<any>(component)
   }
 }

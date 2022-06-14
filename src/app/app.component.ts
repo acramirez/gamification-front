@@ -18,7 +18,6 @@ export class AppComponent implements OnDestroy {
 
   refreshSession=fromEvent(document,'click')
     .subscribe(event=>{   
-      console.log(event);
       this.callback.refreshSession();
     })
 

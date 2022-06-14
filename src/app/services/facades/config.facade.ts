@@ -22,7 +22,6 @@ export class ConfigFacade{
             
           }).catch(error=>{
             console.log(error);
-            
           })
     }
 
