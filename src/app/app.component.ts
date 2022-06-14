@@ -1,5 +1,7 @@
 
 import { Component } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { GamificationCallbacksService } from './services/gamification-callbacks.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,18 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+
+  constructor(
+    private callback:GamificationCallbacksService
+  ){}
   title = 'Application Gramificacion';
+
+  refreshSession=fromEvent(document,'click')
+    .subscribe(event=>{
+      console.log(event);
+      
+      this.callback.refreshSession();
+    })
+
+
 }

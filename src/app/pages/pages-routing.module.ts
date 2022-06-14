@@ -17,12 +17,7 @@ const routes: Routes = [
         path:'',
         component:ChallengeLikeuComponent
       },
-      {
-        path:'notificacion/:message',
-        component:MessageComponent,
-        canActivate:[MessageGuard],
-        canLoad:[MessageGuard]
-      },
+
       {
         path:'bienvenido',
         component:FirstPageComponent
@@ -30,6 +25,12 @@ const routes: Routes = [
     ],
     // canLoad:[SsoGuard],
     // canActivate:[SsoGuard],
+  },
+  {
+    path:'notificacion/:message',
+    component:MessageComponent,
+    canActivate:[MessageGuard],
+    canLoad:[MessageGuard]
   },
   {
     path:'error',
