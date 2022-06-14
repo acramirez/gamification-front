@@ -1,5 +1,6 @@
 import { ComponentFactory, ElementRef, Injectable, ViewContainerRef } from '@angular/core';
 import { Modal } from '../../interfaces/atoms/modal';
+import { ModalComponent } from './modal.component';
 
 @Injectable({
   providedIn: 'root'

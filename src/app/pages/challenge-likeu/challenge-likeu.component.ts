@@ -14,6 +14,7 @@ import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.inte
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
 import { ModalComponent } from 'src/app/shared/molecules/modal/modal.component';
+import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 
 
 @Component({
@@ -57,7 +58,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private challengesFacade: ChallengesFacade,
     private router:Router,
     private modalService:ModalService,
-    private viewContainerRef:ViewContainerRef
+    private viewContainerRef:ViewContainerRef,
+    private callback:GamificationCallbacksService
   ) { }
 
 
@@ -91,7 +93,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   show(){
-    this.modalService.generateModal(this.viewContainerRef,ModalComponent)
+    
+    const modal = new ModalComponent(this.callback)
+    modal.challenge=this.challengeActive
+    this.modalService.generateModal(this.viewContainerRef,modal)
   }
 
 
