@@ -1,23 +1,25 @@
-<div #modal class="modal-bg">
-    <div animation="zoomIn" class="modal">
-        <div class="modal__body">
-            <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
-            <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+challenge.icon+'.png'"  alt="icono">
-                <h2 [ngClass]="{
-                    'modal__title':true,
-                    'modal__title--gradient':(challenge.accelerator)
-                }">
-                    {{challenge.name}}
-                </h2>
-                <span class="modal__subtitle">{{challenge.description}}</span>            
+<ng-template #modal>
+    <div class="modal-bg">
+        <div animation="zoomIn" class="modal">
+            <div class="modal__body">
+                <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
+                <div class="modal__header">
+                    <img [src]="'../../../../assets/icons/'+challenge.icon+'.png'"  alt="icono">
+                    <h2 [ngClass]="{
+                        'modal__title':true,
+                        'modal__title--gradient':(challenge.accelerator)
+                    }">
+                        {{challenge.name}}
+                    </h2>
+                    <span class="modal__subtitle">{{challenge.description}}</span>            
+                </div>
+                <ul>
+                    <ng-container *ngFor="let condition of challenge.conditions">
+                        <li>{{condition}}</li>
+                    </ng-container>
+                </ul>
             </div>
-            <ul>
-                <ng-container *ngFor="let condition of challenge.conditions">
-                    <li>{{condition}}</li>
-                </ng-container>
-            </ul>
+            <button class="btn" *ngIf="challenge.redirection" (click)="redirect()">Continuar</button>
         </div>
-        <button class="btn" *ngIf="challenge.redirection" (click)="redirect()">Continuar</button>
     </div>
-</div>
+</ng-template>

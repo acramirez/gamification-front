@@ -11,7 +11,7 @@ export class ModalComponent {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
   @Input() challenge!:Challenge
-  @ViewChild('modal',{read:TemplateRef}) modal !:TemplateRef<HTMLElement>
+  @ViewChild(TemplateRef) modal !:TemplateRef<HTMLElement>
 
   constructor(
     private callback:GamificationCallbacksService,
