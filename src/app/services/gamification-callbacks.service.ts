@@ -10,7 +10,6 @@ declare let Gamification:any;
 export class GamificationCallbacksService {
 
   refreshSession(){
-	  console.log('refresh');
 	  
     if (typeof Gamification !== 'undefined') {
       Gamification.refreshSession();
@@ -21,31 +20,20 @@ export class GamificationCallbacksService {
 
 
   close() {
-		console.log('close');
 		
 		if (typeof Gamification !== 'undefined') {
-			
 			Gamification.close();
-			
 		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-			
 		  (window as any).webkit.messageHandlers.Gamification.close();
-			
 		}		
 	}
 
 	redirect(challengeId:string) {
 
-		console.log('redirect');
-
 		if (typeof Gamification !== 'undefined') {
-
-		Gamification.redirect(challengeId);
-
+			Gamification.redirect(challengeId);
 		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-
-		(window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
-
+			(window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
 		}		
 	}	
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorService } from '../../services/apis/error.service';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
+import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
+import { ModalComponent } from 'src/app/shared/molecules/modal/modal.component';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   // Temporaly
 
+  @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
 
   tabs:Tab[]=[];
   showModal:boolean=false;
@@ -54,6 +57,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
     private router:Router,
+    private modalService:ModalService
   ) { }
 
 
@@ -84,6 +88,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       })     
     }
 
+  }
+
+  show(){
+    this.modalService.generateModal(this.challengeLikeU,ModalComponent)
   }
 
 
