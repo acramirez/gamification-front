@@ -9,8 +9,7 @@ import { Assistance, CardPayment, CurrentLimit, Period } from '../../shared/inte
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
-import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorService } from '../../services/apis/error.service';
+import { Router } from '@angular/router';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
@@ -45,7 +44,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   // Temporaly
 
-  @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
+  // @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
 
   tabs:Tab[]=[];
   showModal:boolean=false;
@@ -57,7 +56,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
     private router:Router,
-    private modalService:ModalService
+    private modalService:ModalService,
+    private viewContainerRef:ViewContainerRef
   ) { }
 
 
@@ -91,7 +91,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   show(){
-    this.modalService.generateModal(this.challengeLikeU,ModalComponent)
+    this.modalService.generateModal(this.viewContainerRef,ModalComponent)
   }
 
 
