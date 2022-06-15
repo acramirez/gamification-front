@@ -18,15 +18,17 @@ export class ModalService {
   container!:ViewContainerRef
   
 
-  generateModal(container:ViewContainerRef,challenge:Challenge){
+  generateModal(container:ViewContainerRef,challenge:Challenge,component:any){
     this.container=container
-    const factory = this.componentFR.resolveComponentFactory<ModalComponent>(ModalComponent)
-    const modal= container.createComponent<ModalComponent>(factory)
-    // modal.instance.challenge=challenge
+    const factory = this.componentFR.resolveComponentFactory<any>(component)
+    const modal= container.createComponent<any>(factory)
+    modal.instance.challenge=challenge
 
   }
 
   closeModal(){
+    console.log(this.container);
+    
     this.container.clear()
   }
 }
