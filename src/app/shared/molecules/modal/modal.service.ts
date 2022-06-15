@@ -19,8 +19,8 @@ export class ModalService {
 
   generateModal(container:ViewContainerRef, modalData:Modal){
 
-    const factory = this.componentFR.resolveComponentFactory<any>(ModalComponent)
-    const modal= container.createComponent<any>(factory)
+    const factory = this.componentFR.resolveComponentFactory<ModalComponent>(ModalComponent)
+    const modal= container.createComponent<ModalComponent>(factory)
     modal.instance.modal=modalData
   }
 
@@ -28,9 +28,9 @@ export class ModalService {
 
     console.log(message);
     
-    const factory = this.componentFR.resolveComponentFactory<any>(MessageComponent)
-    const notification= container.createComponent<any>(factory)
-    notification.instance.notificacion=message
+    const factoryNotification = this.componentFR.resolveComponentFactory<MessageComponent>(MessageComponent)
+    const notification= container.createComponent<MessageComponent>(factoryNotification)
+    notification.instance.notification=message
 
   }
 
