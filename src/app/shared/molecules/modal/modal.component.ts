@@ -12,7 +12,6 @@ import { ModalService } from './modal.service';
 export class ModalComponent {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
-  @Input() challenge!:Challenge
   @Input() modal!:Modal
  
   constructor(
@@ -22,7 +21,6 @@ export class ModalComponent {
   }
   
   redirect(){
-    console.log(this.challenge);
-    this.callback.redirect(this.challenge.id)
+    this.callback.redirect(this.modal.id)
   }
 }
