@@ -10,5 +10,5 @@ export interface Modal {
     redirection: boolean;
     status?:     boolean;
     accelerator?:boolean,
-    close?:Function
+    close:Function
 }
