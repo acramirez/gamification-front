@@ -97,6 +97,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       ...this.challengeActive,
       close:()=>this.closeModal()
     }
+    if (modal.id==='digitalChannels') {
+      modal.id='digital_channel'
+    }
     this.modalService.generateModal(this.viewContainerRef,modal)
   }
 
@@ -395,7 +398,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   messageNotification(resp:ChallengeLikeU){
 
-
     const {period,current_limit,potential_limit}=resp
 
     const {current_period,period_detail} = period
@@ -414,7 +416,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           icon:'',
           title:'',
           subtitle:'',
-          description:''
+          description:'',
+          btnAction:()=>this.closeModal()
         }
         
           const status=this.getStatusMission(previousPeriod)
@@ -435,11 +438,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
             notification.description='Continúa con los retos de la siguiente misión para avanzar.'
           }  
+          this.modalService.generateNotification(this.viewContainerRef,notification)
       }
     }
 
   }
-
 
   getStatusMission(index:number):boolean | undefined{
 
@@ -449,14 +452,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     const {challenges}=this.statusMissions[index]
     const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
     
-      
       const statusMandatory=(challenge:StatusChallenges)=>{
         if (mandatoryChallenges.includes(challenge.id)) {
           return true
         }
         return false
       };
-  
   
       const statusSpecial=(challenge:StatusChallenges)=>{
         if (specialChallenges.includes(challenge.id)) {
@@ -468,7 +469,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   
       const mandatoryChallengesStatus= challenges?.filter(statusMandatory)
       const specialChallengesStatus= challenges?.filter(statusSpecial)
-  
   
       if(mandatoryChallengesStatus && mandatoryChallengesStatus?.length!== mandatoryChallenges.length){
         status=false

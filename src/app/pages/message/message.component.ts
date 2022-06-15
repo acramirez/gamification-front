@@ -10,12 +10,7 @@ import { Notification } from "../../shared/interfaces/notification";
 })
 export class MessageComponent implements OnInit {
 
-  @Input() notification:Notification={
-    icon:'',
-    title:'',
-    subtitle:'',
-    description:''
-  }
+  @Input() notification!:Notification
 
   constructor(
     private activatedRoute:ActivatedRoute,

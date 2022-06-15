@@ -1,8 +1,8 @@
-import { ComponentFactory, ComponentFactoryResolver, Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, ViewContainerRef } from '@angular/core';
 import { MessageComponent } from 'src/app/pages/message/message.component';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Modal } from '../../interfaces/atoms/modal';
-import { Challenge } from '../../interfaces/response/challengesContract.interface';
+import { Notification } from '../../interfaces/notification';
 import { ModalComponent } from './modal.component';
 
 @Injectable({
@@ -29,10 +29,10 @@ export class ModalService {
 
   generateNotification(container:ViewContainerRef,message:Notification){
 
-    
     const factory = this.componentFR.resolveComponentFactory<any>(MessageComponent)
     const notification= container.createComponent<any>(factory)
     notification.instance.notificacion=message
+
   }
 
   close(container:ViewContainerRef){    
