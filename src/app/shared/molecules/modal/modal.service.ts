@@ -21,7 +21,6 @@ export class ModalService {
     console.log(component);
     
     const modal=new ModalComponent(this.gamificationCS)
-    // modal.challenge=challenge
     const factory = this.componentFR.resolveComponentFactory<any>(component)
     component=container.createComponent<any>(factory)
     console.log(component);

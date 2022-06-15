@@ -16,7 +16,7 @@
          [missionStatus]="missionStatus"
          [initialTab]="currentPeriod"
          (challengeActive)="challengeActive=$event"
-         (openModal)="showModal=true"
+         (openModal)="show()"
         >
         </app-month-challenges>
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
@@ -26,5 +26,5 @@
     <sn-spinner ></sn-spinner>
 </ng-template>
 
-<app-modal *show="showModal" [challenge]="challengeActive" (closeModal)="showModal=$event"></app-modal>
+<!-- <app-modal *show="showModal" [challenge]="challengeActive" (closeModal)="showModal=$event"></app-modal> -->
     
