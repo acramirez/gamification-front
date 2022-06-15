@@ -93,10 +93,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   show(){
-    const modal = new ModalComponent(this.callback)
-    modal.challenge=this.challengeActive
 
-    this.modalService.generateModal(this.viewContainerRef,modal.modal)
+    this.modalService.generateModal(this.viewContainerRef,this.challengeActive)
   }
 
 

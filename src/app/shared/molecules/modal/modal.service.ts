@@ -17,13 +17,11 @@ export class ModalService {
 
   modalData!:Modal
 
-  generateModal(container:ViewContainerRef,component:any){
-    console.log(component);
-    
-    const modal=new ModalComponent(this.gamificationCS)
-    const factory = this.componentFR.resolveComponentFactory<any>(component)
-    component=container.createComponent<any>(factory)
-    console.log(component);
+  generateModal(container:ViewContainerRef,challenge:Challenge){
+
+    const factory = this.componentFR.resolveComponentFactory<ModalComponent>(ModalComponent)
+    const modal= container.createComponent<ModalComponent>(factory)
+    modal.instance.challenge=challenge
 
   }
 }
