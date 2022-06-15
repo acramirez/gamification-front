@@ -93,7 +93,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   show(){
-
     this.modalService.generateModal(this.viewContainerRef,this.challengeActive)
   }
 
