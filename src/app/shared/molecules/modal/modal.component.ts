@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -11,10 +12,10 @@ export class ModalComponent {
 
   @Output() closeModal:EventEmitter<boolean>= new EventEmitter();
   @Input() challenge!:Challenge
-  @ViewChild(TemplateRef) modal !:TemplateRef<HTMLElement>
-
+  
   constructor(
     private callback:GamificationCallbacksService,
+    private modalService:ModalService
   ){
 
   }
@@ -23,6 +24,10 @@ export class ModalComponent {
     console.log(this.challenge);
     
     this.callback.redirect(this.challenge.id)
+  }
+
+  close(){
+    this.modalService.closeModal()
   }
 
 

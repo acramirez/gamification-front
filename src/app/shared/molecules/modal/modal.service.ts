@@ -12,16 +12,21 @@ export class ModalService {
     private componentFR:ComponentFactoryResolver,
     private gamificationCS:GamificationCallbacksService
   ){
-
   }
 
   modalData!:Modal
+  container!:ViewContainerRef
+  
 
   generateModal(container:ViewContainerRef,challenge:Challenge){
-
+    this.container=container
     const factory = this.componentFR.resolveComponentFactory<ModalComponent>(ModalComponent)
     const modal= container.createComponent<ModalComponent>(factory)
-    modal.instance.challenge=challenge
+    // modal.instance.challenge=challenge
 
+  }
+
+  closeModal(){
+    this.container.clear()
   }
 }
