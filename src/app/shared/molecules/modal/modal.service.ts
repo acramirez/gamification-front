@@ -18,9 +18,9 @@ export class ModalService {
   container!:ViewContainerRef
   
 
-  generateModal(container:ViewContainerRef,challenge:Challenge,component:any){
+  generateModal(container:ViewContainerRef,challenge:Challenge){
     this.container=container
-    const factory = this.componentFR.resolveComponentFactory<any>(component)
+    const factory = this.componentFR.resolveComponentFactory<any>(ModalComponent)
     const modal= container.createComponent<any>(factory)
     modal.instance.challenge=challenge
 
