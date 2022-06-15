@@ -25,8 +25,6 @@ export class ModalService {
   }
 
   generateNotification(container:ViewContainerRef,message:Notification){
-
-    console.log(message);
     
     const factoryNotification = this.componentFR.resolveComponentFactory<MessageComponent>(MessageComponent)
     const notification= container.createComponent<MessageComponent>(factoryNotification)

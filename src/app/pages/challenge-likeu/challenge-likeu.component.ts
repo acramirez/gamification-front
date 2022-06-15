@@ -126,7 +126,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     
     this.messageNotification(resp);
     this.modalService.generateNotification(this.viewContainerRef,this.notification)
-
   }
 
   get challenges(){
@@ -436,9 +435,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.notification.title='¡Misión cumplida!'
             this.notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
             this.notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-          }
-          console.log(this.notification);
-          
+          }          
         }
     }
 
