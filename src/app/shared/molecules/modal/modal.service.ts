@@ -1,4 +1,5 @@
 import { ComponentFactory, ComponentFactoryResolver, Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
+import { MessageComponent } from 'src/app/pages/message/message.component';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Modal } from '../../interfaces/atoms/modal';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
@@ -18,17 +19,21 @@ export class ModalService {
   container!:ViewContainerRef
   
 
-  generateModal(container:ViewContainerRef,challenge:Challenge){
+  generateModal(container:ViewContainerRef, modalData:Modal){
     this.container=container
     const factory = this.componentFR.resolveComponentFactory<any>(ModalComponent)
     const modal= container.createComponent<any>(factory)
-    modal.instance.challenge=challenge
-
+    modal.instance.modal=modalData
   }
 
-  closeModal(){
-    console.log(this.container);
-    
+  generateNotification(container:ViewContainerRef,message:Notification){
+    this.container=container
+    const factory = this.componentFR.resolveComponentFactory<any>(MessageComponent)
+    const notification= container.createComponent<any>(factory)
+    notification.instance.notificacion=message
+  }
+
+  close(){    
     this.container.clear()
   }
 }

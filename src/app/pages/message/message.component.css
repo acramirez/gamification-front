@@ -1,9 +1,13 @@
 .message{
     background: var(--theme-color-background-03);
     height: 100vh;
+    left: 0;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    top: 0;
+    width: 100%;
     z-index: 1000;
+
 }
 
 .header{

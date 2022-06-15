@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
-import { Subject, throwError } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy, ViewContainerRef } from '@angular/core';
+import { Subject } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -13,8 +13,9 @@ import { Router } from '@angular/router';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
-import { ModalComponent } from 'src/app/shared/molecules/modal/modal.component';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
+import { Notification } from 'src/app/shared/interfaces/notification';
+import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 
 
 @Component({
@@ -59,7 +60,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     private router:Router,
     private modalService:ModalService,
     private viewContainerRef:ViewContainerRef,
-    private callback:GamificationCallbacksService
   ) { }
 
 
@@ -93,9 +93,15 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   show(){
-    this.modalService.generateModal(this.viewContainerRef,this.challengeActive)
+    const modal:Modal=this.challengeActive
+    modal.close=()=>this.closeModal();
+
+    this.modalService.generateModal(this.viewContainerRef,modal)
   }
 
+  closeModal(){
+    this.viewContainerRef.clear()
+  }
 
   proccessData(resp:ChallengeLikeU){
     
@@ -317,7 +323,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         channel.operation_date= new Date(channel.operation_date)
         
         if (channel.status==='ACTIVE' && channel.operation_date<cutDate) {
-          this.statusChallenges.push({id:'digitalChannels',status:true})
+          this.statusChallenges.push({id:'digital_channel',status:true})
           break
         }
       }
@@ -402,15 +408,31 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       const date=new Date();
       
       if (date>dueDate && this.gamificacionFacade.message) {
+
+        const notification:Notification={
+          icon:'',
+          title:'',
+          subtitle:'',
+          description:''
+        }
         
           const status=this.getStatusMission(previousPeriod)
           
           if (current_limit.amount===potential_limit.amount) {
-            this.router.navigate(['notificacion','lo-has-logrado'])
+            notification.icon='challenge-complete'
+            notification.title='¡Lo has logrado!'
+            notification.subtitle='Tu límite de crédito ha aumentado'
+            notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
           }else if(!status){
-            this.router.navigate(['notificacion','lo-sentimos'])
+            notification.icon='challenge-no-complete'
+            notification.title='¡Lo sentimos!'
+            notification.subtitle='No has logrado completar el reto LikeU'
+            notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
           }else if(status){
-            this.router.navigate(['notificacion','mision-cumplida'])
+            notification.icon='mission-complete'
+            notification.title='¡Misión cumplida!'
+            notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
+            notification.description='Continúa con los retos de la siguiente misión para avanzar.'
           }  
       }
     }

@@ -1,7 +1,14 @@
+import { ViewContainerRef } from "@angular/core";
+
 export interface Modal {
-    icon:string,
-    btnClose:string,
-    title:string,
-    subtitle?:string,
-    body?:string[]
+    id:          string;
+    name:        string;
+    description: string;
+    specs:       string[];
+    conditions:  string[];
+    icon:        string;
+    redirection: boolean;
+    status?:     boolean;
+    accelerator?:boolean,
+    close?:Function
 }

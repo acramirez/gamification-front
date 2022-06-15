@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Notification } from "../../shared/interfaces/notification";
@@ -10,7 +10,7 @@ import { Notification } from "../../shared/interfaces/notification";
 })
 export class MessageComponent implements OnInit {
 
-  notification:Notification={
+  @Input() notification:Notification={
     icon:'',
     title:'',
     subtitle:'',
