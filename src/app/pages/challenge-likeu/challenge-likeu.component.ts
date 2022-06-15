@@ -100,7 +100,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   closeModal(){
-    this.viewContainerRef.clear()
+    this.modalService.close(this.viewContainerRef)
   }
 
   proccessData(resp:ChallengeLikeU){
