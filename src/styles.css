@@ -2,8 +2,9 @@
 
 :root{
     --theme-color-background-gradient-likeu:linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
+    --theme-color-background-gradient-likeu:linear-gradient(80deg, #FF1D53 0%, #A540D7 86.96%);
     --theme-color-background-default:#F2F2F2FF;
-    --theme-color-background-default2:rgba(255, 255, 255, 0.7);;
+    --theme-color-background-default2:rgba(255, 255, 255, 0.7);
     --theme-color-background-03:#FFFFFFFF;
     --theme-color-primary-01:#EC0000FF;
     --theme-color-primary-05:#000000ff;
@@ -50,7 +51,7 @@
 body{
     background-color: #F5F7FA;
     font-size: 16px;
-    font-family: 'SantanderText';
+    font-family: 'SantanderText', sans-serif, Arial, Helvetica;
     margin:auto;
     max-width: 375px;
     width: 375px;
@@ -95,37 +96,30 @@ sn-icon>i[class^=sn-]{
     top: .875rem;
 }
 
-@media screen and (min-width: 320px) {
-    .percent__circle{
+.btn{
+    align-self: center;
+    background-color: var(--theme-color-primary-01);
+    border: none;
+    border-radius: 3rem;
+    color: var(--theme-color-text-01);
+    font-weight: 700;
 
-        width: 64px;
-        height: 64px;
-    }
-}
-  
-@media screen and (min-width: 360px) {
-    body{
-        font-size: 16px;
-    }
+    padding: 0.75rem 1.5rem;
 }
 
-@media screen and (min-width: 375px) {
-
-}
-@media screen and (min-width: 415px) {
-    .circle_svg{
-        height: 72px;
-        width: 72px;
-    }
-}
-
-@media screen and (min-width: 512px) {
+.bg__circle::before{
+    background: var(--theme-color-background-03);
+    border-radius: 0 0 50% 50%;
+    content: '';
+    height: 375px;
+    top:-200px;
+    left: -25%;
+    position: absolute;
+    width: 150%;
+    z-index: -1;
 
 }
 
-@media screen and (min-width: 768px) {
-
-}
 
 
 

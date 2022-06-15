@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
@@ -6,13 +6,9 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.css']
 })
-export class ChallengeComponent implements OnInit {
-
+export class ChallengeComponent {
 
   @Input() challenge!:Challenge;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() statusMission:boolean | undefined
 
 }

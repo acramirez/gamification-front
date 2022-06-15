@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { ErrorData } from '../../interfaces/atoms/error';
 
 @Component({
@@ -6,7 +7,7 @@ import { ErrorData } from '../../interfaces/atoms/error';
   templateUrl: './error-dialog.component.html',
   styleUrls: ['./error-dialog.component.css']
 })
-export class ErrorDialogComponent implements OnInit {
+export class ErrorDialogComponent{
 
   @Input()errorData:ErrorData={
     title:'¡Oh, oh!',
@@ -16,9 +17,12 @@ export class ErrorDialogComponent implements OnInit {
     redirect:'/',
   }
 
-  constructor() { }
+  constructor(
+    private callback:GamificationCallbacksService
+  ){}
 
-  ngOnInit(): void {
+  close(){
+    this.callback.close()
   }
 
 }

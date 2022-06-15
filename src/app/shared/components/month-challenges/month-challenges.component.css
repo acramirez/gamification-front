@@ -1,10 +1,12 @@
 .tabs{
+    align-items: center;
     display: grid;
     column-gap: .5rem;
     margin:0 1rem 1.5rem 1rem;
     grid-auto-flow: column;
     max-width: 340px;
     overflow-x: auto;
+    overflow-y: none;
     width: 375px;
 }
 
@@ -12,8 +14,9 @@
     display: none;
 }
 
-lu-tab{
+.tab{
     cursor: pointer;
+    border-radius: 24px;
 }
 
 .general-challenges{
@@ -27,20 +30,6 @@ lu-tab{
     position: relative;
 }
 
-.time-remaining{
-    color: var(--theme-color-text-01);
-    background: linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
-    border-radius: 0px 14px 0px 9px;
-    font-size: .75rem;
-    right: 0;
-    padding: .25rem .75rem;
-    position: absolute;
-    top: 0;
-}
-
-.time-remaining__days{
-    font-weight: 700;
-}
 
 .challenges__title{
     font-size: 1.25rem;

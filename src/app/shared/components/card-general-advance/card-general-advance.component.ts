@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Card } from 'src/app/shared/models/card.model';
-import { PeriodDetail } from 'src/app/shared/models/period-detail.model';
+import { Component, Input } from '@angular/core';
+import { Card, PeriodDetail } from '../../interfaces/response/gamification.interface';
 
 @Component({
   selector: 'app-card-general-advance',
   templateUrl: './card-general-advance.component.html',
   styleUrls: ['./card-general-advance.component.css']
 })
-export class CardGeneralAdvanceComponent implements OnInit {
+export class CardGeneralAdvanceComponent {
 
     /**
    * Has the info which is used in the component
@@ -23,10 +22,5 @@ export class CardGeneralAdvanceComponent implements OnInit {
    * 
    */
   @Input() periodData!:PeriodDetail[]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

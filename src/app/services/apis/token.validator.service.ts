@@ -1,10 +1,9 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Observable, throwError } from "rxjs";
-import { OpaqueToken } from "src/app/shared/interfaces/response/opaqueToken.interfaace";
+import { Observable } from "rxjs";
+import { TokenValidator } from "../../shared/interfaces/response/opaqueToken.interface";
 
-import { environment } from "src/environments/environment";
+import { ConfigFacade } from "../facades/config.facade";
 
 
 @Injectable({
@@ -12,36 +11,22 @@ import { environment } from "src/environments/environment";
 })
 export class TokenValidatorService {
 
-    private _apiUrl: string = `${environment.tkn.url}`;
-
-    private _token: string = '';
-
     constructor( 
         private httpClient: HttpClient,
+        private configFacade:ConfigFacade
     ) { }
 
-    getValidateToken(tkn:string): Observable<OpaqueToken> {
-        
-        const url = `${this._apiUrl}/${tkn}`;
-        return this.httpClient.get<OpaqueToken>( url, {params: this.httpParams} );
-
-    }
-
-
+    getValidateToken(tkn:string): Observable<TokenValidator> {
     
-    get httpParams(): HttpParams {
-        const jsonEntry = {
-            stokenValidatorRequest: {
-                token: this._token,
-                ipUsuario: '180.186.107.23',
-                idAplicativo: 'SNET',
-                PAdicional: ''
-            }
-        }
-        return new HttpParams({
-            fromObject:{
-              jsonEntrada:JSON.stringify( jsonEntry )
-            }
-        });
+
+        const headers = new HttpHeaders({
+            "Authorization":tkn
+        })
+        
+        const url = this.configFacade.tokenURL;
+        
+        return this.httpClient.post<TokenValidator>( url,null,{headers} );
+
     }
+
 }

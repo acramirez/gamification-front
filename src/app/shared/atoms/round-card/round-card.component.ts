@@ -1,20 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sn-round-card',
   templateUrl: './round-card.component.html',
   styleUrls: ['./round-card.component.css']
 })
-export class RoundCardComponent implements OnInit {
+export class RoundCardComponent{
 
   @Input() principalText!:string | number;
   @Input() secondaryText!:string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-
-    
-  }
 
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="cardDetail" >
+<div class="challenge-likeu__container bg__circle" *ngIf="cardDetail;else spinner" >
     <app-header animation="up"></app-header> 
     <div class="challenge-likeu">
         <app-card-data 
@@ -8,18 +8,22 @@
         </app-card-data>
         <app-month-challenges 
          [mandatoryChallenges]="mandatoryChallenges" 
-         [optionalChallenges]="specialChallenges" 
+         [specialChallenges]="specialChallenges" 
          [tabs]="tabs"
-         [days]="getDays(cut_of_day)"
-         (indexTab)="getChallenges($event);index=$event"
-         [activeTab]="currentPeriod"
-         (challengeActive)="challengeActive=$event"
-         (openModal)="showModal=true"
+         [seconds]="remainingDays"
+         [dueDate]="dueDay"
+         (indexTab)="getChallenges($event);indexTab=$event"
+         [missionStatus]="missionStatus"
+         [initialTab]="currentPeriod"
+         (challengeActive)="challengeActive=$event;showModal()"
         >
         </app-month-challenges>
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
-</ng-container>
+</div>
+<ng-template #spinner>
+    <sn-spinner ></sn-spinner>
+</ng-template>
 
-<app-modal *show="showModal" [data]="challengeActive" (closeModal)="showModal=$event"></app-modal>
+<!-- <app-modal *show="showModal" [challenge]="challengeActive" (closeModal)="showModal=$event"></app-modal> -->
     

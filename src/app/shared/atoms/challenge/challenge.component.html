@@ -3,8 +3,11 @@
         'challenge__content':true,
         'challenge__content--accelerator':challenge.accelerator
     }">
-        <img class="challenge__img" [src]="'../../../../assets/icons/'+challenge.icon+'.svg'" alt="">
-        <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/check-challenge.svg'" alt="">
+        <img class="challenge__img" [src]="'../../../../assets/icons/'+challenge.icon+'.png'" alt="">
+
+
+        <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Check.png'" alt="">
+        <img *ngIf="statusMission===false && !challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Wrong.png'" alt="">
     </div>
     <h3 class="challenge__title">{{challenge.name}}</h3>
 </div>

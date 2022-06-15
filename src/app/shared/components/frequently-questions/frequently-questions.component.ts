@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FAQ } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
@@ -6,13 +6,7 @@ import { FAQ } from '../../interfaces/response/challengesContract.interface';
   templateUrl: './frequently-questions.component.html',
   styleUrls: ['./frequently-questions.component.css']
 })
-export class FrequentlyQuestionsComponent implements OnInit {
+export class FrequentlyQuestionsComponent{
 
   @Input() questions:FAQ[]=[]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

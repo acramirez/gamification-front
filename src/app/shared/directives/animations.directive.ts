@@ -1,17 +1,16 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[animation]'
 })
-export class AnimationsDirective implements OnInit {
-
-
+export class AnimationsDirective {
 
   constructor(
     private element:ElementRef<HTMLElement>
   ) { }
 
   height!:number;
+
   @Input() set animation(direction:string){
 
     switch (direction) {
@@ -25,7 +24,9 @@ export class AnimationsDirective implements OnInit {
       default:
         break;
     }
-  };
+  }
+
+
 
   downUp(){
     this.element.nativeElement.classList.add('downUp')
@@ -38,29 +39,29 @@ export class AnimationsDirective implements OnInit {
     this.element.nativeElement.classList.add('zoomIn')
   }
 
-
-  ngOnInit(): void {
-    
+  @Input() set rotate(deg:number){
+    this.element.nativeElement.classList.add('rotate')
+    this.element.nativeElement.style.transform=`rotate(${deg}deg)`
   }
 
   @Input() set dropDown(active:boolean){
-
-    const h = this.height;
     
     if (!active) {
       this.height=this.element.nativeElement.clientHeight
       this.element.nativeElement.classList.add('drop-down-hidden')
-      console.log(this.height);
       
     }else{
-      this.element.nativeElement.classList.add('drop-down-hidden')
+      this.element.nativeElement.classList.remove('drop-down-hidden')
       this.element.nativeElement.style.height= `${this.height.toString()}px`
     }
   }
 
   @Input() set loadProgress(progress:number){
-    this.element.nativeElement.style.strokeDashoffset=progress.toString();
-
+    this.element.nativeElement.classList.add('transition')
+    this.element.nativeElement.style.strokeDashoffset='295.31';
+    setTimeout(() => {
+      this.element.nativeElement.style.strokeDashoffset=progress.toString();
+    }, 0);
   }
 }
 

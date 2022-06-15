@@ -1,17 +1,17 @@
-<div class="header">
-    <sn-icon icon="sn-BAN005"></sn-icon>
+<div class="message">
+    <div class="header">
+        <div class="header__santander-icon">
+            <img src="../../../assets/icons/santander-icon.png" alt="">
+        </div>
+        <div class="header__icon">
+            <img [src]="'../../../assets/icons/'+ notification.icon +'.png'" alt="">
+        </div>
+    </div>
 
-    <div class="header__icon">
-        <img src="../../../assets/icons/oh-no.svg" alt="">
+    <div class="content">
+        <h3 class="content__title">{{notification.title}}</h3>
+        <h3 class="content__subtitle">{{notification.subtitle}}</h3>
+        <p class="content__description">{{notification.description}}</p>
+        <button class="btn" (click)="notification.btnAction()">Continuar</button>
     </div>
 </div>
-
-<div class="content">
-    <h3 class="content__title">¡Lo sentimos!</h3>
-    <h3 class="content__subtitle">No has logrado completar el reto LikeU</h3>
-    <p class="content__description">Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.</p>
-    <button sn-button>Continuar</button>
-</div>
-
-
-

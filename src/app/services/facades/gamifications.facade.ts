@@ -1,36 +1,62 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { ChallengeLikeU } from "src/app/shared/interfaces/response/challenges.interface";
-import { Gamification, Period } from "src/app/shared/interfaces/response/gamification.interface";
-import { Card } from "src/app/shared/interfaces/response/icard-details";
-import { environment } from "src/environments/environment";
+import { Observable, throwError } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { ChallengeLikeU } from "../../shared/interfaces/response/challenges.interface";
 
 import { GamificationService } from "../apis/gamification.service";
+import { ErrorService } from "../apis/error.service";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
 })
 export class GamificationFacade {
 
-    private _authorization=environment.gamification.dummy
+    public firstaccess:boolean=false
+    public message:boolean=true
+    public route:string='';
+    public resp!:ChallengeLikeU
 
-    constructor( private gamificacionAPI: GamificationService ) {        
+
+    constructor( 
+        private gamificacionAPI: GamificationService,
+        private errorService:ErrorService,
+        private router:Router
+        ) {        
     }
 
     getGamification():Observable<ChallengeLikeU>{
-        return this.gamificacionAPI.getGamifications(this._authorization).pipe(
+        return this.gamificacionAPI.getGamifications().pipe(
+            tap(resp=>{ 
+                if(resp.card.status!=="ACTIVE"){
+                    const error = throwError('Tarjeta bloqueada')
+                    this.errorService.errorShow(error)
+                }                
+            }),
             map(resp=>{
-                const{cut_of_date}=resp.data
-                const{current_limit,potential_limit,period}=resp.data.card
-                return {
+                
+                const{cut_of_date,seen_first_time}=resp
+                const{current_limit,potential_limit,period,status,lower_limit}=resp.card
+                this.resp ={
                     current_limit,
                     potential_limit,
                     period,
-                    cut_of_date:new Date()
+                    cut_of_date,
+                    status,
+                    seen_first_time,
+                    lower_limit
+                }
+                
+                return this.resp
+            }),
+            tap(resp=>{
+
+                if (resp.seen_first_time ) {
+                    this.router.navigateByUrl('bienvenido')
+                    this.firstaccess=true
                 }
             })
         )
     }
-
 }
+

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -6,14 +6,14 @@ import { PagesModule } from './pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from "./app-routing.module";
 
-
-import {
-  DigitalBankDarkTheme,
-  DigitalBankTheme,
-  ThemeModule
-} from '@ngx-mxflame/atoms/theme';
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
-import { SsoInterceptorService } from './services/interceptors/sso-interceptor.service';
+import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
+import { ConfigFacade } from './services/facades/config.facade';
+
+
+export function appConfigProvider(provider:ConfigFacade){
+  return () => provider.getConfig();
+}
 
 
 @NgModule({
@@ -25,22 +25,25 @@ import { SsoInterceptorService } from './services/interceptors/sso-interceptor.s
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    ThemeModule.forRoot({ 
-      themes: [DigitalBankTheme, DigitalBankDarkTheme],
-      active: 'theme--digitalbank-dark'
-    }),
     PagesModule,
     
   ],
   providers: [
     {
       provide:  HTTP_INTERCEPTORS,
-      useClass:SsoInterceptorService,
+      useClass:MockInterceptorService,
       multi:true
     },
     {
       provide:  HTTP_INTERCEPTORS,
       useClass:ErrorInterceptorService,
+      multi:true
+    },
+    ConfigFacade,
+    {
+      provide:APP_INITIALIZER,
+      useFactory:appConfigProvider,
+      deps:[ConfigFacade],
       multi:true
     }
   ],

@@ -8,7 +8,8 @@ import { DirectivesModule } from '../../directives/directives.module';
 @NgModule({
   declarations: [CircleProgressComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    DirectivesModule
   ],
   exports:[
     CircleProgressComponent

@@ -1,9 +1,9 @@
-import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[show]'
 })
-export class ModalDirective implements OnInit {
+export class ModalDirective {
 
   htmlElement!:ElementRef<HTMLElement>
 
@@ -13,19 +13,12 @@ export class ModalDirective implements OnInit {
     :this.viewContainer.clear();
   }
 
+  
+
   constructor(
     private templateRef:TemplateRef<HTMLElement>,
     private viewContainer:ViewContainerRef
   ) { 
     this.htmlElement=this.templateRef.elementRef
   }
-  ngOnInit(): void {
-    
-  }
-
-
-  closeModal(){
-    
-  }
-
 }

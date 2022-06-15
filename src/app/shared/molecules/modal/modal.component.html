@@ -1,18 +1,23 @@
-<div #modal class="modal-bg">
+<div class="modal-bg">
     <div animation="zoomIn" class="modal">
         <div class="modal__body">
-            <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
+            <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
             <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+data.icon+'.svg'"  alt="icono">
-                <h2 class="modal__title">{{data.name}}</h2>
-                <span class="modal__subtitle">{{data.description}}</span>            
+                <img [src]="'../../../../assets/icons/'+modal.icon+'.png'"  alt="icono">
+                <h2 [ngClass]="{
+                    'modal__title':true,
+                    'modal__title--gradient':(modal.accelerator)
+                }">
+                    {{modal.name}}
+                </h2>
+                <span class="modal__subtitle">{{modal.description}}</span>            
             </div>
             <ul>
-                <ng-container *ngFor="let condition of data.conditions">
+                <ng-container *ngFor="let condition of modal.conditions">
                     <li>{{condition}}</li>
                 </ng-container>
             </ul>
         </div>
-        <button class="modal__btn-continuar" sn-button *ngIf="data.redirection">Continuar</button>
+        <button class="btn" *ngIf="modal.redirection" (click)="redirect()">Continuar</button>
     </div>
 </div>

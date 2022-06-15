@@ -1,14 +1,28 @@
+.message{
+    background: var(--theme-color-background-03);
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+}
+
 .header{
     align-items: center;
     display: grid;
     justify-content: center;
+    margin-top: 3.75rem;
     margin-bottom: 3.4rem;
+    text-align: center;
 }
 
-sn-icon{
-    font-size: 2rem;
+.header__santander-icon{
     margin: auto;
     margin-bottom: 3rem;
+    z-index: 1;
 }
 
 .header__icon{
@@ -20,6 +34,7 @@ sn-icon{
     justify-content: center;
     height: 6.5rem;
     width: 6.5rem;
+    z-index: 1;
 }
 
 .content{
@@ -54,4 +69,16 @@ sn-icon{
 
 button{
     margin: 0 7rem;
+}
+
+.header::before{
+    background: #F5F7FA;
+    border-radius: 0 0 50% 50%;
+    content: '';
+    height: 375px;
+    left: -25%;
+    position: absolute;
+    top: -180px;
+    width: 150%;
+    z-index: 0;
 }

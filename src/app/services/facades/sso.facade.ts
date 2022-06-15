@@ -1,76 +1,81 @@
 
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, of, throwError } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
+import { throwError } from "rxjs";
+import { ErrorService } from "../apis/error.service";
 
 import { TokenValidatorService } from "../apis/token.validator.service";
-import { ErrorService } from "../apis/error.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenSsoFacade {
 
-    private _token!:string
-    private isBase64!:boolean
-    validToken!:boolean;
+    public _token!:string
+    challengesRedirect:string[]=[]
 
     constructor(
+        private tokenService:TokenValidatorService,
         private activatedRoute:ActivatedRoute,
         private errorService:ErrorService,
-        private router:Router
     ) {
-
-        if (this.activatedRoute.queryParams) {
-            const queryParams=this.activatedRoute.queryParams
-
-            queryParams.subscribe(param=>{
-              if (param['token']) {
-                this._token=param['token']
-                this.isBase64=this.isBase64Token()
-              }else{
-                  
-                  throwError('param Token no existe')
-                  console.log(this.errorService.showError);
-              }
-            })
-          }
+       
     }
 
-    validationToken(): Observable<any> {
-        if (this.isBase64) {
-            return of(true)
-            // return this.tokenService.getValidateToken(this._token)
+    validationToken( ) {
+        let tkn=''
+        let isBase64=false
+        let error
 
-        }else{
-            this.errorService.showError=true
-            this.router.navigate(['error'])
-            return throwError('El token no es base 64')
+        this.activatedRoute.queryParams.subscribe(params=>{
+            if (params['token']) {
+                tkn=this.transformBase64(params['token'])
+                this._token=tkn
+                isBase64=this.isBase64Token(tkn)
+            }else{
+                error= throwError('El token no existe')
+            }
+        })
+        
+        if (!isBase64) {
+            error = throwError('El token no es base 64')
         }
-    }
+        
+        if (error) {
+            this.errorService.errorShow(error)
+            return error
+        }
+        
+        return this.tokenService.getValidateToken(tkn);
+   }
 
-    isBase64Token(){
+    isBase64Token(tkn:string){
 
         let base64regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/
 
-
-        const tk=this._token.split(' ')
-
-        this._token='';
-        tk.forEach((tkn,i)=>{
-
-            if (i<tk.length-1) {
-                this._token+=`${tkn}+`
-            }else{
-                this._token+=`${tkn}`
-            }
-        })
-
-        const validateBase64=base64regex.test(this._token);
+        const validateBase64=base64regex.test(tkn);
 
         if (!validateBase64) {
           return false
         }
         return true
-      }
+    }
+
+    transformBase64(tkn:string){
+
+    const token=tkn.split(' ')
+
+    tkn='';
+    token.forEach((t,i)=>{
+
+        if (i<token.length-1) {
+            tkn+=`${t}+`
+        }else{
+            tkn+=`${t}`
+        }
+    })
+    
+    return tkn
+
+    }
 }

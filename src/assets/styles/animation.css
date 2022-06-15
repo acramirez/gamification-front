@@ -1,4 +1,9 @@
 
+.transition{
+    transition: all ease 1s;
+}
+
+
 .zoomIn{
     animation: zoomIn .3s ease-in normal;
 }
@@ -31,6 +36,10 @@
     transition: all ease .3s;
 }
 
+.rotate{
+    transition: all ease .3s;
+}
+
 @keyframes downUp {
     0%{
         bottom: -100%;
@@ -47,6 +56,18 @@
 }
 
 
+.hidden{
+    display: none;
+}
 
 
+.hidden--dropdown{
+    height: 0;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
+.active--tab{
+    transform: scale(1.2);
+}

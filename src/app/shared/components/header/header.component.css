@@ -2,7 +2,8 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: 0 1rem;
+    margin: 0 1.5rem;
+    padding-top: 3.75rem;
     position: relative;
     overflow: hidden;
     z-index: 100;
@@ -21,7 +22,7 @@
 
 h2{
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 sn-icon{
