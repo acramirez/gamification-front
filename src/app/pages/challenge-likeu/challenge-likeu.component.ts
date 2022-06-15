@@ -45,6 +45,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   // Temporaly
+  
+  notification!:Notification
 
   // @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
 
@@ -83,7 +85,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       
       this.gamificacionFacade.getGamification()
       .subscribe(resp=>{
-
         this.proccessData(resp)
       })     
     }
@@ -113,9 +114,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.currentPeriod=Number(period.current_period)
     this.indexTab=this.currentPeriod
     this.cutOfDate=new Date(resp.cut_of_date as Date)
-    
-    // this.showFirstAccess(resp.seen_first_time)    
-    
+        
     this.getTabs(period);
 
     this.checkChallenges();
@@ -394,7 +393,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     })
   }
 
-  messageNotification(resp:ChallengeLikeU){
+  async messageNotification(resp:ChallengeLikeU){
 
     const {period,current_limit,potential_limit}=resp
 
@@ -407,16 +406,16 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       const dueDate=new Date(period_detail[previousPeriod].due_date)
 
       const date=new Date();
+      const notification:Notification={
+        icon:'',
+        title:'',
+        subtitle:'',
+        description:'',
+        btnAction:()=>this.closeModal()
+      }
       
       if (date>dueDate && this.gamificacionFacade.message) {
 
-        const notification:Notification={
-          icon:'',
-          title:'',
-          subtitle:'',
-          description:'',
-          btnAction:()=>this.closeModal()
-        }
         
           const status=this.getStatusMission(previousPeriod)
           
@@ -438,8 +437,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           }
           console.log(notification);
            
-          this.modalService.generateNotification(this.viewContainerRef,notification)
-      }
+        }
+        await this.modalService.generateNotification(this.viewContainerRef,notification)
     }
 
   }
