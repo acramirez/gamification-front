@@ -16,7 +16,6 @@ export class ModalService {
   }
 
   modalData!:Modal
-  container!:ViewContainerRef
   
 
   generateModal(container:ViewContainerRef, modalData:Modal){
@@ -33,6 +32,6 @@ export class ModalService {
   }
 
   close(container:ViewContainerRef){    
-    this.container.clear()
+    container.clear()
   }
 }
