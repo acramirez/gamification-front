@@ -71,7 +71,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.tokenFacade.validationToken()
         .toPromise()
           .then(challenges=>{
-            console.log(challenges);
             
             this.getChallengesRedirect(challenges);
              
@@ -436,7 +435,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             notification.title='¡Misión cumplida!'
             notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
             notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-          }  
+          }
+          console.log(notification);
+           
           this.modalService.generateNotification(this.viewContainerRef,notification)
       }
     }
