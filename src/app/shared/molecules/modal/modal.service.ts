@@ -11,7 +11,6 @@ import { ModalComponent } from './modal.component';
 export class ModalService {
   constructor(
     private componentFR:ComponentFactoryResolver,
-    private gamificationCS:GamificationCallbacksService
   ){
   }
 

@@ -49,7 +49,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   // @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
 
   tabs:Tab[]=[];
-  showModal:boolean=false;
 
   private destroy$!:Subject<any>;
 
@@ -92,7 +91,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   }
 
-  show(){
+  showModal(){
     const modal:Modal={
       ...this.challengeActive,
       close:()=>this.closeModal()
