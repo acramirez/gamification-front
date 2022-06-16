@@ -492,3 +492,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
