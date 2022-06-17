@@ -348,11 +348,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     //   }
     // })
 
-    this.statusMissions[tab].challenges?.forEach(chall=>{
-      if (chall.id===challenge.id) {
-        status=chall.status
-      }
-    })
+    if (this.statusMissions[tab].challenges) {
+      
+      this.statusMissions[tab].challenges?.forEach(chall=>{
+        if (chall.id===challenge.id) {
+          status=chall.status
+        }
+      })
+    }
     return status
   }
 
@@ -454,7 +457,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     let status=undefined
     const today = new Date();
  
-    if (this.statusMissions[index] && index<this.currentPeriod) {
+    if (this.statusMissions[index]) {
     const {challenges}=this.statusMissions[index]
     const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
     
