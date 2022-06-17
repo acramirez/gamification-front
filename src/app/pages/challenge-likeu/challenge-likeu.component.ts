@@ -174,6 +174,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     })
 
+    
     this.setChallengeRedirect();
     this.missionStatus=this.getStatusMission(tab);
     
@@ -334,18 +335,23 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   setStatusChallenges(tab:number,challenge:Challenge){
 
     let status=false
-    this.statusMissions.forEach(mission=>{
-      if (mission.mission===tab.toString()) {
+    // this.statusMissions.forEach(mission=>{
+    //   if (mission.mission===tab.toString()) {
         
-        mission.challenges?.forEach(chall=>{
-          if (chall.id===challenge.id) {
-            status=chall.status
-          }
-        })
+    //     mission.challenges?.forEach(chall=>{
+    //       if (chall.id===challenge.id) {
+    //         status=chall.status
+    //       }
+    //     })
 
+    //   }
+    // })
+
+    this.statusMissions[tab].challenges?.forEach(chall=>{
+      if (chall.id===challenge.id) {
+        status=chall.status
       }
     })
-      
     return status
   }
 
@@ -418,6 +424,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         }
         
           const status=this.getStatusMission(previousPeriod)
+          console.log(status);
           
           if (current_limit.amount===potential_limit.amount) {
             notification.icon='challenge-complete'
@@ -434,9 +441,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             notification.title='¡Misión cumplida!'
             notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
             notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-          }
-          console.log(notification);
-          
+          }          
           this.modalService.generateNotification(this.viewContainerRef,notification)
         }
     }
@@ -448,7 +453,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     let status=undefined
     const today = new Date();
  
-    if (this.statusMissions[index] && this.cutOfDate<today) {
+    if (this.statusMissions[index] && index<this.currentPeriod) {
     const {challenges}=this.statusMissions[index]
     const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
     
@@ -480,13 +485,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return status
   }
 
-
   showFirstAccess(seenFirstTime:boolean){
     if (seenFirstTime  && !this.gamificacionFacade.firstaccess) {
       this.router.navigateByUrl('bienvenido')
     }
   }
-
 
   ngOnDestroy(): void {
     if (this.destroy$) {

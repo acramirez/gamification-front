@@ -1,6 +1,7 @@
 export interface StatusMissions {
     mission:string,
-    challenges?:StatusChallenges[]
+    challenges?:StatusChallenges[],
+    status?:boolean
 }
 
 export interface StatusChallenges{
