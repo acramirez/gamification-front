@@ -174,6 +174,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     })
 
+    console.log(this.challenges);
     
     this.setChallengeRedirect();
     this.missionStatus=this.getStatusMission(tab);
