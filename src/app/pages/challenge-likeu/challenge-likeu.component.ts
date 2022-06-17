@@ -33,7 +33,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   statusMissions:StatusMissions[]=[]
   percent:number=0;
   currentPeriod:number=0
-  dueDay!:Date;
+  // dueDay!:Date;
   cutOfDate!:Date;
   indexTab!:number
   remainingDays!:number
@@ -122,7 +122,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.getPercent();
     
 
-    this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
+    // this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
     
     this.messageNotification(resp);
     this.modalService.generateNotification(this.viewContainerRef,this.notification)
