@@ -125,6 +125,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
     
     this.messageNotification(resp);
+    this.modalService.generateNotification(this.viewContainerRef,this.notification)
   }
 
   get challenges(){
@@ -401,41 +402,43 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     const previousPeriod= Number(current_period) - 1
     const previousPeriodDetail=period_detail[previousPeriod]
-    
-    const date=new Date();
-    this.notification={
-      icon:'',
-      title:'',
-      subtitle:'',
-      description:'',
-      btnAction:()=>this.closeModal()
-    }
-    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>1) {
+
+    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>=1) {
       const dueDate=new Date(period_detail[previousPeriod].due_date)
 
+      const date=new Date();
       
       if (date>dueDate && this.gamificacionFacade.message) {
-
+        
+        const notification={
+          icon:'',
+          title:'',
+          subtitle:'',
+          description:'',
+          btnAction:()=>this.closeModal()
+        }
         
           const status=this.getStatusMission(previousPeriod)
           
           if (current_limit.amount===potential_limit.amount) {
-            this.notification.icon='challenge-complete'
-            this.notification.title='¡Lo has logrado!'
-            this.notification.subtitle='Tu límite de crédito ha aumentado'
-            this.notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
+            notification.icon='challenge-complete'
+            notification.title='¡Lo has logrado!'
+            notification.subtitle='Tu límite de crédito ha aumentado'
+            notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
           }else if(!status){
-            this.notification.icon='challenge-no-complete'
-            this.notification.title='¡Lo sentimos!'
-            this.notification.subtitle='No has logrado completar el reto LikeU'
-            this.notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
+            notification.icon='challenge-no-complete'
+            notification.title='¡Lo sentimos!'
+            notification.subtitle='No has logrado completar el reto LikeU'
+            notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
           }else if(status){
-            this.notification.icon='mission-complete'
-            this.notification.title='¡Misión cumplida!'
-            this.notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
-            this.notification.description='Continúa con los retos de la siguiente misión para avanzar.'
+            notification.icon='mission-complete'
+            notification.title='¡Misión cumplida!'
+            notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
+            notification.description='Continúa con los retos de la siguiente misión para avanzar.'
           }
-
+          console.log(notification);
+          
+          this.modalService.generateNotification(this.viewContainerRef,notification)
         }
     }
 
