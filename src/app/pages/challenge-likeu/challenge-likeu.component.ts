@@ -446,8 +446,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   getStatusMission(index:number):boolean | undefined{
 
     let status=undefined
+    const today = new Date();
  
-    if (this.statusMissions[index]) {
+    if (this.statusMissions[index] && this.cutOfDate<today) {
     const {challenges}=this.statusMissions[index]
     const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
     
