@@ -402,18 +402,18 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     const previousPeriod= Number(current_period) - 1
     const previousPeriodDetail=period_detail[previousPeriod]
-
+    
+    const date=new Date();
+    this.notification={
+      icon:'',
+      title:'',
+      subtitle:'',
+      description:'',
+      btnAction:()=>this.closeModal()
+    }
     if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>1) {
       const dueDate=new Date(period_detail[previousPeriod].due_date)
 
-      const date=new Date();
-      this.notification={
-        icon:'',
-        title:'',
-        subtitle:'',
-        description:'',
-        btnAction:()=>this.closeModal()
-      }
       
       if (date>dueDate && this.gamificacionFacade.message) {
 
