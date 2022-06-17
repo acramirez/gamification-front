@@ -125,7 +125,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
     
     this.messageNotification(resp);
-    this.modalService.generateNotification(this.viewContainerRef,this.notification)
   }
 
   get challenges(){
