@@ -23,6 +23,13 @@ export interface Challenge {
     redirection: boolean;
     status?:     boolean;
     accelerator?:boolean
+    type?:typeChallenge
+}
+
+export enum typeChallenge{
+    mandatory='mandatory',
+    special='special',
+    accelerator='accelerator',
 }
 
 export interface Mission {

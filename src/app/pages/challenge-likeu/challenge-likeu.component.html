@@ -3,10 +3,10 @@
     <div class="challenge-likeu">
         <app-card-data 
             [data]="cardDetail"
-            [percent]="getPercent()"
-        >
+            >
         </app-card-data>
-        <app-month-challenges 
+        <!-- [percent]="getPercent()" -->
+        <!-- <app-month-challenges 
          [mandatoryChallenges]="mandatoryChallenges" 
          [specialChallenges]="specialChallenges" 
          [tabs]="tabs"
@@ -17,7 +17,7 @@
          [initialTab]="currentPeriod"
          (challengeActive)="challengeActive=$event;showModal()"
         >
-        </app-month-challenges>
+        </app-month-challenges> -->
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
 </div>
