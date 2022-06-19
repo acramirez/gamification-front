@@ -5,7 +5,7 @@ import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge, Mission, typeChallenge } from '../../shared/interfaces/response/challengesContract.interface';
-import { Assistance, CardPayment, CurrentLimit, Period } from '../../shared/interfaces/response/gamification.interface';
+import { Assistance, CardPayment, CurrentLimit, Period, PeriodDetail } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
@@ -18,6 +18,7 @@ import { Notification } from 'src/app/shared/interfaces/notification';
 import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   cutOfDate!:Date;
   indexTab!:number
   remainingDays!:number
-  statusChallenges:StatusChallenges[]=[]
+  //statusChallenges:StatusChallenges[]=[]
   missionStatus!:boolean | undefined;
 
   challengesRedirect:string[]=[]
@@ -82,7 +83,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               // this.proccessData(resp)
-              this.createMission(resp);
+              this.createMission();
+              this.propertyChallenges();
             })
           })
 
@@ -143,21 +145,33 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
  * Metodo mediante el cual se obtienen los challenges de acuerdo al tab seleccionado
 */
 
-createMission(resp:ChallengeLikeU){
-  console.log();
-  const {missions,challenges}= this.challenges
-
-  missions.forEach(miss=>{
-    const mission:MissionInterfaces={
-      id:miss.id,
-      cut_of_date:resp.cut_of_date,
-    }
-    mission.challenges=this.typeChallenge(miss)
-    this.missions.push(mission)
-    })  
-
+  propertyChallenges(){
+    this.missions.forEach((mission,index)=>{
+      if (this.period.period_detail[index]) {
+        mission.challenges?.forEach(challenge=>{
+          challenge=this.statusChallenge(challenge,this.period.period_detail[index])
+        })
+      }
+    })
     console.log(this.missions);
-}
+    
+  }
+
+  createMission(){
+    console.log();
+    const {missions,challenges}= this.challenges
+
+    missions.forEach(miss=>{
+      const mission:MissionInterfaces={
+        id:miss.id,
+      }
+      mission.challenges=this.typeChallenge(miss)
+      this.missions.push(mission)
+      })  
+
+      console.log(this.missions);
+  }
+
 
   typeChallenge(mission:Mission){
   const {challenges}= this.challenges
@@ -181,6 +195,144 @@ createMission(resp:ChallengeLikeU){
 
       return challengesMission
   }
+
+  statusChallenge(challenge:Challenge,periodDetail:PeriodDetail){
+    const {
+      accumulated_purchases,
+      card_payment,
+      recurrent_payment, 
+      domiciliation,
+      assistance,
+      payroll_portability,
+      digitalChannels,
+      due_date
+      
+    }= periodDetail
+
+      const chall ={...challenge}
+      switch (challenge.id) {
+        case 'accumulated_purchases':
+          chall.status=this.checkAccumulatedPurchases(accumulated_purchases,due_date)
+          
+          break;
+        case 'card_payment':
+          chall.status=this.checkCardPayment(card_payment,due_date)
+          break;
+
+        case 'recurrent_payment':
+          chall.status=this.checkRecurrentPayment(recurrent_payment,due_date)
+          break;
+
+        case 'domiciliation':
+          chall.status=this.checkDomiciliation(domiciliation,due_date)
+          break;
+
+        case 'assistance':
+          chall.status=this.checkAssistance(assistance,due_date)
+          break;
+
+        case 'payroll_portability':
+          chall.status=this.checkPayrollPortability(payroll_portability,due_date)
+          break;
+
+        case 'digitalChannels':
+          chall.status=this.checkDigitalChannels(digitalChannels,due_date)
+          break;
+      }
+
+      return chall
+
+  }
+
+  checkCardPayment(cardPayment:CardPayment[],dueDate:Date){ 
+    if(cardPayment){
+      dueDate=new Date(dueDate)
+      for (const card of cardPayment) {
+        card.operation_date = new Date(card.operation_date);
+        if(card.amount_payment.amount>=card.minimum_amount.amount && card.operation_date<dueDate){
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit, cutDate:Date){
+    const today=new Date()
+    
+    if (accumulatedPurchases && accumulatedPurchases.amount>=200 && today<cutDate) {
+      return true
+    }
+    return false
+  }
+
+  checkRecurrentPayment(recurrentPayment:Assistance[],cutDate:Date){
+    if (recurrentPayment) {
+      for (const recurrent of recurrentPayment) {
+        recurrent.operation_date= new Date(recurrent.operation_date)
+
+        if (recurrent.status==='ACTIVE' && recurrent.operation_date && recurrent.operation_date<cutDate) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkDomiciliation(domiciliation:any[], cutDate:Date){
+    if (domiciliation) {
+      
+      for (const dom of domiciliation) {
+        dom.operation_date= new Date(dom.operation_date)
+
+        if (dom.status==='ACTIVE' && dom.operation_date<cutDate) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkAssistance(assistance:any[], cutDate:Date){
+    if (assistance ) {
+      for (const assis of assistance) {
+        assis.operation_date= new Date(assis.operation_date)
+        if (assis.status==='ACTIVE' && assis.operation_date<cutDate) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkPayrollPortability(payrollPortability:any[], cutDate:Date){
+
+    if (payrollPortability) {
+      for (const payroll of payrollPortability) {
+        payroll.operation_date= new Date(payroll.operation_date)
+        if (payroll.status==='ACTIVE' && payroll.operation_date<cutDate) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkDigitalChannels(digitalChannels:any[], cutDate:Date ){   
+    if (digitalChannels) {
+     for (const channel of digitalChannels) {
+       channel.operation_date= new Date(channel.operation_date)
+        
+        if (channel.status==='ACTIVE' && channel.operation_date<cutDate) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+
+
 
   // getChallenges(tab:number){
     
@@ -289,94 +441,7 @@ createMission(resp:ChallengeLikeU){
   //   })
   // }
 
-  // checkCardPayment(cardPayment:CardPayment[],dueDate:Date){
-    
-  //   if(cardPayment){
-  //     dueDate=new Date(dueDate)
-  //     for (const card of cardPayment) {
-  //       card.operation_date = new Date(card.operation_date);
-  //       if(card.amount_payment.amount>card.minimum_amount.amount && card.operation_date<dueDate){
-  //         this.statusChallenges.push({id:'card_payment',status:true})
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit, cutDate:Date){
-  //   const today=new Date()
-    
-  //   if (accumulatedPurchases && accumulatedPurchases.amount>=200 && today<cutDate) {
-  //     this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
-  //   }
-  // }
-
-  // checkRecurrentPayment(recurrentPayment:Assistance[],cutDate:Date){
-  //   if (recurrentPayment) {
-  //     for (const recurrent of recurrentPayment) {
-  //       recurrent.operation_date= new Date(recurrent.operation_date)
-
-  //       if (recurrent.status==='ACTIVE' && recurrent.operation_date && recurrent.operation_date<cutDate) {
-  //         this.statusChallenges.push({id:'recurrent_payment',status:true});
-  //         break;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkDomiciliation(domiciliation:any[], cutDate:Date){
-  //   if (domiciliation) {
-      
-  //     for (const dom of domiciliation) {
-  //       dom.operation_date= new Date(dom.operation_date)
-
-  //       if (dom.status==='ACTIVE' && dom.operation_date<cutDate) {
-  //         this.statusChallenges.push({id:'domicialitation',status:true})
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkAssistance(assistance:any[], cutDate:Date){
-  //   if (assistance ) {
-  //     for (const assis of assistance) {
-  //       assis.operation_date= new Date(assis.operation_date)
-  //       if (assis.status==='ACTIVE' && assis.operation_date<cutDate) {
-  //         this.statusChallenges.push({id:'assistance',status:true})
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkPayrollPortability(payrollPortability:any[], cutDate:Date){
-
-  //   if (payrollPortability) {
-  //     for (const payroll of payrollPortability) {
-  //       payroll.operation_date= new Date(payroll.operation_date)
-  //       if (payroll.status==='ACTIVE' && payroll.operation_date<cutDate) {
-  //         this.statusChallenges.push({id:'payroll_portability',status:true})
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkDigitalChannels(digitalChannels:any[], cutDate:Date ){
-        
-  //   if (digitalChannels) {
-  //     for (const channel of digitalChannels) {
-  //       channel.operation_date= new Date(channel.operation_date)
-        
-  //       if (channel.status==='ACTIVE' && channel.operation_date<cutDate) {
-  //         this.statusChallenges.push({id:'digital_channel',status:true})
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
-
+  
   // setStatusChallenges(tab:number,challenge:Challenge){
 
   //   let status=false

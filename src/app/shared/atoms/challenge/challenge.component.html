@@ -1,7 +1,7 @@
 <div class="challenge">
     <div [ngClass]="{
         'challenge__content':true,
-        'challenge__content--accelerator':challenge.accelerator
+        'challenge__content--accelerator':challenge.type==='accelerator'
     }">
         <img class="challenge__img" [src]="'../../../../assets/icons/'+challenge.icon+'.png'" alt="">
 
