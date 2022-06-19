@@ -86,6 +86,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               this.createMission();
               this.propertyChallenges();
             })
+            console.log(this.missions);
+
           })
 
     }else if (this.tokenFacade._token) {
@@ -153,7 +155,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         })
       }
     })
-    console.log(this.missions);
     
   }
 
