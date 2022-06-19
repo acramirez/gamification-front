@@ -154,7 +154,8 @@ createMission(resp:ChallengeLikeU){
     }
     const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=miss
     const challengesMission:Challenge[]=[]
-    this.challenges.challenges.forEach(challenge => {
+
+    challenges.forEach(challenge => {
         let chall={...challenge}
         if (mandatoryChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.mandatory
