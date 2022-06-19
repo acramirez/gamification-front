@@ -16,7 +16,7 @@ export const challengesContract:ChallengesContract={
         redirection: false
       },
       {
-        id: "minimum_monthly_billing",
+        id: "accumulated_purchases",
         name: "Usa tu tarjeta",
         description: "Facturación minima de $200 pesos MN (equiparable al monto de consumo mínimo del producto LIKEU).",
         specs: [
