@@ -154,20 +154,18 @@ createMission(resp:ChallengeLikeU){
     }
     const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=miss
     
-    challenges.filter(
-      (challenge)=>{
+    this.challenges.challenges.forEach(challenge => {
         let chall={...challenge}
         if (mandatoryChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.mandatory
-          mission.challenges?.push(chall)
         }else if (specialChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.special
-          mission.challenges?.push(chall)
         }else if (acceleratorChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.accelerator
-          mission.challenges?.push(chall)
         }
+        mission.challenges?.push(chall)
       })
+      
       this.missions.push(mission)
   })
   console.log(this.missions);
