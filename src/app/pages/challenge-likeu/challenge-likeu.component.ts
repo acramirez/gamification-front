@@ -159,12 +159,14 @@ createMission(resp:ChallengeLikeU){
         let chall={...challenge}
         if (mandatoryChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.mandatory
+          challengesMission.push(chall)
         }else if (specialChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.special
+          challengesMission.push(chall)
         }else if (acceleratorChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.accelerator
+          challengesMission.push(chall)
         }
-        challengesMission.push(chall)
       })
       mission.challenges=challengesMission
       this.missions.push(mission)
