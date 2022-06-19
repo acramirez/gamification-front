@@ -83,6 +83,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               // this.proccessData(resp)
+              this.period=resp.period
               this.createMission();
               this.propertyChallenges();
             })
