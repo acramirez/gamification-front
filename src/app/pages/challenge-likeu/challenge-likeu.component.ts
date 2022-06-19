@@ -86,8 +86,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               this.period=resp.period
               this.createMission();
               this.propertyChallenges();
+              console.log(this.missions);
             })
-            console.log(this.missions);
 
           })
 
@@ -152,7 +152,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.missions.forEach((mission,index)=>{
       if (this.period.period_detail[index]) {
         mission.challenges?.forEach(challenge=>{
-          challenge=this.statusChallenge(challenge,this.period.period_detail[index])
+          challenge.status=this.statusChallenge(challenge,this.period.period_detail[index]).status
         })
       }
     })
