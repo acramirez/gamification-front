@@ -4,7 +4,7 @@ import { GamificationFacade } from '../../services/facades/gamifications.facade'
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
-import { Challenge, typeChallenge } from '../../shared/interfaces/response/challengesContract.interface';
+import { Challenge, Mission, typeChallenge } from '../../shared/interfaces/response/challengesContract.interface';
 import { Assistance, CardPayment, CurrentLimit, Period } from '../../shared/interfaces/response/gamification.interface';
 import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
@@ -152,8 +152,18 @@ createMission(resp:ChallengeLikeU){
       id:miss.id,
       cut_of_date:resp.cut_of_date,
     }
-    const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=miss
+    mission.challenges=this.typeChallenge(miss)
+    this.missions.push(mission)
+    })  
+
+    console.log(this.missions);
+}
+
+  typeChallenge(mission:Mission){
+  const {challenges}= this.challenges
+    const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=mission
     const challengesMission:Challenge[]=[]
+
 
     challenges.forEach(challenge => {
         let chall={...challenge}
@@ -168,12 +178,10 @@ createMission(resp:ChallengeLikeU){
           challengesMission.push(chall)
         }
       })
-      mission.challenges=challengesMission
-      this.missions.push(mission)
-      
-    })  
-    console.log(this.missions);
-}
+
+      return challengesMission
+  }
+
   // getChallenges(tab:number){
     
   //   this.mandatoryChallenges=[];
