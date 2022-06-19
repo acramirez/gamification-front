@@ -153,7 +153,7 @@ createMission(resp:ChallengeLikeU){
       cut_of_date:resp.cut_of_date,
     }
     const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=miss
-    
+    const challenges:Challenge[]=[]
     this.challenges.challenges.forEach(challenge => {
         let chall={...challenge}
         if (mandatoryChallenges.includes(challenge.id)) {
@@ -163,13 +163,13 @@ createMission(resp:ChallengeLikeU){
         }else if (acceleratorChallenges.includes(challenge.id)) {
           chall.type=typeChallenge.accelerator
         }
-        mission.challenges?.push(chall)
+        challenges.push(chall)
       })
-      
+      mission.challenges=challenges
       this.missions.push(mission)
-  })
-  console.log(this.missions);
-  
+      
+    })  
+    console.log(this.missions);
 }
   // getChallenges(tab:number){
     
