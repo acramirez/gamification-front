@@ -17,20 +17,8 @@
             (challengeActive)="challengeActive=$event;showModal()"
             (indexTab)="showMissionActive($event);indexTab=$event"
         >
-
         </app-month-challenges>
-        <!-- <app-month-challenges 
-         [mandatoryChallenges]="mandatoryChallenges" 
-         [specialChallenges]="specialChallenges" 
-         [tabs]="tabs"
-         [seconds]="remainingDays"
-         [dueDate]="cutOfDate"
-         (indexTab)="getChallenges($event);indexTab=$event"
-         [missionStatus]="missionStatus"
-         [initialTab]="currentPeriod"
-         (challengeActive)="challengeActive=$event;showModal()"
-        >
-        </app-month-challenges> -->
+
         <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
     </div>
 </div>
@@ -38,5 +26,4 @@
     <sn-spinner ></sn-spinner>
 </ng-template>
 
-<!-- <app-modal *show="showModal" [challenge]="challengeActive" (closeModal)="showModal=$event"></app-modal> -->
     

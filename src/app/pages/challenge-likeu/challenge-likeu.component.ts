@@ -113,17 +113,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     this.currentPeriod = Number(current_period);
     this.period = resp.period
-    this.cutOfDate = new Date(resp.cut_of_date)
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
+    this.showMissionActive(this.currentPeriod)
 
-    this.missionActive = this.missions[this.currentPeriod]
     this.showNotification(current_limit, potential_limit)
   }
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
+    
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
 
 
@@ -157,29 +157,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.tabs.push(tab);
     })
   }
-
-
-
-  // proccessData(resp:ChallengeLikeU){
-
-  //   const{current_limit,potential_limit,period, lower_limit}=resp
-  //   this.cardDetail={current_limit,potential_limit,lower_limit}
-  //   this.period=period;
-  //   this.currentPeriod=Number(period.current_period)
-  //   this.indexTab=this.currentPeriod
-  //   this.cutOfDate=new Date(resp.cut_of_date as Date)
-
-  //   // this.getTabs(period);
-
-  //   // this.checkChallenges();
-  //   // this.getChallenges(this.currentPeriod);
-  //   // this.getPercent();
-
-
-  //   // // this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
-
-  //   // this.messageNotification(resp);
-  // }
 
   get challenges() {
     return this.challengesFacade.getChallenges();
@@ -295,6 +272,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       case 'digitalChannels':
         chall.status = this.checkDigitalChannels(digitalChannels, this.cutOfDate)
         break;
+        
       case 'higher_payment':
         chall.status = this.checkAccelerator(card_payment)
         break;
@@ -503,322 +481,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     return chall
   }
-
-  // setChallengeRedirect(){
-  //   this.challengesRedirect.forEach(challenge=>{
-  //     this.mandatoryChallenges.forEach(mandatory=>{
-
-  //       if(mandatory.id===challenge){
-  //         mandatory.redirection=true
-  //       }
-  //       else if(challenge==='digital_channel' && mandatory.id==='digitalChannels'){
-  //         mandatory.redirection=true
-  //       }
-  //     })
-
-  //     if (this.specialChallenges.length>0) {
-  //       this.specialChallenges.forEach(special=>{
-  //         if (special.id===challenge) {
-  //           special.redirection=true;
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
-
-
-  // messageNotification(resp:ChallengeLikeU){
-
-  //   const {period,current_limit,potential_limit}=resp
-
-  //   const {current_period,period_detail} = period
-
-  //   const previousPeriod= Number(current_period) - 1
-  //   const previousPeriodDetail=period_detail[previousPeriod]
-
-  //   if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>=1) {
-  //     const dueDate=new Date(period_detail[previousPeriod].due_date)
-
-  //     const date=new Date();
-
-  //     if (date>dueDate && this.gamificacionFacade.message) {
-
-  //       const notification={
-  //         icon:'',
-  //         title:'',
-  //         subtitle:'',
-  //         description:'',
-  //         btnAction:()=>this.closeModal()
-  //       }
-
-  //         const status=this.getStatusMission(previousPeriod)
-  //         console.log(status);
-
-  //         if (current_limit.amount===potential_limit.amount) {
-  //           notification.icon='challenge-complete'
-  //           notification.title='¡Lo has logrado!'
-  //           notification.subtitle='Tu límite de crédito ha aumentado'
-  //           notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
-  //         }else if(!status){
-  //           notification.icon='challenge-no-complete'
-  //           notification.title='¡Lo sentimos!'
-  //           notification.subtitle='No has logrado completar el reto LikeU'
-  //           notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
-  //         }else if(status){
-  //           notification.icon='mission-complete'
-  //           notification.title='¡Misión cumplida!'
-  //           notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
-  //           notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-  //         }          
-  //         this.modalService.generateNotification(this.viewContainerRef,notification)
-  //       }
-  //   }
-
-  // }
-
-
-
-  // getChallenges(tab:number){
-
-  //   this.mandatoryChallenges=[];
-  //   this.specialChallenges=[];
-
-  //   const {mandatoryChallenges,acceleratorChallenges,specialChallenges} =this.challenges.missions[tab]
-
-
-  //   this.challenges.challenges.forEach(challenge=>{
-
-  //     mandatoryChallenges.forEach(mandatory=>{
-  //       if (mandatory===challenge.id) {
-  //         challenge.status=this.setStatusChallenges(tab,challenge)
-  //         this.mandatoryChallenges.push(challenge)
-  //       }
-  //     });
-
-  //     specialChallenges.forEach(special=>{
-  //       if (special===challenge.id) {
-
-  //         challenge.status=this.setStatusChallenges(tab,challenge)
-
-  //         this.specialChallenges.push(challenge)
-  //       }
-  //     });
-
-  //     acceleratorChallenges.forEach(accelerator=>{
-  //       if (accelerator===challenge.id) {
-  //         challenge.status=this.setStatusChallenges(tab,challenge)
-  //         challenge.accelerator=true
-  //         this.mandatoryChallenges.push(challenge)
-  //       }
-  //     });
-
-  //   })
-
-  //   console.log(this.challenges);
-
-  //   this.setChallengeRedirect();
-  //   this.missionStatus=this.getStatusMission(tab);
-
-  // }
-
-  // getTabs(period:Period){
-
-  //   this.challenges.missions.forEach((mission,i)=>{
-  //     let tab:Tab={
-  //       id:'',
-  //       texto:'',
-  //       status:''
-  //     }
-  //     if(mission.id==='0'){
-  //       tab.texto='Intro'
-  //       tab.id=mission.id
-  //     }
-  //     else{
-  //       tab.texto=`Misión ${mission.id}`
-  //       tab.id=mission.id
-  //     }
-  //     this.tabs.push(tab);
-  //   })
-
-  //   this.tabs.forEach((tab,i)=>{
-  //     period.period_detail.forEach(mission=>{
-  //       if (tab.id===mission.period_id) {
-  //         tab.status=mission.status
-  //       }
-
-  //     })
-  //   })    
-  // }
-
-  // checkChallenges(){
-
-  //   this.period.period_detail.forEach((period,i)=>{
-
-  //     const {
-  //       accumulated_purchases,
-  //       card_payment,
-  //       recurrent_payment, 
-  //       domiciliation,
-  //       assistance,
-  //       payroll_portability,
-  //       digitalChannels,
-  //       due_date
-  //     } = period      
-
-  //     this.checkCardPayment(card_payment, due_date);
-
-  //     this.checkAccumulatedPurchases(accumulated_purchases,this.cutOfDate);
-
-  //     this.checkRecurrentPayment(recurrent_payment,this.cutOfDate);
-
-  //     this.checkDomiciliation(domiciliation,this.cutOfDate);
-
-  //     this.checkAssistance(assistance,this.cutOfDate);
-
-  //     this.checkPayrollPortability(payroll_portability,this.cutOfDate)
-
-  //     this.checkDigitalChannels(digitalChannels,this.cutOfDate)
-
-  //     this.statusMissions.push({mission:period.period_id,challenges:this.statusChallenges})
-  //     this.statusChallenges=[];
-
-  //   })
-  // }
-
-
-  // setStatusChallenges(tab:number,challenge:Challenge){
-
-  //   let status=false
-  //   // this.statusMissions.forEach(mission=>{
-  //   //   if (mission.mission===tab.toString()) {
-
-  //   //     mission.challenges?.forEach(chall=>{
-  //   //       if (chall.id===challenge.id) {
-  //   //         status=chall.status
-  //   //       }
-  //   //     })
-
-  //   //   }
-  //   // })
-
-  //   if (this.statusMissions[tab].challenges) {
-
-  //     this.statusMissions[tab].challenges?.forEach(chall=>{
-  //       if (chall.id===challenge.id) {
-  //         status=chall.status
-  //       }
-  //     })
-  //   }
-  //   return status
-  // }
-
-  // getPercent(){
-
-  //   const {lower_limit,current_limit,potential_limit}=this.cardDetail
-
-  //   let totalIncrease=potential_limit.amount-lower_limit.amount;
-
-  //   let currentIncrease=current_limit.amount-lower_limit.amount;
-
-  //   let percent=(currentIncrease * 100) / totalIncrease
-
-  //   return percent
-  // }
-
-
-
-
-  // messageNotification(resp:ChallengeLikeU){
-
-  //   const {period,current_limit,potential_limit}=resp
-
-  //   const {current_period,period_detail} = period
-
-  //   const previousPeriod= Number(current_period) - 1
-  //   const previousPeriodDetail=period_detail[previousPeriod]
-
-  //   if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>=1) {
-  //     const dueDate=new Date(period_detail[previousPeriod].due_date)
-
-  //     const date=new Date();
-
-  //     if (date>dueDate && this.gamificacionFacade.message) {
-
-  //       const notification={
-  //         icon:'',
-  //         title:'',
-  //         subtitle:'',
-  //         description:'',
-  //         btnAction:()=>this.closeModal()
-  //       }
-
-  //         const status=this.getStatusMission(previousPeriod)
-  //         console.log(status);
-
-  //         if (current_limit.amount===potential_limit.amount) {
-  //           notification.icon='challenge-complete'
-  //           notification.title='¡Lo has logrado!'
-  //           notification.subtitle='Tu límite de crédito ha aumentado'
-  //           notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
-  //         }else if(!status){
-  //           notification.icon='challenge-no-complete'
-  //           notification.title='¡Lo sentimos!'
-  //           notification.subtitle='No has logrado completar el reto LikeU'
-  //           notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
-  //         }else if(status){
-  //           notification.icon='mission-complete'
-  //           notification.title='¡Misión cumplida!'
-  //           notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
-  //           notification.description='Continúa con los retos de la siguiente misión para avanzar.'
-  //         }          
-  //         this.modalService.generateNotification(this.viewContainerRef,notification)
-  //       }
-  //   }
-
-  // }
-
-  // getStatusMission(index:number):boolean | undefined{
-
-  //   let status=undefined
-  //   const today = new Date();
-
-  //   if (this.statusMissions[index]) {
-  //   const {challenges}=this.statusMissions[index]
-  //   const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
-
-  //     const statusMandatory=(challenge:StatusChallenges)=>{
-  //       if (mandatoryChallenges.includes(challenge.id)) {
-  //         return true
-  //       }
-  //       return false
-  //     };
-
-  //     const statusSpecial=(challenge:StatusChallenges)=>{
-  //       if (specialChallenges.includes(challenge.id)) {
-  //         return true
-  //       }
-  //       return false
-  //     };
-
-
-  //     const mandatoryChallengesStatus= challenges?.filter(statusMandatory)
-  //     const specialChallengesStatus= challenges?.filter(statusSpecial)
-
-  //     if(mandatoryChallengesStatus && mandatoryChallengesStatus?.length!== mandatoryChallenges.length){
-  //       status=false
-  //     }else if (specialChallengesStatus && specialChallengesStatus?.length<1 && specialChallenges.length>0) {
-  //       status=false
-  //     }
-  //   }
-
-  //   return status
-  // }
-
-  // showFirstAccess(seenFirstTime:boolean){
-  //   if (seenFirstTime  && !this.gamificacionFacade.firstaccess) {
-  //     this.router.navigateByUrl('bienvenido')
-  //   }
-  // }
 
   ngOnDestroy(): void {
     if (this.destroy$) {
