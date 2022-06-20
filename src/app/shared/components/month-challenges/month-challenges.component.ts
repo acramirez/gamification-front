@@ -11,7 +11,7 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 export class MonthChallengesComponent implements AfterViewInit {
 
   @Input() mandatoryChallenges!:Challenge[];
-  specialChallenges:Challenge[]=[];
+  @Input() specialChallenges:Challenge[]=[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
@@ -30,11 +30,7 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-
-    this.mandatoryChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="mandatory")
-
-    this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
-
+    
     this.missionStatus=this.mission.status
     this.dueDate=this.mission.cut_of_date!
     console.log(this.mission);
