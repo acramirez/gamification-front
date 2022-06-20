@@ -126,7 +126,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.getTabs();
     
     this.missionActive=this.missions[this.currentPeriod]
-    
+    this.showNotification(current_limit,potential_limit)
   }
 
   showMissionActive(index:number){
@@ -425,6 +425,90 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return percent
   }
 
+ showNotification(currentLimit:CurrentLimit,potentialLimit:CurrentLimit){
+  const previousPeriod=this.missions[this.currentPeriod-1]
+
+  if (previousPeriod && previousPeriod.status===false &&  Number(previousPeriod.id)>1){
+    const cutDate=new Date(previousPeriod.cut_of_date!);
+    const today = new Date();
+
+    const {status}=previousPeriod
+      const notification={
+                icon:'',
+                title:'',
+                subtitle:'',
+                description:'',
+                btnAction:()=>this.closeModal()
+              }
+                
+                if (currentLimit.amount===potentialLimit.amount) {
+                  notification.icon='challenge-complete'
+                  notification.title='¡Lo has logrado!'
+                  notification.subtitle='Tu límite de crédito ha aumentado'
+                  notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
+                }else if(!status){
+                  notification.icon='challenge-no-complete'
+                  notification.title='¡Lo sentimos!'
+                  notification.subtitle='No has logrado completar el reto LikeU'
+                  notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
+                }else if(status){
+                  notification.icon='mission-complete'
+                  notification.title='¡Misión cumplida!'
+                  notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
+                  notification.description='Continúa con los retos de la siguiente misión para avanzar.'
+                }          
+                this.modalService.generateNotification(this.viewContainerRef,notification)
+    }
+  }
+
+  // messageNotification(resp:ChallengeLikeU){
+
+  //   const {period,current_limit,potential_limit}=resp
+
+  //   const {current_period,period_detail} = period
+
+  //   const previousPeriod= Number(current_period) - 1
+  //   const previousPeriodDetail=period_detail[previousPeriod]
+
+  //   if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>=1) {
+  //     const dueDate=new Date(period_detail[previousPeriod].due_date)
+
+  //     const date=new Date();
+      
+  //     if (date>dueDate && this.gamificacionFacade.message) {
+        
+  //       const notification={
+  //         icon:'',
+  //         title:'',
+  //         subtitle:'',
+  //         description:'',
+  //         btnAction:()=>this.closeModal()
+  //       }
+        
+  //         const status=this.getStatusMission(previousPeriod)
+  //         console.log(status);
+          
+  //         if (current_limit.amount===potential_limit.amount) {
+  //           notification.icon='challenge-complete'
+  //           notification.title='¡Lo has logrado!'
+  //           notification.subtitle='Tu límite de crédito ha aumentado'
+  //           notification.description='Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
+  //         }else if(!status){
+  //           notification.icon='challenge-no-complete'
+  //           notification.title='¡Lo sentimos!'
+  //           notification.subtitle='No has logrado completar el reto LikeU'
+  //           notification.description='Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
+  //         }else if(status){
+  //           notification.icon='mission-complete'
+  //           notification.title='¡Misión cumplida!'
+  //           notification.subtitle='Estás más cerca de alcanzar tu límite potencial'
+  //           notification.description='Continúa con los retos de la siguiente misión para avanzar.'
+  //         }          
+  //         this.modalService.generateNotification(this.viewContainerRef,notification)
+  //       }
+  //   }
+
+  // }
 
 
 
