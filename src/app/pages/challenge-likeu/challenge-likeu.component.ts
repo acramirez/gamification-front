@@ -128,6 +128,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.cutOfDate=resp.cut_of_date
     this.createMission();
     this.propertyChallenges();
+    this.getTabs();
     this.currentPeriod= Number(current_period);
     
     this.missionActive=this.missions[this.currentPeriod]
@@ -400,7 +401,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
     return status
   }
-
 
   getPercent(){
 
