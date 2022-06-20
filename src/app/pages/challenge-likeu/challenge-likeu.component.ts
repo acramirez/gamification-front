@@ -147,16 +147,18 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }else if (mission.id===this.currentPeriod.toString()) {
         tab.status='ongoing'
       }
+      switch (mission.id) {
+        case '0':
+          tab.texto='Intro'
+          tab.id=mission.id
+          break;
+      
+        default:
+          tab.texto=`Misión ${mission.id}`
+          tab.id=mission.id
+          break;
+      }
 
-      if(mission.id==='0'){
-        tab.texto='Intro'
-        tab.id=mission.id
-      }
-      else{
-        tab.texto=`Misión ${mission.id}`
-        tab.id=mission.id
-        
-      }
       this.tabs.push(tab);
     })
   }
@@ -420,7 +422,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     let currentIncrease=current_limit.amount-lower_limit.amount;
 
     let percent=(currentIncrease * 100) / totalIncrease
-    console.log(percent);
     
     return percent
   }
@@ -428,7 +429,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
  showNotification(currentLimit:CurrentLimit,potentialLimit:CurrentLimit){
   const previousPeriod=this.missions[this.currentPeriod-1]
 
-  if (previousPeriod && previousPeriod.status===false &&  Number(previousPeriod.id)>1){
+  
+  if (previousPeriod &&  Number(previousPeriod.id)>1){
+    console.log(previousPeriod);
     const cutDate=new Date(previousPeriod.cut_of_date!);
     const today = new Date();
 
