@@ -21,7 +21,7 @@ export class MonthChallengesComponent implements AfterViewInit {
 
   @Input() mission!:MissionInterfaces
 
-  activeTab!:number
+  @Input() activeTab!:number
 
   @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
@@ -31,11 +31,7 @@ export class MonthChallengesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-
     this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
-
-
-    this.activeTab=this.initialTab
     this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
       
     

@@ -138,10 +138,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
-
-    this.mandatoryChallenges=this.missions[index].challenges!.filter(challenge=>challenge.type==="mandatory")
-    this.specialChallenges=this.missions[index].challenges!.filter(challenge=>challenge.type==="special")
-        
   }
 
   getTabs(){
@@ -200,7 +196,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   propertyChallenges(){
     this.missions.forEach((mission,index)=>{
-      if (this.period.period_detail[index]) {
+      if (this.period.period_detail[index] && index<=this.currentPeriod) {
         mission.challenges?.forEach(challenge=>{
           challenge.status=this.statusChallenge(challenge,this.period.period_detail[index]).status
         })
