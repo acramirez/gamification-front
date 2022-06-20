@@ -137,6 +137,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
+    console.log(this.missionActive);
+    
   }
 
   getTabs(){
@@ -200,7 +202,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           let statusC=this.statusChallenge(challenge,this.period.period_detail[index]).status
           if (statusC) {
             challenge.status=true
-          }else if (!statusC && index<this.currentPeriod) {
+          }else if (!statusC && index>=this.currentPeriod) {
+            challenge.status=undefined
+          }else if (!statusC && index>=this.currentPeriod) {
             challenge.status=undefined
           }
         })
