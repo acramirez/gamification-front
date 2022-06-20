@@ -25,9 +25,6 @@ export class TabDirective implements OnInit, OnDestroy  {
       case 'tab':
         this.elementTab()
         break;
-      case 'tabs-container':
-        this.tabContainer()
-        break;
       default:
         break;
     }
@@ -48,13 +45,6 @@ export class TabDirective implements OnInit, OnDestroy  {
     }else if (elementCheck.classList.contains('tab') || elementCheck.classList.contains('tab__text') || elementCheck.classList.contains('tab__icon')) {
       element.classList.remove('active--tab')
     }
-  }
-
-  tabContainer(){
-
-    this.elementRef.nativeElement.childNodes.forEach(child=>{
-      
-    })
   }
 
   ngOnInit(): void {
