@@ -40,5 +40,7 @@ export class MonthChallengesComponent implements AfterViewInit {
     this.activeTab=this.initialTab
     this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
       
+    console.log(this.mission);
+    
   }
 }
