@@ -295,7 +295,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       case 'digitalChannels':
         chall.status = this.checkDigitalChannels(digitalChannels, this.cutOfDate)
         break;
-      case '"higher_payment"':
+      case 'higher_payment':
         chall.status = this.checkAccelerator(card_payment)
         break;
     }
