@@ -9,7 +9,6 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 export class TabComponent implements OnInit {
 
   @Input() tab:Tab={texto:'',status:''}
-  @ViewChild('btn') btnActive!:ElementRef<HTMLButtonElement>
   
   icon:string='';
 

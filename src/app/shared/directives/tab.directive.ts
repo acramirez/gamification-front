@@ -8,11 +8,12 @@ import { Tab } from '../interfaces/atoms/tab.interface';
 })
 export class TabDirective implements OnInit, OnDestroy  {
 
-  @Output() indexTab:EventEmitter<number> =new EventEmitter;
+  // @Output() indexTab:EventEmitter<number> =new EventEmitter;
   
   sub!:Subscription
   @Input() tabData!:Tab;
   @Input() tabsData!:Tab[];
+  @Input() initialTab!:number
 
   constructor(
     private elementRef:ElementRef<HTMLElement>
@@ -22,6 +23,9 @@ export class TabDirective implements OnInit, OnDestroy  {
     switch (type) {
       case 'tab':
         this.elementTab()
+        break;
+      case 'tabs-container':
+        this.tabContainer()
         break;
       default:
         break;
@@ -45,7 +49,14 @@ export class TabDirective implements OnInit, OnDestroy  {
     }
   }
 
+  tabContainer(){
+
+    this.elementRef.nativeElement.scrollLeft=this.initialTab*124;  
+    console.log(this.elementRef);
+  }
+
   ngOnInit(): void {
+    const element = this.elementRef.nativeElement
     if (this.tabData && this.tabData.status==='ONGOING') {
       this.elementRef.nativeElement.classList.add('active--tab')
     } 

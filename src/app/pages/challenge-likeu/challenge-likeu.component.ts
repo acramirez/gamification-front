@@ -6,19 +6,14 @@ import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
 import { Challenge, Mission, typeChallenge } from '../../shared/interfaces/response/challengesContract.interface';
 import { Assistance, CardPayment, CurrentLimit, Period, PeriodDetail } from '../../shared/interfaces/response/gamification.interface';
-import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { Router } from '@angular/router';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
-import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
-import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Notification } from 'src/app/shared/interfaces/notification';
 import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
