@@ -30,11 +30,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
   public period!:Period;
-  mandatoryChallenges:Challenge[]=[]
-  specialChallenges:Challenge[]=[]
+  // mandatoryChallenges:Challenge[]=[]
+  // specialChallenges:Challenge[]=[]
   challengeActive!:Challenge;
-  statusMissions:StatusMissions[]=[]
-  percent:number=0;
+  // statusMissions:StatusMissions[]=[]
+  // percent:number=0;
   currentPeriod:number=0
   // dueDay!:Date;
   cutOfDate!:Date;
@@ -84,15 +84,19 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               // this.proccessData(resp)
+              const {lower_limit,current_limit,potential_limit,period}=resp
+              const {current_period}=period
               this.cardDetail={
-                current_limit:resp.current_limit,
-                lower_limit:resp.lower_limit,
-                potential_limit:resp.potential_limit
+                current_limit,
+                lower_limit,
+                potential_limit
               }
               this.period=resp.period
               this.cutOfDate=resp.cut_of_date
               this.createMission();
               this.propertyChallenges();
+              this.currentPeriod= Number(current_period)
+              this.missionActive=this.missions[this.currentPeriod]
             })
 
           })
