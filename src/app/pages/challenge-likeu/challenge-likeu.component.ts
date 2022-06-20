@@ -116,7 +116,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
-    this.showMissionActive(this.currentPeriod)
+    // this.showMissionActive(this.currentPeriod)
 
     this.showNotification(current_limit, potential_limit)
   }
