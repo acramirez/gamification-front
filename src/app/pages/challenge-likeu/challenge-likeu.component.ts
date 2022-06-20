@@ -341,11 +341,17 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     const special = challenges.filter(challenge=>challenge.type==="special")
     const specialStatus:boolean[]=[]
 
-    special.forEach(challenge=>{
-      if (challenge.status) { 
-        specialStatus.push(challenge.status)
+
+
+    for (let i = 0; i < special.length; i++) {
+      const challenge = challenges[i];
+      if (challenge.status===true) {
+        status=true
+        break;
+      }else{
+        status=false
       }
-    })
+    }
 
     const statusSpecial=specialStatus.filter(statusS=>statusS===true)
 
