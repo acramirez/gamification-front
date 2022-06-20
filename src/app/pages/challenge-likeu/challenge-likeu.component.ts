@@ -30,8 +30,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   public cardDetail!:Card;
   public period!:Period;
-  // mandatoryChallenges:Challenge[]=[]
-  // specialChallenges:Challenge[]=[]
+  mandatoryChallenges:Challenge[]=[]
+  specialChallenges:Challenge[]=[]
   challengeActive!:Challenge;
   // statusMissions:StatusMissions[]=[]
   // percent:number=0;
@@ -138,8 +138,10 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
-    console.log(this.missionActive);
-    
+
+    this.mandatoryChallenges=this.missions[index].challenges!.filter(challenge=>challenge.type==="mandatory")
+    this.specialChallenges=this.missions[index].challenges!.filter(challenge=>challenge.type==="special")
+        
   }
 
   getTabs(){

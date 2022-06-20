@@ -10,7 +10,7 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class MonthChallengesComponent implements AfterViewInit {
 
-  mandatoryChallenges!:Challenge[];
+  @Input() mandatoryChallenges!:Challenge[];
   specialChallenges:Challenge[]=[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
