@@ -1,12 +1,12 @@
 
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { Tab } from '../interfaces/atoms/tab.interface';
 
 @Directive({
   selector: '[tabsDirective]'
 })
-export class TabDirective implements OnInit, OnDestroy  {
+export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
 
   // @Output() indexTab:EventEmitter<number> =new EventEmitter;
   
@@ -14,6 +14,7 @@ export class TabDirective implements OnInit, OnDestroy  {
   @Input() tabData!:Tab;
   @Input() tabsData!:Tab[];
   @Input() initialTab!:number
+  @Input() active!:boolean
 
   constructor(
     private elementRef:ElementRef<HTMLElement>
@@ -24,9 +25,7 @@ export class TabDirective implements OnInit, OnDestroy  {
       case 'tab':
         this.elementTab()
         break;
-      case 'tabs-container':
-        this.tabContainer()
-        break;
+
       default:
         break;
     }
@@ -41,7 +40,6 @@ export class TabDirective implements OnInit, OnDestroy  {
 
   isActive(elementCheck:HTMLElement){
     const element=this.elementRef.nativeElement;
-
     if (elementCheck===element || element.contains(elementCheck)) {
       element.classList.add('active--tab')
     }else if (elementCheck.classList.contains('tab') || elementCheck.classList.contains('tab__text') || elementCheck.classList.contains('tab__icon')) {
@@ -60,6 +58,13 @@ export class TabDirective implements OnInit, OnDestroy  {
     if (this.tabData && this.tabData.status==='ONGOING') {
       this.elementRef.nativeElement.classList.add('active--tab')
     } 
+  }
+
+  ngAfterViewInit(): void {
+    if (this.tabsDirective==='tabs-container') {
+        this.tabContainer()
+    }
+    
   }
   
   ngOnDestroy(): void {
