@@ -119,13 +119,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.getTabs();
 
     this.missionActive = this.missions[this.currentPeriod]
+    this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
+
     this.showNotification(current_limit, potential_limit)
   }
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
-
 
   }
 
