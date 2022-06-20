@@ -155,6 +155,9 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           challenge.status=this.statusChallenge(challenge,this.period.period_detail[index]).status
         })
       }
+      if (mission.challenges) { 
+       mission.status= this.statusMission(mission.challenges)
+      }
     })
     
   }
@@ -241,9 +244,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           chall.status=this.checkDigitalChannels(digitalChannels,due_date)
           break;
       }
-
       return chall
-
   }
 
   checkCardPayment(cardPayment:CardPayment[],dueDate:Date){ 
@@ -331,6 +332,41 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }
     }
     return false
+  }
+
+  statusMission(challenges:Challenge[]){
+    let status:boolean=true;
+
+    const mandatory = challenges.filter(challenge=>challenge.type==="mandatory")
+    const special = challenges.filter(challenge=>challenge.type==="special")
+    const specialStatus:boolean[]=[]
+
+    special.forEach(challenge=>{
+      if (challenge.status) { 
+        specialStatus.push(challenge.status)
+      }
+    })
+
+    const statusSpecial=specialStatus.filter(status=>status===true)
+
+    if (statusSpecial.length>0) {
+      status=false
+    }
+
+    for (let i = 0; i < mandatory.length; i++) {
+      const challenge = challenges[i];
+      if (challenge.type==='mandatory' && !challenge.status) {
+        status=false
+        break;
+      }
+    }
+
+    console.log(mandatory);
+    console.log(special);
+    
+    return status
+    
+
   }
 
 

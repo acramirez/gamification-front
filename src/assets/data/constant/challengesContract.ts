@@ -143,7 +143,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "1",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment"
         ],
         specialChallenges: [
@@ -154,7 +154,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "2",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment",
           "digitalChannels"
         ],
@@ -166,7 +166,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "3",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment",
           "digitalChannels"
         ],
@@ -181,7 +181,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "4",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment",
           "digitalChannels"
         ],
@@ -199,7 +199,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "5",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment",
           "digitalChannels"
         ],
@@ -218,7 +218,7 @@ export const challengesContract:ChallengesContract={
       {
         id: "6",
         mandatoryChallenges: [
-          "minimum_monthly_billing",
+          "accumulated_purchases",
           "card_payment",
           "digitalChannels"
         ],
