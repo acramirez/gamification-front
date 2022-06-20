@@ -156,7 +156,6 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "accumulated_purchases",
           "card_payment",
-          "digitalChannels"
         ],
         specialChallenges: [
         ],
@@ -174,7 +173,6 @@ export const challengesContract:ChallengesContract={
 
         ],
         acceleratorChallenges: [
-          "higher_payment"
         ],
         creditIncrease: true
       },
