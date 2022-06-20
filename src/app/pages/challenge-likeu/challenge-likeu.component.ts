@@ -117,7 +117,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
-
+    
     this.missionActive = this.missions[this.currentPeriod]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
 
