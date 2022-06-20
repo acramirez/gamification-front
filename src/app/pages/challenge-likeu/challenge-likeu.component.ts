@@ -138,6 +138,25 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.missionActive=this.missions[index]
   }
 
+  getTabs(){
+    this.missions.forEach(mission=>{
+      let tab:Tab={
+        id:'',
+        texto:'',
+        status:''
+      }
+      if(mission.id==='0'){
+        tab.texto='Intro'
+        tab.id=mission.id
+      }
+      else{
+        tab.texto=`Misión ${mission.id}`
+        tab.id=mission.id
+      }
+      this.tabs.push(tab);
+    })
+  }
+
   
 
   // proccessData(resp:ChallengeLikeU){

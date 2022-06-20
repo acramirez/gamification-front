@@ -9,7 +9,9 @@
 
         <app-month-challenges
         [mission]="missionActive"
+        [tabs]="tabs"
         (challengeActive)="challengeActive=$event;showModal()"
+        (indexTab)="showMissionActive($event)"
         >
 
         </app-month-challenges>
