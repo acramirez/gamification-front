@@ -115,9 +115,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   proccessData(resp:ChallengeLikeU){
 
-    console.log(resp);
-    
-
     const {lower_limit,current_limit,potential_limit,period}=resp
     const {current_period}=period
 
@@ -126,20 +123,24 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       lower_limit,
       potential_limit
     }
-    console.log(this.cardDetail);
     
     this.period=resp.period
     this.cutOfDate=resp.cut_of_date
     this.createMission();
     this.propertyChallenges();
-    this.currentPeriod= Number(current_period)
+    this.currentPeriod= Number(current_period);
+    console.log(this.currentPeriod);
+    
     this.missionActive=this.missions[this.currentPeriod]
-
+    console.log(this.missionActive);
+    
   }
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
   }
+
+  
 
   // proccessData(resp:ChallengeLikeU){
     
@@ -189,7 +190,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   }
 
   createMission(){
-    console.log();
     const {missions,challenges}= this.challenges
 
     missions.forEach(miss=>{
@@ -200,7 +200,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       this.missions.push(mission)
       })  
 
-      console.log(this.missions);
   }
 
   typeChallenge(mission:Mission){
@@ -364,7 +363,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     const mandatory = challenges.filter(challenge=>challenge.type==="mandatory")
     const special = challenges.filter(challenge=>challenge.type==="special")
-    const specialStatus:boolean[]=[]
 
     for (let i = 0; i < special.length; i++) {
       const challenge = challenges[i];
@@ -388,7 +386,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   getPercent(){
-    console.log(this.cardDetail);
 
     const {lower_limit,current_limit,potential_limit}=this.cardDetail
 
