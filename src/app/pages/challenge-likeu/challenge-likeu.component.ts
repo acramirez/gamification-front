@@ -200,10 +200,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   propertyChallenges() {
     this.missions.forEach((mission, index) => {
-      if (this.period.period_detail[index]) {
-        mission.challenges?.forEach(challenge => {
+      mission.challenges?.forEach(challenge => {
+        challenge.redirection = this.setChallengeRedirect(challenge).redirection
+        if (this.period.period_detail[index]) {
           let statusC = this.statusChallenge(challenge, this.period.period_detail[index]).status
-          challenge.redirection = this.setChallengeRedirect(challenge).redirection
           if (statusC) {
             challenge.status = true
           } else if (!statusC && index < this.currentPeriod) {
@@ -211,8 +211,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           } else if (!statusC && index >= this.currentPeriod) {
             challenge.status = undefined
           }
-        })
-      }
+        }
+      })
       if (mission.challenges) {
         mission.status = this.statusMission(mission.challenges)
       }
