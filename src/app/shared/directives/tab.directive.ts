@@ -1,12 +1,12 @@
 
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { Tab } from '../interfaces/atoms/tab.interface';
 
 @Directive({
   selector: '[tabsDirective]'
 })
-export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
+export class TabDirective implements OnInit, OnDestroy  {
 
   // @Output() indexTab:EventEmitter<number> =new EventEmitter;
   
@@ -25,7 +25,9 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
       case 'tab':
         this.elementTab()
         break;
-
+      case 'tabs-container':
+        this.tabContainer()
+        break;
       default:
         break;
     }
@@ -36,6 +38,7 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
       .subscribe(event=>{
         this.isActive(event.target as HTMLElement)
       })
+      
   }
 
   isActive(elementCheck:HTMLElement){
@@ -49,7 +52,12 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
 
   tabContainer(){
 
-    this.elementRef.nativeElement.scrollLeft=this.initialTab*124;  
+    this.elementRef.nativeElement.childNodes.forEach(child=>{
+      console.log(child.nodeType);
+      console.log(child.nodeName);
+      console.log(child.nodeValue);
+      
+    })
     console.log(this.elementRef);
   }
 
@@ -58,12 +66,7 @@ export class TabDirective implements OnInit, AfterViewInit, OnDestroy  {
     if (this.tabData && this.tabData.status==='ONGOING') {
       this.elementRef.nativeElement.classList.add('active--tab')
     } 
-  }
-
-  ngAfterViewInit(): void {
-    if (this.tabsDirective==='tabs-container') {
-        this.tabContainer()
-    }
+    console.log(this.tabsDirective);
     
   }
   

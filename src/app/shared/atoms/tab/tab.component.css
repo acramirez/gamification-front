@@ -21,6 +21,8 @@
 .tab__icon{
     margin-right: .25rem;
     max-width: 20px;
+    background-image: url(../../../../assets/icons/lock.png);
+
 }
 
 .active--tab{
@@ -29,4 +31,11 @@
     color: #fff!important;
     position: relative;
     transform: scale(0.9);
+}
+
+.tab__icon--ongoing{
+    background-image: url(../../../../assets/icons/Pagos_recurrentes.png);
+}
+.tab__icon--finish{
+    background-image: url(../../../../assets/icons/Activa_tu_tarjeta.png);
 }

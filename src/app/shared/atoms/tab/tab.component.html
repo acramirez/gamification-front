@@ -1,8 +1,16 @@
 <button tabsDirective="tab" [id]="tab.id" [ngClass]="{
     'tab':true,
-    'active--tab':(tab.status==='ONGOING')
+    'active--tab':(tab.status==='active')
+    
 }"
 >
-    <img class="tab__icon" [src]="'../../../../assets/icons/'+icon+'.png'" alt="">
+    <img
+    [ngClass]="
+        {
+            'tab__icon': true,
+            'tab__icon--ongoing':tab.status==='ongoing',
+            'tab__icon--finish':tab.status==='finish'
+        }"
+    alt="">
     <span class="tab__text">{{tab.texto}}</span>
 </button>

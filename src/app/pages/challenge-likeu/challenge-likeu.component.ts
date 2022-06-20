@@ -150,6 +150,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       else{
         tab.texto=`Misión ${mission.id}`
         tab.id=mission.id
+        if (Number(mission.id)<this.currentPeriod) {
+          tab.status='finish'
+        }else if (mission.id===this.currentPeriod.toString()) {
+          tab.status='ongoing'
+        }
       }
       this.tabs.push(tab);
     })

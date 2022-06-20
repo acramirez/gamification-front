@@ -8,22 +8,23 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 })
 export class TabComponent implements OnInit {
 
-  @Input() tab:Tab={texto:'',status:''}
+  @Input() tab!:Tab
   
-  icon:string='';
 
   ngOnInit(): void {
-    switch (this.tab.status) {
-      case 'FINISH':
-        this.icon='Activa_tu_tarjeta'
-        break;
-      case 'ONGOING':
-        this.icon='Pagos_recurrentes'
-        break;
-      default:
-        this.icon='lock'
-        break;
-    }    
+    console.log(this.tab);
+    
+    // switch (this.tab.status) {
+    //   case 'FINISH':
+    //     this.icon='Activa_tu_tarjeta'
+    //     break;
+    //   case 'ONGOING':
+    //     this.icon='Pagos_recurrentes'
+    //     break;
+    //   default:
+    //     this.icon='lock'
+    //     break;
+    // }    
   }
 
 }
