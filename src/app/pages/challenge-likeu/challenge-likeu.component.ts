@@ -473,7 +473,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.challengesRedirect[i] = challenge.trim().slice(1, -1)
     })
 
-    console.log(this.challengesRedirect);
 
   }
 
@@ -481,8 +480,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const chall = { ...challenge }
 
+
     this.challengesRedirect.forEach(redirect => {
 
+      console.log(redirect, challenge.id);
+      
       if (challenge.id === redirect) {
         chall.redirection = true
       }
