@@ -86,11 +86,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               // this.proccessData(resp)
               const {lower_limit,current_limit,potential_limit,period}=resp
               const {current_period}=period
+
               this.cardDetail={
                 current_limit,
                 lower_limit,
                 potential_limit
               }
+              console.log(this.cardDetail);
+              
               this.period=resp.period
               this.cutOfDate=resp.cut_of_date
               this.createMission();
@@ -377,6 +380,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
 
   getPercent(){
+    console.log(this.cardDetail);
 
     const {lower_limit,current_limit,potential_limit}=this.cardDetail
 
