@@ -129,10 +129,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.createMission();
     this.propertyChallenges();
     this.currentPeriod= Number(current_period);
-    console.log(this.currentPeriod);
     
     this.missionActive=this.missions[this.currentPeriod]
-    console.log(this.missionActive);
     
   }
 
