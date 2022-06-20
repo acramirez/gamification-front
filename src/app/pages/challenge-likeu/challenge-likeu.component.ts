@@ -317,7 +317,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
     const today = new Date()
 
-    if (accumulatedPurchases && accumulatedPurchases.amount >= 200) {
+    if (accumulatedPurchases && accumulatedPurchases.amount >= 200 && today < cutDate) {
       return true
     }
     return false
@@ -479,11 +479,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const chall = { ...challenge }
 
-
     this.challengesRedirect.forEach(redirect => {
       
       if (challenge.id === redirect) {
         chall.redirection = true
+      }else if(challenge.id==='digitalChannels' && redirect==='digital_channel'){
+        chall.redirection=true
       }
     })
 

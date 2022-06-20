@@ -8,13 +8,13 @@
         </app-card-data>
 
         <app-month-challenges
-        [mission]="missionActive"
-        [tabs]="tabs"
-        [dueDate]="cutOfDate"
-        [initialTab]="currentPeriod"
-        [activeTab]="indexTab"
-        (challengeActive)="challengeActive=$event;showModal()"
-        (indexTab)="showMissionActive($event);indexTab=$event"
+            [mission]="missionActive"
+            [tabs]="tabs"
+            [dueDate]="cutOfDate"
+            [initialTab]="currentPeriod"
+            [activeTab]="indexTab"
+            (challengeActive)="challengeActive=$event;showModal()"
+            (indexTab)="showMissionActive($event);indexTab=$event"
         >
 
         </app-month-challenges>

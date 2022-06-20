@@ -1,6 +1,6 @@
 .message{
     background: var(--theme-color-background-03);
-    height: 100vh;
+    height: 100%;
     left: 0;
     overflow: hidden;
     position: fixed;
