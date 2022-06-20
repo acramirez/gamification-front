@@ -131,6 +131,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
+    console.log(this.missions);
 
   }
 
@@ -232,7 +233,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       mission.challenges = this.typeChallenge(miss)
       this.missions.push(mission)
     })
-
+    
   }
 
   typeChallenge(mission: Mission) {
