@@ -317,7 +317,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
     const today = new Date()
 
-    if (accumulatedPurchases && accumulatedPurchases.amount >= 200 && today < cutDate) {
+    if (accumulatedPurchases && accumulatedPurchases.amount >= 200) {
       return true
     }
     return false
