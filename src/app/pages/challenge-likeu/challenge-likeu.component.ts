@@ -83,7 +83,13 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
               // this.proccessData(resp)
+              this.cardDetail={
+                current_limit:resp.current_limit,
+                lower_limit:resp.lower_limit,
+                potential_limit:resp.potential_limit
+              }
               this.period=resp.period
+              this.cutOfDate=resp.cut_of_date
               this.createMission();
               this.propertyChallenges();
               console.log(this.missions);
@@ -177,7 +183,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       console.log(this.missions);
   }
 
-
   typeChallenge(mission:Mission){
   const {challenges}= this.challenges
     const {mandatoryChallenges,specialChallenges,acceleratorChallenges}=mission
@@ -217,31 +222,31 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       const chall ={...challenge}
       switch (challenge.id) {
         case 'accumulated_purchases':
-          chall.status=this.checkAccumulatedPurchases(accumulated_purchases,due_date)
+          chall.status=this.checkAccumulatedPurchases(accumulated_purchases,this.cutOfDate)
           
           break;
         case 'card_payment':
-          chall.status=this.checkCardPayment(card_payment,due_date)
+          chall.status=this.checkCardPayment(card_payment,this.cutOfDate)
           break;
 
         case 'recurrent_payment':
-          chall.status=this.checkRecurrentPayment(recurrent_payment,due_date)
+          chall.status=this.checkRecurrentPayment(recurrent_payment,this.cutOfDate)
           break;
 
         case 'domiciliation':
-          chall.status=this.checkDomiciliation(domiciliation,due_date)
+          chall.status=this.checkDomiciliation(domiciliation,this.cutOfDate)
           break;
 
         case 'assistance':
-          chall.status=this.checkAssistance(assistance,due_date)
+          chall.status=this.checkAssistance(assistance,this.cutOfDate)
           break;
 
         case 'payroll_portability':
-          chall.status=this.checkPayrollPortability(payroll_portability,due_date)
+          chall.status=this.checkPayrollPortability(payroll_portability,this.cutOfDate)
           break;
 
         case 'digitalChannels':
-          chall.status=this.checkDigitalChannels(digitalChannels,due_date)
+          chall.status=this.checkDigitalChannels(digitalChannels,this.cutOfDate)
           break;
       }
       return chall
@@ -353,11 +358,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }
     }
 
-    const statusSpecial=specialStatus.filter(statusS=>statusS===true)
+    // const statusSpecial=specialStatus.filter(statusS=>statusS===true)
 
-    if (statusSpecial.length=0) {
-      status=false
-    }
+    // if (statusSpecial.length=0) {
+    //   status=false
+    // }
 
     for (let i = 0; i < mandatory.length; i++) {
       const challenge = challenges[i];
@@ -373,6 +378,20 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     return status
     
 
+  }
+
+
+  getPercent(){
+
+    const {lower_limit,current_limit,potential_limit}=this.cardDetail
+
+    let totalIncrease=potential_limit.amount-lower_limit.amount;
+
+    let currentIncrease=current_limit.amount-lower_limit.amount;
+
+    let percent=(currentIncrease * 100) / totalIncrease
+    
+    return percent
   }
 
 

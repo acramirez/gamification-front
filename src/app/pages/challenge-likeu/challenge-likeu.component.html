@@ -1,8 +1,9 @@
-<div class="challenge-likeu__container bg__circle" *ngIf="cardDetail;else spinner" >
+<div class="challenge-likeu__container bg__circle" *ngIf="missions;else spinner" >
     <app-header animation="up"></app-header> 
     <div class="challenge-likeu">
         <app-card-data 
             [data]="cardDetail"
+            [percent]="getPercent()"
             >
         </app-card-data>
         <!-- [percent]="getPercent()" -->
