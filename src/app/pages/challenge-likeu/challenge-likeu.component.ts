@@ -83,23 +83,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             // this.getChallengesRedirect(challenges);
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
-              // this.proccessData(resp)
-              const {lower_limit,current_limit,potential_limit,period}=resp
-              const {current_period}=period
-
-              this.cardDetail={
-                current_limit,
-                lower_limit,
-                potential_limit
-              }
-              console.log(this.cardDetail);
+            this.proccessData(resp)
               
-              this.period=resp.period
-              this.cutOfDate=resp.cut_of_date
-              this.createMission();
-              this.propertyChallenges();
-              this.currentPeriod= Number(current_period)
-              this.missionActive=this.missions[this.currentPeriod]
             })
 
           })
@@ -128,6 +113,29 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.modalService.close(this.viewContainerRef)
   }
 
+  proccessData(resp:ChallengeLikeU){
+
+    console.log(resp);
+    
+
+    const {lower_limit,current_limit,potential_limit,period}=resp
+    const {current_period}=period
+
+    this.cardDetail={
+      current_limit,
+      lower_limit,
+      potential_limit
+    }
+    console.log(this.cardDetail);
+    
+    this.period=resp.period
+    this.cutOfDate=resp.cut_of_date
+    this.createMission();
+    this.propertyChallenges();
+    this.currentPeriod= Number(current_period)
+    this.missionActive=this.missions[this.currentPeriod]
+
+  }
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
