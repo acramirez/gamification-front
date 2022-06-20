@@ -79,8 +79,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
             this.getChallengesRedirect(challenges);
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
-            this.proccessData(resp)
-              
+              this.proccessData(resp)
             })
 
           })
@@ -204,7 +203,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       if (this.period.period_detail[index]) {
         mission.challenges?.forEach(challenge=>{
           let statusC=this.statusChallenge(challenge,this.period.period_detail[index]).status
-          challenge.redirection=this.setChallengesRedirect(challenge).redirection
+          challenge.redirection=this.setChallengeRedirect(challenge).redirection
           if (statusC) {
             challenge.status=true
           }else if (!statusC && index<this.currentPeriod) {
@@ -473,13 +472,17 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.challengesRedirect.forEach((challenge,i)=>{
     this.challengesRedirect[i]=challenge.trim().slice(1,-1)
     })
+
+    console.log(this.challengesRedirect);
+    
   }
 
-  setChallengesRedirect(challenge:Challenge){
+  setChallengeRedirect(challenge:Challenge){
 
     const chall={...challenge}
 
     this.challengesRedirect.forEach(redirect=>{
+
       if (challenge.id===redirect) {
         chall.redirection=true
       }
@@ -487,6 +490,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         chall.redirection=false
       }
     })
+    console.log(chall);
+    
     return chall
   }
 
