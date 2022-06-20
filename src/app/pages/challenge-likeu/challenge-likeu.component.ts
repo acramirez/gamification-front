@@ -349,7 +349,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
     const statusSpecial=specialStatus.filter(statusS=>statusS===true)
 
-    if (statusSpecial.length>0) {
+    if (statusSpecial.length=0) {
       status=false
     }
 
