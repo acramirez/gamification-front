@@ -295,6 +295,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       case 'digitalChannels':
         chall.status = this.checkDigitalChannels(digitalChannels, this.cutOfDate)
         break;
+      case '"higher_payment"':
+        chall.status = this.checkAccelerator(card_payment)
+        break;
     }
     return chall
   }
@@ -304,6 +307,19 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       for (const card of cardPayment) {
         card.operation_date = new Date(card.operation_date);
         if (card.amount_payment.amount >= card.minimum_amount.amount) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkAccelerator(cardPayment: CardPayment[]){
+    if (cardPayment) {
+      for (const card of cardPayment) {
+        card.operation_date = new Date(card.operation_date);
+        let percentPayment = card.amount_payment.amount / card.minimum_amount.amount
+        if (percentPayment >= 1.5) {
           return true
         }
       }
