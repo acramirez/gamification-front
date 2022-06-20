@@ -429,7 +429,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   showNotification(currentLimit: CurrentLimit, potentialLimit: CurrentLimit) {
     const previousPeriod = this.missions[this.currentPeriod - 1]
-    console.log(previousPeriod);
 
     if (previousPeriod && Number(previousPeriod.id) >= 1) {
       const cutDate = new Date(previousPeriod.cut_of_date!);
@@ -482,17 +481,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
 
     this.challengesRedirect.forEach(redirect => {
-
-      console.log(redirect, challenge.id);
       
       if (challenge.id === redirect) {
         chall.redirection = true
       }
-      else {
-        chall.redirection = false
-      }
     })
-    console.log(chall ,'setRedirection');
 
     return chall
   }
