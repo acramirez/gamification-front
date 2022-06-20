@@ -13,6 +13,7 @@
             [dueDate]="cutOfDate"
             [initialTab]="currentPeriod"
             [activeTab]="indexTab"
+            [specialChallenges]="specialChallenges"
             (challengeActive)="challengeActive=$event;showModal()"
             (indexTab)="showMissionActive($event);indexTab=$event"
         >

@@ -10,7 +10,7 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class MonthChallengesComponent implements AfterViewInit {
 
-  specialChallenges:Challenge[]=[];
+  @Input() specialChallenges:Challenge[]=[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
@@ -31,10 +31,7 @@ export class MonthChallengesComponent implements AfterViewInit {
   ngAfterViewInit(): void {
         console.log(this.mission);
         
-        this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
         this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
-        console.log(this.specialChallenges);
-        
-    
+        console.log(this.specialChallenges);  
   }
 }

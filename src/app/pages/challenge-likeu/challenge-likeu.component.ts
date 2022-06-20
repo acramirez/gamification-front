@@ -131,6 +131,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
+    this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
+
     console.log(this.missions);
 
   }
