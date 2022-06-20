@@ -123,13 +123,12 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       lower_limit,
       potential_limit
     }
-    
+    this.currentPeriod= Number(current_period);
     this.period=resp.period
     this.cutOfDate=resp.cut_of_date
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
-    this.currentPeriod= Number(current_period);
     
     this.missionActive=this.missions[this.currentPeriod]
     console.log(this.tabs);
