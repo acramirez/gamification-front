@@ -15,7 +15,7 @@ export class MonthChallengesComponent implements AfterViewInit {
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
-  dueDate!:Date
+  @Input() dueDate!:Date
   missionStatus!:boolean | undefined
 
 
