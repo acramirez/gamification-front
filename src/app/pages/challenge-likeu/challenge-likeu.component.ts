@@ -83,14 +83,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           })
 
         })
+      }
+    // } else if (this.tokenFacade._token) {
 
-    } else if (this.tokenFacade._token) {
-
-      this.gamificacionFacade.getGamification()
-        .subscribe(resp => {
-          // this.proccessData(resp)
-        })
-    }
+    //   this.gamificacionFacade.getGamification()
+    //     .subscribe(resp => {
+    //       // this.proccessData(resp)
+    //     })
+    // }
   }
 
   showModal() {
@@ -431,7 +431,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const previousPeriod = this.missions[this.currentPeriod - 1]
     console.log(previousPeriod);
 
-    if (previousPeriod && Number(previousPeriod.id) > 1) {
+    if (previousPeriod && Number(previousPeriod.id) >= 1) {
       const cutDate = new Date(previousPeriod.cut_of_date!);
       const today = new Date();
 
@@ -490,7 +490,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         chall.redirection = false
       }
     })
-    console.log(chall);
+    console.log(chall ,'setRedirection');
 
     return chall
   }

@@ -31,7 +31,7 @@ export class MonthChallengesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     
-    console.log(this.mission);
+    console.log(this.mission, 'Mission');
     
     this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
     this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
