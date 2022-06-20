@@ -3,21 +3,21 @@
         <div class="modal__body">
             <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
             <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+modal.icon+'.png'"  alt="icono">
+                <img [src]="'../../../../assets/icons/'+modal.challenge.icon+'.png'"  alt="icono">
                 <h2 [ngClass]="{
                     'modal__title':true,
-                    'modal__title--gradient':(modal.accelerator)
+                    'modal__title--gradient':modal.challenge.type==='accelerator'
                 }">
-                    {{modal.name}}
+                    {{modal.challenge.name}}
                 </h2>
-                <span class="modal__subtitle">{{modal.description}}</span>            
+                <span class="modal__subtitle">{{modal.challenge.description}}</span>            
             </div>
             <ul>
-                <ng-container *ngFor="let condition of modal.conditions">
+                <ng-container *ngFor="let condition of modal.challenge.conditions">
                     <li>{{condition}}</li>
                 </ng-container>
             </ul>
         </div>
-        <button class="btn" *ngIf="modal.redirection" (click)="redirect()">Continuar</button>
+        <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
     </div>
 </div>

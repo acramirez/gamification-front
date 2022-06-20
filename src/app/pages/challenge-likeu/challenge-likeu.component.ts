@@ -96,11 +96,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   showModal(){
     const modal:Modal={
-      ...this.challengeActive,
+      challenge:{...this.challengeActive},
       close:()=>this.closeModal()
     }
-    if (modal.id==='digitalChannels') {
-      modal.id='digital_channel'
+    if (modal.challenge.id==='digitalChannels') {
+      modal.challenge.id='digital_channel'
     }
     this.modalService.generateModal(this.viewContainerRef,modal)
   }

@@ -1,14 +1,6 @@
-import { ViewContainerRef } from "@angular/core";
+import { Challenge } from "../response/challengesContract.interface";
 
 export interface Modal {
-    id:          string;
-    name:        string;
-    description: string;
-    specs:       string[];
-    conditions:  string[];
-    icon:        string;
-    redirection: boolean;
-    status?:     boolean;
-    accelerator?:boolean,
+    challenge:Challenge
     close:Function
 }

@@ -21,6 +21,6 @@ export class ModalComponent {
   }
   
   redirect(){
-    this.callback.redirect(this.modal.id)
+    this.callback.redirect(this.modal.challenge.id)
   }
 }
