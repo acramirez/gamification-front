@@ -22,15 +22,12 @@
             </ng-container>
         </div>
     </div>
-    <div *ngIf=" specialChallenges && specialChallenges.length>0 " class="special-challenges">
+    <div *ngIf=" specialChallenges.length>0 " class="special-challenges">
         <h2 class="challenges__title">Retos especiales</h2>
         <p class="challenge__description">Completa cualquiera de las misiones para aumentar tu límite de crédito.   </p>
         <div class="challenges">
-            <ng-container *ngFor="let challenge of mission.challenges">
-                <ng-container *ngIf="challenge.type==='special'">
-                    <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
-
-                </ng-container>
+            <ng-container *ngFor="let challenge of specialChallenges">
+                <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
             </ng-container>
         </div>
     </div>
