@@ -195,9 +195,14 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   propertyChallenges(){
     this.missions.forEach((mission,index)=>{
-      if (this.period.period_detail[index] && index<=this.currentPeriod) {
+      if (this.period.period_detail[index]) {
         mission.challenges?.forEach(challenge=>{
-          challenge.status=this.statusChallenge(challenge,this.period.period_detail[index]).status
+          let statusC=this.statusChallenge(challenge,this.period.period_detail[index]).status
+          if (statusC) {
+            challenge.status=true
+          }else if (!statusC && index<this.currentPeriod) {
+            challenge.status=undefined
+          }
         })
       }
       if (mission.challenges) { 

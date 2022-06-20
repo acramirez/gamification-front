@@ -7,7 +7,9 @@
 
 
         <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Check.png'" alt="">
-        <img *ngIf="statusMission===false && !challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Wrong.png'" alt="">
+        <ng-container *ngIf="challenge.status!==undefined && challenge.status===false">
+            <img class="challenge__check" [src]="'../../../../assets/icons/Wrong.png'" alt="">
+        </ng-container>
     </div>
     <h3 class="challenge__title">{{challenge.name}}</h3>
 </div>
