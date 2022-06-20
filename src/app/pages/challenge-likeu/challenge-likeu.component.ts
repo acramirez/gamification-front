@@ -202,8 +202,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
           let statusC=this.statusChallenge(challenge,this.period.period_detail[index]).status
           if (statusC) {
             challenge.status=true
-          }else if (!statusC && index>=this.currentPeriod) {
-            challenge.status=undefined
+          }else if (!statusC && index<this.currentPeriod) {
+            challenge.status=false
           }else if (!statusC && index>=this.currentPeriod) {
             challenge.status=undefined
           }
