@@ -14,6 +14,7 @@ import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
 import { Notification } from 'src/app/shared/interfaces/notification';
 import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
+import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
 
 
 @Component({
@@ -75,7 +76,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         .toPromise()
           .then(challenges=>{
             
-            // this.getChallengesRedirect(challenges);
+            this.getChallengesRedirect(challenges);
              
             this.gamificacionFacade.getGamification().subscribe(resp=>{
             this.proccessData(resp)
@@ -203,6 +204,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       if (this.period.period_detail[index]) {
         mission.challenges?.forEach(challenge=>{
           let statusC=this.statusChallenge(challenge,this.period.period_detail[index]).status
+          challenge.redirection=this.setChallengesRedirect(challenge).redirection
           if (statusC) {
             challenge.status=true
           }else if (!statusC && index<this.currentPeriod) {
@@ -430,7 +432,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   const previousPeriod=this.missions[this.currentPeriod-1]
 
   
-  if (previousPeriod &&  Number(previousPeriod.id)>1){
+  if (previousPeriod && Number(previousPeriod.id)>1){
     console.log(previousPeriod);
     const cutDate=new Date(previousPeriod.cut_of_date!);
     const today = new Date();
@@ -463,6 +465,53 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
                 this.modalService.generateNotification(this.viewContainerRef,notification)
     }
   }
+
+  getChallengesRedirect(challenges:TokenValidator){
+    const cutChallenges=challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
+    const cutChallenges2=cutChallenges[1].split(']')
+    this.challengesRedirect=cutChallenges2[0].split(',')
+    this.challengesRedirect.forEach((challenge,i)=>{
+    this.challengesRedirect[i]=challenge.trim().slice(1,-1)
+    })
+  }
+
+  setChallengesRedirect(challenge:Challenge){
+
+    const chall={...challenge}
+
+    this.challengesRedirect.forEach(redirect=>{
+      if (challenge.id===redirect) {
+        chall.redirection=true
+      }
+      else{
+        chall.redirection=false
+      }
+    })
+    return chall
+  }
+
+  // setChallengeRedirect(){
+  //   this.challengesRedirect.forEach(challenge=>{
+  //     this.mandatoryChallenges.forEach(mandatory=>{
+        
+  //       if(mandatory.id===challenge){
+  //         mandatory.redirection=true
+  //       }
+  //       else if(challenge==='digital_channel' && mandatory.id==='digitalChannels'){
+  //         mandatory.redirection=true
+  //       }
+  //     })
+    
+  //     if (this.specialChallenges.length>0) {
+  //       this.specialChallenges.forEach(special=>{
+  //         if (special.id===challenge) {
+  //           special.redirection=true;
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
+
 
   // messageNotification(resp:ChallengeLikeU){
 
@@ -662,36 +711,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   //   return percent
   // }
 
-  // getChallengesRedirect(challenges:TokenValidator){
-  //   const cutChallenges=challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
-  //   const cutChallenges2=cutChallenges[1].split(']')
-  //   this.challengesRedirect=cutChallenges2[0].split(',')
-  //   this.challengesRedirect.forEach((challenge,i)=>{
-  //   this.challengesRedirect[i]=challenge.trim().slice(1,-1)
-  //   })
-  // }
 
-  // setChallengeRedirect(){
-  //   this.challengesRedirect.forEach(challenge=>{
-  //     this.mandatoryChallenges.forEach(mandatory=>{
-        
-  //       if(mandatory.id===challenge){
-  //         mandatory.redirection=true
-  //       }
-  //       else if(challenge==='digital_channel' && mandatory.id==='digitalChannels'){
-  //         mandatory.redirection=true
-  //       }
-  //     })
-    
-  //     if (this.specialChallenges.length>0) {
-  //       this.specialChallenges.forEach(special=>{
-  //         if (special.id===challenge) {
-  //           special.redirection=true;
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
+
 
   // messageNotification(resp:ChallengeLikeU){
 
