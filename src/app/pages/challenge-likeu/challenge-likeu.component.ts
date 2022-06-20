@@ -113,17 +113,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     this.currentPeriod = Number(current_period);
     this.period = resp.period
+    this.cutOfDate = new Date(resp.cut_of_date)
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
-    // this.showMissionActive(this.currentPeriod)
 
+    this.missionActive = this.missions[this.currentPeriod]
     this.showNotification(current_limit, potential_limit)
   }
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
-    
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
 
 
@@ -157,6 +157,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.tabs.push(tab);
     })
   }
+
 
   get challenges() {
     return this.challengesFacade.getChallenges();
