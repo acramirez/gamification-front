@@ -29,16 +29,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   mandatoryChallenges: Challenge[] = []
   specialChallenges: Challenge[] = []
   challengeActive!: Challenge;
-  // statusMissions:StatusMissions[]=[]
-  // percent:number=0;
   currentPeriod: number = 0
-  // dueDay!:Date;
   cutOfDate!: Date;
   indexTab!: number
   remainingDays!: number
-  //statusChallenges:StatusChallenges[]=[]
   missionStatus!: boolean | undefined;
-
   challengesRedirect: string[] = []
 
   //New propertys
@@ -49,8 +44,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   // Temporaly
 
   notification!: Notification
-
-  // @ViewChild('challengeLikeU',{read:ViewContainerRef}) challengeLikeU!:ViewContainerRef
 
   tabs: Tab[] = [];
 
@@ -120,7 +113,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     this.currentPeriod = Number(current_period);
     this.period = resp.period
-    this.cutOfDate = resp.cut_of_date
+    this.cutOfDate = new Date(resp.cut_of_date)
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
@@ -133,7 +126,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.missionActive = this.missions[index]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
 
-    console.log(this.missions);
 
   }
 
