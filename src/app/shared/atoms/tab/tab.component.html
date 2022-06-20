@@ -4,13 +4,13 @@
     
 }"
 >
-    <img
+    <div
     [ngClass]="
         {
             'tab__icon': true,
             'tab__icon--ongoing':tab.status==='ongoing',
             'tab__icon--finish':tab.status==='finish'
         }"
-    alt="">
+    ></div>
     <span class="tab__text">{{tab.texto}}</span>
 </button>

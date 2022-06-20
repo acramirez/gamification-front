@@ -126,13 +126,11 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     this.getTabs();
     
     this.missionActive=this.missions[this.currentPeriod]
-    console.log(this.tabs);
     
   }
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
-    console.log(this.missionActive);
     
   }
 
@@ -149,7 +147,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }else if (mission.id===this.currentPeriod.toString()) {
         tab.status='ongoing'
       }
-      
+
       if(mission.id==='0'){
         tab.texto='Intro'
         tab.id=mission.id
@@ -423,6 +421,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     let currentIncrease=current_limit.amount-lower_limit.amount;
 
     let percent=(currentIncrease * 100) / totalIncrease
+    console.log(percent);
     
     return percent
   }
