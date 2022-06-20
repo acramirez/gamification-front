@@ -6,7 +6,13 @@
             [percent]="getPercent()"
             >
         </app-card-data>
-        <!-- [percent]="getPercent()" -->
+
+        <app-month-challenges
+
+        (challengeActive)="challengeActive=$event;showModal()"
+        >
+
+        </app-month-challenges>
         <!-- <app-month-challenges 
          [mandatoryChallenges]="mandatoryChallenges" 
          [specialChallenges]="specialChallenges" 

@@ -48,6 +48,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
   //New propertys
 
   missions:MissionInterfaces[]=[]
+  missionActive!:MissionInterfaces
 
   // Temporaly
   
@@ -92,7 +93,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
               this.cutOfDate=resp.cut_of_date
               this.createMission();
               this.propertyChallenges();
-              console.log(this.missions);
             })
 
           })
@@ -106,20 +106,25 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     }
   }
 
-  // showModal(){
-  //   const modal:Modal={
-  //     ...this.challengeActive,
-  //     close:()=>this.closeModal()
-  //   }
-  //   if (modal.id==='digitalChannels') {
-  //     modal.id='digital_channel'
-  //   }
-  //   this.modalService.generateModal(this.viewContainerRef,modal)
-  // }
+  showModal(){
+    const modal:Modal={
+      ...this.challengeActive,
+      close:()=>this.closeModal()
+    }
+    if (modal.id==='digitalChannels') {
+      modal.id='digital_channel'
+    }
+    this.modalService.generateModal(this.viewContainerRef,modal)
+  }
 
-  // closeModal(){
-  //   this.modalService.close(this.viewContainerRef)
-  // }
+  closeModal(){
+    this.modalService.close(this.viewContainerRef)
+  }
+
+
+  showMissionActive(index:number){
+    this.missionActive=this.missions[index]
+  }
 
   // proccessData(resp:ChallengeLikeU){
     
@@ -346,8 +351,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
     const special = challenges.filter(challenge=>challenge.type==="special")
     const specialStatus:boolean[]=[]
 
-
-
     for (let i = 0; i < special.length; i++) {
       const challenge = challenges[i];
       if (challenge.status===true) {
@@ -358,12 +361,6 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
       }
     }
 
-    // const statusSpecial=specialStatus.filter(statusS=>statusS===true)
-
-    // if (statusSpecial.length=0) {
-    //   status=false
-    // }
-
     for (let i = 0; i < mandatory.length; i++) {
       const challenge = challenges[i];
       if (challenge.type==='mandatory' && !challenge.status) {
@@ -371,13 +368,7 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
         break;
       }
     }
-
-    console.log(mandatory);
-    console.log(special);
-    
     return status
-    
-
   }
 
 

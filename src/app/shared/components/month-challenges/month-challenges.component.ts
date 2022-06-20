@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
+import { MissionInterfaces } from '../../interfaces/mission-interfaces';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
@@ -9,13 +10,16 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class MonthChallengesComponent implements AfterViewInit {
 
-  @Input() mandatoryChallenges!:Challenge[];
-  @Input() specialChallenges!:Challenge[];
+  mandatoryChallenges!:Challenge[];
+  specialChallenges!:Challenge[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
-  @Input() dueDate!:Date
-  @Input() missionStatus!:boolean | undefined
+  dueDate!:Date
+  missionStatus!:boolean | undefined
+
+
+  @Input() mission!:MissionInterfaces
 
   activeTab!:number
 
@@ -26,6 +30,13 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
+
+    this.mandatoryChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="mandatory")
+    this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
+
+    this.missionStatus=this.mission.status
+    this.dueDate=this.mission.cut_of_date!
+
     this.activeTab=this.initialTab
     this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
       
