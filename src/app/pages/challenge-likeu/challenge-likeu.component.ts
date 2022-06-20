@@ -138,6 +138,8 @@ export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
 
   showMissionActive(index:number){
     this.missionActive=this.missions[index]
+    console.log(this.missionActive);
+    
   }
 
   getTabs(){
