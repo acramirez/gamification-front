@@ -3,6 +3,35 @@ import { ChallengesContract } from "../../../app/shared/interfaces/response/chal
 export const challengesContract:ChallengesContract={
     challenges: [
       {
+        id: "welcome_challenge",
+        title: "Bienvenido al Reto LikeU",
+        description: "Misión cero ¡prepárate!... Conoce los detalles de tu LikeU y las misiones a cumplir en cada ciclo para alcanzar tu límite potencial.",
+        specs: [
+          {
+            spec:["Asegúrate de activar tu tarjeta digital y física LikeU."]
+          },
+          {
+            spec:["Recuerda que tu NIP para comprar con tu tarjeta física, lo asignaste al momento de contratarla. Si lo olvidaste, asígnalo desde SúperWallet y confírmalo en un cajero Santander."]
+          },
+          {
+            spec:["Conoce la fecha de corte y fecha límite de pago dentro de Súper Wallet, al hacer clic en la imagen de tu tarjeta."]
+          },
+          {
+            spec:["El reto se compone de 4 misiones durante 6 ciclos, que inician después de la primer fecha de corte y de tu primera fecha de pago."]
+          },
+          {
+            spec:["Descubre cada misión del reto LikeU, ingresando a \"Las misiones\" 🎯."]
+          },
+          {
+            spec:["Encuentra más información sobre el reto dentro de Preguntas Frecuentes."]
+          },
+        ],
+        conditions: [
+        ],
+        icon:"bienvenidos",
+        redirection: false
+      },
+      {
         id: "card_acquaintanceship",
         title: "Conoce tu tarjeta",
 				subtitle: "Conoce las características de tu tarjeta Santander LikeU.",
@@ -58,6 +87,30 @@ export const challengesContract:ChallengesContract={
         redirection: false
       },
       {
+        id: "payroll_portability",
+        title: "Trae tu nómina a Santander",
+        subtitle: "Realiza la portabilidad de nómina desde la app.",
+        description:"Hazlo y obtén beneficios como:",
+        specs: [
+          {
+            title:"Santander Plus",
+            spec:["El programa sin costo donde obtendrás: bonificaciones, promociones y descuentos."]
+          },
+          {
+            title:"Seguro por muerte accidental",
+            spec:["Hasta por $50,000 pesos"]
+          },
+          {
+            title:"Asistencia funeraria",
+            spec:["Sin costo para titular, cónyugue y un hijo, llamando al 800 703 6600"]
+          }
+        ],
+        conditions: [
+        ],
+        icon:"Portabilidad_nomina",
+        redirection: false
+      },
+      {
         id: "domiciliation",
         title: "Domicilia tus pagos",
 				subtitle: "Programa el pago automático mensual de tu LikeU.",
@@ -94,30 +147,7 @@ export const challengesContract:ChallengesContract={
         icon:"Pagos_recurrentes",
         redirection: false
       },
-      {
-        id: "payroll_portability",
-        title: "Trae tu nómina a Santander",
-        subtitle: "Realiza la portabilidad de nómina desde la app.",
-        description:"Hazlo y obtén beneficios como:",
-        specs: [
-          {
-            title:"Santander Plus",
-            spec:["El programa sin costo donde obtendrás: bonificaciones, promociones y descuentos."]
-          },
-          {
-            title:"Seguro por muerte accidental",
-            spec:["Hasta por $50,000 pesos"]
-          },
-          {
-            title:"Asistencia funeraria",
-            spec:["Sin costo para titular, cónyugue y un hijo, llamando al 800 703 6600"]
-          }
-        ],
-        conditions: [
-        ],
-        icon:"Portabilidad_nomina",
-        redirection: false
-      },
+
       {
         id: "assistance",
         title: "Contrata una asistencia Iké",
@@ -164,35 +194,6 @@ export const challengesContract:ChallengesContract={
           }
         ],
         icon:"Pago_minimo",
-        redirection: false
-      },
-      {
-        id: "welcome_challenge",
-        title: "Bienvenido al Reto LikeU",
-        description: "Misión cero ¡prepárate!... Conoce los detalles de tu LikeU y las misiones a cumplir en cada ciclo para alcanzar tu límite potencial.",
-        specs: [
-          {
-            spec:["Asegúrate de activar tu tarjeta digital y física LikeU."]
-          },
-          {
-            spec:["Recuerda que tu NIP para comprar con tu tarjeta física, lo asignaste al momento de contratarla. Si lo olvidaste, asígnalo desde SúperWallet y confírmalo en un cajero Santander."]
-          },
-          {
-            spec:["Conoce la fecha de corte y fecha límite de pago dentro de Súper Wallet, al hacer clic en la imagen de tu tarjeta."]
-          },
-          {
-            spec:["El reto se compone de 4 misiones durante 6 ciclos, que inician después de la primer fecha de corte y de tu primera fecha de pago."]
-          },
-          {
-            spec:["Descubre cada misión del reto LikeU, ingresando a \"Las misiones\" 🎯."]
-          },
-          {
-            spec:["Encuentra más información sobre el reto dentro de Preguntas Frecuentes."]
-          },
-        ],
-        conditions: [
-        ],
-        icon:"bienvenidos",
         redirection: false
       },
       {
@@ -311,8 +312,7 @@ export const challengesContract:ChallengesContract={
         id: "3",
         mandatoryChallenges: [
           "accumulated_purchases",
-          "card_payment",
-          "digital_channels"
+          "card_payment"
         ],
         specialChallenges: [
 
