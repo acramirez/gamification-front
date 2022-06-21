@@ -183,7 +183,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
         challenge.redirection = this.setChallengeRedirect(challenge).redirection
-        if (this.period.period_detail[index]) {
+        if (this.period.period_detail[index] && this.period.period_detail!==null) {
           let statusC = this.statusChallenge(challenge, this.period.period_detail[index]).status
           if (statusC) {
             challenge.status = true
@@ -256,8 +256,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     switch (challenge.id) {
       case 'accumulated_purchases':
         chall.status = this.checkAccumulatedPurchases(accumulated_purchases, this.cutOfDate)
-
         break;
+
       case 'card_payment':
         chall.status = this.checkCardPayment(card_payment)
         break;
