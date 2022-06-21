@@ -78,6 +78,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             })
           )
             .subscribe(resp => {
+              console.log(resp);
+              
             this.proccessData(resp)
           })
 
