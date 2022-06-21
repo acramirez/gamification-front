@@ -1,4 +1,5 @@
 import { ComponentFactoryResolver, Injectable, ViewContainerRef } from '@angular/core';
+import { FirstPageComponent } from 'src/app/pages/first-page/first-page.component';
 import { MessageComponent } from 'src/app/pages/message/message.component';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Modal } from '../../interfaces/atoms/modal';
@@ -25,11 +26,13 @@ export class ModalService {
   }
 
   generateNotification(container:ViewContainerRef,message:Notification){
-    
     const factoryNotification = this.componentFR.resolveComponentFactory<MessageComponent>(MessageComponent)
     const notification= container.createComponent<MessageComponent>(factoryNotification)
     notification.instance.notification=message
-
+  }
+  generateFirstAccess(container:ViewContainerRef){
+    const factoryNotification = this.componentFR.resolveComponentFactory<FirstPageComponent>(FirstPageComponent)
+    container.createComponent<FirstPageComponent>(factoryNotification)
   }
 
   close(container:ViewContainerRef){    

@@ -58,7 +58,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     private viewContainerRef: ViewContainerRef,
   ) { }
 
-
   ngAfterViewInit(): void {
 
     this.destroy$ = new Subject;
@@ -103,7 +102,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   proccessData(resp: ChallengeLikeU) {
 
-    const { lower_limit, current_limit, potential_limit, period } = resp
+    const { lower_limit, current_limit, potential_limit, period,seen_first_time } = resp
     const { current_period } = period
 
     this.cardDetail = {
@@ -114,12 +113,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.currentPeriod = Number(current_period);
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
+    
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
     
     this.missionActive = this.missions[this.currentPeriod]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
+
+    if (seen_first_time) {
+      this.showFirstAccess()
+    }
 
     this.showNotification(current_limit, potential_limit)
   }
@@ -159,6 +163,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     })
   }
 
+  showFirstAccess(){
+    this.modalService.generateFirstAccess(this.viewContainerRef)
+  }
 
   get challenges() {
     return this.challengesFacade.getChallenges();
