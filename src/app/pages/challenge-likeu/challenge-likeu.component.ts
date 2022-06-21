@@ -72,20 +72,20 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           this.getChallengesRedirect(challenges);
 
           this.gamificacionFacade.getGamification()
-          .pipe(
-            catchError(err=>{
-              return throwError(err)
-            })
-          )
+            .pipe(
+              catchError(err => {
+                return throwError(err)
+              })
+            )
             .subscribe(resp => {
 
-            this.proccessData(resp)
-          })
+              this.proccessData(resp)
+            })
 
-        }).catch(err=>{
+        }).catch(err => {
           console.log(err);
         })
-      }
+    }
     // } else if (this.tokenFacade._token) {
 
     //   this.gamificacionFacade.getGamification()
@@ -112,7 +112,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   proccessData(resp: ChallengeLikeU) {
 
-    const { lower_limit, current_limit, potential_limit, period,seen_first_time } = resp
+    const { lower_limit, current_limit, potential_limit, period, seen_first_time } = resp
     const { current_period } = period
 
     this.cardDetail = {
@@ -129,10 +129,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     this.propertyChallenges();
     this.getTabs();
-    console.log(this.missions,'2');
-    console.log(this.missionActive,'2');
-    
-    this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
+
+    this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special")
 
     if (seen_first_time) {
       this.showFirstAccess()
@@ -143,13 +141,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index]
-    this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
+    this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special")
 
   }
 
   getTabs() {
-    console.log(this.missions,'tabs');
-    console.log(this.missionActive,'tabs');
     this.missions.forEach(mission => {
       let tab: Tab = {
         id: '',
@@ -178,7 +174,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     })
   }
 
-  showFirstAccess(){
+  showFirstAccess() {
     this.modalService.generateFirstAccess(this.viewContainerRef)
   }
 
@@ -195,17 +191,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   */
 
   propertyChallenges() {
-    
+
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
-        console.log(this.missions,'property');
-        console.log(this.missionActive,'property');
         challenge.redirection = this.setChallengeRedirect(challenge).redirection
-        console.log(this.missions,'property 2');
-        console.log(this.missionActive,'property 2');
-        if (this.period.period_detail!==null && this.period.period_detail[index]) {
-          console.log(this.missions,'property 3');
-          console.log(this.missionActive,'property 3');
+        const { period_detail } = this.period
+        if (period_detail !== null && period_detail[index] && Number(period_detail[index].period_id) > 0) {
+
           let statusC = this.statusChallenge(challenge, this.period.period_detail[index]).status
           if (statusC) {
             challenge.status = true
@@ -214,15 +206,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           } else if (!statusC && index >= this.currentPeriod) {
             challenge.status = undefined
           }
-        }else{
-          challenge.status=undefined
+        } else {
+          challenge.status = undefined
         }
       })
       if (mission.challenges) {
         mission.status = this.statusMission(mission.challenges)
       }
     })
-
   }
 
   createMission() {
@@ -301,7 +292,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       case 'digitalChannels':
         chall.status = this.checkDigitalChannels(digitalChannels, this.cutOfDate)
         break;
-        
+
       case 'higher_payment':
         chall.status = this.checkAccelerator(card_payment)
         break;
@@ -321,7 +312,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
-  checkAccelerator(cardPayment: CardPayment[]){
+  checkAccelerator(cardPayment: CardPayment[]) {
     if (cardPayment) {
       for (const card of cardPayment) {
         card.operation_date = new Date(card.operation_date);
@@ -500,11 +491,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const chall = { ...challenge }
 
     this.challengesRedirect.forEach(redirect => {
-      
+
       if (challenge.id === redirect) {
         chall.redirection = true
-      }else if(challenge.id==='digitalChannels' && redirect==='digital_channel'){
-        chall.redirection=true
+      } else if (challenge.id === 'digitalChannels' && redirect === 'digital_channel') {
+        chall.redirection = true
       }
     })
 

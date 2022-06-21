@@ -16,4 +16,8 @@ export class HeaderComponent{
     this.callback.close()
   }
 
+  redirect(){
+    this.callback.redirect('client_support')
+  }
+
 }
