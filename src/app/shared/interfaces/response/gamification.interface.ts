@@ -43,7 +43,7 @@ export interface PeriodDetail {
     accumulated_purchases: CurrentLimit;
     card_payment:          CardPayment[];
     recurrent_payment:     Assistance[];
-    digitalChannels:       Assistance[];
+    digital_channels:       Assistance[];
     domiciliation:         Assistance[];
     assistance:            Assistance[];
     payroll_portability:   Assistance[];

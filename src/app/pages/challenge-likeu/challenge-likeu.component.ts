@@ -100,7 +100,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       challenge: { ...this.challengeActive },
       close: () => this.closeModal()
     }
-    if (modal.challenge.id === 'digitalChannels') {
+    if (modal.challenge.id === 'digital_channel') {
       modal.challenge.id = 'digital_channel'
     }
     this.modalService.generateModal(this.viewContainerRef, modal)
@@ -258,7 +258,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       domiciliation,
       assistance,
       payroll_portability,
-      digitalChannels,
+      digital_channels,
       due_date
 
     } = periodDetail
@@ -289,8 +289,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         chall.status = this.checkPayrollPortability(payroll_portability, this.cutOfDate)
         break;
 
-      case 'digitalChannels':
-        chall.status = this.checkDigitalChannels(digitalChannels, this.cutOfDate)
+      case 'digital_channels':
+        chall.status = this.checkdigital_channels(digital_channels, this.cutOfDate)
         break;
 
       case 'higher_payment':
@@ -386,9 +386,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
-  checkDigitalChannels(digitalChannels: any[], cutDate: Date) {
-    if (digitalChannels) {
-      for (const channel of digitalChannels) {
+  checkdigital_channels(digital_channels: any[], cutDate: Date) {
+    if (digital_channels) {
+      for (const channel of digital_channels) {
         channel.operation_date = new Date(channel.operation_date)
 
         if (channel.status === 'ACTIVE' && channel.operation_date < cutDate) {
@@ -494,7 +494,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       if (challenge.id === redirect) {
         chall.redirection = true
-      } else if (challenge.id === 'digitalChannels' && redirect === 'digital_channel') {
+      } else if (challenge.id === 'digital_channels' && redirect === 'digital_channel') {
         chall.redirection = true
       }
     })

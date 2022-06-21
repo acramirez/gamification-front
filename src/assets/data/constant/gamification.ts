@@ -61,7 +61,7 @@
 //                 operation_date:new Date( "2022-04-14T12:20:53.596")
 //               }
 //             ],
-//             digitalChannels: [
+//             digital_channels: [
 //               {
 //                 id: "0122",
 //                 status: "ACTIVE",

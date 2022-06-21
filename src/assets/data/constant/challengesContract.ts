@@ -13,7 +13,6 @@ export const challengesContract:ChallengesContract={
           "Solo aplicable en portabilidades dispensando en Santander"
         ],
         icon:"Conoce_tu_tarjeta",
-        redirection: false
       },
       {
         id: "accumulated_purchases",
@@ -101,7 +100,7 @@ export const challengesContract:ChallengesContract={
         redirection: false
       },
       {
-        id: "digitalChannels",
+        id: "digital_channels",
         name: "Usa los canales digitales",
         description: "La validación consite en medir el uso en los últimos 3 meses a cada mes de validación, para el 5 debe tenerla el 3, 4, 5; y para el 6, será el 4, 5, 6.",
         specs: [
@@ -167,7 +166,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "accumulated_purchases",
           "card_payment",
-          "digitalChannels"
+          "digital_channels"
         ],
         specialChallenges: [
 
@@ -181,7 +180,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "accumulated_purchases",
           "card_payment",
-          "digitalChannels"
+          "digital_channels"
         ],
         specialChallenges: [
           "payroll_portability",
@@ -199,7 +198,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "accumulated_purchases",
           "card_payment",
-          "digitalChannels"
+          "digital_channels"
         ],
         specialChallenges: [
           "payroll_portability",
@@ -218,7 +217,7 @@ export const challengesContract:ChallengesContract={
         mandatoryChallenges: [
           "accumulated_purchases",
           "card_payment",
-          "digitalChannels"
+          "digital_channels"
         ],
         specialChallenges: [
           "payroll_portability",

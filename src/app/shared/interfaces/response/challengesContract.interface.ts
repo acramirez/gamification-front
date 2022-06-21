@@ -20,7 +20,7 @@ export interface Challenge {
     specs:       string[];
     conditions:  string[];
     icon:        string;
-    redirection: boolean;
+    redirection?: boolean;
     status?:     boolean;
     type?:typeChallenge
 }

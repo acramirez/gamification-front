@@ -115,7 +115,7 @@
 					"redirection": true
 				},
 				{
-					"id": "digitalChannels",
+					"id": "digital_channels",
 					"name": "Uso de canales digitales",
 					"description": "La validación consite en medir el uso en los últimos 3 meses a cada mes de validación, para el 5 debe tenerla el 3, 4, 5; y para el 6, será el 4, 5, 6.",
 					"specs": [
@@ -193,48 +193,48 @@
 		{
 			"id": "0",
 			"mandatoryChallenges": ["card_acquaintanceship", "card_payment"],
-			"optionalChallenges": ["minimum_monthly_billing", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["minimum_monthly_billing", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "1",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "2",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "3",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "4",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance"],
-			"optionalChallenges": ["digitalChannels"],
+			"optionalChallenges": ["digital_channels"],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "5",
-			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"optionalChallenges": [],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "6",
-			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"optionalChallenges": [],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
