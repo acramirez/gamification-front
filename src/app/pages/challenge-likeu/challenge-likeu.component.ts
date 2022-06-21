@@ -123,9 +123,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
     
+    console.log(this.missions,'1');
+    console.log(this.missionActive,'1');
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
+    console.log(this.missions,'2');
+    console.log(this.missionActive,'2');
     
     this.missionActive = this.missions[this.currentPeriod]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
@@ -213,7 +217,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   createMission() {
-    const { missions, challenges } = this.challenges
+    const { missions } = this.challenges
 
     missions.forEach(miss => {
       const mission: MissionInterfaces = {
