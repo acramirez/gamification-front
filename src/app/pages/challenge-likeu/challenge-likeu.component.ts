@@ -78,8 +78,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             })
           )
             .subscribe(resp => {
-              console.log(resp);
-              
+
             this.proccessData(resp)
           })
 
@@ -124,9 +123,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.currentPeriod = Number(current_period);
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
-    
-    console.log(this.missions,'1');
-    console.log(this.missionActive,'1');
+
     this.createMission();
     this.propertyChallenges();
     this.getTabs();
@@ -150,6 +147,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   getTabs() {
+    console.log(this.missions,'tabs');
+    console.log(this.missionActive,'tabs');
     this.missions.forEach(mission => {
       let tab: Tab = {
         id: '',
@@ -195,6 +194,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   */
 
   propertyChallenges() {
+    console.log(this.missions,'property');
+    console.log(this.missionActive,'property');
+    
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
         challenge.redirection = this.setChallengeRedirect(challenge).redirection
@@ -220,6 +222,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   createMission() {
     const { missions } = this.challenges
+
+    console.log(this.missions,'MISSION');
+    console.log(this.missionActive,'MISSION');
 
     missions.forEach(miss => {
       const mission: MissionInterfaces = {
