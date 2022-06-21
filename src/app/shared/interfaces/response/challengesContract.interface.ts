@@ -15,10 +15,11 @@ export interface FAQ {
 
 export interface Challenge {
     id:          string;
-    name:        string;
-    description: string;
-    specs:       string[];
-    conditions:  string[];
+    title:        string;
+    subtitle?:    string;
+    description?: string;
+    specs?:        Array<SpecClass | string>;
+    conditions?:  string[];
     icon:        string;
     redirection?: boolean;
     status?:     boolean;
@@ -29,6 +30,11 @@ export enum typeChallenge{
     mandatory='mandatory',
     special='special',
     accelerator='accelerator',
+}
+
+export interface SpecClass {
+    title?: string;
+    spec?:  string[];
 }
 
 export interface Mission {
