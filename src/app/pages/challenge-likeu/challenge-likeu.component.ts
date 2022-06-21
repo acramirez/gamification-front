@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, ViewContainerRef } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -15,6 +15,7 @@ import { Notification } from 'src/app/shared/interfaces/notification';
 import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
+import { catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -70,10 +71,18 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
           this.getChallengesRedirect(challenges);
 
-          this.gamificacionFacade.getGamification().subscribe(resp => {
+          this.gamificacionFacade.getGamification()
+          .pipe(
+            catchError(err=>{
+              return throwError(err)
+            })
+          )
+            .subscribe(resp => {
             this.proccessData(resp)
           })
 
+        }).catch(err=>{
+          console.log(err);
         })
       }
     // } else if (this.tokenFacade._token) {
