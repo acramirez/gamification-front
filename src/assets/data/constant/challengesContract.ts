@@ -124,14 +124,68 @@ export const challengesContract:ChallengesContract={
         ],
         icon:"Pago_minimo",
         redirection: false
-      }
+      },
+      {
+        id: "welcome_challenge",
+        name: "Pago mayor al mínimo",
+        description: "Se deberá considerar como base el campo de pago mínimo.",
+        specs: [
+          "Que pague al menos un 50% más del monto mínimo"
+        ],
+        conditions: [
+          "Solo aplicable en portabilidades dispensando en Santander"
+        ],
+        icon:"bienvenidos",
+        redirection: false
+      },
+      {
+        id: "missions",
+        name: "Pago mayor al mínimo",
+        description: "Se deberá considerar como base el campo de pago mínimo.",
+        specs: [
+          "Que pague al menos un 50% más del monto mínimo"
+        ],
+        conditions: [
+          "Solo aplicable en portabilidades dispensando en Santander"
+        ],
+        icon:"retos",
+        redirection: false
+      },
+      {
+        id: "credit_increase",
+        name: "Pago mayor al mínimo",
+        description: "Se deberá considerar como base el campo de pago mínimo.",
+        specs: [
+          "Que pague al menos un 50% más del monto mínimo"
+        ],
+        conditions: [
+          "Solo aplicable en portabilidades dispensando en Santander"
+        ],
+        icon:"incrementos",
+        redirection: false
+      },
+      {
+        id: "know_your_card",
+        name: "Pago mayor al mínimo",
+        description: "Se deberá considerar como base el campo de pago mínimo.",
+        specs: [
+          "Que pague al menos un 50% más del monto mínimo"
+        ],
+        conditions: [
+          "Solo aplicable en portabilidades dispensando en Santander"
+        ],
+        icon:"Conoce_tu_tarjeta",
+        redirection: false
+      },
     ],
     missions: [
       {
         id: "0",
         mandatoryChallenges: [
-          "card_acquaintanceship",
-          "card_payment"
+          "welcome_challenge",
+          "missions",
+          "credit_increase",
+          "know_your_card"
         ],
         specialChallenges: [
 
