@@ -10,8 +10,14 @@
                 }">
                     {{modal.challenge.title}}
                 </h2>
-                <span class="modal__subtitle">{{modal.challenge.description}}</span>            
+                <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>            
             </div>
+
+            <div class="modal__content">
+                <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
+                <p></p>
+            </div>
+
             <ul>
                 <ng-container *ngFor="let condition of modal.challenge.conditions">
                     <li>{{condition}}</li>

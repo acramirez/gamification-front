@@ -177,15 +177,17 @@ export const challengesContract:ChallengesContract={
           },
           {
             title:"3. Vincula tu tarjeta cumpliendo al menos una de las siguientes acciones cada mes:",
-            spec:["Consumo mínimo mensual de $200 pesos MXN durante el Reto LikeU."]
-          },
-          {
-            title:"1. Usa tu tarjeta:",
             spec:[
               "Domicilia el pago de tu LikeU: Contrata en sucursal el servicio de pago mensual automático de tu tarjeta LikeU, con cargo a tu cuenta de nómina o cheques. ",            
               "Cargo recurrente: Suscribe el cobro mensual de algún servicio (TV, telefonía, Luz, servicios de streaming, etc.) a tu tarjeta LikeU a través de SuperLínea, SuperMóvil o directamente con el prestador de servicio.",            
               "Asistencias IKÉ: Activa un plan de asistencia desde Súper Wallet dentro de la opción \"Personalizar\"",            
               "Portabilidad de Nómina: Trae tu nómina a Santander desde SúperMóvil, SuperNET o en sucursal.",            
+            ]
+          },
+          {
+            title:"4. Uso de canales digitales:",
+            spec:[
+              "Ingresa por lo menos una vez al mes, a alguno de los canales digitales de Santander (SuperNET, SuperMóvil o Súper Wallet) y administra o conoce los detalles de tu tarjeta.",
             ]
           },
         ],
@@ -196,13 +198,28 @@ export const challengesContract:ChallengesContract={
       },
       {
         id: "credit_increase",
-        title: "Pago mayor al mínimo",
-        description: "Se deberá considerar como base el campo de pago mínimo.",
+        title: " Incrementos de Línea de crédito",
+        description: "Los incrementos son automáticos y se generan al cumplir las misiones en los 6 ciclos.",
         specs: [
-          "Que pague al menos un 50% más del monto mínimo"
+          {
+            spec:[
+              "Solo aplicable en portabilidades dispensando en Santander",
+              "Cumpliendo con la misión 3 en el ciclo 4, obtendrás un incremento del 70% del límite de crédito potencial.",
+              "Con la misión 4 en el ciclo 5, obtendrás un incremento del 90% de tu límite de crédito.",
+              "Por último, al completar la misión 5 en el ciclo 6 alcanzarás el 100% de tu límite de crédito potencial y habrás finalizado el Reto LikeU."
+            ]
+          },
+          {
+            title:"¡Acelera el logro de tu límite potencial! ⚡️",
+            spec:["Paga 50% más de tu pago mínimo mensual y finaliza el reto en solo 5 ciclos."]
+          },
+          {
+            title:"Recuerda que cada misión es recurrente y debes repetirla durante todo el Reto LikeU (en cada uno de los 6 ciclos)."
+          }
+          
         ],
         conditions: [
-          "Solo aplicable en portabilidades dispensando en Santander"
+          
         ],
         icon:"incrementos",
         redirection: false
