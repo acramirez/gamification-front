@@ -125,12 +125,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.cutOfDate = new Date(resp.cut_of_date)
 
     this.createMission();
+    this.missionActive = this.missions[this.currentPeriod]
+
     this.propertyChallenges();
     this.getTabs();
     console.log(this.missions,'2');
     console.log(this.missionActive,'2');
     
-    this.missionActive = this.missions[this.currentPeriod]
     this.specialChallenges=this.missionActive.challenges!.filter(challenge=>challenge.type==="special")
 
     if (seen_first_time) {
@@ -194,13 +195,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   */
 
   propertyChallenges() {
-    console.log(this.missions,'property');
-    console.log(this.missionActive,'property');
     
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
+        console.log(this.missions,'property');
+        console.log(this.missionActive,'property');
         challenge.redirection = this.setChallengeRedirect(challenge).redirection
-        if (this.period.period_detail[index] && this.period.period_detail!==null) {
+        console.log(this.missions,'property 2');
+        console.log(this.missionActive,'property 2');
+        if (this.period.period_detail!==null && this.period.period_detail[index]) {
+          console.log(this.missions,'property 3');
+          console.log(this.missionActive,'property 3');
           let statusC = this.statusChallenge(challenge, this.period.period_detail[index]).status
           if (statusC) {
             challenge.status = true
@@ -222,10 +227,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   createMission() {
     const { missions } = this.challenges
-
-    console.log(this.missions,'MISSION');
-    console.log(this.missionActive,'MISSION');
-
     missions.forEach(miss => {
       const mission: MissionInterfaces = {
         id: miss.id,
@@ -233,7 +234,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       mission.challenges = this.typeChallenge(miss)
       this.missions.push(mission)
     })
-    
   }
 
   typeChallenge(mission: Mission) {
