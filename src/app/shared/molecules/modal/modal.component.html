@@ -17,8 +17,13 @@
                 <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
                 <ng-container *ngFor="let spec of modal.challenge.specs">
                     <ul class="modal__specs">
-                        <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
-                        <li *ngFor="let item of spec.spec" class="modal__spec-item">{{item}}</li>
+                        <div class="modal__spec">
+                            <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
+                            <li *ngFor="let item of spec.spec" [ngClass]="{
+                                'modal__spec-item':true,
+                                'modal__spec-item--title':spec.title
+                            }" class="modal__spec-item">{{item}}</li>
+                        </div>
                     </ul>
                 </ng-container>
 
