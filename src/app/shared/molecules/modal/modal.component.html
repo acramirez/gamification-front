@@ -15,14 +15,17 @@
 
             <div class="modal__content">
                 <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
+                <ng-container *ngFor="let spec of modal.challenge.specs">
+                    <span class="modal__spec-title">{{spec.title}}</span>
+                </ng-container>
                 <p></p>
+                <ul>
+                    <ng-container *ngFor="let condition of modal.challenge.conditions">
+                        <li>{{condition}}</li>
+                    </ng-container>
+                </ul>
             </div>
 
-            <ul>
-                <ng-container *ngFor="let condition of modal.challenge.conditions">
-                    <li>{{condition}}</li>
-                </ng-container>
-            </ul>
         </div>
         <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
     </div>

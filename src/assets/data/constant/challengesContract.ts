@@ -30,7 +30,9 @@ export const challengesContract:ChallengesContract={
         title: "Usa tu tarjeta",
 				subtitle: "Gasta $200 MXN pesos al mes.",
         specs: [
-          "Recuerda realizar compras seguras en internet utilizando el CVV dinámico de tu tarjeta en LikeU, lo puedes consultar en Súper Wallet."
+          {
+            spec:["Recuerda realizar compras seguras en internet utilizando el CVV dinámico de tu tarjeta en LikeU, lo puedes consultar en Súper Wallet."]
+          }
         ],
         conditions: [
         ],
@@ -41,8 +43,14 @@ export const challengesContract:ChallengesContract={
         title: "Paga tu tarjeta",
 				subtitle: "Mantén al corriente tus pagos, conoce tu fecha límite de pago en la app.",
         specs: [
-          "Cubre al menos el pago mínimo mensual; recuerda que puedes pagarla desde SuperMóvil.",
-          "Si pagas 50% más del mínimo, alcanzarás tu límite potencial de crédito más rápido."
+          {
+            spec:["Cubre al menos el pago mínimo mensual; recuerda que puedes pagarla desde SuperMóvil."]
+          },
+          {
+            spec:["Si pagas 50% más del mínimo, alcanzarás tu límite potencial de crédito más rápido."]
+          },
+          
+          
         ],
         conditions: [
         ],
@@ -54,9 +62,15 @@ export const challengesContract:ChallengesContract={
         title: "Domicilia tus pagos",
 				subtitle: "Programa el pago automático mensual de tu LikeU.",
         specs: [
-          "Olvídate de pagar comisiones por pago tardío, solicita la domiciliación del pago mensual de tu LikeU con tu tarjeta de débito o cheques y cada mes, se tomará de tu cuenta Santander el monto que hayas solicitado en tu servicio de domiciliación.",
-          "* Contratación forzosa en sucursal. ",
-          "¡Te ayudamos a construir y mantener un buen historial crediticio!"
+          {
+            spec:["Olvídate de pagar comisiones por pago tardío, solicita la domiciliación del pago mensual de tu LikeU con tu tarjeta de débito o cheques y cada mes, se tomará de tu cuenta Santander el monto que hayas solicitado en tu servicio de domiciliación."]
+          },
+          {
+            spec:["* Contratación forzosa en sucursal. "]
+          },
+          {
+            spec:["¡Te ayudamos a construir y mantener un buen historial crediticio!"]
+          },
         ],
         conditions: [
         ],
@@ -68,8 +82,12 @@ export const challengesContract:ChallengesContract={
         title: "Activa un pago recurrente",
 				subtitle: "Domicilia el pago de servicios.",
         specs: [
-          "Solicitar la domiciliación del pago con tu tarjeta LikeU, de algún servicio recurrente. Puedes solicitarlo en Santander o directamente con los proveedores de servicios.",
-          "Se consideran pagos recurrentes los que implican pagos periódicos por el uso de algún servicio (ejemplo: CFE, Escuelas, Gimnasios, servicios de streaming, etc.)",
+          {
+            spec:["Solicitar la domiciliación del pago con tu tarjeta LikeU, de algún servicio recurrente. Puedes solicitarlo en Santander o directamente con los proveedores de servicios.",]
+          },
+          {
+            spec:["Se consideran pagos recurrentes los que implican pagos periódicos por el uso de algún servicio (ejemplo: CFE, Escuelas, Gimnasios, servicios de streaming, etc.)",]
+          }
         ],
         conditions: [
         ],
@@ -105,7 +123,10 @@ export const challengesContract:ChallengesContract={
         title: "Contrata una asistencia Iké",
         subtitle: "Conoce los beneficios exclusivos de activar una asistencia Iké.",
         specs: [
-          "La vida está llena de momentos para compartir e IKÉ se encargará de los disfrutes al máximo. Contrata la asistencia IKÉ que mejor te convenga con tu tarjeta Likeu."
+          {
+            spec:["La vida está llena de momentos para compartir e IKÉ se encargará de los disfrutes al máximo. Contrata la asistencia IKÉ que mejor te convenga con tu tarjeta Likeu."]
+          }
+          
         ],
         conditions: [
         ],
@@ -116,7 +137,10 @@ export const challengesContract:ChallengesContract={
         id: "digital_channels",
         title: "Canales Digitales",
         specs: [
-          "Ingresa por lo menos una vez al mes, a alguno de los canales digitales de Santander (SuperNET, SuperMóvil o Súper Wallet) y administra o conoce los detalles de tu tarjeta."
+          {
+            spec:["Ingresa por lo menos una vez al mes, a alguno de los canales digitales de Santander (SuperNET, SuperMóvil o Súper Wallet) y administra o conoce los detalles de tu tarjeta."]
+          }
+          
         ],
         conditions: [
         ],
@@ -128,8 +152,16 @@ export const challengesContract:ChallengesContract={
         title: "Paga más del mínimo",
         subtitle: "Alcanza más rápido el límite potencial de crédito de tu LikeU.",
         specs: [
-          "No olvides que pagar más del mínimo, es un comodín que puedes usar a partir de la tercera misión del Reto LikeU para incrementar tu línea de crédito.",
-          "Si pagas 50% más del mínimo, acelerarás tu avance en el Reto LikeU."
+          {
+            spec:[
+              "No olvides que pagar más del mínimo, es un comodín que puedes usar a partir de la tercera misión del Reto LikeU para incrementar tu línea de crédito.",
+            ]
+          },
+          {
+            spec:[
+              "Si pagas 50% más del mínimo, acelerarás tu avance en el Reto LikeU."
+            ]
+          }
         ],
         icon:"Pago_minimo",
         redirection: false
@@ -229,7 +261,7 @@ export const challengesContract:ChallengesContract={
         title: "Pago mayor al mínimo",
         description: "Se deberá considerar como base el campo de pago mínimo.",
         specs: [
-          "Que pague al menos un 50% más del monto mínimo"
+          {spec:["Que pague al menos un 50% más del monto mínimo"]}
         ],
         conditions: [
           "Solo aplicable en portabilidades dispensando en Santander"

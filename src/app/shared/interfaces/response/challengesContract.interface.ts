@@ -18,7 +18,7 @@ export interface Challenge {
     title:        string;
     subtitle?:    string;
     description?: string;
-    specs?:        Array<SpecClass | string>;
+    specs?:        Array<SpecClass>;
     conditions?:  string[];
     icon:        string;
     redirection?: boolean;

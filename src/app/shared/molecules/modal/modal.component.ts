@@ -1,8 +1,6 @@
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Modal } from '../../interfaces/atoms/modal';
-import { Challenge } from '../../interfaces/response/challengesContract.interface';
-import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-modal',

@@ -12,8 +12,8 @@
 
 
     <div class="normal-challenges">
-        <h2 class="challenges__title">Misiones especiales</h2>
-        <p class="challenge__description">Aún te falta completar una misión. Elige una de las siguientes misiones especiales para aumentar tu límite de crédito.</p>
+        <h2 class="challenges__title">Misiones por completar</h2>
+        <p class="challenge__description">Recuerda que la validación de las misiones se realiza en cada ciclo.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of mission.challenges">
                 <ng-container *ngIf="challenge.type==='mandatory' || challenge.type==='accelerator'">
@@ -23,8 +23,8 @@
         </div>
     </div>
     <div *ngIf=" specialChallenges.length>0 " class="special-challenges">
-        <h2 class="challenges__title">Retos especiales</h2>
-        <p class="challenge__description">Completa cualquiera de las misiones para aumentar tu límite de crédito.   </p>
+        <h2 class="challenges__title">Misiones especiales</h2>
+        <p class="challenge__description">Aún te falta completar una misión. Elige una de las siguientes misiones especiales para aumentar tu límite de crédito.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of specialChallenges">
                 <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
