@@ -57,3 +57,7 @@
 .modal_description{
     font-size: .875rem;
 }
+
+.modal__spec-title{
+    font-weight: 700;
+}

@@ -27,25 +27,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   public cardDetail!: Card;
   public period!: Period;
-  mandatoryChallenges: Challenge[] = []
   specialChallenges: Challenge[] = []
   challengeActive!: Challenge;
   currentPeriod: number = 0
   cutOfDate!: Date;
   indexTab!: number
-  remainingDays!: number
-  missionStatus!: boolean | undefined;
   challengesRedirect: string[] = []
-
-  //New propertys
-
   missions: MissionInterfaces[] = []
   missionActive!: MissionInterfaces
-
-  // Temporaly
-
-  notification!: Notification
-
   tabs: Tab[] = [];
 
   private destroy$!: Subject<any>;
@@ -187,7 +176,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**  
-   * Metodo mediante el cual se obtienen los challenges de acuerdo al tab seleccionado
+   * Metodo mediante el cual se asignan las propiedades status y redirect a los challenges
   */
 
   propertyChallenges() {
@@ -216,6 +205,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     })
   }
 
+  /**  
+   * Metodo mediante el cual se inicializan las misiones 
+  */
+
   createMission() {
     const { missions } = this.challenges
     missions.forEach(miss => {
@@ -226,6 +219,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.missions.push(mission)
     })
   }
+
+  /**  
+   * Metodo mediante el cual se asigna el tipo a cadaa challenge de cada mision
+  */
 
   typeChallenge(mission: Mission) {
     const { challenges } = this.challenges
@@ -249,6 +246,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     return challengesMission
   }
+
+  /**  
+   * Metodo mediante el cual se define el status del challenge
+  */
 
   statusChallenge(challenge: Challenge, periodDetail: PeriodDetail) {
     const {
@@ -290,7 +291,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'digital_channels':
-        chall.status = this.checkdigital_channels(digital_channels, this.cutOfDate)
+        chall.status = this.checkDigitalChannels(digital_channels, this.cutOfDate)
         break;
 
       case 'higher_payment':
@@ -299,6 +300,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     return chall
   }
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto card_payment
+  */
 
   checkCardPayment(cardPayment: CardPayment[]) {
     if (cardPayment) {
@@ -311,6 +316,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     return false
   }
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto accelerator
+  */
 
   checkAccelerator(cardPayment: CardPayment[]) {
     if (cardPayment) {
@@ -325,6 +334,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status del reto accumulated_purchases
+  */
+
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
     const today = new Date()
 
@@ -334,6 +347,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status del reto recurrent_payment
+  */
   checkRecurrentPayment(recurrentPayment: Assistance[], cutDate: Date) {
     if (recurrentPayment) {
       for (const recurrent of recurrentPayment) {
@@ -347,6 +363,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status del reto domiciliation
+  */
   checkDomiciliation(domiciliation: any[], cutDate: Date) {
     if (domiciliation) {
 
@@ -361,6 +380,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status del reto assistance
+  */
   checkAssistance(assistance: any[], cutDate: Date) {
     if (assistance) {
       for (const assis of assistance) {
@@ -373,6 +395,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status del reto payroll_portability
+  */
   checkPayrollPortability(payrollPortability: any[], cutDate: Date) {
 
     if (payrollPortability) {
@@ -386,7 +411,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
-  checkdigital_channels(digital_channels: any[], cutDate: Date) {
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto digital_channels
+  */
+  checkDigitalChannels(digital_channels: any[], cutDate: Date) {
     if (digital_channels) {
       for (const channel of digital_channels) {
         channel.operation_date = new Date(channel.operation_date)
@@ -399,6 +428,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false
   }
 
+  /**  
+   * Metodo mediante el cual se valida el status de la mision
+  */
   statusMission(challenges: Challenge[]) {
     let status: boolean = true;
 
@@ -425,6 +457,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return status
   }
 
+  /**  
+   * Metodo mediante el cual se obtiene el porcentaje
+  */
   getPercent() {
 
     const { lower_limit, current_limit, potential_limit } = this.cardDetail
@@ -438,6 +473,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return percent
   }
 
+  /**  
+   * Metodo mediante el cual se muestran las notificaciones
+  */
   showNotification(currentLimit: CurrentLimit, potentialLimit: CurrentLimit) {
     const previousPeriod = this.missions[this.currentPeriod - 1]
 
@@ -475,6 +513,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  /**  
+   * Metodo mediante el cual se obtienen los retos los cuales van a contar con la propiedad redirect 
+  */
   getChallengesRedirect(challenges: TokenValidator) {
     const cutChallenges = challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
     const cutChallenges2 = cutChallenges[1].split(']')
@@ -483,9 +524,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.challengesRedirect[i] = challenge.trim().slice(1, -1)
     })
 
-
   }
 
+
+  /**  
+   * Metodo mediante el cual se agrega la propiedad redirect al challenge
+  */
   setChallengeRedirect(challenge: Challenge) {
 
     const chall = { ...challenge }

@@ -277,7 +277,7 @@ export const challengesContract:ChallengesContract={
           "welcome_challenge",
           "missions",
           "credit_increase",
-          "know_your_card"
+          "card_acquaintanceship"
         ],
         specialChallenges: [
 
