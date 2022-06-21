@@ -48,13 +48,6 @@ export class GamificationFacade {
                 }
                 
                 return this.resp
-            }),
-            tap(resp=>{
-
-                if (resp.seen_first_time ) {
-                    this.router.navigateByUrl('bienvenido')
-                    this.firstaccess=true
-                }
             })
         )
     }
