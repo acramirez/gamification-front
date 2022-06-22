@@ -436,25 +436,32 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
+    let statusSpecial=[];
 
-    for (let i = 0; i < special.length; i++) {
-      const challenge = challenges[i];
-      if (challenge.status === true) {
-        status = true
-        break;
-      } else {
-        status = false
-      }
+    if (special.length>0) {
+      statusSpecial=special.filter(spec=>spec.status===true);
+      console.log(statusSpecial);
+    }
+    
+    const statusMandatory=mandatory.filter(mand=>mand.status===false)
+
+    console.log(statusMandatory);
+    
+
+    if (statusMandatory.length>0 && statusSpecial.length===0 ) {
+      return true
     }
 
-    for (let i = 0; i < mandatory.length; i++) {
-      const challenge = challenges[i];
-      if (challenge.type === 'mandatory' && !challenge.status) {
-        status = false
-        break;
-      }
-    }
-    return status
+    return false
+
+    // for (let i = 0; i < mandatory.length; i++) {
+    //   const challenge = challenges[i];
+    //   if (challenge.type === 'mandatory' && !challenge.status) {
+    //     status = false
+    //     break;
+    //   }
+    // }
+    // return status
   }
 
   /**  
@@ -469,6 +476,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     let currentIncrease = current_limit.amount - lower_limit.amount;
 
     let percent = (currentIncrease * 100) / totalIncrease
+
+    if (percent>100) {
+      percent = 100
+    }
 
     return percent
   }

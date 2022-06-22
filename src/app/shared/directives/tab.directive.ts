@@ -10,7 +10,7 @@ export class TabDirective implements OnInit, OnDestroy  {
 
   // @Output() indexTab:EventEmitter<number> =new EventEmitter;
   
-  sub!:Subscription
+  sub$!:Subscription
   @Input() tabData!:Tab;
   @Input() tabsData!:Tab[];
   @Input() initialTab!:number
@@ -31,11 +31,10 @@ export class TabDirective implements OnInit, OnDestroy  {
   }
 
   elementTab(){
-    this.sub = fromEvent(document,'click')
+    this.sub$ = fromEvent(document,'click')
       .subscribe(event=>{
         this.isActive(event.target as HTMLElement)
       })
-      
   }
 
   isActive(elementCheck:HTMLElement){
@@ -55,8 +54,8 @@ export class TabDirective implements OnInit, OnDestroy  {
   }
   
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.sub$) {
+      this.sub$.unsubscribe();
     }
   }
 } 
