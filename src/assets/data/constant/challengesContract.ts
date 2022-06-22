@@ -370,6 +370,23 @@ export const challengesContract:ChallengesContract={
           "domiciliation",
           "recurrent_payment",
           "assistance",
+          "digital"
+        ],
+        acceleratorChallenges: [],
+        creditIncrease: false
+      },
+      {
+        id: "7",
+        mandatoryChallenges: [
+          "accumulated_purchases",
+          "card_payment",
+          "digital_channels"
+        ],
+        specialChallenges: [
+          "payroll_portability",
+          "domiciliation",
+          "recurrent_payment",
+          "assistance",
         ],
         acceleratorChallenges: [],
         creditIncrease: false

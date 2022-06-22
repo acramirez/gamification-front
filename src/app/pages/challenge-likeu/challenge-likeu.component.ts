@@ -432,7 +432,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se valida el status de la mision
   */
   statusMission(challenges: Challenge[]) {
-    let status: boolean = true;
 
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
@@ -440,28 +439,16 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     if (special.length>0) {
       statusSpecial=special.filter(spec=>spec.status===true);
-      console.log(statusSpecial);
     }
     
     const statusMandatory=mandatory.filter(mand=>mand.status===false)
-
-    console.log(statusMandatory);
     
-
-    if (statusMandatory.length>0 && statusSpecial.length===0 ) {
+    if (statusMandatory.length===0 && statusSpecial.length===0 ) {
       return true
     }
-
+  
     return false
 
-    // for (let i = 0; i < mandatory.length; i++) {
-    //   const challenge = challenges[i];
-    //   if (challenge.type === 'mandatory' && !challenge.status) {
-    //     status = false
-    //     break;
-    //   }
-    // }
-    // return status
   }
 
   /**  
