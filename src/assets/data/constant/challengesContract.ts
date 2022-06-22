@@ -329,13 +329,9 @@ export const challengesContract:ChallengesContract={
           "digital_channels"
         ],
         specialChallenges: [
-          "payroll_portability",
-          "domiciliation",
-          "recurrent_payment",
-          "assistance"
+
         ],
         acceleratorChallenges: [
-          "higher_payment"
         ],
         creditIncrease: true
       },
@@ -370,9 +366,11 @@ export const challengesContract:ChallengesContract={
           "domiciliation",
           "recurrent_payment",
           "assistance",
-          "digital"
         ],
-        acceleratorChallenges: [],
+        acceleratorChallenges: [
+          "higher_payment"
+
+        ],
         creditIncrease: false
       },
       {

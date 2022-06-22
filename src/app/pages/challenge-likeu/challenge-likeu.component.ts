@@ -181,6 +181,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   propertyChallenges() {
 
+    console.log(this.missions);
+
+    const { period_detail } = this.period
+
+    
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
         challenge.redirection = this.setChallengeRedirect(challenge).redirection
@@ -260,9 +265,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       assistance,
       payroll_portability,
       digital_channels,
-      due_date
-
+      period_id
     } = periodDetail
+
+    const prevPeriodId=Number(period_id) - 1
+    let {due_date}=periodDetail
+    
+    due_date=new Date(due_date);
 
     const chall = { ...challenge }
     switch (challenge.id) {
@@ -271,7 +280,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'card_payment':
-        chall.status = this.checkCardPayment(card_payment)
+        
+        const previousPeriod = this.period.period_detail[prevPeriodId]
+        if (previousPeriod) {
+          const challengeCardPayment= previousPeriod.card_payment
+          chall.status = this.checkCardPayment(challengeCardPayment,due_date,previousPeriod.period_id)
+        }
         break;
 
       case 'recurrent_payment':
@@ -305,11 +319,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se valida el status del reto card_payment
   */
 
-  checkCardPayment(cardPayment: CardPayment[]) {
+  checkCardPayment(cardPayment: CardPayment[],dueDate:Date, periodId:string) {
     if (cardPayment) {
       for (const card of cardPayment) {
-        card.operation_date = new Date(card.operation_date);
-        if (card.amount_payment.amount >= card.minimum_amount.amount) {
+        let {operation_date,minimum_amount,amount_payment}=card
+
+
+        operation_date = new Date(operation_date);
+
+        if (periodId==='0' && minimum_amount.amount===0) {
+          return true;
+        }else if (amount_payment.amount >= minimum_amount.amount &&  dueDate>operation_date && minimum_amount.amount>0) {
           return true
         }
       }
