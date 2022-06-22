@@ -15,7 +15,6 @@ export class ModalComponent {
   constructor(
     private callback:GamificationCallbacksService,
   ){
-
   }
   
   redirect(){

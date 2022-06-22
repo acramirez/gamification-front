@@ -1,5 +1,10 @@
 <div class="modal-bg">
-    <div animation="zoomIn" class="modal">
+    <div animation="zoomIn" class="modal"  
+    [ngClass]="{
+        'modal':true,
+        'modal--redirect':modal.challenge.redirection
+    }"
+>
         <div class="modal__body">
             <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
             <div class="modal__header">
