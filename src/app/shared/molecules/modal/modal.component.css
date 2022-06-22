@@ -1,7 +1,7 @@
 .modal-bg{
     background-color: var(--theme-color-neutral-02);
     display: flex;
-    height: 100%;   
+    height: 100vh;   
     justify-content: center;
     padding: 5.5rem 1.5rem;
     position: fixed;
@@ -15,7 +15,6 @@
     background: var(--theme-color-background-03);
     border-radius: 16px;
     box-shadow: 0px 6px 14px rgba(153, 153, 153, 0.3);
-    margin: 5.5rem 1.5rem;
     max-width: 375px;
     padding: 3rem 1.25rem 1.25rem 1.25rem;
     height: 100%;
@@ -23,6 +22,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    width: 100%;
 }
 
 .modal--redirect{
@@ -55,6 +55,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    grid-auto-rows: min-content;
 }
 
 .modal__description{
@@ -67,10 +68,6 @@
     grid-auto-rows: min-content;
     gap: 1rem;
     padding: 0;
-}
-
-.modal__spec{
-    margin-bottom: 1rem;
 }
 
 .modal__spec-title{
@@ -86,12 +83,13 @@
 }
 
 .modal__spec-item::before{
-    position: absolute;
     content: '';
     border-radius: 50%;
-    height: 2px;
-    width: 2px;
-    left: -1rem;
+    height: 5px;
+    left: 3rem;
+    position: absolute;
+    top: calc( 50% - 2.5px);
+    width: 5px;
 }
 
 /* .modal{
