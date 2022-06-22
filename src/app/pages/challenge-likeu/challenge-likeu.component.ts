@@ -268,7 +268,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const prevPeriodId=Number(period_id) - 1
     let {due_date}=periodDetail
     
-    due_date=new Date(due_date);
+    const dueDate=new Date(due_date);
 
     const chall = { ...challenge }
     switch (challenge.id) {
@@ -278,7 +278,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       case 'card_payment':
 
-          chall.status = this.checkCardPayment(card_payment,due_date,period_id)
+          chall.status = this.checkCardPayment(card_payment,dueDate,period_id)
         break;
 
       case 'recurrent_payment':
