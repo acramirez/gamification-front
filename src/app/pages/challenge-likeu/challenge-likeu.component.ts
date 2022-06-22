@@ -182,9 +182,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   propertyChallenges() {
 
     console.log(this.missions);
-
-    const { period_detail } = this.period
-
     
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
