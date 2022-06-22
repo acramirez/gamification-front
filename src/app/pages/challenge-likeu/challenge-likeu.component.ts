@@ -277,12 +277,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'card_payment':
-        
-        const previousPeriod = this.period.period_detail[prevPeriodId]
-        if (previousPeriod) {
-          const challengeCardPayment= previousPeriod.card_payment
-          chall.status = this.checkCardPayment(challengeCardPayment,due_date,previousPeriod.period_id)
-        }
+
+          chall.status = this.checkCardPayment(card_payment,due_date,period_id)
         break;
 
       case 'recurrent_payment':
@@ -324,7 +320,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
         operation_date = new Date(operation_date);
 
-        if (periodId==='0' && minimum_amount.amount===0) {
+        if (periodId==='1' && minimum_amount.amount===0) {
           return true;
         }else if (amount_payment.amount >= minimum_amount.amount &&  dueDate>operation_date && minimum_amount.amount>0) {
           return true
