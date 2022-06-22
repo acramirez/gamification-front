@@ -1,27 +1,29 @@
-<div animation="zoomIn" class="modal" [ngClass]="{
+<div class="modal-bg">
+    <div animation="zoomIn" class="modal" [ngClass]="{
         'modal':true,
         'modal--redirect':modal.challenge.redirection
     }">
-    <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
-    <div class="modal__header">
-        <img [src]="'../../../../assets/icons/'+modal.challenge.icon+'.png'" alt="icono">
-        <h2 [ngClass]="{
+        <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
+        <div class="modal__header">
+            <img [src]="'../../../../assets/icons/'+modal.challenge.icon+'.png'" alt="icono">
+            <h2 [ngClass]="{
                     'modal__title':true,
                     'modal__title--gradient':modal.challenge.type==='accelerator'
                 }">
-            {{modal.challenge.title}}
-        </h2>
-        <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>
-    </div>
+                {{modal.challenge.title}}
+            </h2>
+            <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>
+        </div>
 
-    <div class="modal__content">
-        <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
-        <ul class="modal__specs">
-            <div *ngFor="let spec of modal.challenge.specs" class="modal__spec">
-                <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
-                <li *ngFor="let item of spec.spec" class="modal__spec-item">{{item}}</li>
-            </div>
-        </ul>
+        <div class="modal__content">
+            <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
+            <ul class="modal__specs">
+                <div *ngFor="let spec of modal.challenge.specs" class="modal__spec">
+                    <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
+                    <li *ngFor="let item of spec.spec" class="modal__spec-item">{{item}}</li>
+                </div>
+            </ul>
+        </div>
+        <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
     </div>
-    <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
 </div>

@@ -14,7 +14,8 @@
     padding: 3rem 1.25rem 3rem 1.25rem;
 }
 
-.modal::after{
+.modal-bg{
+    align-items: center;
     background-color: var(--theme-color-neutral-02);
     content: '';
     display: flex;
