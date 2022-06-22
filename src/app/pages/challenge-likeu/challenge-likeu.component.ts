@@ -435,7 +435,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
-    let statusSpecial=[];
+    let statusSpecial:Challenge[]=[];
 
     if (special.length>0) {
       statusSpecial=special.filter(spec=>spec.status===true);
@@ -443,11 +443,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     
     const statusMandatory=mandatory.filter(mand=>mand.status===false)
     
-    if (statusMandatory.length===0 && statusSpecial.length===0 ) {
-      return true
+    if (statusMandatory.length>0 && statusSpecial.length===0 ) {
+      return false
     }
-  
-    return false
+    
+    return true
 
   }
 
