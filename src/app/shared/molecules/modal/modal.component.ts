@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 import { Modal } from '../../interfaces/atoms/modal';
 
@@ -17,6 +17,7 @@ export class ModalComponent {
   ){
   }
   
+
   redirect(){
     this.callback.redirect(this.modal.challenge.id)
   }

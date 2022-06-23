@@ -99,6 +99,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.modalService.close(this.viewContainerRef)
   }
 
+
+
   proccessData(resp: ChallengeLikeU) {
 
     const { lower_limit, current_limit, potential_limit, period, seen_first_time } = resp
@@ -112,6 +114,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.currentPeriod = Number(current_period);
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
+    this.indexTab=Number(current_period)
 
     this.createMission();
     this.missionActive = this.missions[this.currentPeriod]
@@ -164,7 +167,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   showFirstAccess() {
-    this.modalService.generateFirstAccess(this.viewContainerRef)
+    const closeFirstAccess=()=>{
+      this.closeModal()
+    }
+    this.modalService.generateFirstAccess(this.viewContainerRef,closeFirstAccess)
   }
 
   get challenges() {
@@ -491,8 +497,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const previousPeriod = this.missions[this.currentPeriod - 1]
 
     if (previousPeriod && Number(previousPeriod.id) >= 1) {
-      const cutDate = new Date(previousPeriod.cut_of_date!);
-      const today = new Date();
 
       const { status } = previousPeriod
       const notification =
@@ -504,7 +508,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         btnAction: () => this.closeModal()
       }
 
-      if (currentLimit.amount === potentialLimit.amount) {
+      if (currentLimit.amount === potentialLimit.amount ) {
         notification.icon = 'challenge-complete'
         notification.title = '¡Lo has logrado!'
         notification.subtitle = 'Tu límite de crédito ha aumentado'

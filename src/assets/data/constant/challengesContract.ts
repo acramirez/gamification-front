@@ -332,6 +332,7 @@ export const challengesContract:ChallengesContract={
 
         ],
         acceleratorChallenges: [
+          "higher_payment"
         ],
         creditIncrease: true
       },
