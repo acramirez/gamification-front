@@ -508,7 +508,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         description: '',
         btnAction: () => this.closeModal()
       }
-      let {icon,title,subtitle,description}=notification
       if (currentLimit.amount >= potentialLimit.amount  ) {
         notification.icon = 'challenge-complete'
         notification.title = '¡Lo lograste!'
