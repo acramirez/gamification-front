@@ -499,6 +499,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (previousPeriod && Number(previousPeriod.id) >= 1) {
 
       const { status } = previousPeriod
+
       const notification =
       {
         icon: '',
@@ -508,26 +509,26 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         btnAction: () => this.closeModal()
       }
       let {icon,title,subtitle,description}=notification
-      if (currentLimit.amount === potentialLimit.amount  ) {
-        icon = 'challenge-complete'
-        title = '¡Lo lograste!'
-        subtitle = 'Conseguiste el incremento potencial de tu límite de crédito'
-        description = 'Continúa disfrutando de los beneficios que solo LikeU tiene para ti.'
+      if (currentLimit.amount >= potentialLimit.amount  ) {
+        notification.icon = 'challenge-complete'
+        notification.title = '¡Lo lograste!'
+        notification.subtitle = 'Conseguiste el incremento potencial de tu límite de crédito'
+        notification.description = 'Continúa disfrutando de los beneficios que solo LikeU tiene para ti.'
       } else if (!status) {
-        icon = 'challenge-no-complete'
-        title = '¡Lo sentimos!'
-        subtitle = 'No completaste el reto LikeU'
-        description = 'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.\n \nRecuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
+        notification.icon = 'challenge-no-complete'
+        notification.title = '¡Lo sentimos!'
+        notification.subtitle = 'No completaste el reto LikeU'
+        notification.description = 'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.\n \nRecuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
       } else if (status && this.currentPeriod<4) {
-        icon = 'cycle-complete'
-        title = '¡Ciclo completado!'
-        subtitle = 'Estás más cerca de alcanzar tu límite de crédito potencial'
-        description = 'Continúa con el siguiente ciclo para avanzar con el Reto.'
+        notification.icon = 'cycle-complete'
+        notification.title = '¡Ciclo completado!'
+        notification.subtitle = 'Estás más cerca de alcanzar tu límite de crédito potencial'
+        notification.description = 'Continúa con el siguiente ciclo para avanzar con el Reto.'
       } else if (status && this.currentPeriod>4) {
-        icon = 'mission-complete'
-        title = '¡Ciclo completado!'
-        subtitle = 'Tu límite de crédito ha aumentado y estás más cerca de la meta'
-        description = 'Continúa con el siguiente ciclo para avanzar en el Reto.'
+        notification.icon = 'mission-complete'
+        notification.title = '¡Ciclo completado!'
+        notification.subtitle = 'Tu límite de crédito ha aumentado y estás más cerca de la meta'
+        notification.description = 'Continúa con el siguiente ciclo para avanzar en el Reto.'
       }
       this.modalService.generateNotification(this.viewContainerRef, notification)
     }
