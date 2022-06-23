@@ -15,16 +15,20 @@ export class ConfigService {
 
   getConfig(){
 
-    this.http.get('/config.json')
+    const location = (window.location.hostname === 'localhost')
+      ? '/assets/config/config.json'
+        : '/config.json';
+
+    this.http.get(location)
       .toPromise()
         .then(resp=>{
           console.log(resp);
         }
-          
+
         ).catch((err)=>{
           console.warn(err)
           console.log('error');
-        } 
+        }
         )
   }
 }

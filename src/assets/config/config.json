@@ -1,0 +1,6 @@
+{
+  "urls": {
+    "gamification-service-sec": "/api/session",
+    "gamification-service": "/credits/v2/credits/customer-key/benefits"
+  }
+}
