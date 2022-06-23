@@ -75,13 +75,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           console.log(err);
         })
     }
-    // } else if (this.tokenFacade._token) {
 
-    //   this.gamificacionFacade.getGamification()
-    //     .subscribe(resp => {
-    //       // this.proccessData(resp)
-    //     })
-    // }
   }
 
   showModal() {
