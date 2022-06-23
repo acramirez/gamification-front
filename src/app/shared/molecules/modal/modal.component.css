@@ -85,10 +85,11 @@
 .modal__spec-item::before{
     content: '';
     border-radius: 50%;
+    background-color: #000;
     height: 5px;
-    left: 3rem;
+    left: 2px;
     position: absolute;
-    top: calc( 50% - 2.5px);
+    top: 7.5px;
     width: 5px;
 }
 
