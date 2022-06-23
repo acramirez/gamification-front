@@ -13,6 +13,6 @@ export class ConfigService {
 
   getConfig(){
 
-    return this.http.get<Config>(environment.config)
+    return this.http.get<Config>(environment.configLocal)
   }
 }
