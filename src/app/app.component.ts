@@ -1,6 +1,7 @@
 
-import { Component } from '@angular/core';
-import { ConfigService } from './services/apis/config.service';
+import { Component, OnDestroy } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { GamificationCallbacksService } from './services/gamification-callbacks.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,21 @@ import { ConfigService } from './services/apis/config.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+
+  constructor(
+    private callback:GamificationCallbacksService
+  ){}
   title = 'Application Gramificacion';
 
-  constructor(private configService:ConfigService){
-    
-    this.configService.getConfig();
+  refreshSession=fromEvent(document,'click')
+    .subscribe(event=>{   
+      this.callback.refreshSession();
+    })
 
-  }
+    ngOnDestroy(): void {
+      if (this.refreshSession) {
+        this.refreshSession.unsubscribe()
+      }
+    }
 }

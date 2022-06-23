@@ -41,8 +41,21 @@
 }
 
 .time-line__goal-icon{
-    font-size: 2rem;
+    align-items: center;
     background: var(--theme-color-background-03);
+    border: 1.5px solid var(--theme-color-primary-01);
+    border-radius: 50%;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    width: 2rem;
+    font-size: 2rem;
+    padding: .1rem;
+    position: relative;
+}
+
+.time-line__star{
+    position: absolute;
 }
 
 .time-line__line{

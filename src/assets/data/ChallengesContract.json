@@ -1,11 +1,34 @@
 {	
 	"challenges": [
 				{
-					"id": "card_acquaintanceship",
+					"id": "know_card",
 					"name": "Conoce tu tarjeta",
-					"description": "Facturación minima de $200 pesos MN (equiparable al monto de consumo mínimo del producto LIKEU).",
+					"subtitle": "Conoce las características de tu tarjeta Santander LikeU.",
+					"description": "Tu tarjeta de Crédito LikeU tiene beneficios increíbles que podrás disfrutar desde el primer día, como: ",
 					"specs": [
-						"La facturación del periodo puede incluir los cargos de las compras a meses con o sin intereses."
+						{
+							"title":"Sin anualidad",
+							"spec":["Úsala mes a mes y olvídate de la anualidad, de por vida."]
+						},
+						{
+							"title":"Beneficios especiales",
+							"spec":["2x1 en Cinépolis", "10% de descuento en Despegar.com", "30% de bonificación en WOW+ de Grupo ALSEA","3 meses gratis de UBERpass", "Garantía Extendida y Protección de Compras"]
+						},
+						{
+							"title":"Usa tu tarjeta y ¡hazla LikeU!  "
+						}
+					],
+					"conditions": [
+						"Solo aplicable en portabilidades dispensando en Santander"
+					],
+					"redirection": false
+				},
+				{
+					"id": "card_acquaintanceship",
+					"name": "Usa tu tarjeta",
+					"subtitle":"Gasta $200 MXN pesos al mes.",
+					"description": "Recuerda realizar compras seguras en internet utilizando el CVV dinámico de tu tarjeta en LikeU, lo puedes consultar en Súper Wallet.",
+					"specs": [
 					],
 					"conditions": [
 						"Solo aplicable en portabilidades dispensando en Santander"
@@ -92,7 +115,7 @@
 					"redirection": true
 				},
 				{
-					"id": "digitalChannels",
+					"id": "digital_channels",
 					"name": "Uso de canales digitales",
 					"description": "La validación consite en medir el uso en los últimos 3 meses a cada mes de validación, para el 5 debe tenerla el 3, 4, 5; y para el 6, será el 4, 5, 6.",
 					"specs": [
@@ -114,54 +137,104 @@
 						"Solo aplicable en portabilidades dispensando en Santander"
 					],
 					"redirection": true
+				},
+				{
+					"id": "welcome_challenge",
+					"name": "Bienvenido al Reto LikeU",
+					"description": "Misión cero ¡prepárate!... Conoce los detalles de tu LikeU y las misiones a cumplir en cada ciclo para alcanzar tu límite potencial.",
+					"specs": [
+						{
+							"spec":["Asegúrate de activar tu tarjeta digital y física LikeU.","Recuerda que tu NIP para comprar con tu tarjeta física, lo asignaste al momento de contratarla. Si lo olvidaste, asígnalo desde SúperWallet y confírmalo en un cajero Santander.","Conoce la fecha de corte y fecha límite de pago dentro de Súper Wallet, al hacer clic en la imagen de tu tarjeta.","El reto se compone de 4 misiones durante 6 ciclos, que inician después de la primer fecha de corte y de tu primera fecha de pago.","Descubre cada misión del reto LikeU, ingresando a Las misiones🎯.","Encuentra más información sobre el reto dentro de Preguntas Frecuentes."]
+						}
+					],
+					"conditions": [
+					],
+					"redirection": false
+				},
+				{
+					"id": "your_missions",
+					"name": "Las Misiones",
+					"specs": [
+						{
+							"spec":["Asegúrate de activar tu tarjeta digital y física LikeU.","Recuerda que tu NIP para comprar con tu tarjeta física, lo asignaste al momento de contratarla. Si lo olvidaste, asígnalo desde SúperWallet y confírmalo en un cajero Santander.","Conoce la fecha de corte y fecha límite de pago dentro de Súper Wallet, al hacer clic en la imagen de tu tarjeta.","El reto se compone de 4 misiones durante 6 ciclos, que inician después de la primer fecha de corte y de tu primera fecha de pago.","Descubre cada misión del reto LikeU, ingresando a Las misiones🎯.","Encuentra más información sobre el reto dentro de Preguntas Frecuentes."]
+						}
+					],
+					"conditions": [
+						"Solo aplicable en portabilidades dispensando en Santander"
+					],
+					"redirection": true
+				},
+				{
+					"id": "increment_credit",
+					"name": "Pago mayor al mínimo",
+					"description": "Se deberá considerar como base el campo de pago mínimo.",
+					"specs": [
+						"Que pague al menos un 50% más del monto mínimo"
+					],
+					"conditions": [
+						"Solo aplicable en portabilidades dispensando en Santander"
+					],
+					"redirection": true
+				},
+				{
+					"id": "increment_credit",
+					"name": "Pago mayor al mínimo",
+					"description": "Se deberá considerar como base el campo de pago mínimo.",
+					"specs": [
+						"Que pague al menos un 50% más del monto mínimo"
+					],
+					"conditions": [
+						"Solo aplicable en portabilidades dispensando en Santander"
+					],
+					"redirection": true
 				}
 			],
 	"missions": [
 		{
 			"id": "0",
 			"mandatoryChallenges": ["card_acquaintanceship", "card_payment"],
-			"optionalChallenges": ["minimum_monthly_billing", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["minimum_monthly_billing", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "1",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "2",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": [],
 			"creditIncrease": false
 		},
 		{
 			"id": "3",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment"],
-			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"optionalChallenges": ["domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "4",
 			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance"],
-			"optionalChallenges": ["digitalChannels"],
+			"optionalChallenges": ["digital_channels"],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "5",
-			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"optionalChallenges": [],
 			"acceleratorChallenges": ["higher_payment"],
 			"creditIncrease": true
 		},
 		{
 			"id": "6",
-			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digitalChannels"],
+			"mandatoryChallenges": ["minimum_monthly_billing", "card_payment", "domiciliation", "recurrent_payment", "payroll_portability", "assistance", "digital_channels"],
 			"optionalChallenges": [],
 			"acceleratorChallenges": [],
 			"creditIncrease": false

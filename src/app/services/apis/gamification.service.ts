@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Gamification } from "../../shared/interfaces/response/gamification.interface";
-import { environment } from "../../../environments/environment";
+import { ConfigFacade } from "../facades/config.facade";
 
 
 @Injectable({
@@ -10,16 +10,16 @@ import { environment } from "../../../environments/environment";
 })
 export class GamificationService {
 
-    private _getApiUri: string = environment.gamification.url;
+    private _getApiUri: string = this.configFacade.gamificationURL;
 
-    constructor( private httpClient: HttpClient ) { }
+    constructor( 
+        private httpClient: HttpClient,
+        private configFacade:ConfigFacade
+    ) { }
 
-    getGamifications(authorization:string): Observable<Gamification> {
-        const headers = new HttpHeaders({
-            'Authorization': 
-            authorization
-        });
+    getGamifications(): Observable<Gamification> {
+
         
-        return this.httpClient.get<Gamification>(`${this._getApiUri}`, {headers});
+        return this.httpClient.get<Gamification>(`${this._getApiUri}`);
     }
 }

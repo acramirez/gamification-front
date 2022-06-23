@@ -1,7 +1,7 @@
 {
   "name": "gramificacion-front",
-  "version": "0.0.0",
-  "scripts": {
+  "version": "1.0.1-SNAPSHOT",
+  "scripts":   {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -11,7 +11,7 @@
     "server": "json-server --watch ./src/assets/mock-data/gamificacion.json --port 8000"
   },
   "private": true,
-  "dependencies": {
+  "dependencies":   {
     "@angular/animations": "~12.2.16",
     "@angular/common": "~12.2.16",
     "@angular/compiler": "~12.2.16",
@@ -24,7 +24,7 @@
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
-  "devDependencies": {
+  "devDependencies":   {
     "@angular-devkit/build-angular": "~12.2.17",
     "@angular/cli": "~12.2.17",
     "@angular/compiler-cli": "~12.2.16",

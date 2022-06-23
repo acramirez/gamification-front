@@ -1,7 +1,6 @@
+import { Challenge } from "../response/challengesContract.interface";
+
 export interface Modal {
-    icon:string,
-    btnClose:string,
-    title:string,
-    subtitle?:string,
-    body?:string[]
+    challenge:Challenge
+    close:Function
 }

@@ -19,8 +19,16 @@
 }
 
 .tab__icon{
+    background-image: url("../../../../assets/icons/lock.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    background-size: 100% 100%;
+    height: 20px;
     margin-right: .25rem;
     max-width: 20px;
+    width: 20px;
+
 }
 
 .active--tab{
@@ -29,4 +37,11 @@
     color: #fff!important;
     position: relative;
     transform: scale(0.9);
+}
+
+.tab__icon--ongoing{
+    background-image: url("../../../../assets/icons/Pagos_recurrentes.png");
+}
+.tab__icon--finish{
+    background-image: url("../../../../assets/icons/Activa_tu_tarjeta.png");
 }

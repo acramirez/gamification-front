@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[animation]'
@@ -26,6 +26,8 @@ export class AnimationsDirective {
     }
   }
 
+
+
   downUp(){
     this.element.nativeElement.classList.add('downUp')
     setTimeout(() => {
@@ -47,7 +49,6 @@ export class AnimationsDirective {
     if (!active) {
       this.height=this.element.nativeElement.clientHeight
       this.element.nativeElement.classList.add('drop-down-hidden')
-      console.log(this.height);
       
     }else{
       this.element.nativeElement.classList.remove('drop-down-hidden')

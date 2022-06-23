@@ -14,25 +14,23 @@ export class ErrorService {
   showError:boolean=false;
 
 
-    getClientError(error:Error){
+  getClientError(error:Error){
 
 
-      if (!navigator.onLine) {
-        return 'No Internet Connection'
-      }
-
-      return error.message
+    if (!navigator.onLine) {
+      return 'No Internet Connection'
     }
+
+    return error.message
+  }
 
   errorShow(error:Observable<never>){
-
-    if (error) {
+    
+    this.showError=true
+    if (error && this.showError===true) {
       this.router.navigateByUrl('error')
+      this.showError=false
     }
-
-    error.subscribe(err=>{
-    })
-
   }
 
 }

@@ -15,14 +15,26 @@ export interface FAQ {
 
 export interface Challenge {
     id:          string;
-    name:        string;
-    description: string;
-    specs:       string[];
-    conditions:  string[];
+    title:        string;
+    subtitle?:    string;
+    description?: string;
+    specs?:        Array<SpecClass>;
+    conditions?:  string[];
     icon:        string;
-    redirection: boolean;
+    redirection?: boolean;
     status?:     boolean;
-    accelerator?:boolean
+    type?:typeChallenge
+}
+
+export enum typeChallenge{
+    mandatory='mandatory',
+    special='special',
+    accelerator='accelerator',
+}
+
+export interface SpecClass {
+    title?: string;
+    spec?:  string[];
 }
 
 export interface Mission {

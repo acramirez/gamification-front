@@ -1,13 +1,13 @@
 <div class="challenge">
     <div [ngClass]="{
         'challenge__content':true,
-        'challenge__content--accelerator':challenge.accelerator
+        'challenge__content--accelerator':challenge.type==='accelerator'
     }">
         <img class="challenge__img" [src]="'../../../../assets/icons/'+challenge.icon+'.png'" alt="">
 
 
         <img *ngIf="challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Check.png'" alt="">
-        <img *ngIf="statusMission===false && !challenge.status" class="challenge__check" [src]="'../../../../assets/icons/Wrong.png'" alt="">
+        <img *ngIf="challenge.status===false" class="challenge__check" [src]="'../../../../assets/icons/Wrong.png'" alt="">
     </div>
-    <h3 class="challenge__title">{{challenge.name}}</h3>
+    <h3 class="challenge__title">{{challenge.title}}</h3>
 </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -8,6 +8,12 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
+import { ConfigFacade } from './services/facades/config.facade';
+
+
+export function appConfigProvider(provider:ConfigFacade){
+  return () => provider.getConfig();
+}
 
 
 @NgModule({
@@ -31,6 +37,13 @@ import { MockInterceptorService } from './services/interceptors/mock-interceptor
     {
       provide:  HTTP_INTERCEPTORS,
       useClass:ErrorInterceptorService,
+      multi:true
+    },
+    ConfigFacade,
+    {
+      provide:APP_INITIALIZER,
+      useFactory:appConfigProvider,
+      deps:[ConfigFacade],
       multi:true
     }
   ],

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
+import { MissionInterfaces } from '../../interfaces/mission-interfaces';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
@@ -9,15 +10,17 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class MonthChallengesComponent implements AfterViewInit {
 
-  @Input() mandatoryChallenges!:Challenge[];
-  @Input() specialChallenges!:Challenge[];
+  @Input() specialChallenges:Challenge[]=[];
   @Input() tabs:Tab[]=[]
   @Input() initialTab:number=0
   @Input() seconds!:number
   @Input() dueDate!:Date
-  @Input() missionStatus!:boolean | undefined
+  missionStatus!:boolean | undefined
 
-  activeTab!:number
+
+  @Input() mission!:MissionInterfaces
+
+  @Input() activeTab!:number
 
   @Output() indexTab = new EventEmitter<number>();
   @Output() openModal = new EventEmitter<MouseEvent>();
@@ -26,8 +29,8 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;  
-    console.log(this.seconds);
-      
+    this.activeTab=this.initialTab
+    this.specialChallenges=this.mission.challenges!.filter(challenge=>challenge.type==="special")
+    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;          
   }
 }

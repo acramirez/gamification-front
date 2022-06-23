@@ -28,7 +28,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
   manejarError(error:Observable<never>){
 
     if (error) {
-      this.router.navigate(['error'])
+      this.errorService.errorShow(error)
     }
     return throwError (error)
   }

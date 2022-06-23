@@ -2,6 +2,7 @@
 export interface Card {
     current_limit:   CurrentLimit;
     potential_limit: CurrentLimit;
+    lower_limit:CurrentLimit
 }
 
 export interface CurrentLimit {

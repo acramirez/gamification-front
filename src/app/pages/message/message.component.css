@@ -1,9 +1,13 @@
 .message{
     background: var(--theme-color-background-03);
-    height: 100vh;
+    height: 100%;
+    left: 0;
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    top: 0;
+    width: 100%;
     z-index: 1000;
+
 }
 
 .header{
@@ -77,4 +81,15 @@ button{
     top: -180px;
     width: 150%;
     z-index: 0;
+}
+
+
+@media screen and (max-height:700px) {
+    .header, .content__subtitle{
+        margin-bottom: 1.5rem;
+    }
+
+    p.content__description{
+        margin-bottom: 3rem;
+    }
 }

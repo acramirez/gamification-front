@@ -1,23 +1,31 @@
-<div #modal class="modal-bg">
-    <div animation="zoomIn" class="modal">
-        <div class="modal__body">
-            <button class="modal__btn-cerrar" (click)="closeModal.emit(false)">Cerrar</button>
+<div class="modal-bg">
+    <div animation="zoomIn" class="modal"  
+    [ngClass]="{
+        'modal':true,
+        'modal--redirect':modal.challenge.redirection
+    }"
+>
+            <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
             <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+data.icon+'.png'"  alt="icono">
+                <img [src]="'../../../../assets/icons/'+modal.challenge.icon+'.png'"  alt="icono">
                 <h2 [ngClass]="{
                     'modal__title':true,
-                    'modal__title--gradient':(data.accelerator)
+                    'modal__title--gradient':modal.challenge.type==='accelerator'
                 }">
-                    {{data.name}}
+                    {{modal.challenge.title}}
                 </h2>
-                <span class="modal__subtitle">{{data.description}}</span>            
+                <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>            
             </div>
-            <ul>
-                <ng-container *ngFor="let condition of data.conditions">
-                    <li>{{condition}}</li>
-                </ng-container>
-            </ul>
-        </div>
-        <button class="btn" *ngIf="data.redirection">Continuar</button>
+
+            <div class="modal__content">
+                <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
+                <ul class="modal__specs">
+                    <div *ngFor="let spec of modal.challenge.specs" class="modal__spec">
+                        <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
+                        <li *ngFor="let item of spec.spec" class="modal__spec-item">{{item}}</li>
+                    </div>
+                </ul>
+            </div>
+        <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
     </div>
 </div>

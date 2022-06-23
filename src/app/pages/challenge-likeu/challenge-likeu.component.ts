@@ -1,18 +1,21 @@
-import { AfterContentChecked, AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { forkJoin, Subject, Subscription, throwError, timer } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { AfterViewInit, Component, OnDestroy, ViewContainerRef } from '@angular/core';
+import { Subject, throwError } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
 import { ChallengesFacade } from '../../services/facades/challenges.facade';
-import { Challenge } from '../../shared/interfaces/response/challengesContract.interface';
-import { CardPayment, CurrentLimit, Period, PeriodDetail, RecurrentPayment } from '../../shared/interfaces/response/gamification.interface';
-import { StatusChallenges, StatusMissions } from '../../shared/interfaces/checkChallenges.interface';
+import { Challenge, Mission, typeChallenge } from '../../shared/interfaces/response/challengesContract.interface';
+import { Assistance, CardPayment, CurrentLimit, Period, PeriodDetail } from '../../shared/interfaces/response/gamification.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
-import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorService } from '../../services/apis/error.service';
+import { Router } from '@angular/router';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
+import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
+import { Notification } from 'src/app/shared/interfaces/notification';
+import { Modal } from 'src/app/shared/interfaces/atoms/modal';
+import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
+import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
+import { catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -20,475 +23,555 @@ import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.inte
   templateUrl: './challenge-likeu.component.html',
   styleUrls: ['./challenge-likeu.component.css']
 })
-export class ChallengeLikeuComponent implements OnDestroy,AfterViewInit {
+export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
-  public cardDetail!:Card;
-  public period!:Period;
-  mandatoryChallenges:Challenge[]=[]
-  specialChallenges:Challenge[]=[]
-  challengeActive!:Challenge;
-  statusMissions:StatusMissions[]=[]
-  percent:number=0;
-  currentPeriod:number=0
-  dueDay!:Date;
-  cutOfDate!:Date;
-  indexTab!:number
-  remainingDays!:number
-  statusChallenges:StatusChallenges[]=[]
-  missionStatus!:boolean | undefined;
+  public cardDetail!: Card;
+  public period!: Period;
+  specialChallenges: Challenge[] = []
+  challengeActive!: Challenge;
+  currentPeriod: number = 0
+  cutOfDate!: Date;
+  indexTab!: number
+  challengesRedirect: string[] = []
+  missions: MissionInterfaces[] = []
+  missionActive!: MissionInterfaces
+  tabs: Tab[] = [];
 
-  challengesRedirect:string[]=[]
-
-
-
-  // Temporaly
-
-
-  tabs:Tab[]=[];
-  showModal:boolean=false;
-
-  private destroy$!:Subject<any>;
+  private destroy$!: Subject<any>;
 
   constructor(
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-
-    private activatedRoute:ActivatedRoute,
-    private errorService:ErrorService,
-    private router:Router,
+    private router: Router,
+    private modalService: ModalService,
+    private viewContainerRef: ViewContainerRef,
   ) { }
-
 
   ngAfterViewInit(): void {
 
-    this.destroy$=new Subject;
+    this.destroy$ = new Subject;
 
     if (!this.tokenFacade._token) {
-      
-      this.activatedRoute.queryParams.subscribe(params=>{
-        if (params['token']) {
-          const token= params['token'];
 
-          return forkJoin(
-            [this.tokenFacade.validationToken(token).pipe(
-              catchError(err=>{
-                this.errorService.errorShow(err)
+      this.tokenFacade.validationToken()
+        .toPromise()
+        .then(challenges => {
+
+          this.getChallengesRedirect(challenges);
+
+          this.gamificacionFacade.getGamification()
+            .pipe(
+              catchError(err => {
                 return throwError(err)
               })
-              ),
-              this.gamificacionFacade.getGamification()]
-          ).subscribe(resp=>{    
-            
-            const cutChallenges=resp[0].SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
-            const cutChallenges2=cutChallenges[1].split(']')
-            this.challengesRedirect=cutChallenges2[0].split(',')
-            
-            this.challengesRedirect.forEach((challenge,i)=>{
-              this.challengesRedirect[i]=challenge.trim().slice(1,-1)
+            )
+            .subscribe(resp => {
+
+              this.proccessData(resp)
             })
 
-            this.proccessData(resp[1])
+        }).catch(err => {
+          console.log(err);
+        })
+    }
+    // } else if (this.tokenFacade._token) {
 
-          })
-          
-        }else{
-          
-          const error= throwError('El token no existe')
-          this.errorService.errorShow(error)
-          return  error
-        }
-      })
-    }else if (this.tokenFacade._token) {   
-      this.gamificacionFacade.getGamification()
-      .subscribe(resp=>{
+    //   this.gamificacionFacade.getGamification()
+    //     .subscribe(resp => {
+    //       // this.proccessData(resp)
+    //     })
+    // }
+  }
 
-        this.proccessData(resp)
-      })     
+  showModal() {
+    const modal: Modal = {
+      challenge: { ...this.challengeActive },
+      close: () => this.closeModal()
+    }
+    if (modal.challenge.id === 'digital_channel') {
+      modal.challenge.id = 'digital_channel'
+    }
+    this.modalService.generateModal(this.viewContainerRef, modal)
+  }
+
+  closeModal() {
+    this.modalService.close(this.viewContainerRef)
+  }
+
+  proccessData(resp: ChallengeLikeU) {
+
+    const { lower_limit, current_limit, potential_limit, period, seen_first_time } = resp
+    const { current_period } = period
+
+    this.cardDetail = {
+      current_limit,
+      lower_limit,
+      potential_limit
+    }
+    this.currentPeriod = Number(current_period);
+    this.period = resp.period
+    this.cutOfDate = new Date(resp.cut_of_date)
+
+    this.createMission();
+    this.missionActive = this.missions[this.currentPeriod]
+
+    this.propertyChallenges();
+    this.getTabs();
+
+    this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special")
+
+    if (seen_first_time) {
+      this.showFirstAccess()
     }
 
+    this.showNotification(current_limit, potential_limit)
   }
 
+  showMissionActive(index: number) {
+    this.missionActive = this.missions[index]
+    this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special")
 
-  proccessData(resp:ChallengeLikeU){
-
-    
-    
-    const{current_limit,potential_limit,period}=resp
-    this.cardDetail={current_limit,potential_limit}
-    this.period=period;
-    this.currentPeriod=Number(period.current_period)
-    this.indexTab=this.currentPeriod
-    this.cutOfDate=new Date(resp.cut_of_date as Date)
-    
-    // this.showFirstAccess(resp.seen_first_time)
-
-    
-    
-    this.getTabs(period);
-
-    this.checkChallenges();
-    this.getChallenges(this.currentPeriod);
-    this.getPercent();
-    
-
-    this.dueDay=new Date(resp.period.period_detail[this.currentPeriod].due_date)
-    
-    this.messageNotification(resp);
   }
 
-  get challenges(){
+  getTabs() {
+    this.missions.forEach(mission => {
+      let tab: Tab = {
+        id: '',
+        texto: '',
+        status: ''
+      }
+
+      if (Number(mission.id) < this.currentPeriod) {
+        tab.status = 'finish'
+      } else if (mission.id === this.currentPeriod.toString()) {
+        tab.status = 'ongoing'
+      }
+      switch (mission.id) {
+        case '0':
+          tab.texto = 'Intro'
+          tab.id = mission.id
+          break;
+
+        default:
+          tab.texto = `Misión ${mission.id}`
+          tab.id = mission.id
+          break;
+      }
+
+      this.tabs.push(tab);
+    })
+  }
+
+  showFirstAccess() {
+    this.modalService.generateFirstAccess(this.viewContainerRef)
+  }
+
+  get challenges() {
     return this.challengesFacade.getChallenges();
   }
 
-  get FAQs(){
+  get FAQs() {
     return this.challenges.FAQ
   }
 
-/**  
- * Metodo mediante el cual se obtienen los challenges de acuerdo al tab seleccionado
-*/
-  getChallenges(tab:number){
+  /**  
+   * Metodo mediante el cual se asignan las propiedades status y redirect a los challenges
+  */
+
+  propertyChallenges() {
+
+    console.log(this.missions);
     
-    this.mandatoryChallenges=[];
-    this.specialChallenges=[];
+    this.missions.forEach((mission, index) => {
+      mission.challenges?.forEach(challenge => {
+        challenge.redirection = this.setChallengeRedirect(challenge).redirection
+        const { period_detail } = this.period
+        if (period_detail !== null && period_detail[index] && Number(period_detail[index].period_id) > 0) {
 
-    const {mandatoryChallenges,acceleratorChallenges,specialChallenges} =this.challenges.missions[tab]
-      
-
-    this.challenges.challenges.forEach(challenge=>{
-
-      mandatoryChallenges.forEach(mandatory=>{
-        if (mandatory===challenge.id) {
-          challenge.status=this.setStatusChallenges(tab,challenge)
-          this.mandatoryChallenges.push(challenge)
+          let statusC = this.statusChallenge(challenge, this.period.period_detail[index]).status
+          if (statusC) {
+            challenge.status = true
+          } else if (!statusC && index < this.currentPeriod) {
+            challenge.status = false
+          } else if (!statusC && index >= this.currentPeriod) {
+            challenge.status = undefined
+          }
+        } else {
+          challenge.status = undefined
         }
-      });
-
-      specialChallenges.forEach(special=>{
-        if (special===challenge.id) {
-
-          challenge.status=this.setStatusChallenges(tab,challenge)
-
-          this.specialChallenges.push(challenge)
-        }
-      });
-
-      acceleratorChallenges.forEach(accelerator=>{
-        if (accelerator===challenge.id) {
-          challenge.status=this.setStatusChallenges(tab,challenge)
-          challenge.accelerator=true
-          this.mandatoryChallenges.push(challenge)
-        }
-      });
-
-    })
-
-    this.setChallengeRedirect();
-    this.missionStatus=this.getStatusMission(tab);
-    
-  }
-
-  getTabs(period:Period){
-
-    this.challenges.missions.forEach((mission,i)=>{
-      let tab:Tab={
-        id:'',
-        texto:'',
-        status:''
-      }
-      if(mission.id==='0'){
-        tab.texto='Intro'
-        tab.id=mission.id
-      }
-      else{
-        tab.texto=`Misión ${mission.id}`
-        tab.id=mission.id
-      }
-      this.tabs.push(tab);
-    })
-
-    this.tabs.forEach((tab,i)=>{
-      period.period_detail.forEach(mission=>{
-        if (tab.id===mission.period_id) {
-          tab.status=mission.status
-        }
-        
       })
-    })    
-  }
-
-  checkChallenges(){
-
-    this.period.period_detail.forEach((period,i)=>{
-      
-      const {
-        accumulated_purchases,
-        card_payment,
-        recurrent_payment, 
-        domiciliation,
-        assistance,
-        payroll_portability,
-        digitalChannels,
-        due_date
-      } = period      
-      
-      this.checkCardPayment(card_payment, due_date);
-
-      this.checkAccumulatedPurchases(accumulated_purchases,this.cutOfDate);
-
-      this.checkRecurrentPayment(recurrent_payment,this.cutOfDate);
-
-      this.checkDomiciliation(domiciliation,this.cutOfDate);
-
-      this.checkAssistance(assistance,this.cutOfDate);
-      
-      this.checkPayrollPortability(payroll_portability,this.cutOfDate)
-
-      this.checkDigitalChannels(digitalChannels,this.cutOfDate)
-            
-      this.statusMissions.push({mission:period.period_id,challenges:this.statusChallenges})
-      this.statusChallenges=[];
-      
+      if (mission.challenges) {
+        mission.status = this.statusMission(mission.challenges)
+      }
     })
   }
 
-  checkCardPayment(cardPayment:CardPayment[],dueDate:Date){
+  /**  
+   * Metodo mediante el cual se inicializan las misiones 
+  */
+
+  createMission() {
+    const { missions } = this.challenges
+    missions.forEach(miss => {
+      const mission: MissionInterfaces = {
+        id: miss.id,
+      }
+      mission.challenges = this.typeChallenge(miss)
+      this.missions.push(mission)
+    })
+  }
+
+  /**  
+   * Metodo mediante el cual se asigna el tipo a cadaa challenge de cada mision
+  */
+
+  typeChallenge(mission: Mission) {
+    const { challenges } = this.challenges
+    const { mandatoryChallenges, specialChallenges, acceleratorChallenges } = mission
+    const challengesMission: Challenge[] = []
+
+
+    challenges.forEach(challenge => {
+      let chall = { ...challenge }
+      if (mandatoryChallenges.includes(challenge.id)) {
+        chall.type = typeChallenge.mandatory
+        challengesMission.push(chall)
+      } else if (specialChallenges.includes(challenge.id)) {
+        chall.type = typeChallenge.special
+        challengesMission.push(chall)
+      } else if (acceleratorChallenges.includes(challenge.id)) {
+        chall.type = typeChallenge.accelerator
+        challengesMission.push(chall)
+      }
+    })
+
+    return challengesMission
+  }
+
+  /**  
+   * Metodo mediante el cual se define el status del challenge
+  */
+
+  statusChallenge(challenge: Challenge, periodDetail: PeriodDetail) {
+    const {
+      accumulated_purchases,
+      card_payment,
+      recurrent_payment,
+      domiciliation,
+      assistance,
+      payroll_portability,
+      digital_channels,
+      period_id
+    } = periodDetail
+
+    const prevPeriodId=Number(period_id) - 1
+    let {due_date}=periodDetail
     
-    if(cardPayment){
-      dueDate=new Date(dueDate)
+    const dueDate=new Date(due_date);
+
+    const chall = { ...challenge }
+    switch (challenge.id) {
+      case 'accumulated_purchases':
+        chall.status = this.checkAccumulatedPurchases(accumulated_purchases, this.cutOfDate)
+        break;
+
+      case 'card_payment':
+
+          chall.status = this.checkCardPayment(card_payment,dueDate,period_id)
+        break;
+
+      case 'recurrent_payment':
+        chall.status = this.checkRecurrentPayment(recurrent_payment, this.cutOfDate)
+        break;
+
+      case 'domiciliation':
+        chall.status = this.checkDomiciliation(domiciliation, this.cutOfDate)
+        break;
+
+      case 'assistance':
+        chall.status = this.checkAssistance(assistance, this.cutOfDate)
+        break;
+
+      case 'payroll_portability':
+        chall.status = this.checkPayrollPortability(payroll_portability, this.cutOfDate)
+        break;
+
+      case 'digital_channels':
+        chall.status = this.checkDigitalChannels(digital_channels, this.cutOfDate)
+        break;
+
+      case 'higher_payment':
+        chall.status = this.checkAccelerator(card_payment)
+        break;
+    }
+    return chall
+  }
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto card_payment
+  */
+
+  checkCardPayment(cardPayment: CardPayment[],dueDate:Date, periodId:string) {
+    if (cardPayment) {
+      for (const card of cardPayment) {
+        let {operation_date,minimum_amount,amount_payment}=card
+
+
+        operation_date = new Date(operation_date);
+
+        if (periodId==='1' && minimum_amount.amount===0) {
+          return true;
+        }else if (amount_payment.amount >= minimum_amount.amount &&  dueDate>operation_date && minimum_amount.amount>0) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto accelerator
+  */
+
+  checkAccelerator(cardPayment: CardPayment[]) {
+    if (cardPayment) {
       for (const card of cardPayment) {
         card.operation_date = new Date(card.operation_date);
-        if(card.amount_payment.amount>card.minimum_amount.amount && card.operation_date<dueDate){
-          this.statusChallenges.push({id:'card_payment',status:true})
-          break
+        let percentPayment = card.amount_payment.amount / card.minimum_amount.amount
+        if (percentPayment >= 1.5) {
+          return true
         }
       }
     }
+    return false
   }
 
-  checkAccumulatedPurchases(accumulatedPurchases:CurrentLimit, cutDate:Date){
-    const today=new Date()
-    
-    if (accumulatedPurchases && accumulatedPurchases.amount>=200 && today<cutDate) {
-      this.statusChallenges.push({id:'minimum_monthly_billing',status:true})
+  /**  
+   * Metodo mediante el cual se valida el status del reto accumulated_purchases
+  */
+
+  checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
+    const today = new Date()
+
+    if (accumulatedPurchases && accumulatedPurchases.amount >= 200 && today < cutDate) {
+      return true
     }
+    return false
   }
 
-  checkRecurrentPayment(recurrentPayment:RecurrentPayment[],cutDate:Date){
+  /**  
+   * Metodo mediante el cual se valida el status del reto recurrent_payment
+  */
+  checkRecurrentPayment(recurrentPayment: Assistance[], cutDate: Date) {
     if (recurrentPayment) {
       for (const recurrent of recurrentPayment) {
-        recurrent.operation_date= new Date(recurrent.operation_date)
+        recurrent.operation_date = new Date(recurrent.operation_date)
 
-        if (recurrent.status==='ACTIVE' && recurrent.operation_date && recurrent.operation_date<cutDate) {
-          this.statusChallenges.push({id:'recurrent_payment',status:true});
-          break;
+        if (recurrent.status === 'ACTIVE' && recurrent.operation_date && recurrent.operation_date < cutDate) {
+          return true
         }
       }
     }
+    return false
   }
 
-  checkDomiciliation(domiciliation:any[], cutDate:Date){
+  /**  
+   * Metodo mediante el cual se valida el status del reto domiciliation
+  */
+  checkDomiciliation(domiciliation: any[], cutDate: Date) {
     if (domiciliation) {
-      
+
       for (const dom of domiciliation) {
-        dom.operation_date= new Date(dom.operation_date)
+        dom.operation_date = new Date(dom.operation_date)
 
-        if (dom.status==='ACTIVE' && dom.operation_date<cutDate) {
-          this.statusChallenges.push({id:'domicialitation',status:true})
-          break
+        if (dom.status === 'ACTIVE' && dom.operation_date < cutDate) {
+          return true
         }
       }
     }
+    return false
   }
 
-  checkAssistance(assistance:any[], cutDate:Date){
-    if (assistance ) {
+  /**  
+   * Metodo mediante el cual se valida el status del reto assistance
+  */
+  checkAssistance(assistance: any[], cutDate: Date) {
+    if (assistance) {
       for (const assis of assistance) {
-        assis.operation_date= new Date(assis.operation_date)
-        if (assis.status==='ACTIVE' && assis.operation_date<cutDate) {
-          this.statusChallenges.push({id:'assistance',status:true})
-          break
+        assis.operation_date = new Date(assis.operation_date)
+        if (assis.status === 'ACTIVE' && assis.operation_date < cutDate) {
+          return true
         }
       }
     }
+    return false
   }
 
-  checkPayrollPortability(payrollPortability:any[], cutDate:Date){
+  /**  
+   * Metodo mediante el cual se valida el status del reto payroll_portability
+  */
+  checkPayrollPortability(payrollPortability: any[], cutDate: Date) {
 
     if (payrollPortability) {
       for (const payroll of payrollPortability) {
-        payroll.operation_date= new Date(payroll.operation_date)
-        if (payroll.status==='ACTIVE' && payroll.operation_date<cutDate) {
-          this.statusChallenges.push({id:'payroll_portability',status:true})
-          break
+        payroll.operation_date = new Date(payroll.operation_date)
+        if (payroll.status === 'ACTIVE' && payroll.operation_date < cutDate) {
+          return true
         }
       }
     }
+    return false
   }
 
-  checkDigitalChannels(digitalChannels:any[], cutDate:Date ){
-        
-    if (digitalChannels) {
-      for (const channel of digitalChannels) {
-        channel.operation_date= new Date(channel.operation_date)
-        
-        if (channel.status==='ACTIVE' && channel.operation_date<cutDate) {
-          this.statusChallenges.push({id:'digitalChannels',status:true})
-          break
+
+  /**  
+   * Metodo mediante el cual se valida el status del reto digital_channels
+  */
+  checkDigitalChannels(digital_channels: any[], cutDate: Date) {
+    if (digital_channels) {
+      for (const channel of digital_channels) {
+        channel.operation_date = new Date(channel.operation_date)
+
+        if (channel.status === 'ACTIVE' && channel.operation_date < cutDate) {
+          return true
         }
       }
     }
+    return false
   }
 
-  setStatusChallenges(tab:number,challenge:Challenge){
+  /**  
+   * Metodo mediante el cual se valida el status de la mision
+  */
+  statusMission(challenges: Challenge[]) {
 
-    let status=false
-    this.statusMissions.forEach(mission=>{
-      if (mission.mission===tab.toString()) {
-        
-        mission.challenges?.forEach(chall=>{
-          if (chall.id===challenge.id) {
-            status=chall.status
-          }
-        })
+    const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
+    const special = challenges.filter(challenge => challenge.type === "special")
+    let statusSpecial:Challenge[]=[];
 
-      }
-    })
-      
-    return status
-  }
-
-  getPercent(){
-
-    this.period
+    if (special.length>0) {
+      statusSpecial=special.filter(spec=>spec.status===true);
+    }
     
-    // let missionPassed:number=0
+    const statusMandatory=mandatory.filter(mand=>mand.status===false)
+    
+    if (statusMandatory.length>0 && statusSpecial.length===0 ) {
+      return false
+    }
+    
+    return true
 
-    // this.statusMissions.forEach(status=>{
-    //   const mission= this.challenges.missions[Number(status.mission)]
-    //   if (status.mission!=='0') {
-    //     status.challenges?.forEach(challenge=>{
-    //       if (mission.mandatoryChallenges.includes(challenge.id) && challenge.status) {
-    //         missionPassed++
-    //       }
-    //       if (mission.specialChallenges.includes(challenge.id) && challenge.status) {
-    //         missionPassed++
-    //       }
-    //     })
-    //   }
-    // })
+  }
 
-    const percent= 0;
+  /**  
+   * Metodo mediante el cual se obtiene el porcentaje
+  */
+  getPercent() {
+
+    const { lower_limit, current_limit, potential_limit } = this.cardDetail
+
+    let totalIncrease = potential_limit.amount - lower_limit.amount;
+
+    let currentIncrease = current_limit.amount - lower_limit.amount;
+
+    let percent = (currentIncrease * 100) / totalIncrease
+
+    if (percent>100) {
+      percent = 100
+    }
+
     return percent
   }
 
-  setChallengeRedirect(){
-    this.challengesRedirect.forEach(challenge=>{
-      this.mandatoryChallenges.forEach(mandatory=>{
-        
-        if(mandatory.id===challenge){
-          mandatory.redirection=true
-        }
-        else if(challenge==='digital_channel' && mandatory.id==='digitalChannels'){
-          mandatory.redirection=true
-        }
-      })
-    
-      if (this.specialChallenges.length>0) {
-        this.specialChallenges.forEach(special=>{
-          if (special.id===challenge) {
-            special.redirection=true;
-          }
-        })
+  /**  
+   * Metodo mediante el cual se muestran las notificaciones
+  */
+  showNotification(currentLimit: CurrentLimit, potentialLimit: CurrentLimit) {
+    const previousPeriod = this.missions[this.currentPeriod - 1]
+
+    if (previousPeriod && Number(previousPeriod.id) >= 1) {
+      const cutDate = new Date(previousPeriod.cut_of_date!);
+      const today = new Date();
+
+      const { status } = previousPeriod
+      const notification =
+      {
+        icon: '',
+        title: '',
+        subtitle: '',
+        description: '',
+        btnAction: () => this.closeModal()
+      }
+
+      if (currentLimit.amount === potentialLimit.amount) {
+        notification.icon = 'challenge-complete'
+        notification.title = '¡Lo has logrado!'
+        notification.subtitle = 'Tu límite de crédito ha aumentado'
+        notification.description = 'Completaste todas las misiones del reto LikeU y tu límite ha alcanzado su potencial completo.'
+      } else if (!status) {
+        notification.icon = 'challenge-no-complete'
+        notification.title = '¡Lo sentimos!'
+        notification.subtitle = 'No has logrado completar el reto LikeU'
+        notification.description = 'Desafortunadamente no podrás continuar participando en el reto. Recuerda que puedes continuar usando tu tarjeta.'
+      } else if (status) {
+        notification.icon = 'mission-complete'
+        notification.title = '¡Misión cumplida!'
+        notification.subtitle = 'Estás más cerca de alcanzar tu límite potencial'
+        notification.description = 'Continúa con los retos de la siguiente misión para avanzar.'
+      }
+      this.modalService.generateNotification(this.viewContainerRef, notification)
+    }
+  }
+
+  /**  
+   * Metodo mediante el cual se obtienen los retos los cuales van a contar con la propiedad redirect 
+  */
+  getChallengesRedirect(challenges: TokenValidator) {
+    const cutChallenges = challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split('"challenges": [')
+    const cutChallenges2 = cutChallenges[1].split(']')
+    this.challengesRedirect = cutChallenges2[0].split(',')
+    this.challengesRedirect.forEach((challenge, i) => {
+      this.challengesRedirect[i] = challenge.trim().slice(1, -1)
+    })
+
+  }
+
+
+  /**  
+   * Metodo mediante el cual se agrega la propiedad redirect al challenge
+  */
+  setChallengeRedirect(challenge: Challenge) {
+
+    const chall = { ...challenge }
+
+    this.challengesRedirect.forEach(redirect => {
+
+      if (challenge.id === redirect) {
+        chall.redirection = true
+      } else if (challenge.id === 'digital_channels' && redirect === 'digital_channel') {
+        chall.redirection = true
       }
     })
+
+    return chall
   }
-
-  messageNotification(resp:ChallengeLikeU){
-
-    const {period,current_limit,potential_limit}=resp
-
-    const {current_period,period_detail} = period
-
-    const previousPeriod= Number(current_period) - 1
-    const previousPeriodDetail=period_detail[previousPeriod]
-
-    if (previousPeriodDetail && previousPeriodDetail.status==='FINISH' && previousPeriod>1) {
-      const dueDate=new Date(period_detail[previousPeriod].due_date)
-
-      const date=new Date();
-      
-      if (date>dueDate && !this.gamificacionFacade.message) {
-        
-          const status=this.getStatusMission(previousPeriod)
-          
-          if (current_limit.amount===potential_limit.amount) {
-            this.router.navigate(['notificacion','lo-has-logrado'])
-          }else if(!status){
-            this.router.navigate(['notificacion','lo-sentimos'])
-          }else if(status){
-            this.router.navigate(['notificacion','mision-cumplida'])
-          }
-  
-        this.gamificacionFacade.message=true;
-      }
-
-      
-    }
-
-  }
-
-
-  getStatusMission(index:number):boolean | undefined{
-
-    let status=undefined
- 
-    if (this.statusMissions[index]) {
-    const {challenges}=this.statusMissions[index]
-    const {mandatoryChallenges,specialChallenges}=this.challenges.missions[index]
-    
-      
-      const statusMandatory=(challenge:StatusChallenges)=>{
-        if (mandatoryChallenges.includes(challenge.id)) {
-          return true
-        }
-        return false
-      };
-  
-  
-      const statusSpecial=(challenge:StatusChallenges)=>{
-        if (specialChallenges.includes(challenge.id)) {
-          return true
-        }
-        return false
-      };
-  
-  
-      const mandatoryChallengesStatus= challenges?.filter(statusMandatory)
-      const specialChallengesStatus= challenges?.filter(statusSpecial)
-  
-  
-      if(mandatoryChallengesStatus && mandatoryChallengesStatus?.length!== mandatoryChallenges.length){
-        status=false
-      }else if (specialChallengesStatus && specialChallengesStatus?.length<1 && specialChallenges.length>0) {
-        status=false
-      }
-    }
-
-    return status
-  }
-
-
-  showFirstAccess(seenFirstTime:boolean){
-    if (seenFirstTime  && !this.gamificacionFacade.firstaccess) {
-      this.router.navigateByUrl('bienvenido')
-    }
-  }
-
 
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
+    if (this.destroy$) {
+      this.destroy$.unsubscribe();
+    }
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+

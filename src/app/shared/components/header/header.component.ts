@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
+
+  constructor(
+    private callback:GamificationCallbacksService
+  ){}
+
+  close(){
+    this.callback.close()
+  }
+
+  redirect(){
+    this.callback.redirect('client_support')
+  }
 
 }
