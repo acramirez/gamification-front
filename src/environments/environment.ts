@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   session:'/api/session',
-  benefits:'credits/v2/credits/customer-key/benefits'
+  benefits:'/credits/v2/credits/customer-key/benefits'
 };
 
 /*
