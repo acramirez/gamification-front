@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  config:'/config.json',
-  configLocal:'/assets/config/config.json'
+  session:'/api/session',
+  benefits:'/credits/v2/credits'
 };
 
 /*

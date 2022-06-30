@@ -1,7 +1,6 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ConfigService } from '../apis/config.service';
 import { TokenValidatorService } from '../apis/token.validator.service';
 
 @Injectable({
@@ -10,7 +9,6 @@ import { TokenValidatorService } from '../apis/token.validator.service';
 export class MockInterceptorService implements HttpInterceptor {
 
   constructor(
-    private configService:ConfigService,
     private tknService:TokenValidatorService
   ){
 

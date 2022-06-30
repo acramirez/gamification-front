@@ -8,13 +8,6 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { ErrorInterceptorService } from './services/interceptors/error-interceptor.service';
 import { MockInterceptorService } from './services/interceptors/mock-interceptor.service';
-import { ConfigFacade } from './services/facades/config.facade';
-
-
-export function appConfigProvider(provider:ConfigFacade){
-  return () => provider.getConfig();
-}
-
 
 @NgModule({
   declarations: [
@@ -37,13 +30,6 @@ export function appConfigProvider(provider:ConfigFacade){
     {
       provide:  HTTP_INTERCEPTORS,
       useClass:ErrorInterceptorService,
-      multi:true
-    },
-    ConfigFacade,
-    {
-      provide:APP_INITIALIZER,
-      useFactory:appConfigProvider,
-      deps:[ConfigFacade],
       multi:true
     }
   ],
