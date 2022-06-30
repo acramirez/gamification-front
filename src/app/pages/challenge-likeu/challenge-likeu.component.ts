@@ -9,10 +9,10 @@ import { Assistance, CardPayment, CurrentLimit, Period, PeriodDetail } from '../
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
-import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
-import { Modal } from 'src/app/shared/interfaces/atoms/modal';
-import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
-import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
+import { ModalService } from '../../shared/molecules/modal/modal.service';
+import { Modal } from '../../shared/interfaces/atoms/modal';
+import { MissionInterfaces } from '../../shared/interfaces/mission-interfaces';
+import { TokenValidator } from '../../shared/interfaces/response/opaqueToken.interface';
 import { catchError } from 'rxjs/operators';
 
 
