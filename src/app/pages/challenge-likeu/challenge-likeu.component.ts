@@ -8,10 +8,8 @@ import { Challenge, Mission, typeChallenge } from '../../shared/interfaces/respo
 import { Assistance, CardPayment, CurrentLimit, Period, PeriodDetail } from '../../shared/interfaces/response/gamification.interface';
 import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
-import { Router } from '@angular/router';
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { ModalService } from 'src/app/shared/molecules/modal/modal.service';
-import { Notification } from 'src/app/shared/interfaces/notification';
 import { Modal } from 'src/app/shared/interfaces/atoms/modal';
 import { MissionInterfaces } from 'src/app/shared/interfaces/mission-interfaces';
 import { TokenValidator } from 'src/app/shared/interfaces/response/opaqueToken.interface';
