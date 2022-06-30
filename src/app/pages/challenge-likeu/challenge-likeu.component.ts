@@ -43,7 +43,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     private gamificacionFacade: GamificationFacade,
     private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
-    private router: Router,
     private modalService: ModalService,
     private viewContainerRef: ViewContainerRef,
   ) { }
@@ -67,8 +66,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
               })
             )
             .subscribe(resp => {
-
-              this.proccessData(resp)
+              this.proccessData(resp);
             })
 
         }).catch(err => {
@@ -93,8 +91,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.modalService.close(this.viewContainerRef)
   }
 
-
-
   proccessData(resp: ChallengeLikeU) {
 
     const { lower_limit, current_limit, potential_limit, period, seen_first_time } = resp
@@ -106,17 +102,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       potential_limit
     }
     this.currentPeriod = Number(current_period);
+    // this.currentPeriod = Number(current_period);
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
-    this.indexTab=Number(current_period)
 
     this.createMission();
-    this.missionActive = this.missions[this.currentPeriod]
+
+
+    if (this.currentPeriod<this.missions.length) {
+      this.indexTab=Number(current_period)
+      this.missionActive = this.missions[this.currentPeriod]
+    }else{
+      this.indexTab=this.missions.length-1
+      this.missionActive=this.missions[this.missions.length-1]
+    }
 
     this.propertyChallenges();
     this.getTabs();
 
-    this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special")
+    if (this.missions[this.currentPeriod]) {
+      this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special");
+    }
 
     if (seen_first_time) {
       this.showFirstAccess()
@@ -456,12 +462,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     
     const statusMandatory=mandatory.filter(mand=>mand.status===false)
     
-    if (statusMandatory.length>0 && statusSpecial.length===0 ) {
+    if (statusMandatory.length>0 ) {
+      return false
+    }else if (statusSpecial.length===0) {
       return false
     }
     
     return true
-
   }
 
   /**  
@@ -512,7 +519,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification.title = '¡Lo sentimos!'
         notification.subtitle = 'No completaste el reto LikeU'
         notification.description = 'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.\n \nRecuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
-      } else if (status && this.currentPeriod<4) {
+      } else if (status && this.currentPeriod<=4) {
         notification.icon = 'cycle-complete'
         notification.title = '¡Ciclo completado!'
         notification.subtitle = 'Estás más cerca de alcanzar tu límite de crédito potencial'
