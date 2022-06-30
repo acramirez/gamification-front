@@ -25,6 +25,5 @@ export class MonthChallengesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;
-
   }
 }
