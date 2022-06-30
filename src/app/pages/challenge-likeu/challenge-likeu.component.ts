@@ -102,28 +102,23 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       potential_limit
     }
     this.currentPeriod = Number(current_period);
-    // this.currentPeriod = Number(current_period);
     this.period = resp.period
     this.cutOfDate = new Date(resp.cut_of_date)
 
     this.createMission();
 
-
-    if (this.currentPeriod<this.missions.length) {
+    if (this.missions[this.currentPeriod]) {
       this.indexTab=Number(current_period)
-      this.missionActive = this.missions[this.currentPeriod]
     }else{
       this.indexTab=this.missions.length-1
-      this.missionActive=this.missions[this.missions.length-1]
     }
+    this.setTimerMission()
+
+    this.showMissionActive(this.indexTab)
 
     this.propertyChallenges();
     this.getTabs();
-
-    if (this.missions[this.currentPeriod]) {
-      this.specialChallenges = this.missionActive.challenges!.filter(challenge => challenge.type === "special");
-    }
-
+    
     if (seen_first_time) {
       this.showFirstAccess()
     }
@@ -181,13 +176,22 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return this.challenges.FAQ
   }
 
+
+  setTimerMission(){
+    this.missions.forEach((mission, index)=>{
+      if (index===this.currentPeriod) {
+        mission.timer=true
+      }else{
+        mission.timer=false
+      }
+    })
+  }
+
   /**  
    * Metodo mediante el cual se asignan las propiedades status y redirect a los challenges
   */
 
   propertyChallenges() {
-
-    console.log(this.missions);
     
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach(challenge => {
@@ -229,7 +233,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**  
-   * Metodo mediante el cual se asigna el tipo a cadaa challenge de cada mision
+   * Metodo mediante el cual se asigna el tipo a cada challenge de cada mision
   */
 
   typeChallenge(mission: Mission) {

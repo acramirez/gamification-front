@@ -6,7 +6,7 @@
 
 <div class="general-challenges">
 
-    <ng-container *ngIf="activeTab===initialTab">
+    <ng-container *ngIf="mission.timer">
         <lu-timer [dueDate]="dueDate"></lu-timer>
     </ng-container>
 
