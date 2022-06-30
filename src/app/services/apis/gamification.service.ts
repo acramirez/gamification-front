@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 import { Gamification } from "../../shared/interfaces/response/gamification.interface";
-import { ConfigFacade } from "../facades/config.facade";
 
 
 @Injectable({
@@ -10,11 +10,10 @@ import { ConfigFacade } from "../facades/config.facade";
 })
 export class GamificationService {
 
-    private _getApiUri: string = this.configFacade.gamificationURL;
+    private _getApiUri: string = environment.benefits;
 
     constructor( 
         private httpClient: HttpClient,
-        private configFacade:ConfigFacade
     ) { }
 
     getGamifications(): Observable<Gamification> {

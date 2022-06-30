@@ -20,8 +20,11 @@ export class TimerComponent implements AfterViewInit  {
     this.timer$=timer(0,1000).subscribe(()=>
     { 
       let time=this.getTime(this.dueDate)
-      if(typeof time === 'number'){
+      if(typeof time === 'number' && time>0){
+
         this.remainingDays= this.transformSeconds(time);
+      }else{
+        this.remainingDays="0 dias"
       }
     }
   );
@@ -48,6 +51,7 @@ export class TimerComponent implements AfterViewInit  {
     }else{
       resp = hour + ':' + minutes + ':' + seconds +' hrs'
     }
+    
     return resp
   }
 

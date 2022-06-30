@@ -4,6 +4,7 @@ export interface MissionInterfaces {
     id:string,
     status?:boolean,
     cut_of_date?:Date,
-    challenges?:Challenge[]
+    challenges?:Challenge[],
+    timer?:boolean
 }
 
