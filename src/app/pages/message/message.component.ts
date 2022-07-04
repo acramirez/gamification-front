@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
 import { Notification } from "../../shared/interfaces/notification";
 
 @Component({

@@ -8,10 +8,14 @@
         </div>
     </div>
 
-    <div class="content">
-        <h3 class="content__title">{{notification.title}}</h3>
-        <h3 class="content__subtitle">{{notification.subtitle}}</h3>
-        <p class="content__description">{{notification.description}}</p>
+    <div class="message__body">
+        <div class="content">
+            <h3 class="content__title">{{notification.title}}</h3>
+            <h3 class="content__subtitle">{{notification.subtitle}}</h3>
+            <div class="content__description">
+                <p *ngFor="let desc of notification.description" class="">{{desc}}</p>
+            </div>
+        </div>
         <button class="btn" (click)="notification.btnAction()">Continuar</button>
     </div>
 </div>
