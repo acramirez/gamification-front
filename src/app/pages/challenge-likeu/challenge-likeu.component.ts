@@ -454,7 +454,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   /**  
    * Metodo mediante el cual se valida el status de la mision
   */
-  statusMission(challenges: Challenge[]) {
+   statusMission(challenges: Challenge[]) {
 
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
@@ -468,10 +468,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     
     if (statusMandatory.length>0 ) {
       return false
-    }else if (statusSpecial.length===0) {
+    }else if (special.length>0 && statusSpecial.length===0) {
       return false
     }
-    
     return true
   }
 
@@ -482,16 +481,18 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const { lower_limit, current_limit, potential_limit } = this.cardDetail
 
-    let totalIncrease = potential_limit.amount - lower_limit.amount;
+    // let totalIncrease = potential_limit.amount - lower_limit.amount;
 
-    let currentIncrease = current_limit.amount - lower_limit.amount;
+    // let currentIncrease = current_limit.amount - lower_limit.amount;
 
-    let percent = (currentIncrease * 100) / totalIncrease
+
+    let percent = (current_limit.amount * 100) / potential_limit.amount
 
     if (percent>100) {
       percent = 100
+    }else if (current_limit.amount===lower_limit.amount) {
+      percent=0
     }
-
     return percent
   }
 
@@ -576,6 +577,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.destroy$.unsubscribe();
     }
   }
+
+  
 
 }
 
