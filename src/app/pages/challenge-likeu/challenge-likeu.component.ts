@@ -14,6 +14,7 @@ import { Modal } from '../../shared/interfaces/atoms/modal';
 import { MissionInterfaces } from '../../shared/interfaces/mission-interfaces';
 import { TokenValidator } from '../../shared/interfaces/response/opaqueToken.interface';
 import { catchError } from 'rxjs/operators';
+import { Notification } from 'src/app/shared/interfaces/notification';
 
 
 @Component({
@@ -65,6 +66,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             )
             .subscribe(resp => {
               this.proccessData(resp);
+              console.log(this.missions);
+              
             })
 
         }).catch(err => {
@@ -452,7 +455,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   /**  
    * Metodo mediante el cual se valida el status de la mision
   */
-  statusMission(challenges: Challenge[]) {
+   statusMission(challenges: Challenge[]) {
 
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
@@ -466,10 +469,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     
     if (statusMandatory.length>0 ) {
       return false
-    }else if (statusSpecial.length===0) {
+    }else if (special.length>0 && statusSpecial.length===0) {
       return false
     }
-    
     return true
   }
 
@@ -480,16 +482,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const { lower_limit, current_limit, potential_limit } = this.cardDetail
 
-    let totalIncrease = potential_limit.amount - lower_limit.amount;
-
-    let currentIncrease = current_limit.amount - lower_limit.amount;
-
-    let percent = (currentIncrease * 100) / totalIncrease
+    let percent = (current_limit.amount * 100) / potential_limit.amount
 
     if (percent>100) {
       percent = 100
+    }else if (current_limit.amount===lower_limit.amount) {
+      percent=0
     }
-
     return percent
   }
 
@@ -503,34 +502,34 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       const { status } = previousPeriod
 
-      const notification =
+      const notification:Notification =
       {
         icon: '',
         title: '',
         subtitle: '',
-        description: '',
+        description: [],
         btnAction: () => this.closeModal()
       }
       if (currentLimit.amount >= potentialLimit.amount  ) {
         notification.icon = 'challenge-complete'
-        notification.title = '¡Lo lograste!'
-        notification.subtitle = 'Conseguiste el incremento potencial de tu límite de crédito'
-        notification.description = 'Continúa disfrutando de los beneficios que solo LikeU tiene para ti.'
+        notification.title = '¡Felicidades!'
+        notification.subtitle = 'Conseguiste el 100% de tu límite potencial'
+        notification.description.push('Finalizaste exitosamente el Reto LikeU.')
       } else if (!status) {
         notification.icon = 'challenge-no-complete'
         notification.title = '¡Lo sentimos!'
         notification.subtitle = 'No completaste el reto LikeU'
-        notification.description = 'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.\n \nRecuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
+        notification.description.push('Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.','Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.')
       } else if (status && this.currentPeriod<=4) {
         notification.icon = 'cycle-complete'
         notification.title = '¡Ciclo completado!'
         notification.subtitle = 'Estás más cerca de alcanzar tu límite de crédito potencial'
-        notification.description = 'Continúa con el siguiente ciclo para avanzar con el Reto.'
+        notification.description.push('Continúa con el siguiente ciclo para avanzar con el Reto.')
       } else if (status && this.currentPeriod>4) {
         notification.icon = 'mission-complete'
         notification.title = '¡Ciclo completado!'
         notification.subtitle = 'Tu límite de crédito ha aumentado y estás más cerca de la meta'
-        notification.description = 'Continúa con el siguiente ciclo para avanzar en el Reto.'
+        notification.description.push('Continúa con el siguiente ciclo para avanzar en el Reto.')
       }
       this.modalService.generateNotification(this.viewContainerRef, notification)
     }
@@ -574,6 +573,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.destroy$.unsubscribe();
     }
   }
+
+  
 
 }
 

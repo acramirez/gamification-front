@@ -66,13 +66,14 @@
     list-style: none;
     display: grid;
     grid-auto-rows: min-content;
-    gap: 1rem;
+    /* gap: 1rem; */
     padding: 0;
 }
 
 .modal__spec-title{
     font-weight: 700;
     font-size: .875rem;
+    margin-bottom: .5rem;
 }
 
 .modal__spec-item{
@@ -80,15 +81,16 @@
     font-size: .875rem;
     padding-left: 1rem;
     position: relative;
+    margin-bottom: .75rem;
 }
 
 .modal__spec-item::before{
     content: '';
     border-radius: 50%;
     background-color: #000;
-    height: 5px;
-    left: 2px;
+    height: 3px;
+    left: 8px;
     position: absolute;
-    top: 7.5px;
-    width: 5px;
+    top: 8.5px;
+    width: 3px;
 }

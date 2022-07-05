@@ -43,7 +43,7 @@ export class GamificationFacade {
                     period,
                     cut_of_date,
                     status,
-                    seen_first_time,
+                    seen_first_time:true,
                     lower_limit
                 }
                 
