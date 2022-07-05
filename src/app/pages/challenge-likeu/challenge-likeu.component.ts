@@ -481,11 +481,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const { lower_limit, current_limit, potential_limit } = this.cardDetail
 
-    // let totalIncrease = potential_limit.amount - lower_limit.amount;
-
-    // let currentIncrease = current_limit.amount - lower_limit.amount;
-
-
     let percent = (current_limit.amount * 100) / potential_limit.amount
 
     if (percent>100) {
