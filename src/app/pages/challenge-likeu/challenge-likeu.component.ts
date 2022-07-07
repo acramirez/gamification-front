@@ -65,9 +65,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
               })
             )
             .subscribe(resp => {
-              this.proccessData(resp);
-              console.log(this.missions);
-              
+              this.proccessData(resp);              
             })
 
         }).catch(err => {
@@ -109,7 +107,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.createMission();
 
     if (this.missions[this.currentPeriod]) {
-      this.indexTab=Number(current_period)
+      this.indexTab=this.currentPeriod
     }else{
       this.indexTab=this.missions.length-1
     }
@@ -213,7 +211,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         }
       })
       if (mission.challenges) {
-        mission.status = this.statusMission(mission.challenges)
+        mission.status = this.statusMission(mission.challenges, index)
       }
     })
   }
@@ -455,8 +453,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   /**  
    * Metodo mediante el cual se valida el status de la mision
   */
-   statusMission(challenges: Challenge[]) {
-
+   statusMission(challenges: Challenge[], missionIndex:number) {
+    let statusMission:boolean=true;
     const mandatory = challenges.filter(challenge => challenge.type === "mandatory")
     const special = challenges.filter(challenge => challenge.type === "special")
     let statusSpecial:Challenge[]=[];
@@ -468,11 +466,16 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const statusMandatory=mandatory.filter(mand=>mand.status===false)
     
     if (statusMandatory.length>0 ) {
-      return false
+
+      const digitalChannell=statusMandatory.filter(challengeDigital=>challengeDigital.id==='digital_channels')
+      statusMission= false
+      if (digitalChannell.length>0 && missionIndex<6) {
+        statusMission=true
+      }
     }else if (special.length>0 && statusSpecial.length===0) {
-      return false
+      statusMission= false
     }
-    return true
+    return statusMission
   }
 
   /**  
