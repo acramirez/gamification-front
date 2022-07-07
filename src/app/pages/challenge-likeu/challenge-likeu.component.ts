@@ -464,6 +464,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
     
     const statusMandatory=mandatory.filter(mand=>mand.status===false)
+
     
     if (statusMandatory.length>0 ) {
 
@@ -477,7 +478,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }else if (missionIndex===6) {
       let statusDC5=this.missions[missionIndex-1].challenges?.filter(challenge=>(challenge.id==='digital_channels' && challenge.status===false))
       let statusDC4=this.missions[missionIndex-2].challenges?.filter(challenge=>(challenge.id==='digital_channels' && challenge.status===false))
-      if ((statusDC4 && statusDC4.length>0) || (statusDC5 && statusDC5.length>0)) {
+      if (statusDC4!.length>0 || statusDC5!.length>0) {
         statusMission=false
       }
       
