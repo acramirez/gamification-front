@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path:'**',
-        redirectTo:'/error'
+        redirectTo:'error'
       }
     ],
     // canLoad:[SsoGuard],
@@ -26,6 +26,10 @@ const routes: Routes = [
     component:ErrorPageComponent,
     canActivate:[ErrorGuard],
     canLoad:[ErrorGuard]
+  },
+  {
+    path:'**',
+    redirectTo:'error'
   }
 ];
 
