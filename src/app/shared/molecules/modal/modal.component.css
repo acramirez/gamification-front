@@ -37,6 +37,9 @@
 .modal__title{
     font-size: 1.25rem;
     font-weight: 700;
+    max-width: 15rem;
+    margin:auto;
+    margin-bottom: 1rem;
 }
 
 .modal__title--gradient{
@@ -47,6 +50,8 @@
 
 .modal__subtitle{
     color: var( --theme-color-text-03);
+    max-width: 15rem;
+    margin: auto;
 }
 
 .modal__content{

@@ -9,6 +9,11 @@
     z-index: 100;
 }
 
+.heder__btn{
+    cursor: pointer;
+}
+
+
 /* .header::before{
     content: '';
     background: var(--theme-color-background-03);

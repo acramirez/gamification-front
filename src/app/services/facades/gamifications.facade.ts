@@ -5,7 +5,6 @@ import { ChallengeLikeU } from "../../shared/interfaces/response/challenges.inte
 
 import { GamificationService } from "../apis/gamification.service";
 import { ErrorService } from "../apis/error.service";
-import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +20,6 @@ export class GamificationFacade {
     constructor( 
         private gamificacionAPI: GamificationService,
         private errorService:ErrorService,
-        private router:Router
         ) {        
     }
 

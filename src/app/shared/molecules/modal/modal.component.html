@@ -1,4 +1,4 @@
-<div class="modal-bg">
+ <div class="modal-bg">
     <div animation="zoomIn" class="modal"  
     [ngClass]="{
         'modal':true,
@@ -12,7 +12,7 @@
                     'modal__title':true,
                     'modal__title--gradient':modal.challenge.type==='accelerator'
                 }">
-                    {{modal.challenge.title}}
+                    {{(modal.challenge.titlemodal)?modal.challenge.titlemodal:modal.challenge.title}}
                 </h2>
                 <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>            
             </div>

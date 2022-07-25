@@ -9,6 +9,8 @@
     display: flex;
     justify-content: space-between;
     padding: 1.5rem 1.25rem;
+    cursor: pointer;
+
 }
 
 .question__text{
@@ -34,7 +36,9 @@
 }
 
 .question__link{
-    font-weight: 700;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--theme-color-neutral-02);
 }
 
 sn-icon{
