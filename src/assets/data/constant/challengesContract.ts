@@ -52,21 +52,21 @@ export const challengesContract: ChallengesContract = {
         {
           title: '2. Paga tu tarjeta:',
           spec: [
-            'Cubre al menos el pago mínimo mensual; recuerda que puedes pagarla desde SuperMóvil. Si pagas 50% más del mínimo, alcanzarás tu límite potencial más rápido.',
+            'Cubre al menos el pago mínimo mensual; recuerda que puedes pagarla desde SuperMóvil y Súper Wallet. Si pagas 50% más del mínimo, alcanzarás tu límite potencial más rápido. ',
           ],
         },
         {
           title:
             '3. Vincula tu tarjeta cumpliendo al menos una de las siguientes acciones cada mes:',
           spec: [
-            'Domicilia el pago de tu LikeU: Contrata en sucursal el servicio de pago mensual automático de tu tarjeta LikeU, con cargo a tu cuenta de nómina o cheques. ',
+            'Domicilia el pago de tu LikeU: Contrata en sucursal el servicio de pago mensual automático de tu tarjeta LikeU, con cargo a tu cuenta de nómina o cheques.',
             'Cargo recurrente: Suscribe el cargo mensual de algún servicio (TV, telefonía, luz, servicios de streaming, etc.) a tu tarjeta LikeU, a través de SuperLínea, SuperMóvil o directamente con el prestador de servicio.',
             'Asistencias LikeU: Activa un plan anual de asistencia desde Súper Wallet dentro de la opción "Personalizar".',
             'Portabilidad de Nómina: Trae tu nómina a Santander desde SúperMóvil, SuperNET o en sucursal.',
           ],
         },
         {
-          title: 'Uso de canales digitales:',
+          title: '4. Uso de canales digitales:',
           spec: [
             'Ingresa por lo menos una vez al mes, a alguno de los canales digitales de Santander (SuperNET, SuperMóvil o Súper Wallet) y administra o conoce los detalles de tu tarjeta.',
           ],
@@ -109,7 +109,7 @@ export const challengesContract: ChallengesContract = {
       title: 'Conoce tu tarjeta',
       subtitle: 'Conoce las características de tu tarjeta Santander LikeU.',
       description:
-        'Tu tarjeta de Crédito LikeU tiene beneficios increíbles que podrás disfrutar desde el primer día como: ',
+        'Tu tarjeta de Crédito LikeU tiene beneficios increíbles que podrás disfrutar desde el primer día como:',
       specs: [
         {
           title: 'Sin anualidad',
