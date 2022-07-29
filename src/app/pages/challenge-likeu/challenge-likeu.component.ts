@@ -593,19 +593,19 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         );
       } else if (status && this.currentPeriod <= 4) {
         notification.icon = 'cycle-complete';
-        notification.title = '¡Ciclo completado!';
+        notification.title = '¡Lo lograste!';
         notification.subtitle =
-          'Estás más cerca de alcanzar tu límite de crédito potencial';
+        `Cumpliste la misión ${previousPeriod}`;
         notification.description.push(
-          'Continúa con el siguiente ciclo para avanzar con el Reto.'
+          'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.​'
         );
       } else if (status && this.currentPeriod > 4) {
         notification.icon = 'mission-complete';
-        notification.title = '¡Misión completada!';
+        notification.title = `¡Misión ${previousPeriod} completada!`;
         notification.subtitle =
           'Tu límite de crédito ha aumentado y estás más cerca de la meta';
         notification.description.push(
-          'Continúa con el siguiente ciclo para avanzar en el Reto.'
+          'Continúa con la siguiente misión para avanzar en el Reto.'
         );
       }
       this.modalService.generateNotification(
