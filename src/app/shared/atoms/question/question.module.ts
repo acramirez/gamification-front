@@ -9,7 +9,7 @@ import { DirectivesModule } from '../../directives/directives.module';
   declarations: [QuestionComponent],
   imports: [
     CommonModule,
-    DirectivesModule
+    DirectivesModule,
   ],
   exports:[QuestionComponent]
 })

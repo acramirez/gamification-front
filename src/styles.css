@@ -94,6 +94,8 @@ sn-icon>i[class^=sn-]{
     position: absolute;
     right: 1.5rem;
     top: .875rem;
+    cursor: pointer;
+
 }
 
 .btn{
@@ -103,7 +105,7 @@ sn-icon>i[class^=sn-]{
     border-radius: 3rem;
     color: var(--theme-color-text-01);
     font-weight: 700;
-
+    cursor: pointer;
     padding: 0.75rem 1.5rem;
 }
 
@@ -124,5 +126,80 @@ sn-icon>i[class^=sn-]{
 
 
 /*Animation styles*/
+
+
+.transition{
+    transition: all ease 1s;
+}
+
+
+.zoomIn{
+    animation: zoomIn .3s ease-in normal;
+}
+
+@keyframes zoomIn {
+    0%{
+        transform: scale(0);
+    }
+    50%{
+        transform: scale(.6);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+    
+}
+
+.drop-down-hidden{
+    overflow: hidden;
+    padding-bottom: 0!important;
+    transition: all ease .3s;
+    height: 0;
+}
+
+.downUp{
+    bottom: -100%;
+    transition: all ease .3s;
+}
+
+.rotate{
+    transition: all ease .3s;
+}
+
+@keyframes downUp {
+    0%{
+        bottom: -100%;
+    }
+    50%{
+        bottom: -50%;
+    }
+    75%{
+        bottom: -25%;
+    }
+    100%{
+        bottom: 0;
+    }
+}
+
+
+.hidden{
+    display: none;
+}
+
+
+.hidden--dropdown{
+    height: 0;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.active--tab{
+    transform: scale(1.2);
+}
+
 
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber, Subscription, timer } from 'rxjs';
 
 @Component({
@@ -6,7 +6,7 @@ import { Subscriber, Subscription, timer } from 'rxjs';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements AfterViewInit  {
+export class TimerComponent implements AfterViewInit, OnDestroy  {
 
   timer$!:Subscription
   remainingDays!:number | string | null
@@ -65,6 +65,12 @@ export class TimerComponent implements AfterViewInit  {
       let days:number | string=result/(1000)
       
       return days
+  }
+
+  ngOnDestroy(): void {
+    if (this.timer$) {
+      this.timer$.unsubscribe()
+    }
   }
 
 }
