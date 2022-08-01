@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "inlineStyleLanguage": "css",
             "outputPath": "dist/gramificacion-front",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -25,32 +26,7 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "*",
-                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/icons",
-                "output": "assets/fonts/icons"
-              },
-              {
-                "glob": "*",
-                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/open-sans",
-                "output": "assets/fonts/open-sans"
-              },
-              {
-                "glob": "*",
-                "input": "node_modules/@ngx-mxflame/atoms/assets/fonts/santander",
-                "output": "assets/fonts/santander"
-              },
-              {
-                "glob": "*",
-                "input": "node_modules/@ngx-mxflame/atoms/assets/animations/navbar",
-                "output": "assets/animations/navbar"
-              },
-              {
-                "glob": "*",
-                "input": "src/assets/animations",
-                "output": "lotties"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -65,7 +41,14 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": true
+              },
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
