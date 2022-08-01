@@ -115,8 +115,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       lower_limit,
       potential_limit,
     };
-    // this.currentPeriod = Number(current_period);
-    this.currentPeriod = 3;
+    this.currentPeriod = Number(current_period);
     this.period = resp.period;
     this.cutOfDate = new Date(resp.cut_of_date);
 

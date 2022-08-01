@@ -10,6 +10,7 @@
     width: 375px;
 }
 
+
 .tabs::-webkit-scrollbar{
     display: none;
 }
