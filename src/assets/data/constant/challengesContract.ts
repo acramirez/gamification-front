@@ -418,13 +418,13 @@ export const challengesContract: ChallengesContract = {
     {
       question: '¿Cuánto tiempo dura el Reto LikeU?',
       answer:
-        '6 periodos de facturación completos; aproximadamente 7 o 6 meses, en caso del cumplimiento de tu acelerador.​',
+        '6 periodos de facturación completos; aproximadamente 7 o 6 meses, en caso del cumplimiento de tu acelerador.',
       additionalInfo: '',
       link: '',
     },
     {
       question:
-        '¿Si hago una compra a meses sin intereses puede servir para cubrir el monto mínimo de consumo de $200 pesos al mes?​',
+        '¿Si hago una compra a meses sin intereses puede servir para cubrir el monto mínimo de consumo de $200 pesos al mes?',
       answer:
         'No, la compra sólo contará como consumo durante el mes de su realización por la cantidad total, los meses de pago subsecuentes no se consideran como nuevos consumos.',
       additionalInfo: '',
@@ -439,7 +439,7 @@ export const challengesContract: ChallengesContract = {
       link: '',
     },
     {
-      question: '¿Cómo acelero el avance de mi Reto?​',
+      question: '¿Cómo acelero el avance de mi Reto?',
       answer:
         'A partir de la Misión 4, paga 50% más del monto mínimo mensual y acelera tu avance en el Reto. Por ejemplo, si tu pago mínimo es de $100 MXN, tendrías que pagar $150 MXN.',
       additionalInfo: '',
