@@ -41,6 +41,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "inlineStyleLanguage": "css",
               "optimization": {
                 "scripts": true,
                 "styles": {
