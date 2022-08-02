@@ -39,17 +39,18 @@ export class TabDirective implements OnInit, OnDestroy  {
 
   isActive(elementCheck:HTMLElement){
     const element=this.elementRef.nativeElement;
+    
     if (elementCheck===element || element.contains(elementCheck)) {
-      element.classList.add('active--tab')
+      element.children[0].classList.add('active--tab')
     }else if (elementCheck.classList.contains('tab') || elementCheck.classList.contains('tab__text') || elementCheck.classList.contains('tab__icon')) {
-      element.classList.remove('active--tab')
+      element.children[0].classList.remove('active--tab')
     }
   }
 
   ngOnInit(): void {
     const element = this.elementRef.nativeElement
     if (this.tabData && this.tabData.status==='ONGOING') {
-      this.elementRef.nativeElement.classList.add('active--tab')
+      this.elementRef.nativeElement.children[0].classList.add('active--tab')
     }     
   }
   
