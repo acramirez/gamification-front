@@ -596,7 +596,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification.subtitle =
         `Cumpliste la misión ${previousPeriod}`;
         notification.description.push(
-          'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.​'
+          'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
         );
       } else if (status && this.currentPeriod > 4) {
         notification.icon = 'mission-complete';
