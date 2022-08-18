@@ -115,7 +115,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       lower_limit,
       potential_limit,
     };
-    this.currentPeriod = Number(current_period);
+    // this.currentPeriod = Number(current_period);
+    this.currentPeriod = 1;
     this.period = resp.period;
     this.cutOfDate = new Date(resp.cut_of_date);
 
@@ -565,8 +566,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   showNotification(currentLimit: CurrentLimit, potentialLimit: CurrentLimit) {
     const previousPeriod = this.missions[this.currentPeriod - 1];
 
-    if (previousPeriod && Number(previousPeriod.id) >= 1) {
+    if (previousPeriod && Number(previousPeriod.id) >= 0) {
       const { status } = previousPeriod;
+
 
       const notification: Notification = {
         icon: '',
@@ -594,13 +596,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification.icon = 'cycle-complete';
         notification.title = '¡Lo lograste!';
         notification.subtitle =
-        `Cumpliste la misión ${previousPeriod}`;
+        `Cumpliste la misión ${this.currentPeriod - 1}`;
         notification.description.push(
           'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
         );
       } else if (status && this.currentPeriod > 4) {
         notification.icon = 'mission-complete';
-        notification.title = `¡Misión ${previousPeriod} completada!`;
+        notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
         notification.subtitle =
           'Tu límite de crédito ha aumentado y estás más cerca de la meta';
         notification.description.push(
