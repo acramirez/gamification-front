@@ -3,7 +3,10 @@
         <div class="header__santander-icon">
             <img src="../../../assets/icons/santander-icon.png" alt="">
         </div>
-        <div class="header__icon">
+        <div [ngClass]="{
+          'header__icon':true,
+          'header__icon-complete':notification.icon==='challenge-complete'
+        }">
             <img [src]="'../../../assets/icons/'+ notification.icon +'.png'" alt="">
         </div>
     </div>

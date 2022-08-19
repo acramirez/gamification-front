@@ -573,6 +573,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
       const { status } = previousPeriod;
 
+      //TODO:
+      currentLimit.amount=27000
       const notification: Notification = {
         icon: '',
         title: '',
