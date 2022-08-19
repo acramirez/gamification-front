@@ -242,7 +242,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         mission.status = this.statusMission(mission.challenges, index);
       }
     });
-    console.log(this.missions)
   }
 
   /**
@@ -573,8 +572,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
       const { status } = previousPeriod;
 
-      //TODO:
-      currentLimit.amount=27000
       const notification: Notification = {
         icon: '',
         title: '',
@@ -634,17 +631,20 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   setChallengeRedirect(challenge: Challenge) {
     const chall = { ...challenge };
+    if (this.challengesRedirect.challenges) {
+      this.challengesRedirect.challenges.forEach((redirect) => {
+        if (challenge.id === redirect) {
+          chall.redirection = true;
+        } else if (
+          challenge.id === 'digital_channels' &&
+          redirect === 'digital_channel'
+        ) {
+          chall.redirection = true;
+        }
+      });
+    }
 
-    this.challengesRedirect.challenges.forEach((redirect) => {
-      if (challenge.id === redirect) {
-        chall.redirection = true;
-      } else if (
-        challenge.id === 'digital_channels' &&
-        redirect === 'digital_channel'
-      ) {
-        chall.redirection = true;
-      }
-    });
+
 
     return chall;
   }
