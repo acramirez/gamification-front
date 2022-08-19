@@ -30,12 +30,12 @@ export class TokenSsoFacade {
           this._token = tkn;
           isBase64 = this.isBase64Token(tkn);
         } else {
-          error = throwError('El token no existe');
+          error = throwError(()=>'El token no existe');
         }
       });
 
     if (!isBase64) {
-      error = throwError('El token no es base 64');
+      error = throwError(()=>'El token no es base 64');
     }
 
     if (error) {

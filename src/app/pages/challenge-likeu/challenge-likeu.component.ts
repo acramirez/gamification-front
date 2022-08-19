@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ViewContainerRef,
 } from '@angular/core';
-import { Subject, throwError } from 'rxjs';
+import { firstValueFrom, Subject, throwError } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -44,7 +44,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   currentPeriod: number = 0;
   cutOfDate!: Date;
   indexTab!: number;
-  challengesRedirect: string[] = [];
+  challengesRedirect!: {challenges:[]};
   missions: MissionInterfaces[] = [];
   missionActive!: MissionInterfaces;
   tabs: Tab[] = [];
@@ -61,28 +61,31 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!this.tokenFacade._token) {
-      this.tokenFacade
-        .validationToken()
-        .toPromise()
-        .then((challenges) => {
-          this.getChallengesRedirect(challenges);
+      const challenges$ = this.tokenFacade.validationToken();
 
-          this.gamificacionFacade
-            .getGamification()
-            .pipe(
-              takeUntil(this.destroy$),
-              catchError((err) => {
-                return throwError(err);
-              })
-            )
-            .subscribe((resp) => {
-              this.proccessData(resp);
-            });
-        })
-        .catch((err) => {
-          return throwError(err);
-        });
+      const validationToken= async () => {
+        await firstValueFrom(challenges$)
+          .then((challenges) => {
+            this.getChallengesRedirect(challenges);
+
+            this.gamificacionFacade
+              .getGamification()
+              .pipe(
+                catchError((err) => throwError(() => err)),
+                takeUntil(this.destroy$)
+              )
+              .subscribe((resp) => {
+                this.proccessData(resp);
+              });
+          })
+          .catch((err) => {
+            return throwError(() => err);
+          });
+      };
+
+      validationToken().then
     }
+
   }
 
   showModal() {
@@ -101,7 +104,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   proccessData(resp: ChallengeLikeU) {
-    const {
+    let {
       lower_limit,
       current_limit,
       potential_limit,
@@ -115,8 +118,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       lower_limit,
       potential_limit,
     };
-    // this.currentPeriod = Number(current_period);
-    this.currentPeriod = 1;
+
+    this.currentPeriod = Number(current_period);
     this.period = resp.period;
     this.cutOfDate = new Date(resp.cut_of_date);
 
@@ -239,6 +242,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         mission.status = this.statusMission(mission.challenges, index);
       }
     });
+    console.log(this.missions)
   }
 
   /**
@@ -516,14 +520,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       statusSpecial = special.filter((spec) => spec.status === true);
     }
 
-    const statusMandatory = mandatory.filter((mand) => mand.status === false);
 
+    const statusMandatory = mandatory.filter((mand) => mand.status === false);
     if (statusMandatory.length > 0) {
       const digitalChannell = statusMandatory.filter(
         (challengeDigital) => challengeDigital.id === 'digital_channels'
       );
       statusMission = false;
-      if (digitalChannell.length > 0 && missionIndex < 6) {
+      if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
         statusMission = true;
       }
     } else if (special.length > 0 && statusSpecial.length === 0) {
@@ -569,7 +573,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
       const { status } = previousPeriod;
 
-
       const notification: Notification = {
         icon: '',
         title: '',
@@ -595,8 +598,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       } else if (status && this.currentPeriod <= 4) {
         notification.icon = 'cycle-complete';
         notification.title = '¡Lo lograste!';
-        notification.subtitle =
-        `Cumpliste la misión ${this.currentPeriod - 1}`;
+        notification.subtitle = `Cumpliste la misión ${this.currentPeriod - 1}`;
         notification.description.push(
           'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
         );
@@ -620,15 +622,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se obtienen los retos los cuales van a contar con la propiedad redirect
    */
   getChallengesRedirect(challenges: TokenValidator) {
-    const cutChallenges =
-      challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue.split(
-        '"challenges": ['
-      );
-    const cutChallenges2 = cutChallenges[1].split(']');
-    this.challengesRedirect = cutChallenges2[0].split(',');
-    this.challengesRedirect.forEach((challenge, i) => {
-      this.challengesRedirect[i] = challenge.trim().slice(1, -1);
-    });
+    this.challengesRedirect= JSON.parse(
+      challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue
+    );
   }
 
   /**
@@ -637,7 +633,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   setChallengeRedirect(challenge: Challenge) {
     const chall = { ...challenge };
 
-    this.challengesRedirect.forEach((redirect) => {
+    this.challengesRedirect.challenges.forEach((redirect) => {
       if (challenge.id === redirect) {
         chall.redirection = true;
       } else if (
