@@ -16,6 +16,6 @@ export class QuestionComponent {
 
   show(){
     this.showAnswer=!this.showAnswer
-    this.showAnswer?this.deg=90:this.deg=0
+    this. deg=this.showAnswer?90:0
   }
 }
