@@ -1,3 +1,4 @@
 <div class="time-remaining">
-    <span class="time-remaining__text"> Faltan: <span class="time-remaining__days">{{remainingDays}}</span></span>
+  {{transformSeconds()}}
+    <span class="time-remaining__text"> {{remainingDays.firstText}} <span class="time-remaining__days">{{remainingDays.secondText}}</span></span>
 </div>

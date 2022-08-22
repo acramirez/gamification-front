@@ -38,6 +38,7 @@
     height: 6.5rem;
     width: 6.5rem;
     z-index: 1;
+    position: relative;
 }
 
 .message__body{
@@ -81,6 +82,10 @@
     margin: 0 3rem;
 }
 
+.content__description p:nth-child(1){
+  margin-bottom: 2.5rem;
+}
+
 button{
     margin: 0 7rem;
 }
@@ -97,13 +102,27 @@ button{
     z-index: 0;
 }
 
+.header__icon-complete::before{
+  content: '';
+  width: 4rem;
+  position: absolute;
+  height: 3.5rem;
+  background-image: url(/assets/icons/confetti.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  right: 85%;
+  bottom: 60%;
+}
 
-/* @media screen and (max-height:700px) {
-    .header, .content__subtitle{
-        margin-bottom: 1.5rem;
-    }
-
-    p.content__description{
-        margin-bottom: 3rem;
-    }
-} */
+.header__icon-complete::after{
+  content: '';
+  width: 4rem;
+  position: absolute;
+  height: 3.5rem;
+  background-image: url(/assets/icons/confetti.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  left: 85%;
+  bottom: 60%;
+  transform: rotateY(180deg);
+}

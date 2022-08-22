@@ -38,7 +38,7 @@ app-header::before{
     color: var(--theme-color-text-02);
     font-size: 1.125rem;
     font-weight: 400;
-    
+
 }
 
 .first-page__description{
@@ -62,6 +62,10 @@ app-header::before{
     margin-bottom: 3rem;
     text-align: left;
 
+}
+
+.first-page__terms-link{
+  font-size: 700;
 }
 
 .first-page__terms>a{

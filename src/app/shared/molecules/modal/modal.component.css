@@ -1,7 +1,7 @@
 .modal-bg{
     background-color: var(--theme-color-neutral-02);
     display: flex;
-    height: 100vh;   
+    height: 100%;
     justify-content: center;
     padding: 5.5rem 1.5rem;
     position: fixed;

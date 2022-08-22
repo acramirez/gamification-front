@@ -48,6 +48,7 @@
     font-weight: bold;
 }
 
+
 body{
     background-color: #F5F7FA;
     font-size: 16px;
@@ -55,6 +56,7 @@ body{
     margin:auto;
     max-width: 375px;
     width: 375px;
+    overscroll-behavior:none;
 }
 
 *{
@@ -150,7 +152,7 @@ sn-icon>i[class^=sn-]{
     100%{
         transform: scale(1);
     }
-    
+
 }
 
 .drop-down-hidden{
