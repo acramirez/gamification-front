@@ -21,7 +21,7 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const percent=(100/this.elements.length);    
+    const percent=(100/this.elements.length);
 
     this.elements.forEach(el=>{
       if(el.status==='COMPLETE'){
@@ -29,7 +29,7 @@ export class TimelineComponent implements OnInit {
         this.percent+=0.6
       }
       });
-      
+
   }
 
 }
