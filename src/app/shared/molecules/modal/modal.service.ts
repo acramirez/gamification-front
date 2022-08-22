@@ -9,9 +9,6 @@ import { ModalComponent } from './modal.component';
   providedIn: 'root'
 })
 export class ModalService {
-  constructor(
-  ){
-  }
 
   modalData!:Modal
 
