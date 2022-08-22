@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
+import { GamificationCallbacksService } from '../../../services/gamification-callbacks.service';
 
 @Component({
   selector: 'app-header',

@@ -29,7 +29,7 @@ import { Modal } from '../../shared/interfaces/atoms/modal';
 import { MissionInterfaces } from '../../shared/interfaces/mission-interfaces';
 import { TokenValidator } from '../../shared/interfaces/response/opaqueToken.interface';
 import { catchError, takeUntil } from 'rxjs/operators';
-import { Notification } from 'src/app/shared/interfaces/notification';
+import { Notification } from '../../shared/interfaces/notification';
 
 @Component({
   selector: 'challenge-likeu',
@@ -83,7 +83,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           });
       };
 
-      validationToken().then
+      validationToken()
     }
 
   }
@@ -216,7 +216,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach((challenge) => {
         challenge.redirection =
-          this.setChallengeRedirect(challenge).redirection;
+          this.setChallengeRedirect(challenge);
         const { period_detail } = this.period;
         if (
           period_detail !== null &&
@@ -302,7 +302,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       period_id,
     } = periodDetail;
 
-    const prevPeriodId = Number(period_id) - 1;
     let { due_date } = periodDetail;
 
     const dueDate = new Date(due_date);
@@ -365,6 +364,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     dueDate: Date,
     periodId: string
   ) {
+
+    let statusCardPayment:boolean=false
     if (cardPayment) {
       for (const card of cardPayment) {
         let { operation_date, minimum_amount, amount_payment } = card;
@@ -372,17 +373,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         operation_date = new Date(operation_date);
 
         if (periodId === '1' && minimum_amount.amount === 0) {
-          return true;
+          statusCardPayment= true;
         } else if (
           amount_payment.amount >= minimum_amount.amount &&
           dueDate > operation_date &&
-          minimum_amount.amount > 0
+          minimum_amount.amount >= 0
         ) {
-          return true;
+          statusCardPayment= true;
         }
       }
     }
-    return false;
+    return statusCardPayment;
   }
 
   /**
@@ -522,13 +523,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const statusMandatory = mandatory.filter((mand) => mand.status === false);
     if (statusMandatory.length > 0) {
-      const digitalChannell = statusMandatory.filter(
-        (challengeDigital) => challengeDigital.id === 'digital_channels'
-      );
-      statusMission = false;
-      if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
-        statusMission = true;
-      }
+
+      statusMission= this.validationDigitalChannels(statusMandatory, missionIndex)
+
     } else if (special.length > 0 && statusSpecial.length === 0) {
       statusMission = false;
     } else if (missionIndex === 6) {
@@ -545,6 +542,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return statusMission;
+  }
+
+
+  validationDigitalChannels(statusMandatory:Challenge[], missionIndex:number){
+    const digitalChannell = statusMandatory.filter(
+      (challengeDigital) => challengeDigital.id === 'digital_channels'
+    );
+    if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
+      return true;
+    }
+    return false
   }
 
   /**
@@ -631,22 +639,16 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   setChallengeRedirect(challenge: Challenge) {
     const chall = { ...challenge };
+    chall.redirection=false
     if (this.challengesRedirect.challenges) {
       this.challengesRedirect.challenges.forEach((redirect) => {
         if (challenge.id === redirect) {
-          chall.redirection = true;
-        } else if (
-          challenge.id === 'digital_channels' &&
-          redirect === 'digital_channel'
-        ) {
           chall.redirection = true;
         }
       });
     }
 
-
-
-    return chall;
+    return chall.redirection;
   }
 
   ngOnDestroy(): void {

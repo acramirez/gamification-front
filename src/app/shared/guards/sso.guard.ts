@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GamificationFacade } from 'src/app/services/facades/gamifications.facade';
-import { ErrorService } from '../../services/apis/error.service';
+import { GamificationFacade } from '../../services/facades/gamifications.facade';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SsoGuard implements CanActivate, CanLoad {
+export class SsoGuard implements CanActivate {
 
   constructor(
     private gamificationFacade:GamificationFacade
@@ -16,15 +15,6 @@ export class SsoGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      if (!this.gamificationFacade.resp) {
-        return false
-      }
-      return true
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
       if (!this.gamificationFacade.resp) {
         return false

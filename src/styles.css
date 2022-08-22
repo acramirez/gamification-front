@@ -186,12 +186,6 @@ sn-icon>i[class^=sn-]{
     }
 }
 
-
-.hidden{
-    display: none;
-}
-
-
 .hidden--dropdown{
     height: 0;
     overflow: hidden;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
+import { GamificationCallbacksService } from '../../../services/gamification-callbacks.service';
 import { ErrorData } from '../../interfaces/atoms/error';
 
 @Component({

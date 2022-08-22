@@ -1,7 +1,6 @@
-import { ComponentFactoryResolver, Injectable, ViewContainerRef } from '@angular/core';
-import { FirstPageComponent } from 'src/app/pages/first-page/first-page.component';
-import { MessageComponent } from 'src/app/pages/message/message.component';
-import { GamificationCallbacksService } from 'src/app/services/gamification-callbacks.service';
+import { Injectable, ViewContainerRef } from '@angular/core';
+import { FirstPageComponent } from '../../../pages/first-page/first-page.component';
+import { MessageComponent } from '../../../pages/message/message.component';
 import { Modal } from '../../interfaces/atoms/modal';
 import { Notification } from '../../interfaces/notification';
 import { ModalComponent } from './modal.component';
@@ -11,41 +10,37 @@ import { ModalComponent } from './modal.component';
 })
 export class ModalService {
   constructor(
-    private componentFR:ComponentFactoryResolver,
   ){
   }
 
   modalData!:Modal
-  
+
 
   generateModal(container:ViewContainerRef, modalData:Modal){
 
     this.addEventScroll();
-    const factory = this.componentFR.resolveComponentFactory<ModalComponent>(ModalComponent)
-    const modal= container.createComponent<ModalComponent>(factory)
+    const modal= container.createComponent<ModalComponent>(ModalComponent)
     modal.instance.modal=modalData
-    
+
   }
 
   generateNotification(container:ViewContainerRef,message:Notification){
     this.addEventScroll();
-    const factoryNotification = this.componentFR.resolveComponentFactory<MessageComponent>(MessageComponent)
-    const notification= container.createComponent<MessageComponent>(factoryNotification)
+    const notification= container.createComponent<MessageComponent>(MessageComponent)
     notification.instance.notification=message
   }
   generateFirstAccess(container:ViewContainerRef,close:Function){
     this.addEventScroll();
-    const factoryNotification = this.componentFR.resolveComponentFactory<FirstPageComponent>(FirstPageComponent)
-    const firstAccess=container.createComponent<FirstPageComponent>(factoryNotification)
+    const firstAccess=container.createComponent<FirstPageComponent>(FirstPageComponent)
     firstAccess.instance.close=close
   }
 
-  close(container:ViewContainerRef){  
-    this.removeScroll();  
+  close(container:ViewContainerRef){
+    this.removeScroll();
     container.clear()
 
   }
-  
+
   disableScroll(){
     window.scrollTo(0,0)
   }

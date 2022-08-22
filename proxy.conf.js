@@ -1,3 +1,6 @@
+/* Configuracion de proxys en local*/
+/* Para evitar la configuracion de CORS*/
+
 const PROXY_CONFIG = [
   {
       context: [
@@ -8,6 +11,6 @@ const PROXY_CONFIG = [
       secure: false,
       changeOrigin: true
   }
-]
+];
 
 module.exports = PROXY_CONFIG;

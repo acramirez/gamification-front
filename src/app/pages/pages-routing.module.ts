@@ -18,8 +18,6 @@ const routes: Routes = [
         redirectTo:'error'
       }
     ],
-    // canLoad:[SsoGuard],
-    // canActivate:[SsoGuard],
   },
   {
     path:'error',
