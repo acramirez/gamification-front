@@ -23,6 +23,7 @@
     flex-direction: column;
     overflow: hidden;
     width: 100%;
+    overscroll-behavior: none;
 }
 
 .modal--redirect{

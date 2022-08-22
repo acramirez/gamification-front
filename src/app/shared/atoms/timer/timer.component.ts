@@ -23,23 +23,26 @@ export class TimerComponent {
   @Input() seconds!: number;
 
   transformSeconds() {
-    let time = this.getTime(new Date('2022-08-20'));
+    let time = this.getTime(this.dueDate);
 
     let hour: number | string = Math.floor(time / 3600);
     hour = hour < 10 ? '0' + hour : hour;
 
-    let resp = '';
-    if (typeof hour === 'number' && hour >= 24) {
-      resp = Math.ceil(hour / 24) + ' días';
+    let days = Math.ceil(Number(hour) / 24)
+    if (days >= 24) {
       this.remainingDays = {
         firstText: 'Faltan:',
-        secondText: resp,
+        secondText: days + ' días',
       };
-    } else {
-      resp = Math.ceil(Number(hour) / 24) + ' día';
+    } else if (days === 1) {
       this.remainingDays = {
         firstText: 'Falta:',
-        secondText: resp,
+        secondText: days + ' día',
+      };
+    } else {
+      this.remainingDays = {
+        firstText: 'Faltan:',
+        secondText: '0 días',
       };
     }
   }

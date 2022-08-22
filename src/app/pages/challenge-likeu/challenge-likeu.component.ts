@@ -83,7 +83,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           });
       };
 
-      validationToken().then
+      validationToken()
     }
 
   }
@@ -522,13 +522,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     const statusMandatory = mandatory.filter((mand) => mand.status === false);
     if (statusMandatory.length > 0) {
-      const digitalChannell = statusMandatory.filter(
-        (challengeDigital) => challengeDigital.id === 'digital_channels'
-      );
-      statusMission = false;
-      if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
-        statusMission = true;
-      }
+
+      statusMission= this.validationDigitalChannels(statusMandatory, missionIndex)
+
     } else if (special.length > 0 && statusSpecial.length === 0) {
       statusMission = false;
     } else if (missionIndex === 6) {
@@ -545,6 +541,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return statusMission;
+  }
+
+
+  validationDigitalChannels(statusMandatory:Challenge[], missionIndex:number){
+    const digitalChannell = statusMandatory.filter(
+      (challengeDigital) => challengeDigital.id === 'digital_channels'
+    );
+    if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
+      return true;
+    }
+    return false
   }
 
   /**
