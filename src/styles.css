@@ -55,7 +55,7 @@ body{
     font-family: 'SantanderText', sans-serif, Arial, Helvetica;
     margin:auto;
     max-width: 375px;
-    width: 375px;
+    width: 100%;
     overscroll-behavior:none;
 }
 
