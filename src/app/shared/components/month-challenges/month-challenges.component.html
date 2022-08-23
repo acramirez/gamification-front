@@ -12,7 +12,7 @@
 
     <div class="normal-challenges">
         <h2 class="challenges__title">Objetivos por completar</h2>
-        <p class="challenge__description">La validación de tus Objetivos se realiza en cada fecha de corte.</p>
+        <p class="challenge__description">La validación de tus objetivos se realiza en cada fecha de corte.</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of mission.challenges">
                 <ng-container *ngIf="challenge.type==='mandatory' || challenge.type==='accelerator'">
@@ -26,7 +26,7 @@
         <p class="challenge__description">Elige uno de los siguientes retos para aumentar tu línea de crédito.​</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of specialChallenges">
-                <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>  
+                <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
             </ng-container>
         </div>
     </div>

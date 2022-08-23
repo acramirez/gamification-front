@@ -176,11 +176,11 @@ export const challengesContract: ChallengesContract = {
       titlemodal: 'Trae tu nómina a Santander',
       subtitle: 'Solicita la portabilidad de tu nómina desde la app.',
       description: 'Hazlo y obtén beneficios como:',
-      specs: [        
+      specs: [
         {
           title: 'Seguro por muerte accidental',
           spec: ['Hasta por $50,000 pesos'],
-        },        
+        },
         {
           title: 'Asistencia funeraria',
           spec: [
@@ -403,7 +403,7 @@ export const challengesContract: ChallengesContract = {
     {
       question: '¿Cómo llego al límite de crédito potencial?',
       answer:
-        'Lo alcanzarás cuando logres las 7 misiones,  para avanzar más rápido puedes pagar 50% más de tu pago mínimo mensual y finalizarlo solo 6 misiones.',
+        'Lo alcanzarás cuando logres las 7 misiones, para avanzar más rápido puedes pagar 50% más de tu pago mínimo mensual y finalizarlo en solo 6 misiones.',
       additionalInfo: '',
       link: '',
     },
@@ -411,14 +411,14 @@ export const challengesContract: ChallengesContract = {
       question:
         '¿Qué pasa con mi tarjeta LikeU si no cumplo con alguno de los objetivos del Reto?',
       answer:
-        'Podrás continuar usando tu tarjeta LikeU con el límite de crédito inicial o el que hayas alcanzado durante el reto, dependiendo del número de misiones completadas.',
+        'Podrás continuar usando tu tarjeta LikeU con el límite de crédito inicial o el que hayas alcanzado durante el reto, dependiendo del número de objetivos completados.',
       additionalInfo: '',
       link: '',
     },
     {
       question: '¿Cuánto tiempo dura el Reto LikeU?',
       answer:
-        '6 periodos de facturación completos; aproximadamente 7 o 6 meses, en caso del cumplimiento de tu acelerador.',
+        '7 periodos de facturación completos; aproximadamente 7 o 6 meses, en caso del cumplimiento de tu acelerador.',
       additionalInfo: '',
       link: '',
     },
