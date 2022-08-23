@@ -1,60 +1,76 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'lu-timer',
   templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.css'],
+  styleUrls: ['./timer.component.css']
 })
-export class TimerComponent {
-  timer$!: Subscription;
-  remainingDays!: {
-    firstText: string;
-    secondText: string;
-  };
-  @Input() dueDate!: Date;
+export class TimerComponent implements AfterViewInit, OnDestroy  {
 
-  @Input() seconds!: number;
+  timer$!:Subscription
+  remainingDays!:number | string | null
+  @Input() dueDate!:Date
 
-  transformSeconds() {
-    let time = this.getTime(this.dueDate);
+  @Input() seconds!:number;
 
-    let hour: number | string = Math.floor(time / 3600);
-    hour = hour < 10 ? '0' + hour : hour;
+  ngAfterViewInit(): void {
+    this.dueDate=new Date(this.dueDate)
 
-    let days = Math.ceil(Number(hour) / 24)
-    if (days >= 24) {
-      this.remainingDays = {
-        firstText: 'Faltan:',
-        secondText: days + ' días',
-      };
-    } else if (days === 1) {
-      this.remainingDays = {
-        firstText: 'Falta:',
-        secondText: days + ' día',
-      };
-    } else {
-      this.remainingDays = {
-        firstText: 'Faltan:',
-        secondText: '0 días',
-      };
+    this.timer$=timer(0,1000).subscribe(()=>
+    {
+      let time=this.getTime(this.dueDate)
+      if(typeof time === 'number' && time>0){
+        this.remainingDays= this.transformSeconds(time);
+      }else{
+        this.remainingDays="0 dias"
+      }
+    }
+  );
+
+  }
+
+  transformSeconds(segundos:number){
+    let hour:number | string= Math.floor(segundos/3600)
+    hour=(hour<10)?'0' + hour:hour
+    let minutes:number | string= Math.floor((segundos/60)%60)
+    minutes=(minutes<10)?'0' + minutes:minutes
+    let seconds:number | string= Math.floor(segundos%60)
+    seconds=(seconds<10)?'0' + seconds:seconds
+
+    let resp=''
+    if (segundos<0) {
+      resp = Math.round(segundos/(60 * 60 * 24)) + ' días'
+    } else if (typeof hour === 'number' && hour>=24) {
+      resp = Math.round(hour/24) + ' días'
+    }else if(hour==0){
+      resp = hour + ':' + minutes + ':' + seconds +' min'
+    }else if(hour==0  && minutes == 0){
+      resp = hour + ':' + minutes + ':' + seconds +' sec'
+    }else{
+      resp = hour + ':' + minutes + ':' + seconds +' hrs'
+    }
+
+    return resp
+  }
+
+  getTime(date:Date){
+
+      const currenDate=new Date().getTime()
+      const dueDate=date.getTime();
+
+      const result= dueDate-currenDate
+
+      let days:number | string=result/(1000)
+
+      return days
+  }
+
+  ngOnDestroy(): void {
+    if (this.timer$) {
+      this.timer$.unsubscribe()
     }
   }
 
-  getTime(date: Date) {
-    const currenDate = new Date().getTime();
-    const dueDate = date.getTime();
-
-    const result = dueDate - currenDate;
-
-    let days: number | string = result / 1000;
-
-    return days;
-  }
 }
+
