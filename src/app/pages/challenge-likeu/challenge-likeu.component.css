@@ -1,6 +1,4 @@
 .challenge-likeu__container {
-  display: grid;
-  justify-content: center;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -9,6 +7,8 @@
 .challenge-likeu {
   display: grid;
   gap: 1.5rem;
-  margin: 1.5rem 0;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   max-width: 375px;
 }

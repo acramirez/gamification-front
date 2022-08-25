@@ -4,9 +4,20 @@
     justify-content: space-between;
     margin: 0 1.5rem;
     padding-top: 3.75rem;
-    position: relative;
     overflow: hidden;
     z-index: 100;
+}
+
+.header::before{
+  background: var(--theme-color-background-03);
+  border-radius: 0 0 50% 50%;
+  content: '';
+  height: 375px;
+  top:-200px;
+  left: -25%;
+  position: absolute;
+  width: 150%;
+  z-index: -1;
 }
 
 .heder__btn{

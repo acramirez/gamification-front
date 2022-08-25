@@ -6,7 +6,7 @@
 .time-line__element{
     display: flex;
     grid-auto-flow: column;
-    padding: 0 2rem;
+    padding: 0 1.75rem 0 2rem;
     text-align: left;
 
 }
