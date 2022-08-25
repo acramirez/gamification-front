@@ -8,4 +8,5 @@ export interface ChallengeLikeU{
     period:Period,
     status:string;
     seen_first_time:boolean;
+    statusChallenge:string
 }

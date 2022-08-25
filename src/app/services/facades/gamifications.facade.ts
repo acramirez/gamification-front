@@ -35,17 +35,17 @@ export class GamificationFacade {
 
                 const{cut_of_date,seen_first_time}=resp
                 const{current_limit,potential_limit,period,status,lower_limit}=resp.card
-                this.resp ={
+                return {
                     current_limit,
                     potential_limit,
                     period,
                     cut_of_date,
                     status,
                     seen_first_time,
-                    lower_limit
+                    lower_limit,
+                    statusChallenge:resp.status,
                 }
 
-                return this.resp
             })
         )
     }

@@ -48,6 +48,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   missions: MissionInterfaces[] = [];
   missionActive!: MissionInterfaces;
   tabs: Tab[] = [];
+  statusLikeU!: string;
 
   private destroy$: Subject<boolean> = new Subject();
 
@@ -103,6 +104,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   proccessData(resp: ChallengeLikeU) {
+    this.statusLikeU = resp.statusChallenge;
     let {
       lower_limit,
       current_limit,
@@ -250,14 +252,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const { missions } = this.challenges;
     let { current_limit, potential_limit } = this.cardDetail;
     missions.forEach((miss) => {
-      if (current_limit.amount < potential_limit.amount) {
         const mission: MissionInterfaces = {
           id: miss.id,
         };
         mission.challenges = this.typeChallenge(miss);
         this.missions.push(mission);
-      }
     });
+    if (this.statusLikeU==='FINAL' && this.currentPeriod===7) {
+      this.missions.pop()
+    }
   }
 
   /**
@@ -539,7 +542,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         (challenge) =>
           challenge.id === 'digital_channels' && challenge.status === false
       );
-      if ((statusDC4 && statusDC4.length > 0) || ( statusDC5 && statusDC5.length > 0)) {
+      if (
+        (statusDC4 && statusDC4.length > 0) ||
+        (statusDC5 && statusDC5.length > 0)
+      ) {
         statusMission = false;
       }
     }
@@ -595,14 +601,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         description: [],
         btnAction: () => this.closeModal(),
       };
-      if (currentLimit.amount >= potentialLimit.amount) {
+      if (this.statusLikeU === 'FINAL') {
         notification.icon = 'challenge-complete';
         notification.title = '¡Felicidades!';
         notification.subtitle = 'Conseguiste el 100% de tu límite potencial';
         notification.description.push(
           'Finalizaste exitosamente el Reto LikeU.'
         );
-      } else if (!status) {
+      } else if (!status || this.statusLikeU === 'CANCELED') {
         notification.icon = 'challenge-no-complete';
         notification.title = '¡Lo sentimos!';
         notification.subtitle = 'No completaste el reto LikeU';
@@ -610,22 +616,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.',
           'Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
         );
-      } else if (status && this.currentPeriod <= 4) {
-        notification.icon = 'cycle-complete';
-        notification.title = '¡Lo lograste!';
-        notification.subtitle = `Cumpliste la misión ${this.currentPeriod - 1}`;
-        notification.description.push(
-          'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
-        );
-      } else if (status && this.currentPeriod > 4) {
-        notification.icon = 'mission-complete';
-        notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
-        notification.subtitle =
-          'Tu límite de crédito ha aumentado y estás más cerca de la meta';
-        notification.description.push(
-          'Continúa con la siguiente misión para avanzar en el Reto.'
-        );
+      } else if (this.statusLikeU === 'EVALUATION') {
+        if (status && this.currentPeriod <= 4) {
+          notification.icon = 'cycle-complete';
+          notification.title = '¡Lo lograste!';
+          notification.subtitle = `Cumpliste la misión ${
+            this.currentPeriod - 1
+          }`;
+          notification.description.push(
+            'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
+          );
+        } else {
+          notification.icon = 'mission-complete';
+          notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
+          notification.subtitle =
+            'Tu límite de crédito ha aumentado y estás más cerca de la meta';
+          notification.description.push(
+            'Continúa con la siguiente misión para avanzar en el Reto.'
+          );
+        }
       }
+
       this.modalService.generateNotification(
         this.viewContainerRef,
         notification
