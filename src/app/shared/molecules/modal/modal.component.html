@@ -9,13 +9,16 @@
   >
     <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
     <div class="modal__header">
-      <img
-        [src]="'../../../../assets/icons/' + modal.challenge.icon + '.png'"
-        alt="icono"
-      />
+      <figure class="modal__header-icon">
+        <img
+          [src]="'../../../../assets/icons/' + modal.challenge.icon + '.png'"
+          alt="icono"
+        />
+      </figure>
       <h2
         [ngClass]="{
-          modal__title: true,
+          'modal__title': true,
+          'modal__title--subtitle': modal.challenge.subtitle,
           'modal__title--gradient': modal.challenge.type === 'accelerator'
         }"
       >
@@ -31,21 +34,24 @@
     </div>
 
     <div class="modal__content">
-
       <ng-container *ngIf="modal.challenge.modalContent">
-        <span
+        <div
           *ngFor="let text of modal.challenge.modalContent"
-          [innerHTML]="convertToStrong(text.text , (text.strong)?text.strong:false)"
           [ngClass]="{
-            'modal__content-item':true,
-            'modal__content--bold':(text.strong===true),
-            'modal__content--tab':(text.tab),
-            'modal__content--mb':(text.mb),
-            'modal__content--pretext':text.pretext==='DOT'
+            'modal__content-item': true,
+            'modal__content--bold': text.strong === true,
+            'modal__content--tab': text.tab,
+            'modal__content--mb': text.mb,
+            'modal__content--pretext': text.pretext === 'DOT'
           }"
         >
-        <span class="modal__content--pretext-icon" *ngIf="text.pretext==='NUMBER'">{{text.pretextIcon}}</span>
-        </span>
+          <span
+            [innerHTML]="
+              convertToStrong(text.text, text.strong ? text.strong : false)
+            "
+          >
+          </span>
+        </div>
       </ng-container>
     </div>
     <button
