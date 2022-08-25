@@ -42,11 +42,11 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     } else if (typeof hour === 'number' && hour >= 24) {
       resp = Math.round(hour / 24) + ' días';
     } else if (hour == 0) {
-      resp = hour + ':' + minutes + ':' + seconds + ' min';
+      resp = hour + ':' + minutes + ':' + seconds;
     } else if (hour == 0 && minutes == 0) {
-      resp = hour + ':' + minutes + ':' + seconds + ' sec';
+      resp = hour + ':' + minutes + ':' + seconds;
     } else {
-      resp = hour + ':' + minutes + ':' + seconds + ' hrs';
+      resp = hour + ':' + minutes + ':' + seconds;
     }
 
     return resp;
