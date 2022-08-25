@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -14,12 +14,12 @@ import { MockInterceptorService } from './services/interceptors/mock-interceptor
     AppComponent,
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
     PagesModule,
-    
+
   ],
   providers: [
     {
