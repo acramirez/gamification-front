@@ -1,31 +1,65 @@
- <div class="modal-bg">
-    <div animation="zoomIn" class="modal"  
+<div class="modal-bg">
+  <div
+    animation="zoomIn"
+    class="modal"
     [ngClass]="{
-        'modal':true,
-        'modal--redirect':modal.challenge.redirection
+      modal: true,
+      'modal--redirect': modal.challenge.redirection
     }"
->
-            <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
-            <div class="modal__header">
-                <img [src]="'../../../../assets/icons/'+modal.challenge.icon+'.png'"  alt="icono">
-                <h2 [ngClass]="{
-                    'modal__title':true,
-                    'modal__title--gradient':modal.challenge.type==='accelerator'
-                }">
-                    {{(modal.challenge.titlemodal)?modal.challenge.titlemodal:modal.challenge.title}}
-                </h2>
-                <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{modal.challenge.subtitle}}</span>            
-            </div>
-
-            <div class="modal__content">
-                <p class="modal__description" *ngIf="modal.challenge.description">{{modal.challenge.description}}</p>
-                <ul class="modal__specs">
-                    <div *ngFor="let spec of modal.challenge.specs" class="modal__spec">
-                        <span *ngIf="spec.title" class="modal__spec-title">{{spec.title}}</span>
-                        <li *ngFor="let item of spec.spec" class="modal__spec-item">{{item}}</li>
-                    </div>
-                </ul>
-            </div>
-        <button class="btn" *ngIf="modal.challenge.redirection" (click)="redirect()">Continuar</button>
+  >
+    <button class="modal__btn-cerrar" (click)="modal.close()">Cerrar</button>
+    <div class="modal__header">
+      <figure class="modal__header-icon">
+        <img
+          [src]="'../../../../assets/icons/' + modal.challenge.icon + '.png'"
+          alt="icono"
+        />
+      </figure>
+      <h2
+        [ngClass]="{
+          'modal__title': true,
+          'modal__title--subtitle': modal.challenge.subtitle,
+          'modal__title--gradient': modal.challenge.type === 'accelerator'
+        }"
+      >
+        {{
+          modal.challenge.titlemodal
+            ? modal.challenge.titlemodal
+            : modal.challenge.title
+        }}
+      </h2>
+      <span *ngIf="modal.challenge.subtitle" class="modal__subtitle">{{
+        modal.challenge.subtitle
+      }}</span>
     </div>
+
+    <div class="modal__content">
+      <ng-container *ngIf="modal.challenge.modalContent">
+        <div
+          *ngFor="let text of modal.challenge.modalContent"
+          [ngClass]="{
+            'modal__content-item': true,
+            'modal__content--bold': text.strong === true,
+            'modal__content--tab': text.tab,
+            'modal__content--mb': text.mb,
+            'modal__content--pretext': text.pretext === 'DOT'
+          }"
+        >
+          <span
+            [innerHTML]="
+              convertToStrong(text.text, text.strong ? text.strong : false)
+            "
+          >
+          </span>
+        </div>
+      </ng-container>
+    </div>
+    <button
+      class="btn"
+      *ngIf="modal.challenge.redirection"
+      (click)="redirect()"
+    >
+      Continuar
+    </button>
+  </div>
 </div>

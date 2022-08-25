@@ -41,10 +41,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   public period!: Period;
   specialChallenges: Challenge[] = [];
   challengeActive!: Challenge;
-  currentPeriod: number = 0;
+  currentPeriod = 0;
   cutOfDate!: Date;
   indexTab!: number;
-  challengesRedirect!: {challenges:[]};
+  challengesRedirect!: { challenges: [] };
   missions: MissionInterfaces[] = [];
   missionActive!: MissionInterfaces;
   tabs: Tab[] = [];
@@ -63,7 +63,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (!this.tokenFacade._token) {
       const challenges$ = this.tokenFacade.validationToken();
 
-      const validationToken= async () => {
+      const validationToken = async () => {
         await firstValueFrom(challenges$)
           .then((challenges) => {
             this.getChallengesRedirect(challenges);
@@ -83,9 +83,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           });
       };
 
-      validationToken()
+      validationToken();
     }
-
   }
 
   showModal() {
@@ -146,9 +145,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   showMissionActive(index: number) {
     this.missionActive = this.missions[index];
-    this.specialChallenges = this.missionActive.challenges!.filter(
-      (challenge) => challenge.type === 'special'
-    );
+    this.specialChallenges = this.missionActive.challenges
+      ? this.missionActive.challenges.filter(
+          (challenge) => challenge.type === 'special'
+        )
+      : [];
   }
 
   getTabs() {
@@ -159,10 +160,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         status: '',
       };
 
-      if (Number(mission.id) < this.currentPeriod) {
+      let idMission=Number(mission.id)
+      if (idMission< this.currentPeriod) {
         tab.status = 'finish';
-      } else if (mission.id === this.currentPeriod.toString()) {
+      } else if (idMission === this.currentPeriod) {
         tab.status = 'ongoing';
+      }
+
+      if (mission.id) {
+
       }
       switch (mission.id) {
         case '0':
@@ -215,8 +221,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   propertyChallenges() {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach((challenge) => {
-        challenge.redirection =
-          this.setChallengeRedirect(challenge);
+        challenge.redirection = this.setChallengeRedirect(challenge);
         const { period_detail } = this.period;
         if (
           period_detail !== null &&
@@ -250,12 +255,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   createMission() {
     const { missions } = this.challenges;
+    let { current_limit, potential_limit } = this.cardDetail;
     missions.forEach((miss) => {
-      const mission: MissionInterfaces = {
-        id: miss.id,
-      };
-      mission.challenges = this.typeChallenge(miss);
-      this.missions.push(mission);
+      if (current_limit.amount < potential_limit.amount) {
+        const mission: MissionInterfaces = {
+          id: miss.id,
+        };
+        mission.challenges = this.typeChallenge(miss);
+        this.missions.push(mission);
+      }
     });
   }
 
@@ -364,8 +372,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     dueDate: Date,
     periodId: string
   ) {
-
-    let statusCardPayment:boolean=false
+    let statusCardPayment!: boolean;
     if (cardPayment) {
       for (const card of cardPayment) {
         let { operation_date, minimum_amount, amount_payment } = card;
@@ -373,13 +380,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         operation_date = new Date(operation_date);
 
         if (periodId === '1' && minimum_amount.amount === 0) {
-          statusCardPayment= true;
+          statusCardPayment = true;
         } else if (
           amount_payment.amount >= minimum_amount.amount &&
           dueDate > operation_date &&
           minimum_amount.amount >= 0
         ) {
-          statusCardPayment= true;
+          statusCardPayment = true;
+        } else {
+          statusCardPayment = false;
         }
       }
     }
@@ -520,12 +529,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       statusSpecial = special.filter((spec) => spec.status === true);
     }
 
-
     const statusMandatory = mandatory.filter((mand) => mand.status === false);
     if (statusMandatory.length > 0) {
-
-      statusMission= this.validationDigitalChannels(statusMandatory, missionIndex)
-
+      statusMission = this.validationDigitalChannels(
+        statusMandatory,
+        missionIndex
+      );
     } else if (special.length > 0 && statusSpecial.length === 0) {
       statusMission = false;
     } else if (missionIndex === 6) {
@@ -544,15 +553,21 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return statusMission;
   }
 
-
-  validationDigitalChannels(statusMandatory:Challenge[], missionIndex:number){
+  validationDigitalChannels(
+    statusMandatory: Challenge[],
+    missionIndex: number
+  ) {
     const digitalChannell = statusMandatory.filter(
       (challengeDigital) => challengeDigital.id === 'digital_channels'
     );
-    if (digitalChannell.length > 0 && missionIndex < 6 && statusMandatory.length===1) {
+    if (
+      digitalChannell.length > 0 &&
+      missionIndex < 6 &&
+      statusMandatory.length === 1
+    ) {
       return true;
     }
-    return false
+    return false;
   }
 
   /**
@@ -629,7 +644,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se obtienen los retos los cuales van a contar con la propiedad redirect
    */
   getChallengesRedirect(challenges: TokenValidator) {
-    this.challengesRedirect= JSON.parse(
+    this.challengesRedirect = JSON.parse(
       challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue
     );
   }
@@ -639,7 +654,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   setChallengeRedirect(challenge: Challenge) {
     const chall = { ...challenge };
-    chall.redirection=false
+    chall.redirection = false;
     if (this.challengesRedirect.challenges) {
       this.challengesRedirect.challenges.forEach((redirect) => {
         if (challenge.id === redirect) {

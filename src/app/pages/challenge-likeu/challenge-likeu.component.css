@@ -1,11 +1,14 @@
-.challenge-likeu__container{
-    overflow: hidden;
-    position: relative
+.challenge-likeu__container {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-.challenge-likeu{
-    display: grid;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
-    max-width: 375px;
+.challenge-likeu {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  max-width: 375px;
 }
