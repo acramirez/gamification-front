@@ -7,7 +7,7 @@ const PROXY_CONFIG = [
           "/api/session",
           "/credits/v2/credits/customer-key/benefits"
       ],
-      target: "https://mx-gamification-front-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp",
+      target: "https://gamificacion.santander.pre.mx.corp",
       secure: false,
       changeOrigin: true
   }

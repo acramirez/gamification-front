@@ -18,13 +18,34 @@ export interface Challenge {
   titlemodal?: string;
   title: string;
   subtitle?: string;
-  description?: string;
+  description?: string[];
   specs?: Array<SpecClass>;
   conditions?: string[];
   icon: string;
   redirection?: boolean;
   status?: boolean;
   type?: typeChallenge;
+  modalContent?:modalContent[]
+}
+
+export interface modalContent{
+  text?:string,
+  tab?:boolean,
+  strong?:boolean | string[]
+  mb?:boolean,
+  pretext?:Pretext,
+  fontsize?:number,
+  pretextIcon?:string
+}
+
+export enum Pretext{
+  dot='DOT',
+  number='NUMBER'
+}
+
+export interface FooterModal{
+  text:string,
+  strong:boolean
 }
 
 export enum typeChallenge {
