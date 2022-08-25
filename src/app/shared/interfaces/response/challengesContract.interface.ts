@@ -25,10 +25,10 @@ export interface Challenge {
   redirection?: boolean;
   status?: boolean;
   type?: typeChallenge;
-  modalContent?:modalContent[]
+  modalContent?:ModalContent[]
 }
 
-export interface modalContent{
+export interface ModalContent{
   text?:string,
   tab?:boolean,
   strong?:boolean | string[]
