@@ -250,12 +250,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   createMission() {
     const { missions } = this.challenges;
+    let {current_limit,potential_limit}=this.cardDetail
     missions.forEach((miss) => {
-      const mission: MissionInterfaces = {
-        id: miss.id,
-      };
-      mission.challenges = this.typeChallenge(miss);
-      this.missions.push(mission);
+      if (current_limit.amount<potential_limit.amount) {
+        const mission: MissionInterfaces = {
+          id: miss.id,
+        };
+        mission.challenges = this.typeChallenge(miss);
+        this.missions.push(mission);
+      }
     });
   }
 
