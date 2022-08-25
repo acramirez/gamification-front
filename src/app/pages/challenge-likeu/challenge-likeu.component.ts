@@ -160,26 +160,19 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         status: '',
       };
 
-      let idMission=Number(mission.id)
-      if (idMission< this.currentPeriod) {
+      let idMission = Number(mission.id);
+      if (idMission < this.currentPeriod) {
         tab.status = 'finish';
       } else if (idMission === this.currentPeriod) {
         tab.status = 'ongoing';
       }
 
-      if (mission.id) {
-
-      }
-      switch (mission.id) {
-        case '0':
-          tab.texto = 'Intro';
-          tab.id = mission.id;
-          break;
-
-        default:
-          tab.texto = `Misión ${mission.id}`;
-          tab.id = mission.id;
-          break;
+      if (mission.id === '0') {
+        tab.texto = 'Intro';
+        tab.id = mission.id;
+      } else {
+        tab.texto = `Misión ${mission.id}`;
+        tab.id = mission.id;
       }
 
       this.tabs.push(tab);
@@ -499,9 +492,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   /**
    * Metodo mediante el cual se valida el status del reto digital_channels
    */
-  checkDigitalChannels(digital_channels: any[], cutDate: Date) {
-    if (digital_channels) {
-      for (const channel of digital_channels) {
+  checkDigitalChannels(digitalChannels: any[], cutDate: Date) {
+    if (digitalChannels) {
+      for (const channel of digitalChannels) {
         channel.operation_date = new Date(channel.operation_date);
 
         if (channel.status === 'ACTIVE' && channel.operation_date < cutDate) {
@@ -516,7 +509,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se valida el status de la mision
    */
   statusMission(challenges: Challenge[], missionIndex: number) {
-    let statusMission: boolean = true;
+    let statusMission = true;
     const mandatory = challenges.filter(
       (challenge) => challenge.type === 'mandatory'
     );
@@ -546,7 +539,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         (challenge) =>
           challenge.id === 'digital_channels' && challenge.status === false
       );
-      if (statusDC4!.length > 0 || statusDC5!.length > 0) {
+      if ((statusDC4 && statusDC4.length > 0) || ( statusDC5 && statusDC5.length > 0)) {
         statusMission = false;
       }
     }

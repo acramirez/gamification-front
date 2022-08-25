@@ -30,6 +30,6 @@ export class ErrorInterceptorService implements HttpInterceptor {
     if (error) {
       this.errorService.errorShow(error)
     }
-    return throwError (error)
+    return throwError (()=>error)
   }
 }

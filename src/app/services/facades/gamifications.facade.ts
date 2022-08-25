@@ -11,28 +11,28 @@ import { ErrorService } from "../apis/error.service";
 })
 export class GamificationFacade {
 
-    public firstaccess:boolean=false
-    public message:boolean=true
-    public route:string='';
+    public firstaccess=false
+    public message=true
+    public route='';
     public resp!:ChallengeLikeU
 
 
-    constructor( 
+    constructor(
         private gamificacionAPI: GamificationService,
         private errorService:ErrorService,
-        ) {        
+        ) {
     }
 
     getGamification():Observable<ChallengeLikeU>{
         return this.gamificacionAPI.getGamifications().pipe(
-            tap(resp=>{ 
+            tap(resp=>{
                 if(resp.card.status!=="ACTIVE"){
-                    const error = throwError('Tarjeta bloqueada')
+                    const error = throwError(()=>'Tarjeta bloqueada')
                     this.errorService.errorShow(error)
-                }                
+                }
             }),
             map(resp=>{
-                
+
                 const{cut_of_date,seen_first_time}=resp
                 const{current_limit,potential_limit,period,status,lower_limit}=resp.card
                 this.resp ={
@@ -44,7 +44,7 @@ export class GamificationFacade {
                     seen_first_time,
                     lower_limit
                 }
-                
+
                 return this.resp
             })
         )

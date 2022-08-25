@@ -1,5 +1,5 @@
 
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { Tab } from '../interfaces/atoms/tab.interface';
 
@@ -21,12 +21,10 @@ export class TabDirective implements OnInit, OnDestroy  {
   ) { }
 
   @Input() set tabsDirective(type:string){
-    switch (type) {
-      case 'tab':
-        this.elementTab()
-        break;
-      default:
-        break;
+
+    if (type==='tab') {
+      this.elementTab()
+
     }
   }
 

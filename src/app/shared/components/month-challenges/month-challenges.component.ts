@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 import { MissionInterfaces } from '../../interfaces/mission-interfaces';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
@@ -12,7 +12,7 @@ export class MonthChallengesComponent implements AfterViewInit {
 
   @Input() specialChallenges:Challenge[]=[];
   @Input() tabs:Tab[]=[]
-  @Input() initialTab:number=0
+  @Input() initialTab=0
   @Input() dueDate!:Date
   @Input() mission!:MissionInterfaces
   @Input() activeTab!:number

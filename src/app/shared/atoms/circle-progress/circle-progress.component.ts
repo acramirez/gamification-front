@@ -8,10 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CircleProgressComponent implements OnInit {
 
 
-  @Input() percent:number=0;
-  @Input() icon:string='';
-  circunference:number=295.31;
-  strokeDashoffset:number=0;
+  @Input() percent=0;
+  @Input() icon='';
+  circunference=295.31;
+  strokeDashoffset=0;
 
   ngOnInit(): void {
     this.percent= this.percent/100;

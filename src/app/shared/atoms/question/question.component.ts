@@ -9,9 +9,9 @@ import { FAQ } from "../../interfaces/response/challengesContract.interface";
 export class QuestionComponent {
 
   @Input() question!:FAQ;
-  showAnswer:boolean=false
+  showAnswer=false
   height!:number;
-  deg:number=0
+  deg=0
   @ViewChild('answer') answer!:ElementRef<HTMLElement>;
 
   show(){

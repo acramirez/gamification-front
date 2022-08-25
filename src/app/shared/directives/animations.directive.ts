@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[animation]'
@@ -20,7 +20,7 @@ export class AnimationsDirective {
       case 'zoomIn':
         this.zoomIn()
         break;
-      
+
       default:
         break;
     }
@@ -34,8 +34,8 @@ export class AnimationsDirective {
       this.element.nativeElement.style.bottom='0'
     }, 300);
   }
-  
-  zoomIn(){    
+
+  zoomIn(){
     this.element.nativeElement.classList.add('zoomIn')
   }
 
@@ -45,11 +45,11 @@ export class AnimationsDirective {
   }
 
   @Input() set dropDown(active:boolean){
-    
+
     if (!active) {
       this.height=this.element.nativeElement.clientHeight
       this.element.nativeElement.classList.add('drop-down-hidden')
-      
+
     }else{
       this.element.nativeElement.classList.remove('drop-down-hidden')
       this.element.nativeElement.style.height= `${this.height.toString()}px`

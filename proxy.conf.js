@@ -3,10 +3,12 @@
 
 const PROXY_CONFIG = [
   {
+    /* url cortas*/
       context: [
           "/api/session",
           "/credits/v2/credits/customer-key/benefits"
       ],
+      /*target para dev*/
       target: "https://mx-gamification-front-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp",
       secure: false,
       changeOrigin: true

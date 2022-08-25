@@ -1,10 +1,8 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -28,8 +26,8 @@ export class ModalComponent {
   }
 
   public convertToStrong(
-    message: string = '',
-    strongs: string[] | boolean
+    strongs: string[] | boolean,
+    message = '',
   ): string {
     if (Array.isArray(strongs)) {
       strongs.forEach((word) => {

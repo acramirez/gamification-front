@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router'
-import { Observable, throwError } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ErrorService {
     private router:Router
   ){}
 
-  showError:boolean=false;
+  showError=false;
 
 
   getClientError(error:Error){
@@ -25,7 +25,7 @@ export class ErrorService {
   }
 
   errorShow(error:Observable<never>){
-    
+
     this.showError=true
     if (error && this.showError===true) {
       this.router.navigateByUrl('error')

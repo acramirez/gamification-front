@@ -47,7 +47,7 @@
         >
           <span
             [innerHTML]="
-              convertToStrong(text.text, text.strong ? text.strong : false)
+              convertToStrong(text.strong ? text.strong : false,text.text)
             "
           >
           </span>

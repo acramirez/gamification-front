@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 
 @Component({
@@ -9,6 +9,6 @@ import { Tab } from '../../interfaces/atoms/tab.interface';
 export class TabComponent {
 
   @Input() tab!:Tab
-  
+
 
 }

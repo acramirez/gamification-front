@@ -15,9 +15,9 @@ export class TimelineComponent implements OnInit {
     {principalText:'¡Listo!',secondaryText:'Lograrás tu objetivo e incrementaste tu línea de crédito.',status:statusElement.NEXT},
   ]
 
-  percent:number=0;
+  percent=0;
 
-  direction:string='';
+  direction='';
 
   ngOnInit(): void {
 
