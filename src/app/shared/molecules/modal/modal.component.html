@@ -17,7 +17,7 @@
       </figure>
       <h2
         [ngClass]="{
-          'modal__title': true,
+          modal__title: true,
           'modal__title--subtitle': modal.challenge.subtitle,
           'modal__title--gradient': modal.challenge.type === 'accelerator'
         }"
@@ -46,8 +46,19 @@
           }"
         >
           <span
+          [innerHTML]="
+              convertToStrong(text.strong ? text.strong : false, text.pretextIcon)
+            "
+            [ngClass]="{
+              'modal__content--bold': text.strong === true,
+              'modal__content--pretext-icon': text.pretext === 'NUMBER'
+            }"
+          >
+            {{ text.pretextIcon }}
+          </span>
+          <span
             [innerHTML]="
-              convertToStrong(text.strong ? text.strong : false,text.text)
+              convertToStrong(text.strong ? text.strong : false, text.text)
             "
           >
           </span>
