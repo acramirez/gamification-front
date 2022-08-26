@@ -1,109 +1,112 @@
-.message{
-    background: var(--theme-color-background-03);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    left: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-
+.message {
+  background: var(--theme-color-background-03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-.header{
-    align-items: center;
-    display: grid;
-    justify-content: center;
-    margin-top: 3.75rem;
-    margin-bottom: 3.4rem;
-    text-align: center;
+.header {
+  align-items: center;
+  display: grid;
+  justify-content: center;
+  margin-top: 3.75rem;
+  margin-bottom: 3.4rem;
+  text-align: center;
 }
 
-.header__santander-icon{
-    margin: auto;
-    margin-bottom: 3rem;
-    z-index: 1;
+.header__santander-icon {
+  margin: auto;
+  margin-bottom: 3rem;
+  z-index: 1;
 }
 
-.header__icon{
-    align-items: center;
-    background: var(--theme-color-background-03);
-    border-radius: 50%;
-    box-shadow: 0px 32px 32px -4px rgba(0, 0, 0, 0.12);
-    display: flex;
-    justify-content: center;
-    height: 6.5rem;
-    width: 6.5rem;
-    z-index: 1;
-    position: relative;
+.header__icon {
+  align-items: center;
+  background: var(--theme-color-background-03);
+  border-radius: 50%;
+  box-shadow: 0px 32px 32px -4px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  height: 6.5rem;
+  width: 6.5rem;
+  z-index: 1;
+  position: relative;
+  padding: 1.5rem;
 }
 
-.message__body{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    margin-bottom: 4rem;
+.header__icon > img {
+  height: 100%;
+  width: 100%;
 }
 
-.content{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 2rem;
-    text-align: center;
-
+.message__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  margin-bottom: 4rem;
 }
 
-.content__title{
-    background: linear-gradient(99.84deg, #FF1D53 0%, #A540D7 86.96%);
-    background-clip: text;
-    font-size: 1.75rem;
-    margin: 0 2.375rem;
-    margin-bottom: .5rem;
-    -webkit-text-fill-color: transparent;
-
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.content__subtitle{
-    font-size: 1.5rem;
-    line-height: 2rem;
-    margin: 0 2.375rem;
-    margin-bottom: 3rem;
+.content__title {
+  background: linear-gradient(99.84deg, #ff1d53 0%, #a540d7 86.96%);
+  background-clip: text;
+  font-size: 1.75rem;
+  margin: 0 2.375rem;
+  margin-bottom: 0.5rem;
+  -webkit-text-fill-color: transparent;
 }
 
-.content__description{
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    margin: 0 3rem;
+.content__subtitle {
+  font-size: 1.75rem;
+  line-height: 2rem;
+  margin: 0 2.375rem;
+  margin-bottom: 3rem;
 }
 
-.content__description p:nth-child(1){
+.content__description {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin: 0 3rem;
+}
+
+.content__description p:nth-child(1) {
   margin-bottom: 2.5rem;
 }
 
-button{
-    margin: 0 7rem;
+button {
+  margin: 0 7rem;
 }
 
-.header::before{
-    background: #F5F7FA;
-    border-radius: 0 0 50% 50%;
-    content: '';
-    height: 375px;
-    left: -25%;
-    position: absolute;
-    top: -180px;
-    width: 150%;
-    z-index: 0;
+.header::before {
+  background: #f5f7fa;
+  border-radius: 0 0 50% 50%;
+  content: "";
+  height: 375px;
+  left: -25%;
+  position: absolute;
+  top: -180px;
+  width: 150%;
+  z-index: 0;
 }
 
-.header__icon-complete::before{
-  content: '';
+.header__icon-complete::before {
+  content: "";
   width: 4rem;
   position: absolute;
   height: 3.5rem;
@@ -114,8 +117,8 @@ button{
   bottom: 60%;
 }
 
-.header__icon-complete::after{
-  content: '';
+.header__icon-complete::after {
+  content: "";
   width: 4rem;
   position: absolute;
   height: 3.5rem;

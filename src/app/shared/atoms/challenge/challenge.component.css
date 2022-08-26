@@ -13,9 +13,9 @@
     display: flex;
     justify-content: center;
     margin:auto;
-    max-width: 100px;
-    min-height: 100px;
-    min-width: 100px;
+    max-width: 6.25rem;
+    min-height: 6.25rem;
+    min-width: 6.25rem;
     position: relative;
 }
 

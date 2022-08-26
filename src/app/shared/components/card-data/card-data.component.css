@@ -2,16 +2,25 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: 0 1.5rem;
+    margin: auto;
+    margin-bottom: 1.5rem;
     position: relative;
-    height: 100px;
+    height: 6.25rem;
+    width: 90%;
+}
+
+
+sn-round-card{
+  min-width: 40%;
 }
 
 .percent{
-    left: calc( 50% - 50px);
-    height: 100px; 
+    left: calc( 50% - 3.125rem);
+    height: 6.25rem;
     position: absolute;
-    top: calc(50% - 50px);
-    width: 100px;
+    top: calc(50% - 3.125rem);
+    width: 6.25rem;
 
 }
+
+

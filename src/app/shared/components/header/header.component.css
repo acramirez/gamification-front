@@ -13,7 +13,7 @@
   border-radius: 0 0 50% 50%;
   content: '';
   height: 375px;
-  top:-200px;
+  top:-12.5rem;
   left: -25%;
   position: absolute;
   width: 150%;
@@ -43,4 +43,17 @@ h2{
 
 sn-icon{
     font-size: 2rem;
+}
+
+
+
+@media screen and (max-width:374px) {
+  .header::before{
+    top: -15.5rem;
+  }
+}
+@media screen and (max-width:319px) {
+  .header::before{
+    top: -18.5rem;
+  }
 }

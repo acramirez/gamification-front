@@ -5,10 +5,16 @@
 }
 
 .challenge-likeu {
-  display: grid;
-  gap: 1.5rem;
   margin: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   max-width: 375px;
+}
+
+app-card-data{
+  margin-bottom: 1.5rem;
+}
+
+app-month-challenges{
+  margin-bottom: 1.5rem;
 }

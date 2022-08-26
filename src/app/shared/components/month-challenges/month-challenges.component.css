@@ -26,6 +26,7 @@
     border-radius: 16px;
     display: grid;
     margin: 0 1rem;
+    margin-bottom: 1.5rem;
     overflow: auto;
     padding-bottom: 1.5rem;
     position: relative;
@@ -40,6 +41,7 @@
 
 .challenge__description{
     margin-bottom: 2rem;
+    font-size: 1rem;
 }
 
 .challenges{
