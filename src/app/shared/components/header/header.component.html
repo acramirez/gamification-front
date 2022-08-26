@@ -1,4 +1,7 @@
-<div class="header">
+<div [ngClass]="{
+  'header':true,
+  'header__circle-bg':circleBG
+}">
     <img class="heder__btn" src="../../../../assets/icons/chevron-left.png" alt="" (click)="close()">
     <h2>Reto LikeU</h2>
     <img class="heder__btn" src="../../../../assets/icons/phone.png" alt="client_support" (click)="redirect()">

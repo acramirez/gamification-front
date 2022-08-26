@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GamificationCallbacksService } from '../../../services/gamification-callbacks.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { GamificationCallbacksService } from '../../../services/gamification-cal
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
+
+  @Input()circleBG=true
 
   constructor(
     private callback:GamificationCallbacksService
