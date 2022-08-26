@@ -34,16 +34,3 @@ h2{
 sn-icon{
     font-size: 2rem;
 }
-
-
-/*
-@media screen and (max-width:374px) {
-  .header::before{
-    top: -15.5rem;
-  }
-}
-@media screen and (max-width:319px) {
-  .header::before{
-    top: -18.5rem;
-  }
-} */

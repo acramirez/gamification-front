@@ -8,7 +8,6 @@ import { Tab } from '../interfaces/atoms/tab.interface';
 })
 export class TabDirective implements OnInit, OnDestroy  {
 
-  // @Output() indexTab:EventEmitter<number> =new EventEmitter;
 
   sub$!:Subscription
   @Input() tabData!:Tab;
