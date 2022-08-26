@@ -52,5 +52,6 @@
     right: -1.125rem;
     top: -1rem;
     position: absolute;
+    width: 2.25rem;
     z-index: 10;
 }
