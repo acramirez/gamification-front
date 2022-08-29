@@ -20,7 +20,7 @@ const routes: Routes = [
     ],
   },
   {
-    path:'error',
+    path:'error/:error',
     component:ErrorPageComponent,
     canActivate:[ErrorGuard],
     canLoad:[ErrorGuard]

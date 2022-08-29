@@ -24,11 +24,11 @@ export class ErrorService {
     return error.message
   }
 
-  errorShow(error:Observable<never>){
+  errorShow(error:Observable<never>,errorId='1'){
 
     this.showError=true
     if (error && this.showError===true) {
-      this.router.navigateByUrl('error')
+      this.router.navigate(['error',errorId])
       this.showError=false
     }
   }

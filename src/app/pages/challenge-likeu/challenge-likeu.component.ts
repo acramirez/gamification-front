@@ -32,7 +32,7 @@ import { catchError, takeUntil } from 'rxjs/operators';
 import { Notification } from '../../shared/interfaces/notification';
 
 @Component({
-  selector: 'challenge-likeu',
+  selector: 'lu-challenge-likeu',
   templateUrl: './challenge-likeu.component.html',
   styleUrls: ['./challenge-likeu.component.css'],
 })
@@ -165,7 +165,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       let idMission = Number(mission.id);
       if (idMission < this.currentPeriod) {
         tab.status = 'finish';
-      } else if (idMission === this.currentPeriod) {
+      } else if (idMission === this.currentPeriod && this.statusLikeU!=='CANCELED') {
         tab.status = 'ongoing';
       }
 

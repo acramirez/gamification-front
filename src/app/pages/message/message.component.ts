@@ -8,6 +8,9 @@ import { Notification } from "../../shared/interfaces/notification";
 })
 export class MessageComponent {
 
+  /**
+   * Notification Data
+   */
   @Input() notification!:Notification
 
 }
