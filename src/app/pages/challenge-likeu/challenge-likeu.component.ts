@@ -353,7 +353,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'higher_payment':
-        chall.status = this.checkAccelerator(card_payment);
+        chall.status = this.checkAccelerator(card_payment,dueDate);
         break;
     }
     return chall;
@@ -395,13 +395,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se valida el status del reto accelerator
    */
 
-  checkAccelerator(cardPayment: CardPayment[]) {
+  checkAccelerator(cardPayment: CardPayment[],dueDate:Date) {
     if (cardPayment) {
       for (const card of cardPayment) {
-        card.operation_date = new Date(card.operation_date);
+        let operationDate = new Date(card.operation_date);
         let percentPayment =
           card.amount_payment.amount / card.minimum_amount.amount;
-        if (percentPayment >= 1.5) {
+        if (percentPayment >= 1.5 && operationDate<dueDate) {
           return true;
         }
       }
