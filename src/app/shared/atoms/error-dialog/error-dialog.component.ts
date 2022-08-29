@@ -7,39 +7,50 @@ import { ErrorData } from '../../interfaces/atoms/error';
 @Component({
   selector: 'app-error-dialog',
   templateUrl: './error-dialog.component.html',
-  styleUrls: ['./error-dialog.component.css']
+  styleUrls: ['./error-dialog.component.css'],
 })
-export class ErrorDialogComponent implements OnDestroy{
+export class ErrorDialogComponent implements OnDestroy {
 
-  errorData:ErrorData={
-    title:'¡Oh, oh!',
-    message:'No podemos atender tu solicitud, por favor inténtalo más tarde.',
-    icon:'cloud-error',
-    button:false,
-    redirect:'/',
-  }
+  /**
+   * error data to show
+   */
+  errorData: ErrorData = {
+    title: '¡Oh, oh!',
+    message: 'No podemos atender tu solicitud, por favor inténtalo más tarde.',
+    icon: 'cloud-error',
+    button: false,
+    redirect: '/',
+  };
 
-subs$!:Subscription
+  /**
+   * subscription activated route
+   */
+  subs$!: Subscription;
 
   constructor(
-    private callback:GamificationCallbacksService,
-    private activeRoute:ActivatedRoute
-  ){
-    this.subs$= this.activeRoute.params.subscribe(({error})=>{
-      if (error==='2') {
-        this.errorData.title='Tu tarjeta está bloqueda';
+    private callback: GamificationCallbacksService,
+    private activeRoute: ActivatedRoute
+  ) {
+    this.subs$ = this.activeRoute.params.subscribe(({ error }) => {
+      if (error === '2') {
+        this.errorData.title = 'Tu tarjeta está bloqueda';
       }
-    })
+    });
   }
 
-  close(){
-    this.callback.close()
+  /**
+   * callback to close
+   */
+  close() {
+    this.callback.close();
   }
 
+  /**
+   * Lifecycle
+   */
   ngOnDestroy(): void {
     if (this.subs$) {
-      this.subs$.unsubscribe()
+      this.subs$.unsubscribe();
     }
   }
-
 }

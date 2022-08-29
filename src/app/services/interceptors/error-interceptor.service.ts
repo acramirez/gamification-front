@@ -24,7 +24,11 @@ export class ErrorInterceptorService implements HttpInterceptor {
     )
   }
 
-
+  /**
+   * Function to handle htttp errors
+   * @param error error http
+   * @returns Observable<never>
+   */
   manejarError(error:Observable<never>){
 
     if (error) {

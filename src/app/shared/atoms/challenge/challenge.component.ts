@@ -8,7 +8,13 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 })
 export class ChallengeComponent {
 
+  /**
+   * challenge data
+   */
   @Input() challenge!:Challenge;
+  /**
+   * status mission
+   */
   @Input() statusMission:boolean | undefined
 
 }

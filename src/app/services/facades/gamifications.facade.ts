@@ -23,6 +23,10 @@ export class GamificationFacade {
         ) {
     }
 
+    /**
+     * Function that extracts the necessary data for challengelikeu.component
+     * @returns Observable ChallengeLikeU
+     */
     getGamification():Observable<ChallengeLikeU>{
         return this.gamificacionAPI.getGamifications().pipe(
             tap(resp=>{
