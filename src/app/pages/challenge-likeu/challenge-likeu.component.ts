@@ -140,9 +140,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.propertyChallenges();
     this.getTabs();
 
-    if (seen_first_time) {
-      this.showFirstAccess();
-    }
+    // if (seen_first_time) {
+    //   this.showFirstAccess();
+    // }
 
     this.showNotification(current_limit, potential_limit);
   }
