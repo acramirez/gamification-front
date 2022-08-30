@@ -16,13 +16,13 @@
 .question__text{
     font-size: 1rem;
     font-weight: 700;
-    max-width: 245px;
+    max-width: 15.3rem;
 
 }
 
 .question__chevron{
     max-height: 1rem;
-}    
+}
 
 .question__body{
     font-size: .875rem;

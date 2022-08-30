@@ -97,10 +97,10 @@ button {
   background: #f5f7fa;
   border-radius: 0 0 50% 50%;
   content: "";
-  height: 375px;
+  height: 23.4rem;
   left: -25%;
   position: absolute;
-  top: -180px;
+  top: -11.25rem;
   width: 150%;
   z-index: 0;
 }
