@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./first-page.component.css']
 })
 export class FirstPageComponent {
-
+/**
+ *  property to assign the function to the button
+ */
   close!:Function
 
 }

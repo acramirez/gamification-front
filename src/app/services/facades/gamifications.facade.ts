@@ -23,12 +23,16 @@ export class GamificationFacade {
         ) {
     }
 
+    /**
+     * Function that extracts the necessary data for challengelikeu.component
+     * @returns Observable ChallengeLikeU
+     */
     getGamification():Observable<ChallengeLikeU>{
         return this.gamificacionAPI.getGamifications().pipe(
             tap(resp=>{
                 if(resp.card.status!=="ACTIVE"){
                     const error = throwError(()=>'Tarjeta bloqueada')
-                    this.errorService.errorShow(error)
+                    this.errorService.errorShow(error,'2')
                 }
             }),
             map(resp=>{
@@ -40,7 +44,7 @@ export class GamificationFacade {
                     potential_limit,
                     period,
                     cut_of_date,
-                    status,
+                    status:'CANCEL',
                     seen_first_time,
                     lower_limit,
                     statusChallenge:resp.status,

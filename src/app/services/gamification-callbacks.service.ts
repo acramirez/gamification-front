@@ -1,42 +1,51 @@
 import { Injectable } from '@angular/core';
 
-
-
 declare let Gamification: any;
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class GamificationCallbacksService {
+  /**
+   * Function to refresh session (callback)
+   */
+  refreshSession() {
+    if (typeof Gamification !== 'undefined') {
+      Gamification.refreshSession();
+    } else if (
+      (window as any).webkit !== undefined &&
+      (window as any).webkit.messageHandlers.Gamification !== undefined
+    ) {
+      (window as any).webkit.messageHandlers.Gamification.refreshSession();
+    }
+  }
 
-	refreshSession() {
+  /**
+   * Function to close gamification app (callback)
+   */
+  close() {
+    if (typeof Gamification !== 'undefined') {
+      Gamification.close();
+    } else if (
+      (window as any).webkit !== undefined &&
+      (window as any).webkit.messageHandlers.Gamification !== undefined
+    ) {
+      (window as any).webkit.messageHandlers.Gamification.close();
+    }
+  }
 
-		if (typeof Gamification !== 'undefined') {
-			Gamification.refreshSession();
-		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-			(window as any).webkit.messageHandlers.Gamification.refreshSession()
-		}
-	}
-
-
-	close() {
-
-		if (typeof Gamification !== 'undefined') {
-			Gamification.close();
-		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-			(window as any).webkit.messageHandlers.Gamification.close();
-		}
-	}
-
-	redirect(challengeId: string) {
-
-		if (typeof Gamification !== 'undefined') {
-			Gamification.redirect(challengeId);
-		} else if ((window as any).webkit !== undefined && (window as any).webkit.messageHandlers.Gamification !== undefined) {
-			(window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
-		}
-	}
+  /**
+   * Function to redirect father (callback)
+   * @param challengeId redirect challenge
+   */
+  redirect(challengeId: string) {
+    if (typeof Gamification !== 'undefined') {
+      Gamification.redirect(challengeId);
+    } else if (
+      (window as any).webkit !== undefined &&
+      (window as any).webkit.messageHandlers.Gamification !== undefined
+    ) {
+      (window as any).webkit.messageHandlers.Gamification.redirect(challengeId);
+    }
+  }
 }
-
-
-

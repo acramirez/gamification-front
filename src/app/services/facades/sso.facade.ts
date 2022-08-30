@@ -18,6 +18,10 @@ export class TokenSsoFacade {
     private errorService: ErrorService
   ) {}
 
+  /**
+   * function to validate token
+   * @returns Observable TokenValidator
+   */
   validationToken() {
     let tkn = '';
     let isBase64 = false;
@@ -46,6 +50,11 @@ export class TokenSsoFacade {
     return this.tokenService.getValidateToken(tkn);
   }
 
+  /**
+   * function to validate if token is base64
+   * @param tkn tkn
+   * @returns boolean
+   */
   isBase64Token(tkn: string) {
     let base64regex =
       /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
@@ -58,6 +67,11 @@ export class TokenSsoFacade {
     return true;
   }
 
+  /**
+   * Function to transform tkn in base64
+   * @param tkn
+   * @returns string
+   */
   transformBase64(tkn: string) {
     const token = tkn.split(' ');
 

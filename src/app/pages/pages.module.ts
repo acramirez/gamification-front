@@ -20,7 +20,6 @@ import { SpinnerModule } from '../shared/atoms/spinner/spinner.module';
     DirectivesModule,
     ErrorDialogModule,
     SpinnerModule
-    
   ],
   exports:[ChallengeLikeuComponent]
 })
