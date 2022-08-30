@@ -1,7 +1,7 @@
-<div class="challenge-likeu__container bg__circle" *ngIf="missionActive;else spinner" >
-    <app-header animation="up"></app-header> 
+<div class="challenge-likeu__container bg__circle" *ngIf="this.cardDetail;else spinner" >
+    <app-header animation="up"></app-header>
     <div class="challenge-likeu">
-        <app-card-data 
+        <app-card-data
             [data]="cardDetail"
             [percent]="getPercent()"
             >
@@ -26,4 +26,3 @@
     <sn-spinner ></sn-spinner>
 </ng-template>
 
-    

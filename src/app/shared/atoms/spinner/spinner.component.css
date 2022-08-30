@@ -5,6 +5,7 @@
     background: inherit;
     left: 0;
     top:0;
+    z-index: 1002;
 }
 
 .spinner__content{
@@ -30,18 +31,18 @@
     filter: blur(5px);
 }
 
-.spinner__dot:nth-child(1){ 
-    animation: dot-rotate-1 5s 0s ease infinite; 
-} 
- .spinner__dot:nth-child(2){ 
-    animation: dot-rotate-2 5s 1.25s ease infinite; 
+.spinner__dot:nth-child(1){
+    animation: dot-rotate-1 5s 0s ease infinite;
 }
-.spinner__dot:nth-child(3){ 
-    animation: dot-rotate-3 5s 2.5s ease infinite; 
+ .spinner__dot:nth-child(2){
+    animation: dot-rotate-2 5s 1.25s ease infinite;
+}
+.spinner__dot:nth-child(3){
+    animation: dot-rotate-3 5s 2.5s ease infinite;
 }
 
-.spinner__dot:nth-child(4){ 
-    animation:dot-rotate-4 5s 3.75s ease infinite; 
+.spinner__dot:nth-child(4){
+    animation:dot-rotate-4 5s 3.75s ease infinite;
 }
 
 .spinner__dot::before{
@@ -57,18 +58,18 @@
     filter: blur(6px);
 }
 
-.spinner__dot:nth-child(1):before{ 
-    animation: dot-move 5s 0s ease infinite; 
-} 
- .spinner__dot:nth-child(2)::before{ 
-    animation: dot-move 5s 1.25s ease infinite; 
+.spinner__dot:nth-child(1):before{
+    animation: dot-move 5s 0s ease infinite;
 }
-.spinner__dot:nth-child(3)::before{ 
-    animation: dot-move 5s 2.5s ease infinite; 
+ .spinner__dot:nth-child(2)::before{
+    animation: dot-move 5s 1.25s ease infinite;
+}
+.spinner__dot:nth-child(3)::before{
+    animation: dot-move 5s 2.5s ease infinite;
 }
 
-.spinner__dot:nth-child(4)::before{ 
-    animation:dot-move 5s 3.75s ease infinite; 
+.spinner__dot:nth-child(4)::before{
+    animation:dot-move 5s 3.75s ease infinite;
 }
 
 .loader-logo{
