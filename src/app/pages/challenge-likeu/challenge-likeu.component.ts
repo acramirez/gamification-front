@@ -128,7 +128,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     if (this.statusLikeU === 'CANCELED') {
       this.indexTab = this.currentPeriod - 1;
-      console.log(this.indexTab);
     } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;
     } else {

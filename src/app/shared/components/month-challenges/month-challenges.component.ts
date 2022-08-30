@@ -24,6 +24,8 @@ export class MonthChallengesComponent implements AfterViewInit {
   @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
 
   ngAfterViewInit(): void {
-    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*124;
+    const element= this.scrollTabs.nativeElement
+
+    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*(element.firstElementChild!.clientWidth +6);
   }
 }
