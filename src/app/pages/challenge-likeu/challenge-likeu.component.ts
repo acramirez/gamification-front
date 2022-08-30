@@ -126,7 +126,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     this.createMission();
 
-    if (this.missions[this.currentPeriod]) {
+    if (this.statusLikeU === 'CANCELED') {
+      this.indexTab = this.currentPeriod - 1;
+      console.log(this.indexTab);
+    } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;
     } else {
       this.indexTab = this.missions.length - 1;
@@ -201,7 +204,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   setTimerMission() {
     this.missions.forEach((mission, index) => {
-      if (index === this.currentPeriod) {
+      if (index === this.currentPeriod && this.statusLikeU!=='CANCELED') {
         mission.timer = true;
       } else {
         mission.timer = false;
@@ -533,7 +536,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       );
     } else if (special.length > 0 && statusSpecial.length === 0) {
       statusMission = false;
-    } else if (missionIndex === 6) {
+    } else if (missionIndex >= 6) {
       let statusDC5 = this.missions[missionIndex - 1].challenges?.filter(
         (challenge) =>
           challenge.id === 'digital_channels' && challenge.status === false
