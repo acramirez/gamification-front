@@ -126,7 +126,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     this.createMission();
 
-    if (this.statusLikeU === 'CANCELED') {
+    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7) {
       this.indexTab = this.currentPeriod - 1;
     } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;
@@ -134,17 +134,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       this.indexTab = this.missions.length - 1;
     }
     this.setTimerMission();
-
     this.showMissionActive(this.indexTab);
 
     this.propertyChallenges();
-    this.getTabs();
 
     // if (seen_first_time) {
     //   this.showFirstAccess();
     // }
 
     this.showNotification(current_limit, potential_limit);
+
+    if (this.currentPeriod > 7) {
+      if(this.validateAccelerator()){
+        this.missions.pop()
+        this.indexTab=this.missions.length-1
+        this.showMissionActive(this.indexTab)
+      }
+    }
+
+    this.getTabs();
+
+
   }
 
   showMissionActive(index: number) {
@@ -167,7 +177,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       let idMission = Number(mission.id);
       if (idMission < this.currentPeriod) {
         tab.status = 'finish';
-      } else if (idMission === this.currentPeriod && this.statusLikeU!=='CANCELED') {
+      } else if (
+        idMission === this.currentPeriod &&
+        this.statusLikeU !== 'CANCELED'
+      ) {
         tab.status = 'ongoing';
       }
 
@@ -203,7 +216,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   setTimerMission() {
     this.missions.forEach((mission, index) => {
-      if (index === this.currentPeriod && this.statusLikeU!=='CANCELED') {
+      if (index === this.currentPeriod && this.statusLikeU !== 'CANCELED') {
         mission.timer = true;
       } else {
         mission.timer = false;
@@ -241,7 +254,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         }
       });
       if (mission.challenges) {
-        mission.status = this.statusMission(mission.challenges, index);
+        let statusMission = this.statusMission(mission.challenges, index);
+        mission.status = statusMission;
+        if (statusMission === false && index < this.currentPeriod) {
+          this.indexTab = index;
+          this.showMissionActive(index);
+        }
       }
     });
   }
@@ -252,17 +270,18 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   createMission() {
     const { missions } = this.challenges;
-    let { current_limit, potential_limit } = this.cardDetail;
     missions.forEach((miss) => {
-        const mission: MissionInterfaces = {
-          id: miss.id,
-        };
-        mission.challenges = this.typeChallenge(miss);
-        this.missions.push(mission);
+      const mission: MissionInterfaces = {
+        id: miss.id,
+      };
+      mission.challenges = this.typeChallenge(miss);
+      this.missions.push(mission);
     });
-    if (this.statusLikeU==='FINAL' && this.currentPeriod===7) {
-      this.missions.pop()
+
+    if (this.statusLikeU === 'FINAL' && this.currentPeriod === 7) {
+      this.missions.pop();
     }
+
   }
 
   /**
@@ -355,7 +374,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'higher_payment':
-        chall.status = this.checkAccelerator(card_payment,dueDate);
+        chall.status = this.checkAccelerator(card_payment, dueDate);
         break;
     }
     return chall;
@@ -397,13 +416,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * Metodo mediante el cual se valida el status del reto accelerator
    */
 
-  checkAccelerator(cardPayment: CardPayment[],dueDate:Date) {
+  checkAccelerator(cardPayment: CardPayment[], dueDate: Date) {
     if (cardPayment) {
       for (const card of cardPayment) {
         let operationDate = new Date(card.operation_date);
         let percentPayment =
           card.amount_payment.amount / card.minimum_amount.amount;
-        if (percentPayment >= 1.5 && operationDate<dueDate) {
+        if (percentPayment >= 1.5 && operationDate < dueDate) {
           return true;
         }
       }
@@ -418,11 +437,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
     const today = new Date();
 
-    if (
-      accumulatedPurchases &&
-      accumulatedPurchases.amount >= 200 &&
-      today < cutDate
-    ) {
+    if (accumulatedPurchases && accumulatedPurchases.amount >= 200) {
       return true;
     }
     return false;
@@ -603,7 +618,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         description: [],
         btnAction: () => this.closeModal(),
       };
-      if (this.statusLikeU === 'FINAL') {
+      if (this.statusLikeU === 'FINAL' || currentLimit.amount===potentialLimit.amount) {
         notification.icon = 'challenge-complete';
         notification.title = '¡Felicidades!';
         notification.subtitle = 'Conseguiste el 100% de tu límite potencial';
@@ -672,6 +687,26 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return chall.redirection;
   }
 
+  validateAccelerator() {
+
+    let missions = this.missions.slice(4, 7);
+    let accelerator = true;
+
+    for (let i = 0; i < missions.length; i++) {
+      const { challenges } = missions[i];
+
+      let higherPayment = challenges?.filter(
+        ({ id }) => id === 'higher_payment'
+      );
+
+      if (higherPayment && higherPayment[0].status === false) {
+        accelerator = false;
+        break;
+      }
+
+    }
+    return accelerator
+  }
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
