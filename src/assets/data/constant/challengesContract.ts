@@ -310,7 +310,7 @@ export const challengesContract: ChallengesContract = {
           mb: true,
         },
         {
-          text: '*Contratación en sucursal.',
+          text: '*Contrata en SuperNet o en sucursal.',
           mb: true,
         },
       ],
