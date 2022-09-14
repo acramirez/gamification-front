@@ -8,18 +8,25 @@ import { GamificationCallbacksService } from '../../../services/gamification-cal
 })
 export class HeaderComponent{
 
-  @Input()circleBG=true
+  /**
+   *Background Circle
+   */
+   @Input() circleBG = true;
 
-  constructor(
-    private callback:GamificationCallbacksService
-  ){}
+   constructor(private callback: GamificationCallbacksService) {}
 
-  close(){
-    this.callback.close()
-  }
+   /**
+    * Callback close challenge likeu
+    */
+   close() {
+     this.callback.close();
+   }
 
-  redirect(){
-    this.callback.redirect('client_support')
-  }
+   /**
+    * Callback redirect challenge likeu
+    */
+   redirect() {
+     this.callback.redirect('client_support');
+   }
 
 }

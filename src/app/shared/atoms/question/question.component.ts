@@ -8,14 +8,28 @@ import { FAQ } from "../../interfaces/response/challengesContract.interface";
 })
 export class QuestionComponent {
 
-  @Input() question!:FAQ;
-  showAnswer=false
-  height!:number;
-  deg=0
-  @ViewChild('answer') answer!:ElementRef<HTMLElement>;
+/**
+   * question data
+   */
+ @Input() question!:FAQ;
+ /**
+  * property to show the answer
+  */
+ showAnswer=false
+ /**
+  * property to rotate chevron question
+  */
+ deg=0
+ /**
+  * ViewChild answerx
+  */
+ @ViewChild('answer') answer!:ElementRef<HTMLElement>;
 
-  show(){
-    this.showAnswer=!this.showAnswer
-    this. deg=this.showAnswer?90:0
-  }
+ /**
+  * Function to show answer
+  */
+ show(){
+   this.showAnswer=!this.showAnswer
+   this. deg=this.showAnswer?90:0
+ }
 }

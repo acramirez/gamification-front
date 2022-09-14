@@ -1,24 +1,26 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[animation]'
+  selector: '[animation]',
 })
 export class AnimationsDirective {
+  constructor(private element: ElementRef<HTMLElement>) {}
 
-  constructor(
-    private element:ElementRef<HTMLElement>
-  ) { }
+  /**
+   * heigt element
+   */
+  height!: number;
 
-  height!:number;
-
-  @Input() set animation(direction:string){
-
+  /**
+   * Input set for animation
+   */
+  @Input() set animation(direction: string) {
     switch (direction) {
       case 'downUp':
-        this.downUp()
+        this.downUp();
         break;
       case 'zoomIn':
-        this.zoomIn()
+        this.zoomIn();
         break;
 
       default:
@@ -26,44 +28,52 @@ export class AnimationsDirective {
     }
   }
 
-
-
-  downUp(){
-    this.element.nativeElement.classList.add('downUp')
+  /**
+   * Animation downUp (error-dialog)
+   */
+  downUp() {
+    this.element.nativeElement.classList.add('downUp');
     setTimeout(() => {
-      this.element.nativeElement.style.bottom='0'
+      this.element.nativeElement.style.bottom = '0';
     }, 300);
   }
 
-  zoomIn(){
-    this.element.nativeElement.classList.add('zoomIn')
+  /**
+   * Animation zoomIn (Modal)
+   */
+  zoomIn() {
+    this.element.nativeElement.classList.add('zoomIn');
   }
 
-  @Input() set rotate(deg:number){
-    this.element.nativeElement.classList.add('rotate')
-    this.element.nativeElement.style.transform=`rotate(${deg}deg)`
+  /**
+   * Animation rotate (FAQs chevron)
+   */
+  @Input() set rotate(deg: number) {
+    this.element.nativeElement.classList.add('rotate');
+    this.element.nativeElement.style.transform = `rotate(${deg}deg)`;
   }
 
-  @Input() set dropDown(active:boolean){
-
+  /**
+   * Animation dropDown
+   */
+  @Input() set dropDown(active: boolean) {
     if (!active) {
-      this.height=this.element.nativeElement.clientHeight
-      this.element.nativeElement.classList.add('drop-down-hidden')
-
-    }else{
-      this.element.nativeElement.classList.remove('drop-down-hidden')
-      this.element.nativeElement.style.height= `${this.height.toString()}px`
+      this.height = this.element.nativeElement.clientHeight;
+      this.element.nativeElement.classList.add('drop-down-hidden');
+    } else {
+      this.element.nativeElement.classList.remove('drop-down-hidden');
+      this.element.nativeElement.style.height = `${this.height.toString()}px`;
     }
   }
 
-  @Input() set loadProgress(progress:number){
-    this.element.nativeElement.classList.add('transition')
-    this.element.nativeElement.style.strokeDashoffset='295.31';
+  /**
+   * Animation load progress
+   */
+  @Input() set loadProgress(progress: number) {
+    this.element.nativeElement.classList.add('transition');
+    this.element.nativeElement.style.strokeDashoffset = '295.31';
     setTimeout(() => {
-      this.element.nativeElement.style.strokeDashoffset=progress.toString();
+      this.element.nativeElement.style.strokeDashoffset = progress.toString();
     }, 0);
   }
 }
-
-
-

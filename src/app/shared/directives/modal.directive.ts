@@ -13,12 +13,10 @@ export class ModalDirective {
     :this.viewContainer.clear();
   }
 
-  
-
   constructor(
     private templateRef:TemplateRef<HTMLElement>,
     private viewContainer:ViewContainerRef
-  ) { 
+  ) {
     this.htmlElement=this.templateRef.elementRef
   }
 }

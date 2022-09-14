@@ -4,25 +4,26 @@ import { Card } from '../../interfaces/response/icard-details';
 @Component({
   selector: 'app-card-data',
   templateUrl: './card-data.component.html',
-  styleUrls: ['./card-data.component.css']
+  styleUrls: ['./card-data.component.css'],
 })
 export class CardDataComponent implements AfterViewInit {
+  /**
+   * property to save potential limit, current limit and lower limit
+   */
+  @Input() data!: Card;
+  /**
+   * property to save percent value
+   */
+  @Input() percent = 0;
 
   /**
-   * Has the info which is used in the component
-   *
-   * @type {Card}
-   *
+   * AfterViewInit life cycle: Component loading view start.
+   * Match current limit and potentiaal limit if current_limit>potential_limit
+   * @returns void
    */
-  @Input() data!:Card
-  @Input() percent=0
-
-
   ngAfterViewInit(): void {
-
-    if (this.data.current_limit>this.data.potential_limit) {
-      this.data.current_limit=this.data.potential_limit
+    if (this.data.current_limit > this.data.potential_limit) {
+      this.data.current_limit = this.data.potential_limit;
     }
   }
-
 }

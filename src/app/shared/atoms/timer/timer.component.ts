@@ -7,12 +7,26 @@ import { Subject, Subscription, takeUntil, timer } from 'rxjs';
   styleUrls: ['./timer.component.css'],
 })
 export class TimerComponent implements AfterViewInit, OnDestroy {
+  /**
+   * Subject to unsubscribe the timer$
+   */
   timer$: Subject<boolean> = new Subject();
+
+  /**
+   * Text remaining days or remainings days
+   */
   remainingDays!: number | string | null;
+
+  /**
+   * due date to evaluate challenges
+   */
   @Input() dueDate!: Date;
 
-  @Input() seconds!: number;
-
+  /**
+   * AfterViewInit life cycle: Component loading view start.
+   * Initializes the subscriptions of timer, dueDate
+   * @returns void
+   */
   ngAfterViewInit(): void {
     this.dueDate = new Date(this.dueDate);
 
@@ -28,6 +42,11 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  /**
+   * Function to transform seconds in string of remaining days, hours, minutes or seconds
+   * @param segundos remaining seconds
+   * @returns string
+   */
   transformSeconds(segundos: number) {
     let hour: number | string = Math.floor(segundos / 3600);
     hour = hour < 10 ? '0' + hour : hour;
@@ -52,6 +71,11 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     return resp;
   }
 
+  /**
+   * Function to get remaining seconds between current date and param date
+   * @param date due date
+   * @returns number
+   */
   getTime(date: Date) {
     const currenDate = new Date().getTime();
     const dueDate = date.getTime();
@@ -59,9 +83,13 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     const result = dueDate - currenDate;
 
     return result / 1000;
-
   }
 
+  /**
+   * onDestroy life cycle:
+   * Unsubscribe timer$
+   * @returns void
+   */
   ngOnDestroy(): void {
     this.timer$.next(true);
     this.timer$.complete();

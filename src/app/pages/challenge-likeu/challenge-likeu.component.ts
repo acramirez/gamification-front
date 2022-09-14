@@ -37,19 +37,95 @@ import { Notification } from '../../shared/interfaces/notification';
   styleUrls: ['./challenge-likeu.component.css'],
 })
 export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
+  /**
+   * Attribute to save percent and limits
+   * @param cardDetail
+   * @type Card
+   * */
   public cardDetail!: Card;
+
+  /**
+   * Attribute to save period data
+   * @param period
+   * @type Period
+   * */
   public period!: Period;
+
+  /**
+   * Array of special challenges
+   * @param specialChallenges
+   * @type Challenge[]
+   * */
   specialChallenges: Challenge[] = [];
+
+  /**
+   * Attribute to save the challenge clicked
+   * @param challengeActive
+   * @type Challenge
+   * */
   challengeActive!: Challenge;
+
+  /**
+   * Attribute to save the current period
+   * @param currentPeriod
+   * @type number
+   * */
   currentPeriod = 0;
+
+  /**
+   * Attribute to save the cut of date
+   * @param cutOfDate
+   * @type Date
+   * */
   cutOfDate!: Date;
+
+  /**
+   * Attribute to save the indexTab
+   * @param indexTab
+   * @type number
+   * */
   indexTab!: number;
+
+  /**
+   * Attribute to save challenges with redirection
+   * @param challengesRedirect
+   * @type Object {challenges:[]}
+   * */
   challengesRedirect!: { challenges: [] };
+
+  /**
+   * Attribute to save the missions
+   * @param missions
+   * @type MissionInterfaces[]
+   * */
   missions: MissionInterfaces[] = [];
+
+  /**
+   * Attribute to save the mission active
+   * @param challengesRedirect
+   * @type MissionInterfaces
+   * */
   missionActive!: MissionInterfaces;
+
+  /**
+   * Attribute to save the number tabs and status
+   * @param tabs
+   * @type Tab[]
+   * */
   tabs: Tab[] = [];
+
+  /**
+   * Attribute to save the status of challenge likeu
+   * @param statusLikeU
+   * @type string
+   * */
   statusLikeU!: string;
 
+  /**
+   * Subject for unsuscribe observables
+   * @param destroy$
+   * @type Object {challenges:[]}
+   * */
   private destroy$: Subject<boolean> = new Subject();
 
   constructor(
@@ -60,6 +136,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     private viewContainerRef: ViewContainerRef
   ) {}
 
+  /**
+   * AfterViewInit life cycle: Component loading view start.
+   * Initializes the subscriptions of token and challenge LikeU
+   * @returns void
+   */
   ngAfterViewInit(): void {
     if (!this.tokenFacade._token) {
       const challenges$ = this.tokenFacade.validationToken();
@@ -88,6 +169,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  /**
+   * Function show modal for challenges
+   * @returns void
+   */
   showModal() {
     const modal: Modal = {
       challenge: { ...this.challengeActive },
@@ -99,10 +184,22 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.modalService.generateModal(this.viewContainerRef, modal);
   }
 
+  /**
+   *Close modal challenges
+   * @returns void
+   */
   closeModal() {
     this.modalService.close(this.viewContainerRef);
   }
 
+  /**
+   * Function to:
+   * Initializes: statusLikeU, cardDetail,currentPeriod, period, cutOfDate
+   *
+   * Execute: createMission(), setTimerMission(), showMissionActive(), propertyChallenges(), getTabs(), showFirstAccess() and showNotification()
+   * @param {ChallengeLikeU} resp Response susbscription challenge LikeU
+   * @returns {void}
+   */
   proccessData(resp: ChallengeLikeU) {
     this.statusLikeU = resp.statusChallenge;
     let {
@@ -145,18 +242,21 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.showNotification(current_limit, potential_limit);
 
     if (this.currentPeriod > 7) {
-      if(this.validateAccelerator()){
-        this.missions.pop()
-        this.indexTab=this.missions.length-1
-        this.showMissionActive(this.indexTab)
+      if (this.validateAccelerator()) {
+        this.missions.pop();
+        this.indexTab = this.missions.length - 1;
+        this.showMissionActive(this.indexTab);
       }
     }
 
     this.getTabs();
-
-
   }
 
+  /**
+   * Function to show mission active for index
+   * @param {Number} index Mission Index
+   * @returns void
+   */
   showMissionActive(index: number) {
     this.missionActive = this.missions[index];
     this.specialChallenges = this.missionActive.challenges
@@ -166,6 +266,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       : [];
   }
 
+  /**
+   * Function get tabs missions
+   * @returns void
+   */
   getTabs() {
     this.missions.forEach((mission) => {
       let tab: Tab = {
@@ -196,6 +300,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     });
   }
 
+  /**
+   * Function show view first access
+   * @returns void
+   */
   showFirstAccess() {
     const closeFirstAccess = () => {
       this.closeModal();
@@ -206,14 +314,26 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     );
   }
 
+  /**
+   * Get challenges
+   * @returns Challenges Contract
+   */
   get challenges() {
     return this.challengesFacade.getChallenges();
   }
 
+  /**
+   * Get Frequently Questions
+   * @returns frequently questions
+   */
   get FAQs() {
     return this.challenges.FAQ;
   }
 
+  /**
+   * Function to assign if show timer
+   * @returns void
+   */
   setTimerMission() {
     this.missions.forEach((mission, index) => {
       if (index === this.currentPeriod && this.statusLikeU !== 'CANCELED') {
@@ -225,9 +345,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se asignan las propiedades status y redirect a los challenges
+   * Function to assign the status of challenges
+   * @returns void
    */
-
   propertyChallenges() {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach((challenge) => {
@@ -265,9 +385,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se inicializan las misiones
+   * Function to create array missions
+   * @returns {void} void
    */
-
   createMission() {
     const { missions } = this.challenges;
     missions.forEach((miss) => {
@@ -281,13 +401,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (this.statusLikeU === 'FINAL' && this.currentPeriod === 7) {
       this.missions.pop();
     }
-
   }
 
   /**
-   * Metodo mediante el cual se asigna el tipo a cada challenge de cada mision
+   * Function to assign the type to the challenges of the mission
+   * @param mission
+   * @returns array of challenges with update status
    */
-
   typeChallenge(mission: Mission) {
     const { challenges } = this.challenges;
     const { mandatoryChallenges, specialChallenges, acceleratorChallenges } =
@@ -312,9 +432,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se define el status del challenge
+   * Function to update the status of a challenge
+   * @param challenge challenge to update status
+   * @param periodDetail Information to dterminate the status of challenges
+   * @returns Challenge
    */
-
   statusChallenge(challenge: Challenge, periodDetail: PeriodDetail) {
     const {
       accumulated_purchases,
@@ -381,9 +503,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto card_payment
+   * Function check if card payment its true
+   * @param cardPayment card payment data
+   * @param dueDate deadline for payment
+   * @param periodId period to evaluate
+   * @returns boolean
    */
-
   checkCardPayment(
     cardPayment: CardPayment[],
     dueDate: Date,
@@ -413,9 +538,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto accelerator
+   * Function to evaluate if the acclerator is activated (1.5)
+   * @param cardPayment card payment data
+   * @returns return boolean
    */
-
   checkAccelerator(cardPayment: CardPayment[], dueDate: Date) {
     if (cardPayment) {
       for (const card of cardPayment) {
@@ -431,9 +557,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto accumulated_purchases
+   * Function to evaluate if accumulated purchases > 200
+   * @param accumulatedPurchases accumulated purchases data
+   * @param cutDate deadline for accumulated purchases
+   * @returns boolean
    */
-
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
     const today = new Date();
 
@@ -444,7 +572,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto recurrent_payment
+   * Function to evaluate if a recurrent payment activation exist
+   * @param recurrentPayment recurrent payment data of period detail
+   * @param cutDate deadline to validate the recurrent payment
+   * @returns boolean
    */
   checkRecurrentPayment(recurrentPayment: Assistance[], cutDate: Date) {
     if (recurrentPayment) {
@@ -464,7 +595,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto domiciliation
+   * Function to evaluate if a domiciliation exist
+   * @param domiciliation Domiciliation data
+   * @param cutDate deadline to validatee the domiciliation
+   * @returns boolean
    */
   checkDomiciliation(domiciliation: any[], cutDate: Date) {
     if (domiciliation) {
@@ -480,7 +614,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto assistance
+   * Function to evaluate if a assistance activation exist
+   * @param assistance assistance data
+   * @param cutDate deadline to validate assistance
+   * @returns boolean
    */
   checkAssistance(assistance: any[], cutDate: Date) {
     if (assistance) {
@@ -495,7 +632,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto payroll_portability
+   * Function to evaluate if a payroll portability exist
+   * @param payrollPortability portability data
+   * @param cutDate deadline to validate payroll portability
+   * @returns boolean
    */
   checkPayrollPortability(payrollPortability: any[], cutDate: Date) {
     if (payrollPortability) {
@@ -510,7 +650,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status del reto digital_channels
+   * Function to validate if a digital channels exist
+   * @param digitalChannels digital channels data
+   * @param cutDate deadline to validate digital channels
+   * @returns boolean
    */
   checkDigitalChannels(digitalChannels: any[], cutDate: Date) {
     if (digitalChannels) {
@@ -526,7 +669,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se valida el status de la mision
+   * Function to evaluate and update status missions
+   * @param challenges challenges to evaluate
+   * @param missionIndex mission index to validate your challenges
+   * @returns boolean
    */
   statusMission(challenges: Challenge[], missionIndex: number) {
     let statusMission = true;
@@ -569,6 +715,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return statusMission;
   }
 
+  /**
+   * Function to validate the digital channels in 3 months from mission 6
+   * @param statusMandatory status mandatory to evaluate
+   * @param missionIndex mission index to validate mandatory challenges
+   * @returns boolean
+   */
   validationDigitalChannels(
     statusMandatory: Challenge[],
     missionIndex: number
@@ -587,7 +739,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se obtiene el porcentaje
+   * Function to get percent (current limit/potential limit)
+   * @returns number
    */
   getPercent() {
     const { lower_limit, current_limit, potential_limit } = this.cardDetail;
@@ -603,7 +756,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se muestran las notificaciones
+   * Function to show notifications using the status flag
    */
   showNotification(currentLimit: CurrentLimit, potentialLimit: CurrentLimit) {
     const previousPeriod = this.missions[this.currentPeriod - 1];
@@ -618,7 +771,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         description: [],
         btnAction: () => this.closeModal(),
       };
-      if (this.statusLikeU === 'FINAL' || currentLimit.amount===potentialLimit.amount) {
+      if (
+        this.statusLikeU === 'FINAL' ||
+        currentLimit.amount === potentialLimit.amount
+      ) {
         notification.icon = 'challenge-complete';
         notification.title = '¡Felicidades!';
         notification.subtitle = 'Conseguiste el 100% de tu límite potencial';
@@ -662,7 +818,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se obtienen los retos los cuales van a contar con la propiedad redirect
+   * Function to get challenges that have redirection
+   * @param challenges response validate opaque token
    */
   getChallengesRedirect(challenges: TokenValidator) {
     this.challengesRedirect = JSON.parse(
@@ -671,7 +828,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Metodo mediante el cual se agrega la propiedad redirect al challenge
+   * Function to set th redirection
+   * @param challenge challenges redirection
+   * @returns boolean
    */
   setChallengeRedirect(challenge: Challenge) {
     const chall = { ...challenge };
@@ -687,8 +846,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return chall.redirection;
   }
 
+  /**
+   * Validate the accelerator challenge from previous missions
+   * @returns boolean
+   */
   validateAccelerator() {
-
     let missions = this.missions.slice(4, 7);
     let accelerator = true;
 
@@ -703,10 +865,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         accelerator = false;
         break;
       }
-
     }
-    return accelerator
+    return accelerator;
   }
+
+  /**
+   * OnDestroy life cycle: Destroy component and unsuscribe observables
+   * @returns void
+   */
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();

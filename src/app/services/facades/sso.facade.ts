@@ -9,7 +9,15 @@ import { TokenValidatorService } from '../apis/token.validator.service';
   providedIn: 'root',
 })
 export class TokenSsoFacade {
+
+  /**
+   * Property to save query param token
+   */
   public _token!: string;
+
+  /**
+   * Property to save challenges whit redirection
+   */
   challengesRedirect: string[] = [];
 
   constructor(

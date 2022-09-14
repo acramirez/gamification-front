@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Tab } from '../../interfaces/atoms/tab.interface';
 import { MissionInterfaces } from '../../interfaces/mission-interfaces';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
@@ -6,26 +14,68 @@ import { Challenge } from '../../interfaces/response/challengesContract.interfac
 @Component({
   selector: 'app-month-challenges',
   templateUrl: './month-challenges.component.html',
-  styleUrls: ['./month-challenges.component.css']
+  styleUrls: ['./month-challenges.component.css'],
 })
 export class MonthChallengesComponent implements AfterViewInit {
+  /**
+   * property to show special challenges
+   */
+  @Input() specialChallenges: Challenge[] = [];
 
-  @Input() specialChallenges:Challenge[]=[];
-  @Input() tabs:Tab[]=[]
-  @Input() initialTab=0
-  @Input() dueDate!:Date
-  @Input() mission!:MissionInterfaces
-  @Input() activeTab!:number
+  /**
+   * tabs array
+   */
+  @Input() tabs: Tab[] = [];
 
+  /**
+   * property to assign style for initial tab
+   */
+  @Input() initialTab = 0;
+
+  /**
+   * due date for timer
+   */
+  @Input() dueDate!: Date;
+
+  /**
+   * challenges and data to show
+   */
+  @Input() mission!: MissionInterfaces;
+
+  /**
+   * property to assign style tab active
+   */
+  @Input() activeTab!: number;
+
+  /**
+   *Property emit indextab
+   */
   @Output() indexTab = new EventEmitter<number>();
+
+  /**
+   * Property emit open modal
+   */
   @Output() openModal = new EventEmitter<MouseEvent>();
-  @Output() challengeActive = new EventEmitter<Challenge>()
 
-  @ViewChild('tabsContainer') scrollTabs!:ElementRef<HTMLDivElement>
+  /**
+   * property emit challenge active
+   */
+  @Output() challengeActive = new EventEmitter<Challenge>();
 
+  /**
+   * tabs container
+   */
+  @ViewChild('tabsContainer') scrollTabs!: ElementRef<HTMLDivElement>;
+
+  /**
+   * AfterViewInit life cycle: Component loading view start.
+   * Initializes the scroll
+   * @returns void
+   */
   ngAfterViewInit(): void {
-    const element= this.scrollTabs.nativeElement
+    const element = this.scrollTabs.nativeElement;
 
-    this.scrollTabs.nativeElement.scrollLeft=this.initialTab*(element.firstElementChild!.clientWidth +6);
+    this.scrollTabs.nativeElement.scrollLeft =
+      this.initialTab * (element.firstElementChild!.clientWidth + 6);
   }
 }

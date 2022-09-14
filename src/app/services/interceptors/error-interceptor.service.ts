@@ -1,6 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorService } from '../apis/error.service';
@@ -12,9 +11,14 @@ export class ErrorInterceptorService implements HttpInterceptor {
 
   constructor(
     private errorService:ErrorService,
-    private router:Router
   ) { }
 
+  /**
+   * Function to intercept all http request
+   * @param req Request
+   * @param next
+   * @returns HttpEvent
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
     .pipe(
