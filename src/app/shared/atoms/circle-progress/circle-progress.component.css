@@ -80,3 +80,12 @@
 .progress__icon > img {
   height: 100%;
 }
+
+.stop-color-one {
+  stop-color: rgb(255, 29, 83);
+  stop-opacity: 1;
+}
+.stop-color-two {
+  stop-color: rgb(165, 64, 215);
+  stop-opacity: 1;
+}

@@ -211,7 +211,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       current_limit,
       potential_limit,
       period,
-      seen_first_time,
     } = resp;
     const { current_period } = period;
 
@@ -238,10 +237,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.showMissionActive(this.indexTab);
 
     this.propertyChallenges();
-
-    // if (seen_first_time) {
-    //   this.showFirstAccess();
-    // }
 
     this.showNotification(current_limit, potential_limit);
 
@@ -571,7 +566,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @returns boolean
    */
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
-    const today = new Date();
 
     if (accumulatedPurchases && accumulatedPurchases.amount >= 200) {
       return true;
@@ -777,7 +771,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         title: '',
         subtitle: '',
         description: [],
-        btnAction: () => {this.closeModal(), this.getPercent()},
+        btnAction: () => this.btnActionNotification(),
       };
       if (
         this.statusLikeU === 'FINAL' ||
@@ -875,6 +869,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return accelerator;
+  }
+
+  /**
+   * Function to the actions for button continue notification
+   */
+  btnActionNotification(){
+    this.closeModal();
+    this.getPercent();
   }
 
   /**
