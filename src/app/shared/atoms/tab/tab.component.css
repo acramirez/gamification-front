@@ -46,3 +46,6 @@
 .tab__icon--finish{
     background-image: url("../../../../assets/icons/Activa_tu_tarjeta.png");
 }
+.tab__icon--failed{
+    background-image: url("../../../../assets/icons/mission-failed.png");
+}

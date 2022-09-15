@@ -120,6 +120,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @type string
    * */
   statusLikeU!: string;
+/**
+ * Percent to show in circle progreess
+ */
+  percent=0;
 
   /**
    * Subject for unsuscribe observables
@@ -280,7 +284,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       let idMission = Number(mission.id);
       if (idMission < this.currentPeriod) {
-        tab.status = 'finish';
+        if (mission.status) {
+          tab.status = 'finish';
+        }else{
+          tab.status='failed'
+        }
       } else if (
         idMission === this.currentPeriod &&
         this.statusLikeU !== 'CANCELED'
@@ -745,14 +753,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   getPercent() {
     const { lower_limit, current_limit, potential_limit } = this.cardDetail;
 
-    let percent = (current_limit.amount * 100) / potential_limit.amount;
+    let percent = (current_limit.amount) / potential_limit.amount;
 
-    if (percent > 100) {
-      percent = 100;
+    if (percent > 1) {
+      percent = 1;
     } else if (current_limit.amount === lower_limit.amount) {
       percent = 0;
     }
-    return percent;
+    this.percent= percent;
   }
 
   /**
@@ -769,7 +777,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         title: '',
         subtitle: '',
         description: [],
-        btnAction: () => this.closeModal(),
+        btnAction: () => {this.closeModal(), this.getPercent()},
       };
       if (
         this.statusLikeU === 'FINAL' ||

@@ -1,7 +1,7 @@
 <button  [id]="tab.id" [ngClass]="{
     'tab':true,
     'active--tab':(tab.status==='ongoing')
-    
+
 }"
 >
     <div
@@ -9,7 +9,8 @@
         {
             'tab__icon': true,
             'tab__icon--ongoing':tab.status==='ongoing',
-            'tab__icon--finish':tab.status==='finish'
+            'tab__icon--finish':tab.status==='finish',
+            'tab__icon--failed':tab.status==='failed'
         }"
     ></div>
     <span class="tab__text">{{tab.texto}}</span>

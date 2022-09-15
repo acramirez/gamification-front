@@ -64,6 +64,7 @@
 .circle--active {
   stroke-width: 0.5rem;
   stroke: url(#grad);
+  transition: all ease 1s;
 }
 
 .circle--bg {

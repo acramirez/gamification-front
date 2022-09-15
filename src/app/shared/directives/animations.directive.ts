@@ -69,11 +69,8 @@ export class AnimationsDirective {
   /**
    * Animation load progress
    */
-  @Input() set loadProgress(progress: number) {
-    this.element.nativeElement.classList.add('transition');
-    this.element.nativeElement.style.strokeDashoffset = '295.31';
-    setTimeout(() => {
-      this.element.nativeElement.style.strokeDashoffset = progress.toString();
-    }, 0);
+  @Input() set loadProgress(load: {circunference:number,progress:number}) {
+
+    this.element.nativeElement.style.strokeDashoffset = ((1 - load.progress) * load.circunference).toString();
   }
 }

@@ -72,7 +72,7 @@ export const challengesContract: ChallengesContract = {
         },
         {
           text: 'Vincula tu tarjeta cumpliendo al menos una de las siguientes acciones cada mes:',
-          strong: true,
+          strong: ['Vincula tu tarjeta cumpliendo al menos una de las siguientes acciones cada mes:'],
           tab: true,
           pretext: Pretext.number,
           mb: true,

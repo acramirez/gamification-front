@@ -9,11 +9,12 @@
         <div class="progress__circle  " >
             <svg viewBox="0, 0, 100, 100">
                 <defs>
-                    <linearGradient id="grad">
-                        <stop offset="90%" stop-color="#A540D7"></stop>
+                    <linearGradient id="grad" x1="68%" y1="0%" x2="32%" y2="100%">
+                      <stop offset="0%" style="stop-color:rgb(255,29,83);stop-opacity:1.00" />
+                      <stop offset="100%" style="stop-color:rgb(165,64,215);stop-opacity:1.00" />
                     </linearGradient>
                 </defs>
-                <circle class="circle circle--active" r="46" cx="50" cy="50" animation [loadProgress]="strokeDashoffset"></circle>
+                <circle class="circle circle--active" r="46" cx="50" cy="50" animation [loadProgress]="{circunference:this.circunference,progress:this.percent}"></circle>
             </svg>
         </div>
     </div>
