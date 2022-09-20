@@ -278,17 +278,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       };
 
       let idMission = Number(mission.id);
-      if (idMission < this.currentPeriod) {
+
+      if (idMission===this.indexTab && this.statusLikeU=== 'EVALUATION') {
+        tab.status='ongoing'
+      }else if(idMission<=this.indexTab){
         if (mission.status) {
           tab.status = 'finish';
-        }else{
+        }else if(!mission.status &&this.statusLikeU === 'CANCELED'){
           tab.status='failed'
         }
-      } else if (
-        idMission === this.currentPeriod &&
-        this.statusLikeU !== 'CANCELED'
-      ) {
-        tab.status = 'ongoing';
       }
 
       if (mission.id === '0') {
@@ -339,7 +337,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   setTimerMission() {
     this.missions.forEach((mission, index) => {
-      if (index === this.currentPeriod && this.statusLikeU !== 'CANCELED') {
+      if (index === this.indexTab && this.statusLikeU === 'EVALUATION') {
         mission.timer = true;
       } else {
         mission.timer = false;
@@ -365,12 +363,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             challenge,
             this.period.period_detail[index]
           ).status;
-          if (statusC) {
+
+
+          if (statusC && index<=this.indexTab) {
             challenge.status = true;
           } else if (!statusC && index < this.currentPeriod) {
             challenge.status = false;
-          } else if (!statusC && index >= this.currentPeriod) {
-            challenge.status = undefined;
           }
         } else {
           challenge.status = undefined;
