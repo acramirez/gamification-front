@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[animation]',
+  selector: '[lu-animation]',
 })
 export class AnimationsDirective {
   constructor(private element: ElementRef<HTMLElement>) {}

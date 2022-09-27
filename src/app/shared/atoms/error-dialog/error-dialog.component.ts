@@ -5,7 +5,7 @@ import { GamificationCallbacksService } from '../../../services/gamification-cal
 import { ErrorData } from '../../interfaces/atoms/error';
 
 @Component({
-  selector: 'app-error-dialog',
+  selector: 'sn-error-dialog',
   templateUrl: './error-dialog.component.html',
   styleUrls: ['./error-dialog.component.css'],
 })

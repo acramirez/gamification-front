@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
-  selector: 'sn-challenge',
+  selector: 'lu-challenge',
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.css']
 })

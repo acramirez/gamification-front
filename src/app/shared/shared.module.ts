@@ -16,7 +16,6 @@ import { ErrorDialogModule } from './atoms/error-dialog/error-dialog.module';
     CommonModule,
     ComponentsModule,
     TimelineModule,
-    ElementListModule,
     ModalModule,
     DirectivesModule,
     ErrorDialogModule

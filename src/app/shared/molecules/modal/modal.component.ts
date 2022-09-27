@@ -10,7 +10,7 @@ import { GamificationCallbacksService } from '../../../services/gamification-cal
 import { Modal } from '../../interfaces/atoms/modal';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'lu-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
@@ -21,10 +21,19 @@ export class ModalComponent {
 
   constructor(private callback: GamificationCallbacksService) {}
 
+  /**
+   * Callback redirect
+   */
   redirect() {
     this.callback.redirect(this.modal.challenge.id);
   }
 
+  /**
+   * Replace strong words in message
+   * @param strongs Words to transform strong
+   * @param message message to find strong words
+   * @returns new message
+   */
   public convertToStrong(
     strongs: string[] | boolean,
     message = '',

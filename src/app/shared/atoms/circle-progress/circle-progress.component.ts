@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'sn-circle-progress',
+  selector: 'lu-circle-progress',
   templateUrl: './circle-progress.component.html',
   styleUrls: ['./circle-progress.component.css'],
 })

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { GamificationCallbacksService } from '../../../services/gamification-callbacks.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'lu-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

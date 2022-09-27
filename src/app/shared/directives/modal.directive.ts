@@ -5,8 +5,14 @@ import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef } from '@an
 })
 export class ModalDirective {
 
+/**
+ * Reference to HTMLElement
+ */
   htmlElement!:ElementRef<HTMLElement>
 
+  /**
+   * Condition to show modal or element
+   */
   @Input() set show(condicion:boolean){
     (condicion)
     ?this.viewContainer.createEmbeddedView(this.templateRef)

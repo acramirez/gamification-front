@@ -1,11 +1,11 @@
 <div class="card-data">
-    
-    <sn-round-card [principalText]="data.current_limit.amount" [secondaryText]="'Límite de crédito actual'"></sn-round-card>
+
+    <lu-round-card [principalText]="data.current_limit.amount" [secondaryText]="'Límite de crédito actual'"></lu-round-card>
 
     <div class="percent">
-        <sn-circle-progress [percent]="percent" [icon]="'../../../../assets/icons/trophy.png'"></sn-circle-progress>
+        <lu-circle-progress [percent]="percent" [icon]="'../../../../assets/icons/trophy.png'"></lu-circle-progress>
     </div>
 
-    <sn-round-card [principalText]="data.potential_limit.amount" [secondaryText]="'Límite potencial'"></sn-round-card>
+    <lu-round-card [principalText]="data.potential_limit.amount" [secondaryText]="'Límite potencial'"></lu-round-card>
 
 </div>

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FAQ } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
-  selector: 'app-frequently-questions',
+  selector: 'lu-frequently-questions',
   templateUrl: './frequently-questions.component.html',
   styleUrls: ['./frequently-questions.component.css'],
 })

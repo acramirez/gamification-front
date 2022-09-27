@@ -16,7 +16,7 @@
         <div class="challenges">
             <ng-container *ngFor="let challenge of mission.challenges">
                 <ng-container *ngIf="challenge.type==='mandatory' || challenge.type==='accelerator'">
-                    <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge"  (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
+                    <lu-challenge [statusMission]="mission.status" lu-animation animation="zoomIn" [challenge]="challenge"  (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></lu-challenge>
                 </ng-container>
             </ng-container>
         </div>
@@ -26,7 +26,7 @@
         <p class="challenge__description">Elige uno de los siguientes retos para aumentar tu línea de crédito.​</p>
         <div class="challenges">
             <ng-container *ngFor="let challenge of specialChallenges">
-                <sn-challenge [statusMission]="mission.status" animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></sn-challenge>
+                <lu-challenge [statusMission]="mission.status" lu-animation animation="zoomIn" [challenge]="challenge" (click)="openModal.emit($event)" (click)="challengeActive.emit(challenge)"></lu-challenge>
             </ng-container>
         </div>
     </div>

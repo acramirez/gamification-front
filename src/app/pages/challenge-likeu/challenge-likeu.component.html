@@ -1,13 +1,13 @@
 <div class="challenge-likeu__container bg__circle" *ngIf="cardDetail;else spinner" >
-    <app-header animation="up"></app-header>
+    <lu-header lu-animation animation="up"></lu-header>
     <div class="challenge-likeu">
-        <app-card-data
+        <lu-card-data
             [data]="cardDetail"
             [percent]="percent"
             >
-        </app-card-data>
+        </lu-card-data>
 
-        <app-month-challenges
+        <lu-month-challenges
             [mission]="missionActive"
             [tabs]="tabs"
             [dueDate]="cutOfDate"
@@ -17,9 +17,9 @@
             (challengeActive)="challengeActive=$event;showModal()"
             (indexTab)="showMissionActive($event);indexTab=$event"
         >
-        </app-month-challenges>
+        </lu-month-challenges>
 
-        <app-frequently-questions [questions]="FAQs"></app-frequently-questions>
+        <lu-frequently-questions [questions]="FAQs"></lu-frequently-questions>
     </div>
 </div>
 <ng-template #spinner>

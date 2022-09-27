@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Notification } from "../../shared/interfaces/notification";
 
 @Component({
-  selector: 'app-message',
+  selector: 'lu-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })

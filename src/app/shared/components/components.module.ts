@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardDataComponent } from './card-data/card-data.component';
-import { CardGeneralAdvanceComponent } from './card-general-advance/card-general-advance.component';
 import { MonthChallengesComponent } from './month-challenges/month-challenges.component';
 
 import { TimelineModule } from '../molecules/timeline/timeline.module';
@@ -19,7 +18,7 @@ import { TimerModule } from '../atoms/timer/timer.module';
 
 
 @NgModule({
-  declarations: [CardDataComponent, CardGeneralAdvanceComponent, MonthChallengesComponent, FrequentlyQuestionsComponent, HeaderComponent, ],
+  declarations: [CardDataComponent, MonthChallengesComponent, FrequentlyQuestionsComponent, HeaderComponent, ],
   imports: [
     CommonModule,
     TimelineModule,
@@ -35,7 +34,6 @@ import { TimerModule } from '../atoms/timer/timer.module';
   ],
   exports:[
     CardDataComponent,
-    CardGeneralAdvanceComponent,
     MonthChallengesComponent,
     FrequentlyQuestionsComponent,
     HeaderComponent,

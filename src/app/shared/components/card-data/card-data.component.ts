@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { Card } from '../../interfaces/response/icard-details';
 
 @Component({
-  selector: 'app-card-data',
+  selector: 'lu-card-data',
   templateUrl: './card-data.component.html',
   styleUrls: ['./card-data.component.css'],
 })

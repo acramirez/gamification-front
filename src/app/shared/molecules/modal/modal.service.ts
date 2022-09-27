@@ -6,47 +6,73 @@ import { Notification } from '../../interfaces/notification';
 import { ModalComponent } from './modal.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalService {
+  modalData!: Modal;
 
-  modalData!:Modal
-
-
-  generateModal(container:ViewContainerRef, modalData:Modal){
-
+  /**
+   * Generate modal into container
+   * @param container Reference to container Modal
+   * @param modalData Data Modal
+   */
+  generateModal(container: ViewContainerRef, modalData: Modal) {
     this.addEventScroll();
-    const modal= container.createComponent<ModalComponent>(ModalComponent)
-    modal.instance.modal=modalData
-
+    const modal = container.createComponent<ModalComponent>(ModalComponent);
+    modal.instance.modal = modalData;
   }
 
-  generateNotification(container:ViewContainerRef,message:Notification){
+  /**
+   * Generate notification into container
+   * @param container Reference to container Modal
+   * @param modalData Data Modal
+   */
+  generateNotification(container: ViewContainerRef, message: Notification) {
     this.addEventScroll();
-    const notification= container.createComponent<MessageComponent>(MessageComponent)
-    notification.instance.notification=message
-  }
-  generateFirstAccess(container:ViewContainerRef,close:Function){
-    this.addEventScroll();
-    const firstAccess=container.createComponent<FirstPageComponent>(FirstPageComponent)
-    firstAccess.instance.close=close
+    const notification =
+      container.createComponent<MessageComponent>(MessageComponent);
+    notification.instance.notification = message;
   }
 
-  close(container:ViewContainerRef){
+  /**
+   * Generate page first access into container
+   * @param container Reference to container Modal
+   * @param modalData Data Modal
+   */
+  generateFirstAccess(container: ViewContainerRef, close: Function) {
+    this.addEventScroll();
+    const firstAccess =
+      container.createComponent<FirstPageComponent>(FirstPageComponent);
+    firstAccess.instance.close = close;
+  }
+
+  /**
+   * Close modal, notification or page
+   * @param container Reference to container Modal
+   */
+  close(container: ViewContainerRef) {
     this.removeScroll();
-    container.clear()
-
+    container.clear();
   }
 
-  disableScroll(){
-    window.scrollTo(0,0)
+  /**
+   * Disable scrooll
+   */
+  disableScroll() {
+    window.scrollTo(0, 0);
   }
 
-  addEventScroll(){
-    window.addEventListener('scroll',this.disableScroll)
+  /**
+   * Restore scroll
+   */
+  addEventScroll() {
+    window.addEventListener('scroll', this.disableScroll);
   }
 
-  removeScroll(){
-    window.removeEventListener('scroll',this.disableScroll)
+  /**
+   * remove scroll
+   */
+  removeScroll() {
+    window.removeEventListener('scroll', this.disableScroll);
   }
 }

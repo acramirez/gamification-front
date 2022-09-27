@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FAQ } from "../../interfaces/response/challengesContract.interface";
 
 @Component({
-  selector: 'app-question',
+  selector: 'lu-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })

@@ -1,5 +1,6 @@
 <div class="modal-bg">
   <div
+    lu-animation
     animation="zoomIn"
     class="modal"
     [ngClass]="{
@@ -46,8 +47,11 @@
           }"
         >
           <span
-          [innerHTML]="
-              convertToStrong(text.strong ? text.strong : false, text.pretextIcon)
+            [innerHTML]="
+              convertToStrong(
+                text.strong ? text.strong : false,
+                text.pretextIcon
+              )
             "
             [ngClass]="{
               'modal__content--bold': text.strong === true,
@@ -65,6 +69,5 @@
         </div>
       </ng-container>
     </div>
-
   </div>
 </div>

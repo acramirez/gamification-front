@@ -12,7 +12,7 @@ import { MissionInterfaces } from '../../interfaces/mission-interfaces';
 import { Challenge } from '../../interfaces/response/challengesContract.interface';
 
 @Component({
-  selector: 'app-month-challenges',
+  selector: 'lu-month-challenges',
   templateUrl: './month-challenges.component.html',
   styleUrls: ['./month-challenges.component.css'],
 })

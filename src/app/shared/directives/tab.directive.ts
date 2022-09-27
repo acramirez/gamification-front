@@ -45,6 +45,7 @@ export class TabDirective implements AfterViewInit, OnDestroy {
     elements[this.initialTab].children[0].classList.add('active--tab');
 
     this.sub$ = fromEvent(document, 'click').subscribe((event) => {
+
       this.isActive(event.target as HTMLElement);
     });
   }
@@ -61,6 +62,7 @@ export class TabDirective implements AfterViewInit, OnDestroy {
       const element = elements[i];
       if (elementCheck === element || element.contains(elementCheck)) {
         element.children[0].classList.add('active--tab');
+        element.scrollIntoView({behavior:'smooth',inline:'nearest',block:'nearest'})
       } else if (
         elementCheck.classList.contains('tab') ||
         elementCheck.classList.contains('tab__text') ||

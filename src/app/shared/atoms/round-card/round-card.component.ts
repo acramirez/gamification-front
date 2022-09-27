@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'sn-round-card',
+  selector: 'lu-round-card',
   templateUrl: './round-card.component.html',
   styleUrls: ['./round-card.component.css']
 })
