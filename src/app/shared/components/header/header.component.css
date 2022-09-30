@@ -1,36 +1,35 @@
-.header{
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 1.5rem;
-    padding-top: 3.75rem;
-    overflow: hidden;
-    z-index: 100;
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.5rem;
+  padding-top: 3.75rem;
+  overflow: hidden;
+  z-index: 100;
 }
 
-.header__circle-bg::before{
+.header__circle-bg::before {
   background: var(--theme-color-background-03);
   border-radius: 0 0 50% 50%;
-  content: '';
+  content: "";
   height: 23.5rem;
-  top:-12.5rem;
+  top: -12.5rem;
   left: -25%;
   position: absolute;
   width: 150%;
   z-index: -1;
 }
 
-.heder__btn{
-    cursor: pointer;
+.heder__btn {
+  cursor: pointer;
 }
 
-
-
-h2{
-    font-size: 1.25rem;
-    font-weight: 500;
+h2 {
+  font-family: "SantanderHeadline", sans-serif, Arial, Helvetica;
+  font-size: 1.25rem;
+  font-weight: 400;
 }
 
-sn-icon{
-    font-size: 2rem;
+sn-icon {
+  font-size: 2rem;
 }
