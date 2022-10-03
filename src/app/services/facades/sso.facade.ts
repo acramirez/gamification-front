@@ -35,7 +35,7 @@ export class TokenSsoFacade {
     let isBase64 = false;
     let error;
 
-    let subsriptionRoute: Subscription =
+    let subscriptionRoute: Subscription =
       this.activatedRoute.queryParams.subscribe((params) => {
         if (params['token']) {
           tkn = this.transformBase64(params['token']);
@@ -54,7 +54,7 @@ export class TokenSsoFacade {
       this.errorService.errorShow(error);
       return error;
     }
-    subsriptionRoute.unsubscribe()
+    subscriptionRoute.unsubscribe()
     return this.tokenService.getValidateToken(tkn);
   }
 

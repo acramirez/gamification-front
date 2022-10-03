@@ -15,13 +15,13 @@ export class TokenValidatorService {
    * @param tkn opaque token
    * @returns response session
    */
-  getValidateToken(tkn: string): Observable<TokenValidator> {
+  getValidateToken(tkn: string): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: tkn,
     });
 
     const url = environment.session;
 
-    return this.httpClient.post<TokenValidator>(url, null, { headers });
+    return this.httpClient.post<any>(url, null, { headers });
   }
 }
