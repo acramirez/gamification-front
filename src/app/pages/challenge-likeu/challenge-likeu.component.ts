@@ -151,8 +151,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       const validationToken = async () => {
         await firstValueFrom(challenges$)
-          .then(() => {
-            // this.getChallengesRedirect(challenges);
+          .then((challenges) => {
+            this.getChallengesRedirect(challenges);
 
             this.gamificacionFacade
               .getGamification()
@@ -352,7 +352,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   propertyChallenges() {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach((challenge) => {
-        // challenge.redirection = this.setChallengeRedirect(challenge);
+        challenge.redirection = this.setChallengeRedirect(challenge);
         const { period_detail } = this.period;
         if (
           period_detail !== null &&
