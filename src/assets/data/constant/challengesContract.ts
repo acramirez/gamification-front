@@ -306,7 +306,7 @@ export const challengesContract: ChallengesContract = {
       subtitle: 'Fácil y rápido',
       modalContent: [
         {
-          text: 'Olvídate de pagar comisiones por pago tardío, domicilia el pago de tu tarjeta LikeU a tu tarjeta de débito o cheques y cada mes se tomará de tu cuenta Santander el monto que hayas solicitado en tu servicio de domiciliación.',
+          text: 'Olvídate de pagar comisiones por pago tardío, domicilia* el pago de tu tarjeta LikeU a tu tarjeta de débito o cheques y cada mes se tomará de tu cuenta Santander el monto que hayas solicitado en tu servicio de domiciliación.',
           mb: true,
         },
         {
