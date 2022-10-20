@@ -221,12 +221,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     };
 
     this.currentPeriod = Number(current_period);
+    this.currentPeriod = 1;
     this.period = resp.period;
     this.cutOfDate = new Date(resp.cut_of_date);
 
     this.createMission();
 
-    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7) {
+    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7 && this.currentPeriod >0) {
       this.indexTab = this.currentPeriod - 1;
     } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;
