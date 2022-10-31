@@ -226,7 +226,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     this.createMission();
 
-    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7) {
+    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7 && this.currentPeriod >0) {
       this.indexTab = this.currentPeriod - 1;
     } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;

@@ -15,7 +15,7 @@ export class ErrorDialogComponent implements OnDestroy {
    * error data to show
    */
   errorData: ErrorData = {
-    title: '¡Oh, oh!',
+    title: 'Lo sentimos.',
     message: 'No podemos atender tu solicitud, por favor inténtalo más tarde.',
     icon: 'cloud-error',
     button: false,
