@@ -525,8 +525,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     prevCardPayment = cardPayment;
 
     if (periodId > 0) {
-      prevCardPayment =
-        this.period.period_detail[periodId - 1].card_payment;
+      prevCardPayment = this.period.period_detail[periodId - 1].card_payment;
     }
 
     if (cardPayment && prevCardPayment) {
@@ -534,24 +533,48 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         for (const prevCard of prevCardPayment) {
           let { operation_date, amount_payment } = card;
           let { minimum_amount } = prevCard;
-
           operation_date = new Date(operation_date);
-
-          if (periodId === 1 && minimum_amount.amount === 0) {
-            statusCardPayment = true;
-          } else if (
-            amount_payment.amount >= minimum_amount.amount &&
-            dueDate > operation_date &&
-            minimum_amount.amount >= 0
-          ) {
-            statusCardPayment = true;
-          } else {
-            statusCardPayment = false;
-          }
+          statusCardPayment = this.statusCardPayment(
+            amount_payment,
+            minimum_amount,
+            operation_date,
+            periodId,
+            dueDate
+          );
         }
       }
     }
     return statusCardPayment;
+  }
+
+  /**
+   *  Function returns a boolean with status for mission cardPayment
+   * @param amountPayment amount to pay
+   * @param minimumAmount minimum to pay
+   * @param operationDate date of the payment operation
+   * @param periodId currrent period
+   * @param dueDate date payment limit
+   * @returns {boolean} status mision cardPayment
+   */
+  statusCardPayment(
+    amountPayment: CurrentLimit,
+    minimumAmount: CurrentLimit,
+    operationDate: Date,
+    periodId: number,
+    dueDate: Date
+  ) {
+
+    if (periodId === 1 && minimumAmount.amount === 0) {
+      return true;
+    } else if (
+      amountPayment.amount >= minimumAmount.amount &&
+      dueDate > operationDate &&
+      minimumAmount.amount >= 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -899,6 +922,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
-    this.destroy$.unsubscribe()
+    this.destroy$.unsubscribe();
   }
 }
