@@ -63,9 +63,9 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     let resp = '';
     if (typeof hour === 'number' && hour >= 18) {
       resp= this.setDays(hour)
-    } else if (hour == 0) {
+    } else if (hour === 0) {
       resp = hour + ':' + minutes + ':' + seconds;
-    } else if (hour == 0 && minutes == 0) {
+    } else if (hour === 0 && minutes === 0) {
       resp = hour + ':' + minutes + ':' + seconds;
     } else {
       resp = hour + ':' + minutes + ':' + seconds;
@@ -94,12 +94,11 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
    */
   setDays(hours:number){
     const days =Math.round(hours / 24)
-    let resp=''
     if (days===1) {
       this.remaining='Falta: '
-      return resp=days + ' día'
+      return days + ' día'
     }
-    return resp=days + ' días'
+    return days + ' días'
 
   }
 
