@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { Subject, Subscription, takeUntil, timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'lu-timer',
@@ -17,8 +17,10 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
    */
   remainingDays!: number | string | null;
 
-
-  remaining:string=''
+  /**
+   * Text to timer ('Faltan:' o Falta:)
+   */
+  remaining:string='Faltan:'
 
   /**
    * due date to evaluate challenges
@@ -59,7 +61,6 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     seconds = seconds < 10 ? '0' + seconds : seconds;
 
     let resp = '';
-    this.remaining='Faltan: '
     if (typeof hour === 'number' && hour >= 18) {
       resp= this.setDays(hour)
     } else if (hour == 0) {
@@ -86,7 +87,11 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     return result / 1000;
   }
 
-
+  /**
+   *
+   * @param hours remaining hours
+   * @returns string with correct word
+   */
   setDays(hours:number){
     const days =Math.round(hours / 24)
     let resp=''
@@ -106,5 +111,6 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.timer$.next(true);
     this.timer$.complete();
+    this.timer$.unsubscribe()
   }
 }

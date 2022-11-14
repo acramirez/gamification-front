@@ -120,10 +120,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @type string
    * */
   statusLikeU!: string;
-/**
- * Percent to show in circle progreess
- */
-  percent=0;
+  /**
+   * Percent to show in circle progreess
+   */
+  percent = 0;
 
   /**
    * Subject for unsuscribe observables
@@ -206,12 +206,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   proccessData(resp: ChallengeLikeU) {
     this.statusLikeU = resp.statusChallenge;
-    let {
-      lower_limit,
-      current_limit,
-      potential_limit,
-      period,
-    } = resp;
+    let { lower_limit, current_limit, potential_limit, period } = resp;
     const { current_period } = period;
 
     this.cardDetail = {
@@ -222,11 +217,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     this.currentPeriod = Number(current_period);
     this.period = resp.period;
-    this.cutOfDate = new Date(resp.cut_of_date);
+    if (resp.cut_of_date) {
+      this.cutOfDate = new Date(resp.cut_of_date);
+    }
 
     this.createMission();
 
-    if (this.statusLikeU === 'CANCELED' && this.currentPeriod < 7 && this.currentPeriod >0) {
+    if (
+      this.statusLikeU === 'CANCELED' &&
+      this.currentPeriod < 7 &&
+      this.currentPeriod > 0
+    ) {
       this.indexTab = this.currentPeriod - 1;
     } else if (this.missions[this.currentPeriod]) {
       this.indexTab = this.currentPeriod;
@@ -279,13 +280,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       let idMission = Number(mission.id);
 
-      if (idMission===this.indexTab && this.statusLikeU=== 'EVALUATION') {
-        tab.status='ongoing'
-      }else if(idMission<=this.indexTab){
+      if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
+        tab.status = 'ongoing';
+      } else if (idMission <= this.indexTab) {
         if (mission.status) {
           tab.status = 'finish';
-        }else if(!mission.status &&this.statusLikeU === 'CANCELED'){
-          tab.status='failed'
+        } else if (!mission.status && this.statusLikeU === 'CANCELED') {
+          tab.status = 'failed';
         }
       }
 
@@ -337,7 +338,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   setTimerMission() {
     this.missions.forEach((mission, index) => {
-      if (index === this.indexTab && this.statusLikeU === 'EVALUATION') {
+      if (
+        this.cutOfDate &&
+        index === this.indexTab &&
+        this.statusLikeU === 'EVALUATION'
+      ) {
         mission.timer = true;
       } else {
         mission.timer = false;
@@ -364,8 +369,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             this.period.period_detail[index]
           ).status;
 
-
-          if (statusC && index<=this.indexTab) {
+          if (statusC && index <= this.indexTab) {
             challenge.status = true;
           } else if (!statusC && index < this.currentPeriod) {
             challenge.status = false;
@@ -513,25 +517,37 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   checkCardPayment(
     cardPayment: CardPayment[],
     dueDate: Date,
-    periodId: string
+    periodId: string | number
   ) {
     let statusCardPayment!: boolean;
-    if (cardPayment) {
+    periodId = Number(periodId);
+    let prevCardPayment: CardPayment[];
+    prevCardPayment = cardPayment;
+
+    if (periodId > 0) {
+      prevCardPayment =
+        this.period.period_detail[periodId - 1].card_payment;
+    }
+
+    if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
-        let { operation_date, minimum_amount, amount_payment } = card;
+        for (const prevCard of prevCardPayment) {
+          let { operation_date, amount_payment } = card;
+          let { minimum_amount } = prevCard;
 
-        operation_date = new Date(operation_date);
+          operation_date = new Date(operation_date);
 
-        if (periodId === '1' && minimum_amount.amount === 0) {
-          statusCardPayment = true;
-        } else if (
-          amount_payment.amount >= minimum_amount.amount &&
-          dueDate > operation_date &&
-          minimum_amount.amount >= 0
-        ) {
-          statusCardPayment = true;
-        } else {
-          statusCardPayment = false;
+          if (periodId === 1 && minimum_amount.amount === 0) {
+            statusCardPayment = true;
+          } else if (
+            amount_payment.amount >= minimum_amount.amount &&
+            dueDate > operation_date &&
+            minimum_amount.amount >= 0
+          ) {
+            statusCardPayment = true;
+          } else {
+            statusCardPayment = false;
+          }
         }
       }
     }
@@ -564,7 +580,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @returns boolean
    */
   checkAccumulatedPurchases(accumulatedPurchases: CurrentLimit, cutDate: Date) {
-
     if (accumulatedPurchases && accumulatedPurchases.amount >= 200) {
       return true;
     }
@@ -745,14 +760,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   getPercent() {
     const { lower_limit, current_limit, potential_limit } = this.cardDetail;
 
-    let percent = (current_limit.amount) / potential_limit.amount;
+    let percent = current_limit.amount / potential_limit.amount;
 
     if (percent > 1) {
       percent = 1;
     } else if (current_limit.amount === lower_limit.amount) {
       percent = 0;
     }
-    this.percent= percent;
+    this.percent = percent;
   }
 
   /**
@@ -872,7 +887,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   /**
    * Function to the actions for button continue notification
    */
-  btnActionNotification(){
+  btnActionNotification() {
     this.closeModal();
     this.getPercent();
   }
@@ -884,5 +899,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+    this.destroy$.unsubscribe()
   }
 }
