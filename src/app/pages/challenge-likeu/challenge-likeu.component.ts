@@ -454,6 +454,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       period_id,
     } = periodDetail;
 
+    const periodId= Number(period_id)
+    let previousCardPayment=this.period.period_detail[periodId].card_payment
+    if (periodId>0) {
+      previousCardPayment=this.period.period_detail[periodId-1].card_payment
+    }
     let { due_date } = periodDetail;
 
     const dueDate = new Date(due_date);
@@ -468,7 +473,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'card_payment':
-        chall.status = this.checkCardPayment(card_payment, dueDate, period_id);
+        chall.status = this.checkCardPayment(card_payment, previousCardPayment, dueDate, period_id);
         break;
 
       case 'recurrent_payment':
@@ -501,7 +506,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'higher_payment':
-        chall.status = this.checkAccelerator(card_payment, dueDate);
+        chall.status = this.checkAccelerator(card_payment,previousCardPayment, dueDate);
         break;
     }
     return chall;
@@ -516,17 +521,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   checkCardPayment(
     cardPayment: CardPayment[],
+    prevCardPayment:CardPayment[],
     dueDate: Date,
     periodId: string | number
   ) {
     let statusCardPayment!: boolean;
     periodId = Number(periodId);
-    let prevCardPayment: CardPayment[];
-    prevCardPayment = cardPayment;
-
-    if (periodId > 0) {
-      prevCardPayment = this.period.period_detail[periodId - 1].card_payment;
-    }
 
     if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
@@ -582,14 +582,18 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @param cardPayment card payment data
    * @returns return boolean
    */
-  checkAccelerator(cardPayment: CardPayment[], dueDate: Date) {
-    if (cardPayment) {
+  checkAccelerator(cardPayment: CardPayment[], prevCardPayment:CardPayment[], dueDate: Date) {
+
+    if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
-        let operationDate = new Date(card.operation_date);
-        let percentPayment =
-          card.amount_payment.amount / card.minimum_amount.amount;
-        if (percentPayment >= 1.5 && operationDate < dueDate) {
-          return true;
+        for (const prevCard of prevCardPayment) {
+          const {amount_payment} = card
+          const {minimum_amount} = prevCard
+          let operationDate = new Date(card.operation_date);
+          let percentPayment = amount_payment.amount / minimum_amount.amount;
+          if (percentPayment >= 1.5 && operationDate < dueDate) {
+            return true;
+          }
         }
       }
     }
