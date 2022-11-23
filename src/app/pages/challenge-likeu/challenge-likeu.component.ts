@@ -454,14 +454,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       period_id,
     } = periodDetail;
 
-    const periodId= Number(period_id)
-    let previousCardPayment=this.period.period_detail[periodId].card_payment
-    if (periodId>0) {
-      previousCardPayment=this.period.period_detail[periodId-1].card_payment
+    const periodId = Number(period_id);
+    let prevPeriod = this.period.period_detail[periodId];
+    if (periodId > 0) {
+      prevPeriod = this.period.period_detail[periodId-1];
     }
-    let { due_date } = periodDetail;
-
-    const dueDate = new Date(due_date);
+    let previousCardPayment =prevPeriod.card_payment;
+    let dueDate = new Date(prevPeriod.due_date)
 
     const chall = { ...challenge };
     switch (challenge.id) {
@@ -473,7 +472,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'card_payment':
-        chall.status = this.checkCardPayment(card_payment, previousCardPayment, dueDate, period_id);
+        chall.status = this.checkCardPayment(
+          card_payment,
+          previousCardPayment,
+          dueDate,
+          period_id
+        );
         break;
 
       case 'recurrent_payment':
@@ -506,7 +510,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         break;
 
       case 'higher_payment':
-        chall.status = this.checkAccelerator(card_payment,previousCardPayment, dueDate);
+        chall.status = this.checkAccelerator(
+          card_payment,
+          previousCardPayment,
+          dueDate
+        );
         break;
     }
     return chall;
@@ -521,7 +529,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   checkCardPayment(
     cardPayment: CardPayment[],
-    prevCardPayment:CardPayment[],
+    prevCardPayment: CardPayment[],
     dueDate: Date,
     periodId: string | number
   ) {
@@ -568,11 +576,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       return true;
     } else if (
       amountPayment.amount >= minimumAmount.amount &&
-      dueDate > operationDate &&
+      operationDate <= dueDate &&
       minimumAmount.amount >= 0
     ) {
       return true;
-    } else {
+    } else if (operationDate > dueDate && this.statusLikeU==='EVALUATION') {
+      return true
+    }else {
       return false;
     }
   }
@@ -582,16 +592,19 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @param cardPayment card payment data
    * @returns return boolean
    */
-  checkAccelerator(cardPayment: CardPayment[], prevCardPayment:CardPayment[], dueDate: Date) {
-
+  checkAccelerator(
+    cardPayment: CardPayment[],
+    prevCardPayment: CardPayment[],
+    dueDate: Date
+  ) {
     if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
         for (const prevCard of prevCardPayment) {
-          const {amount_payment} = card
-          const {minimum_amount} = prevCard
+          const { amount_payment } = card;
+          const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = amount_payment.amount / minimum_amount.amount;
-          if (percentPayment >= 1.5 && operationDate < dueDate) {
+          if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           }
         }
@@ -823,7 +836,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification.description.push(
           'Finalizaste exitosamente el Reto LikeU.'
         );
-      } else if (!status || this.statusLikeU === 'CANCELED') {
+      } else if (this.statusLikeU === 'CANCELED' || !status) {
         notification.icon = 'challenge-no-complete';
         notification.title = '¡Lo sentimos!';
         notification.subtitle = 'No completaste el reto LikeU';
@@ -831,7 +844,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.',
           'Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
         );
-      } else if (this.statusLikeU === 'EVALUATION') {
+      } else if (this.statusLikeU === 'EVALUATION' && status) {
         if (status && this.currentPeriod <= 4) {
           notification.icon = 'cycle-complete';
           notification.title = '¡Lo lograste!';
