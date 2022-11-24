@@ -24,6 +24,11 @@ export const challengesContract: ChallengesContract = {
           pretext: Pretext.dot,
         },
         {
+          text: 'Tu reto LikeU inicia al realizar tu primera compra, en la misión cero.',
+          tab: true,
+          pretext: Pretext.dot,
+        },
+        {
           text: 'Conoce la fecha de corte y fecha límite de pago dentro de SúperWallet, al hacer clic en la imagen de tu tarjeta.',
           tab: true,
           pretext: Pretext.dot,
@@ -488,6 +493,13 @@ export const challengesContract: ChallengesContract = {
       link: 'www.santander.com.mx/personas/tarjetas-de-credito/likeu.html',
     },
     {
+      question: '¿En qué momento empieza el Reto LikeU?',
+      answer:
+        'Al momento de realizar tu primera compra en tu misión cero.',
+      additionalInfo: '',
+      link: '',
+    },
+    {
       question: '¿Cómo puedo avanzar en el Reto LikeU?',
       answer:
         'Cumpliendo diferentes objetivos como: usar tu tarjeta, pagar más del mínimo, domiciliar el pago de tu tarjeta, activar una asistencia LikeU, formalizar cargos recurrentes y utilizar los canales digitales.',
@@ -495,7 +507,7 @@ export const challengesContract: ChallengesContract = {
       link: '',
     },
     {
-      question: '¿Cómo llego al límite de crédito potencial?',
+      question: '¿Cuándo se incrementa mi límite de crédito?',
       answer:
         'Lo alcanzarás cuando logres las 7 misiones, para avanzar más rápido puedes pagar 50% más de tu pago mínimo mensual y finalizarlo en solo 6 misiones.',
       additionalInfo: '',
