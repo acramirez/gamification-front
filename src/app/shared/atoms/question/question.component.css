@@ -32,13 +32,11 @@
 .question__aditional{
     display: block;
     margin-top: 1.5rem;
-    color: var(--theme-color-text-03);
 }
 
 .question__link{
     font-weight: 400;
     text-decoration: none;
-    color: var(--theme-color-neutral-02);
 }
 
 sn-icon{

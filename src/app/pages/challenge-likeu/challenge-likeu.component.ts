@@ -819,7 +819,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
       const { status } = previousPeriod;
 
-      const notification: Notification = {
+      let notification: Notification = {
         icon: '',
         title: '',
         subtitle: '',
@@ -845,24 +845,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           'Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
         );
       } else if (this.statusLikeU === 'EVALUATION' && status) {
-        if (status && this.currentPeriod <= 4) {
-          notification.icon = 'cycle-complete';
-          notification.title = '¡Lo lograste!';
-          notification.subtitle = `Cumpliste la misión ${
-            this.currentPeriod - 1
-          }`;
-          notification.description.push(
-            'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
-          );
-        } else {
-          notification.icon = 'mission-complete';
-          notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
-          notification.subtitle =
-            'Tu límite de crédito ha aumentado y estás más cerca de la meta';
-          notification.description.push(
-            'Continúa con la siguiente misión para avanzar en el Reto.'
-          );
-        }
+        notification=this.showNotificationEvaluation(notification,status)
       }
 
       this.modalService.generateNotification(
@@ -870,6 +853,28 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification
       );
     }
+  }
+
+  showNotificationEvaluation(notification:Notification,status:boolean){
+    if (this.currentPeriod <= 4) {
+      notification.icon = 'cycle-complete';
+      notification.title = '¡Lo lograste!';
+      notification.subtitle = `Cumpliste la misión ${
+        this.currentPeriod - 1
+      }`;
+      notification.description.push(
+        'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
+      );
+    } else {
+      notification.icon = 'mission-complete';
+      notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
+      notification.subtitle =
+        'Tu límite de crédito ha aumentado y estás más cerca de la meta';
+      notification.description.push(
+        'Continúa con la siguiente misión para avanzar en el Reto.'
+      );
+    }
+    return notification
   }
 
   /**
