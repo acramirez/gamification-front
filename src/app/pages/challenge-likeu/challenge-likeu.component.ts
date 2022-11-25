@@ -580,8 +580,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       minimumAmount.amount >= 0
     ) {
       return true;
-    } else if (operationDate > dueDate && this.statusLikeU==='EVALUATION') {
-      return true
     }else {
       return false;
     }
