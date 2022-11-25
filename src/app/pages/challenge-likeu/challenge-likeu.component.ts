@@ -368,15 +368,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             challenge,
             this.period.period_detail[index]
           ).status;
-
-          if (statusC && index <= this.indexTab) {
-            challenge.status = true;
-          } else if (statusC &&this.statusLikeU!=='CANCELED' && index < this.currentPeriod) {
-            challenge.status = true;
-          }
-          else if (!statusC && index < this.currentPeriod) {
-            challenge.status = false;
-          }
+            challenge.status= this.challengeStatusCanceled(statusC,index)
         } else {
           challenge.status = undefined;
         }
@@ -390,6 +382,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         }
       }
     });
+  }
+
+  challengeStatusCanceled(statusC:boolean | undefined,index:number,){
+    if (statusC && index <= this.indexTab) {
+      return true;
+    } else if (statusC &&this.statusLikeU!=='CANCELED' && index < this.currentPeriod) {
+      return true;
+    }else if (!statusC && index < this.currentPeriod) {
+      return false;
+    }
+    return undefined
   }
 
   /**
