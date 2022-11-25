@@ -225,7 +225,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
     if (
       this.statusLikeU === 'CANCELED' &&
-      this.currentPeriod < 7 &&
+      this.currentPeriod <=8 &&
       this.currentPeriod > 0
     ) {
       this.indexTab = this.currentPeriod - 1;
@@ -371,7 +371,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
           if (statusC && index <= this.indexTab) {
             challenge.status = true;
-          } else if (!statusC && index < this.currentPeriod) {
+          } else if (statusC &&this.statusLikeU!=='CANCELED' && index < this.currentPeriod) {
+            challenge.status = true;
+          }
+          else if (!statusC && index < this.currentPeriod) {
             challenge.status = false;
           }
         } else {
