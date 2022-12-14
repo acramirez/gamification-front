@@ -582,7 +582,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       return true;
     } else if (
       amountPayment.amount >= minimumAmount.amount &&
-      operationDate <= dueDate &&
+      operationDate < dueDate &&
       minimumAmount.amount >= 0
     ) {
       return true;
@@ -608,7 +608,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = amount_payment.amount / minimum_amount.amount;
-          if (percentPayment >= 1.5 && operationDate <= dueDate) {
+          if (percentPayment >= 1.5 && operationDate < dueDate) {
             return true;
           }
         }
