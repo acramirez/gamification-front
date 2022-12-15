@@ -222,18 +222,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
 
     this.createMission();
-
-    if (
-      this.statusLikeU === 'CANCELED' &&
-      this.currentPeriod <=8 &&
-      this.currentPeriod > 0
-    ) {
-      this.indexTab = this.currentPeriod - 1;
-    } else if (this.missions[this.currentPeriod]) {
-      this.indexTab = this.currentPeriod;
-    } else {
-      this.indexTab = this.missions.length - 1;
-    }
+    this.indexTab = this.currentTab();
     this.setTimerMission();
     this.showMissionActive(this.indexTab);
 
@@ -244,8 +233,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     if (this.currentPeriod > 7) {
       if (this.validateAccelerator()) {
         this.missions.pop();
-        this.indexTab = this.missions.length - 1;
-        this.showMissionActive(this.indexTab);
       }
     }
 
@@ -267,11 +254,38 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
+   * This Function determinate the current tab
+   * @returns number current tab
+   */
+  currentTab() {
+    const periodDetail = this.period.period_detail;
+    let tab = 0;
+
+    if (this.statusLikeU === 'EVALUATION') {
+      const ongoingTab = periodDetail.filter(
+        (period) => period.status === 'ONGOING'
+      );
+      if (ongoingTab.length > 0) {
+        tab = Number(ongoingTab[ongoingTab.length - 1].period_id);
+      }
+    } else {
+      const finishTab = periodDetail.filter(
+        (period) => period.status === 'FINISH'
+      );
+      if (finishTab.length > 0) {
+        tab = Number(finishTab[finishTab.length - 1].period_id);
+      }
+    }
+
+    return tab;
+  }
+  /**
    * Function get tabs missions
    * @returns void
    */
   getTabs() {
-    this.missions.forEach((mission) => {
+    const periodDetails =this.period.period_detail
+    this.missions.forEach((mission,index) => {
       let tab: Tab = {
         id: '',
         texto: '',
@@ -280,13 +294,16 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       let idMission = Number(mission.id);
 
-      if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
-        tab.status = 'ongoing';
-      } else if (idMission <= this.indexTab) {
-        if (mission.status) {
-          tab.status = 'finish';
-        } else if (!mission.status && this.statusLikeU === 'CANCELED') {
-          tab.status = 'failed';
+
+      if (periodDetails[index]) {
+        if ( periodDetails[index].status==='ONGOING') {
+          tab.status = 'ongoing';
+        } else if (periodDetails[index].status==='FINISH') {
+          if (mission.status) {
+            tab.status = 'finish';
+          } else if (!mission.status) {
+            tab.status = 'failed';
+          }
         }
       }
 
@@ -368,7 +385,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             challenge,
             this.period.period_detail[index]
           ).status;
-            challenge.status= this.challengeStatusCanceled(statusC,index)
+          challenge.status = statusC;
+          if (this.statusLikeU === 'EVALUATION') {
+            challenge.status = this.challengeStatus(statusC, index);
+          } else {
+            challenge.status = this.challengeStatusCanceled(statusC, index);
+          }
         } else {
           challenge.status = undefined;
         }
@@ -376,23 +398,26 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       if (mission.challenges) {
         let statusMission = this.statusMission(mission.challenges, index);
         mission.status = statusMission;
-        if (statusMission === false && index < this.currentPeriod) {
-          this.indexTab = index;
-          this.showMissionActive(index);
-        }
       }
     });
   }
 
-  challengeStatusCanceled(statusC:boolean | undefined,index:number,){
+  challengeStatus(statusC: boolean | undefined, index: number) {
     if (statusC && index <= this.indexTab) {
       return true;
-    } else if (statusC &&this.statusLikeU!=='CANCELED' && index < this.currentPeriod) {
-      return true;
-    }else if (!statusC && index < this.currentPeriod) {
+    } else if (!statusC && index < this.indexTab) {
       return false;
     }
-    return undefined
+    return undefined;
+  }
+
+  challengeStatusCanceled(statusC: boolean | undefined, index: number) {
+    if (statusC && index <= this.indexTab) {
+      return true;
+    } else if (!statusC && index <= this.indexTab) {
+      return false;
+    }
+    return undefined;
   }
 
   /**
@@ -463,10 +488,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const periodId = Number(period_id);
     let prevPeriod = this.period.period_detail[periodId];
     if (periodId > 0) {
-      prevPeriod = this.period.period_detail[periodId-1];
+      prevPeriod = this.period.period_detail[periodId - 1];
     }
-    let previousCardPayment =prevPeriod.card_payment;
-    let dueDate = new Date(prevPeriod.due_date)
+    let previousCardPayment = prevPeriod.card_payment;
+    let dueDate = new Date(prevPeriod.due_date);
 
     const chall = { ...challenge };
     switch (challenge.id) {
@@ -577,16 +602,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     periodId: number,
     dueDate: Date
   ) {
-
     if (periodId === 1 && minimumAmount.amount === 0) {
       return true;
     } else if (
       amountPayment.amount >= minimumAmount.amount &&
-      operationDate < dueDate &&
+      operationDate <= dueDate &&
       minimumAmount.amount >= 0
     ) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }
@@ -608,7 +632,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = amount_payment.amount / minimum_amount.amount;
-          if (percentPayment >= 1.5 && operationDate < dueDate) {
+          if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           }
         }
@@ -849,7 +873,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           'Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
         );
       } else if (this.statusLikeU === 'EVALUATION' && status) {
-        notification=this.showNotificationEvaluation(notification,status)
+        notification = this.showNotificationEvaluation(notification, status);
       }
 
       this.modalService.generateNotification(
@@ -859,13 +883,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  showNotificationEvaluation(notification:Notification,status:boolean){
+  showNotificationEvaluation(notification: Notification, status: boolean) {
     if (this.currentPeriod <= 4) {
       notification.icon = 'cycle-complete';
       notification.title = '¡Lo lograste!';
-      notification.subtitle = `Cumpliste la misión ${
-        this.currentPeriod - 1
-      }`;
+      notification.subtitle = `Cumpliste la misión ${this.currentPeriod - 1}`;
       notification.description.push(
         'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
       );
@@ -878,7 +900,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         'Continúa con la siguiente misión para avanzar en el Reto.'
       );
     }
-    return notification
+    return notification;
   }
 
   /**
