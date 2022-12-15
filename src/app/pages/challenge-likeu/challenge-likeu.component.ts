@@ -259,7 +259,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    */
   currentTab() {
     const periodDetail = this.period.period_detail;
-    let tab = 0;
+    let tab = this.currentPeriod;
 
     if (this.statusLikeU === 'EVALUATION') {
       const ongoingTab = periodDetail.filter(
@@ -304,6 +304,10 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           } else if (!mission.status) {
             tab.status = 'failed';
           }
+        }
+      }else{
+        if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
+          tab.status = 'ongoing';
         }
       }
 
@@ -845,7 +849,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const previousPeriod = this.missions[this.currentPeriod - 1];
 
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
-      const { status } = previousPeriod;
 
       let notification: Notification = {
         icon: '',
@@ -864,7 +867,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         notification.description.push(
           'Finalizaste exitosamente el Reto LikeU.'
         );
-      } else if (this.statusLikeU === 'CANCELED' || !status) {
+      } else if (this.statusLikeU === 'CANCELED') {
         notification.icon = 'challenge-no-complete';
         notification.title = '¡Lo sentimos!';
         notification.subtitle = 'No completaste el reto LikeU';
@@ -872,8 +875,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           'Tu límite de crédito actual se mantendrá sin cambios, sigue usando tu tarjeta LikeU.',
           'Recuerda que el uso responsable de tu tarjeta te ayudará a crear un historial crediticio positivo y así podrás incrementar tu línea de crédito muy pronto.'
         );
-      } else if (this.statusLikeU === 'EVALUATION' && status) {
-        notification = this.showNotificationEvaluation(notification, status);
+      } else if (this.statusLikeU === 'EVALUATION') {
+        notification = this.showNotificationEvaluation(notification);
       }
 
       this.modalService.generateNotification(
@@ -883,17 +886,17 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  showNotificationEvaluation(notification: Notification, status: boolean) {
+  showNotificationEvaluation(notification: Notification) {
     if (this.currentPeriod <= 4) {
       notification.icon = 'cycle-complete';
       notification.title = '¡Lo lograste!';
-      notification.subtitle = `Cumpliste la misión ${this.currentPeriod - 1}`;
+      notification.subtitle = `Cumpliste la misión ${this.indexTab - 1}`;
       notification.description.push(
         'Continúa cumpliendo las siguientes misiones para avanzar en el Reto LikeU.'
       );
     } else {
       notification.icon = 'mission-complete';
-      notification.title = `¡Misión ${this.currentPeriod - 1} completada!`;
+      notification.title = `¡Misión ${this.indexTab - 1} completada!`;
       notification.subtitle =
         'Tu límite de crédito ha aumentado y estás más cerca de la meta';
       notification.description.push(
