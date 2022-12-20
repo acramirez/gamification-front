@@ -265,8 +265,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       const ongoingTab = periodDetail.filter(
         (period) => period.status === 'ONGOING'
       );
-      if (ongoingTab.length > 0) {
-        tab = Number(ongoingTab[ongoingTab.length - 1].period_id);
+
+      for (const period of ongoingTab) {
+        if (
+          Number(period.period_id) === this.currentPeriod &&
+          period.status === 'ONGOING'
+        ) {
+          tab = Number(period.period_id);
+        }
       }
     } else {
       const finishTab = periodDetail.filter(
@@ -284,8 +290,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @returns void
    */
   getTabs() {
-    const periodDetails =this.period.period_detail
-    this.missions.forEach((mission,index) => {
+    const periodDetails = this.period.period_detail;
+    this.missions.forEach((mission, index) => {
       let tab: Tab = {
         id: '',
         texto: '',
@@ -294,18 +300,21 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       let idMission = Number(mission.id);
 
-
       if (periodDetails[index]) {
-        if ( periodDetails[index].status==='ONGOING') {
+        if (
+          periodDetails[index].status === 'ONGOING' &&
+          this.statusLikeU === 'EVALUATION' &&
+          Number(periodDetails[index].period_id) === this.currentPeriod
+        ) {
           tab.status = 'ongoing';
-        } else if (periodDetails[index].status==='FINISH') {
+        } else if (periodDetails[index].status === 'FINISH') {
           if (mission.status) {
             tab.status = 'finish';
           } else if (!mission.status) {
             tab.status = 'failed';
           }
         }
-      }else{
+      } else {
         if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
           tab.status = 'ongoing';
         }
@@ -389,7 +398,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
             challenge,
             this.period.period_detail[index]
           ).status;
-          challenge.status = statusC;
           if (this.statusLikeU === 'EVALUATION') {
             challenge.status = this.challengeStatus(statusC, index);
           } else {
@@ -849,7 +857,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const previousPeriod = this.missions[this.currentPeriod - 1];
 
     if (previousPeriod && Number(previousPeriod.id) >= 0) {
-
       let notification: Notification = {
         icon: '',
         title: '',
