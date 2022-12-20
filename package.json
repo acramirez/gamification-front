@@ -1,6 +1,6 @@
 {
   "name": "gramificacion-front",
-  "version": "1.0.17-SNAPSHOT",
+  "version": "1.0.18-SNAPSHOT",
   "scripts":   {
     "ng": "ng",
     "start": "ng serve",
