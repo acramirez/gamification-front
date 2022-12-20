@@ -261,25 +261,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     const periodDetail = this.period.period_detail;
     let tab = this.currentPeriod;
 
-    if (this.statusLikeU === 'EVALUATION') {
-      const ongoingTab = periodDetail.filter(
-        (period) => period.status === 'ONGOING'
-      );
+    if (periodDetail) {
+      if (this.statusLikeU === 'EVALUATION') {
+        const ongoingTab = periodDetail.filter(
+          (period) => period.status === 'ONGOING'
+        );
 
-      for (const period of ongoingTab) {
-        if (
-          Number(period.period_id) === this.currentPeriod &&
-          period.status === 'ONGOING'
-        ) {
-          tab = Number(period.period_id);
+        for (const period of ongoingTab) {
+          if (
+            Number(period.period_id) === this.currentPeriod &&
+            period.status === 'ONGOING'
+          ) {
+            tab = Number(period.period_id);
+          }
         }
-      }
-    } else {
-      const finishTab = periodDetail.filter(
-        (period) => period.status === 'FINISH'
-      );
-      if (finishTab.length > 0) {
-        tab = Number(finishTab[finishTab.length - 1].period_id);
+      } else {
+        const finishTab = periodDetail.filter(
+          (period) => period.status === 'FINISH'
+        );
+        if (finishTab.length > 0) {
+          tab = Number(finishTab[finishTab.length - 1].period_id);
+        }
       }
     }
 
@@ -300,20 +302,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       let idMission = Number(mission.id);
 
-      if (periodDetails[index]) {
-        if (
-          periodDetails[index].status === 'ONGOING' &&
-          this.statusLikeU === 'EVALUATION' &&
-          Number(periodDetails[index].period_id) === this.currentPeriod
-        ) {
-          tab.status = 'ongoing';
-        } else if (periodDetails[index].status === 'FINISH') {
-          if (mission.status) {
-            tab.status = 'finish';
-          } else if (!mission.status) {
-            tab.status = 'failed';
-          }
-        }
+      if (periodDetails && periodDetails[index]) {
+        tab.status = this.statusTabs(periodDetails[index],mission);
       } else {
         if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
           tab.status = 'ongoing';
@@ -330,6 +320,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
       this.tabs.push(tab);
     });
+  }
+
+  statusTabs(
+    periodDetails: PeriodDetail,
+    mission: MissionInterfaces,
+  ) {
+    let status = '';
+    if (
+      periodDetails.status === 'ONGOING' &&
+      this.statusLikeU === 'EVALUATION' &&
+      Number(periodDetails.period_id) === this.currentPeriod
+    ) {
+      status = 'ongoing';
+    } else if (periodDetails.status === 'FINISH') {
+      if (mission.status) {
+        status = 'finish';
+      } else if (!mission.status) {
+        status = 'failed';
+      }
+    }
+    return status;
   }
 
   /**
