@@ -7,12 +7,15 @@ import { RouterModule, Routes } from '@angular/router';
 const routes:Routes=[
   {
     path:'',
+    loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  },
+  {
+    path:'challenge-like-u',
     loadChildren:()=>import('./pages/pages.module').then(m=>m.PagesModule),
-
   },
   {
     path:'**',
-    redirectTo:'error'
+    redirectTo:'error/1'
   }
 ]
 
