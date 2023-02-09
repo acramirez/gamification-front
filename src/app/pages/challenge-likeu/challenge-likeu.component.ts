@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ViewContainerRef,
 } from '@angular/core';
-import { firstValueFrom, Subject, throwError } from 'rxjs';
+import { Subject } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -21,7 +21,6 @@ import {
   Period,
   PeriodDetail,
 } from '../../shared/interfaces/response/gamification.interface';
-import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { ModalService } from '../../shared/molecules/modal/modal.service';
