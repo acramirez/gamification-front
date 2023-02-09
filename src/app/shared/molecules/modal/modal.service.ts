@@ -1,5 +1,4 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
-import { FirstPageComponent } from '../../../pages/first-page/first-page.component';
 import { MessageComponent } from '../../../pages/message/message.component';
 import { Modal } from '../../interfaces/atoms/modal';
 import { Notification } from '../../interfaces/notification';
@@ -39,12 +38,6 @@ export class ModalService {
    * @param container Reference to container Modal
    * @param modalData Data Modal
    */
-  generateFirstAccess(container: ViewContainerRef, close: Function) {
-    this.addEventScroll();
-    const firstAccess =
-      container.createComponent<FirstPageComponent>(FirstPageComponent);
-    firstAccess.instance.close = close;
-  }
 
   /**
    * Close modal, notification or page

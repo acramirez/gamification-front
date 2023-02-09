@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ViewContainerRef,
 } from '@angular/core';
-import { firstValueFrom, Subject, throwError } from 'rxjs';
+import { Subject } from 'rxjs';
 import { GamificationFacade } from '../../services/facades/gamifications.facade';
 import { Card } from '../../shared/interfaces/response/icard-details';
 import { Tab } from '../../shared/interfaces/atoms/tab.interface';
@@ -21,7 +21,6 @@ import {
   Period,
   PeriodDetail,
 } from '../../shared/interfaces/response/gamification.interface';
-import { TokenSsoFacade } from '../../services/facades/sso.facade';
 
 import { ChallengeLikeU } from '../../shared/interfaces/response/challenges.interface';
 import { ModalService } from '../../shared/molecules/modal/modal.service';
@@ -134,7 +133,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     private gamificacionFacade: GamificationFacade,
-    private tokenFacade: TokenSsoFacade,
     private challengesFacade: ChallengesFacade,
     private modalService: ModalService,
     private viewContainerRef: ViewContainerRef
@@ -146,31 +144,15 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @returns void
    */
   ngAfterViewInit(): void {
-    if (!this.tokenFacade._token) {
-      const challenges$ = this.tokenFacade.validationToken();
 
-      const validationToken = async () => {
-        await firstValueFrom(challenges$)
-          .then((challenges) => {
-            this.getChallengesRedirect(challenges);
-
-            this.gamificacionFacade
-              .getGamification()
-              .pipe(
-                catchError((err) => throwError(() => err)),
-                takeUntil(this.destroy$)
-              )
-              .subscribe((resp) => {
-                this.proccessData(resp);
-              });
-          })
-          .catch((err) => {
-            return throwError(() => err);
-          });
-      };
-
-      validationToken();
-    }
+    this.gamificacionFacade
+    .getGamification()
+    .pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe((resp) => {
+      this.proccessData(resp);
+    });
   }
 
   /**
@@ -303,7 +285,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       let idMission = Number(mission.id);
 
       if (periodDetails && periodDetails[index]) {
-        tab.status = this.statusTabs(periodDetails[index],mission);
+        tab.status = this.statusTabs(periodDetails[index], mission);
       } else {
         if (idMission === this.indexTab && this.statusLikeU === 'EVALUATION') {
           tab.status = 'ongoing';
@@ -322,10 +304,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     });
   }
 
-  statusTabs(
-    periodDetails: PeriodDetail,
-    mission: MissionInterfaces,
-  ) {
+  statusTabs(periodDetails: PeriodDetail, mission: MissionInterfaces) {
     let status = '';
     if (
       periodDetails.status === 'ONGOING' &&
@@ -341,20 +320,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return status;
-  }
-
-  /**
-   * Function show view first access
-   * @returns void
-   */
-  showFirstAccess() {
-    const closeFirstAccess = () => {
-      this.closeModal();
-    };
-    this.modalService.generateFirstAccess(
-      this.viewContainerRef,
-      closeFirstAccess
-    );
   }
 
   /**
@@ -398,7 +363,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   propertyChallenges() {
     this.missions.forEach((mission, index) => {
       mission.challenges?.forEach((challenge) => {
-        challenge.redirection = this.setChallengeRedirect(challenge);
         const { period_detail } = this.period;
         if (
           period_detail !== null &&
@@ -934,25 +898,6 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     this.challengesRedirect = JSON.parse(
       challenges.SecObjRec.SecObjInfoBean.SecObjData[0].SecObjDataValue
     );
-  }
-
-  /**
-   * Function to set th redirection
-   * @param challenge challenges redirection
-   * @returns boolean
-   */
-  setChallengeRedirect(challenge: Challenge) {
-    const chall = { ...challenge };
-    chall.redirection = false;
-    if (this.challengesRedirect.challenges) {
-      this.challengesRedirect.challenges.forEach((redirect) => {
-        if (challenge.id === redirect) {
-          chall.redirection = true;
-        }
-      });
-    }
-
-    return chall.redirection;
   }
 
   /**

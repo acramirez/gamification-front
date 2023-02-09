@@ -14,21 +14,13 @@ const routes: Routes = [
         component:ChallengeLikeuComponent
       },
       {
-        path:'**',
-        redirectTo:'error'
+        path:'error/:error',
+        component:ErrorPageComponent,
+        canActivate:[ErrorGuard],
+        canLoad:[ErrorGuard]
       }
     ],
   },
-  {
-    path:'error/:error',
-    component:ErrorPageComponent,
-    canActivate:[ErrorGuard],
-    canLoad:[ErrorGuard]
-  },
-  {
-    path:'**',
-    redirectTo:'error/1'
-  }
 ];
 
 @NgModule({
