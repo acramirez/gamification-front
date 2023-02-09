@@ -9,7 +9,7 @@ const PROXY_CONFIG = [
           "/credits/v2/credits/customer-key/benefits"
       ],
       /*target para dev*/
-      target: "https://mx-gamification-front-mx-gamification-web-dev.appls.mex01.mex.dev.mx1.paas.cloudcenter.corp",
+      target: "https://mx-gamification-front-mx-gamification-web-dev.apps.str01.mex.dev.mx1.paas.cloudcenter.corp",
       secure: false,
       changeOrigin: true
   }

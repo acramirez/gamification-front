@@ -657,6 +657,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           let percentPayment = amount_payment.amount / minimum_amount.amount;
           if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
+          } else if (minimum_amount.amount === 0 && this.statusLikeU!=='CANCELED') {
+            return true;
           }
         }
       }
