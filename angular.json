@@ -31,7 +31,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/decimal.js-light/decimal.min.js"
+            ]
           },
           "configurations": {
             "production": {

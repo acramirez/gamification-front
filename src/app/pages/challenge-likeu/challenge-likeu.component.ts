@@ -29,6 +29,7 @@ import { MissionInterfaces } from '../../shared/interfaces/mission-interfaces';
 import { TokenValidator } from '../../shared/interfaces/response/opaqueToken.interface';
 import { catchError, takeUntil } from 'rxjs/operators';
 import { Notification } from '../../shared/interfaces/notification';
+import Decimal from 'decimal.js-light';
 
 @Component({
   selector: 'lu-challenge-likeu',
@@ -618,8 +619,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { amount_payment } = card;
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
-          let percentPayment = amount_payment.amount / minimum_amount.amount;
-          percentPayment = parseFloat(percentPayment.toFixed(2));
+          let percentPayment = new Decimal(amount_payment.amount).dividedBy(minimum_amount.amount).toNumber();
           if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           } else if (minimum_amount.amount === 0 && this.statusLikeU!=='CANCELED') {
