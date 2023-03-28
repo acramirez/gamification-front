@@ -619,6 +619,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = amount_payment.amount / minimum_amount.amount;
+          percentPayment = parseFloat(percentPayment.toFixed(2));
           if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           } else if (minimum_amount.amount === 0 && this.statusLikeU!=='CANCELED') {
