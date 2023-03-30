@@ -631,7 +631,13 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     return false;
   }
 
-  getPercentPayment(amount_payment:CurrentLimit, minimum_amount:CurrentLimit) {
+  /**
+   * Function to calculate percent payment
+   * @param ammount_payment ammount payment
+   * @param minimum_amount minimum amount
+   * @returns number
+   */
+  getPercentPayment(amount_payment:CurrentLimit, minimum_amount:CurrentLimit): number {
     if (minimum_amount.amount > 0) {
       return new Decimal(amount_payment.amount).dividedBy(minimum_amount.amount).toNumber()
     } else {
