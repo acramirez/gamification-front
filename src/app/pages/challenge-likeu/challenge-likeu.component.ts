@@ -619,7 +619,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { amount_payment } = card;
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
-          let percentPayment = (minimum_amount.amount > 0) ? new Decimal(amount_payment.amount).dividedBy(minimum_amount.amount).toNumber(): amount_payment.amount/minimum_amount.amount;
+          let percentPayment = this.getPercentPayment(amount_payment, minimum_amount);
           if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           } else if (minimum_amount.amount === 0 && this.statusLikeU!=='CANCELED') {
@@ -629,6 +629,14 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return false;
+  }
+
+  getPercentPayment(amount_payment:CurrentLimit, minimum_amount:CurrentLimit) {
+    if (minimum_amount.amount > 0) {
+      return new Decimal(amount_payment.amount).dividedBy(minimum_amount.amount).toNumber()
+    } else {
+      return amount_payment.amount/minimum_amount.amount;
+    }
   }
 
   /**
