@@ -350,11 +350,23 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         index === this.indexTab &&
         this.statusLikeU === 'EVALUATION'
       ) {
-        mission.timer = true;
+        mission.timer = this.currentPeriodExist();
       } else {
         mission.timer = false;
       }
     });
+  }
+
+  /**
+   * Function to validate current period exist
+   * @returns bool
+   */
+  currentPeriodExist():boolean {
+    if(this.period.period_detail.map( p => p.period_id).includes(this.currentPeriod.toString())){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
