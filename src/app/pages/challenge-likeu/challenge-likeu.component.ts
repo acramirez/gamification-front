@@ -362,7 +362,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
    * @returns bool
    */
   currentPeriodExist():boolean {
-    if(this.period.period_detail.map( p => p.period_id).includes(this.currentPeriod.toString())){
+    const validateDates: PeriodDetail[] = this.period.period_detail.filter( p => p.period_id.toString() === this.currentPeriod.toString());
+    if(validateDates && validateDates.length > 0 && validateDates[0].due_date && validateDates[0].cute_of_date){
       return true;
     } else {
       return false;

@@ -48,6 +48,7 @@ export interface PeriodDetail {
   assistance: Assistance[];
   payroll_portability: Assistance[];
   status: string;
+  cute_of_date?: Date;
 }
 
 export interface Assistance {
