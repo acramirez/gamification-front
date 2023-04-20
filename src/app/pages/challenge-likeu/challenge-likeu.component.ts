@@ -313,6 +313,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       Number(periodDetails.period_id) === this.currentPeriod
     ) {
       status = 'ongoing';
+    } else if (this.statusLikeU === 'CANCELED' && mission.id === this.period.period_detail[this.period.period_detail.length -1].period_id) {
+      status = 'failed';
     } else if (periodDetails.status === 'FINISH') {
       if (mission.status) {
         status = 'finish';
