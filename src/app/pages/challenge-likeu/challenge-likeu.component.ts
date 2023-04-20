@@ -313,12 +313,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       Number(periodDetails.period_id) === this.currentPeriod
     ) {
       status = 'ongoing';
-    } else if (
-      this.statusLikeU === 'CANCELED' &&
-      periodDetails.status === 'FINISH' &&
-      this.period.period_detail[this.period.period_detail.length -1] &&
-      mission.id === this.period.period_detail[this.period.period_detail.length -1].period_id
-      ) {
+    } else if (this.isCanceledStatus(periodDetails, mission)) {
       status = 'failed';
     } else if (periodDetails.status === 'FINISH') {
       if (mission.status) {
@@ -328,6 +323,18 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
       }
     }
     return status;
+  }
+  /**
+   * Validate status is canceled and finished mission
+   * @returns boolean
+   */
+  isCanceledStatus(periodDetails: PeriodDetail, mission: MissionInterfaces):boolean {
+    return (
+        this.statusLikeU === 'CANCELED' &&
+        periodDetails.status === 'FINISH' &&
+        this.period.period_detail[this.period.period_detail.length -1] &&
+        mission.id === this.period.period_detail[this.period.period_detail.length -1].period_id
+      )
   }
 
   /**
