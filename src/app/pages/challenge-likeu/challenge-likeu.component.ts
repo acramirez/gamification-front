@@ -619,6 +619,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     dueDate: Date
   ) {
     if(this.isNotExistCurrentPeriod(periodId)) {
+      debugger
       return this.checkPrevPeriod();
     } else if (periodId === 1 && minimumAmount.amount === 0) {
       return true;
