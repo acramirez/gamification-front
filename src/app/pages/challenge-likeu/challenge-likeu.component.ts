@@ -618,7 +618,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     periodId: number,
     dueDate: Date
   ) {
-    if(Number(periodId) == this.currentPeriod && this.isNotExistCurrentPeriod(this.currentPeriod)) {
+    if(this.isNotExistCurrentPeriod(periodId)) {
       return this.checkPrevPeriod();
     } else if (periodId === 1 && minimumAmount.amount === 0) {
       return true;
@@ -634,10 +634,12 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   isNotExistCurrentPeriod(periodId: number): boolean {
-   return this.period.period_detail && //Validamos que exista el array de detalle de periodos
+   return periodId === this.currentPeriod &&
+          periodId !== 1 &&
+          //Validamos que exista el array de detalle de periodos
+          this.period.period_detail &&
           // validamos si no existe el periodo actual en el array de detalle
-          !this.period.period_detail.map(p => p.period_id).includes(this.currentPeriod.toString()) &&
-          periodId !== 1
+          !this.period.period_detail.map(p => p.period_id).includes(this.currentPeriod.toString())
   }
 
   checkPrevPeriod(): boolean {
@@ -672,7 +674,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = this.getPercentPayment(amount_payment, minimum_amount);
-          if (periodId == this.currentPeriod && this.isNotExistCurrentPeriod(this.currentPeriod)) {
+          if (this.isNotExistCurrentPeriod(periodId)) {
             return this.checkPrevPeriod();
           } else if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
