@@ -559,7 +559,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
         chall.status = this.checkAccelerator(
           card_payment,
           previousCardPayment,
-          dueDate
+          dueDate,
+          Number(period_id)
         );
         break;
     }
@@ -617,7 +618,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     periodId: number,
     dueDate: Date
   ) {
-    if (periodId === 1 && minimumAmount.amount === 0) {
+    if(Number(periodId) == this.currentPeriod && this.isNotExistCurrentPeriod(this.currentPeriod)) {
+      return this.checkPrevPeriod();
+    } else if (periodId === 1 && minimumAmount.amount === 0) {
       return true;
     } else if (
       amountPayment.amount >= minimumAmount.amount &&
@@ -630,6 +633,27 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  isNotExistCurrentPeriod(periodId: number): boolean {
+   return this.period.period_detail && //Validamos que exista el array de detalle de periodos
+          // validamos si no existe el periodo actual en el array de detalle
+          !this.period.period_detail.map(p => p.period_id).includes(this.currentPeriod.toString()) &&
+          periodId !== 1
+  }
+
+  checkPrevPeriod(): boolean {
+    if(  // Si verdadero retornamos true check
+        this.period.period_detail[this.currentPeriod - 1] && // validamos que existe el periodo anterior
+        // validamos que el monto minimo en el ciclo anterior es igual a cero
+        this.period.period_detail[this.currentPeriod - 1].card_payment.slice(-1)[0].minimum_amount.amount === 0 &&
+        // validamos que el status del periodo anterior es FINISH
+        this.period.period_detail[this.currentPeriod - 1].status === 'FINISH'
+      ){ // si verdadero retornamos true check
+        return true
+      } else { // si falso retornamos false uncheck
+        return false
+      }
+  }
+
   /**
    * Function to evaluate if the acclerator is activated (1.5)
    * @param cardPayment card payment data
@@ -638,7 +662,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   checkAccelerator(
     cardPayment: CardPayment[],
     prevCardPayment: CardPayment[],
-    dueDate: Date
+    dueDate: Date,
+    periodId: number
   ) {
     if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
@@ -647,7 +672,9 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
           const { minimum_amount } = prevCard;
           let operationDate = new Date(card.operation_date);
           let percentPayment = this.getPercentPayment(amount_payment, minimum_amount);
-          if (percentPayment >= 1.5 && operationDate <= dueDate) {
+          if (periodId == this.currentPeriod && this.isNotExistCurrentPeriod(this.currentPeriod)) {
+            return this.checkPrevPeriod();
+          } else if (percentPayment >= 1.5 && operationDate <= dueDate) {
             return true;
           } else if (minimum_amount.amount === 0 && this.statusLikeU!=='CANCELED') {
             return true;
