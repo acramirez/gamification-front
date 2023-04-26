@@ -582,7 +582,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   ) {
     let statusCardPayment!: boolean;
     periodId = Number(periodId);
-
+    console.log(cardPayment, prevCardPayment, "checkCardPayment")
     if (cardPayment && prevCardPayment) {
       for (const card of cardPayment) {
         for (const prevCard of prevCardPayment) {
@@ -618,9 +618,11 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
     periodId: number,
     dueDate: Date
   ) {
-    debugger
+    console.log(amountPayment, minimumAmount, operationDate, periodId, dueDate)
+    console.log(this.isNotExistCurrentPeriod(periodId), "valor de la funcion isNotExistCurrentPeriod")
     if(this.isNotExistCurrentPeriod(periodId)) {
-      debugger
+      console.log("entro en isNotExistCurrentPeriod");
+      console.log("evaluar checkPrevPeriod:", this.checkPrevPeriod());
       return this.checkPrevPeriod();
     } else if (periodId === 1 && minimumAmount.amount === 0) {
       return true;
@@ -636,6 +638,7 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   isNotExistCurrentPeriod(periodId: number): boolean {
+    console.log("dentro deisNotExistCurrentPeriod ", periodId);
    return periodId === this.currentPeriod &&
           periodId !== 1 &&
           //Validamos que exista el array de detalle de periodos
@@ -645,6 +648,8 @@ export class ChallengeLikeuComponent implements OnDestroy, AfterViewInit {
   }
 
   checkPrevPeriod(): boolean {
+    console.log("vamos a validar el periodo previo");
+    console.log(this.period.period_detail, this.currentPeriod);
     if(  // Si verdadero retornamos true check
         this.period.period_detail[this.currentPeriod - 1] && // validamos que existe el periodo anterior
         // validamos que el monto minimo en el ciclo anterior es igual a cero
